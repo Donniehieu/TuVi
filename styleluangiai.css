@@ -1,0 +1,312 @@
+body {
+    font-family: 'Quicksand', Arial, sans-serif;
+    background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 38px auto;
+    background: #fafdff;
+    border-radius: 18px;
+    box-shadow: 0 6px 32px rgba(98,168,230,0.13);
+    padding: 40px 28px 32px 28px;
+    border: 1.5px solid #e4f1fb;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 32px;
+    border-bottom: 2px solid #b9e0fc;
+    padding-bottom: 18px;
+    background: linear-gradient(90deg, #e0eafc 70%, #f8fdff 100%);
+    border-radius: 12px 12px 0 0;
+}
+
+.header .icon {
+    font-size: 2.3rem;
+    color: #3b82f6;
+    background: #e4fceb;
+    border-radius: 50%;
+    padding: 13px 16px;
+    box-shadow: 0 2px 10px rgba(0,184,148,0.08);
+}
+
+.header h1 {
+    margin: 0;
+    color: #3b82f6;
+    font-weight: 700;
+    font-size: 3rem;
+    letter-spacing: 1px;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(90deg, #a8edea 0%, #fed6e3 100%);
+    color: #3b82f6;
+    font-size: 1.02em;
+    font-weight: 600;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(98,168,230,0.07);
+    margin-top: 18px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    text-decoration: none;
+    outline: none;
+}
+
+.back-btn:hover,
+.back-btn:focus {
+    background: linear-gradient(90deg, #fed6e3 0%, #a8edea 100%);
+    color: #00b894;
+}
+
+.svg-holder {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.svg-holder img,
+.svg-holder svg {
+    width: 400px;
+    max-width: 100%;
+    border-radius: 12px;
+    background: #f2fcfb;
+    padding: 8px;
+    border: 1.5px solid #bce3dd;
+    box-shadow: 0 2px 10px rgba(0,184,148,0.07);
+}
+
+.section {
+    margin-bottom: 30px;
+    background: #f3f8fd;
+    border-radius: 12px;
+    padding: 22px 20px;
+    box-shadow: 0 1px 4px rgba(98,168,230,0.06);
+    border-left: 6px solid #3b82f6;
+    transition: background 0.3s;
+}
+
+.section h2,
+.section h3 {
+    color: #3b82f6;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+/* --- Cố định tiêu đề cung, đại vận, luận chung, lời khuyên --- */
+.cung-title,
+.luan-chung-title,
+.daivan-title,
+.loi-khuyen-title,
+.section .section-head {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: #fff;
+    background: inherit;
+    box-shadow: 0 1px 6px 0 rgba(98,168,230,0.07);
+    border-radius: 7px 7px 0 0;
+    padding-bottom: 4px;
+}
+
+/* --- Cấu trúc từng cung: tiêu đề sticky, nội dung scroll, ẩn sát tiêu đề 3px --- */
+.cung-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 18px;
+}
+
+.cung-item {
+    background: #fff;
+    border-radius: 7px;
+    box-shadow:
+        0 1px 4px rgba(98,168,230,0.08),
+        0 0 0 1.5px rgba(98,168,230,0.08);
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    height: 450px;
+    max-height: 450px;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+/* Tiêu đề sticky trong mỗi cung, chỉ tên cung, nổi bật */
+.cung-item .cung-title {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    color: #e53935 !important;
+    font-size: 2.2em;
+    font-weight: 800;
+    margin-bottom: 1px;
+    display: block;
+    line-height: 1.1;
+    letter-spacing: 1px;
+    background: #fff;
+    padding: 8px 4px 6px 4px;
+    border-radius: 7px 7px 0 0;
+    box-shadow: 0 1px 6px 0 rgba(98,168,230,0.07);
+    text-align: center;
+    /* Chỉ tên cung, không kèm nội dung khác */
+}
+
+/* Nội dung từng cung scroll riêng, bị ẩn sát tiêu đề 3px */
+.cung-item .cung-content
+{
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1px 3px 3px 3px;
+    margin-top: 0;
+    max-height: calc(450px - 52px); /* Trừ chiều cao tiêu đề, điều chỉnh nếu font size lớn hơn */
+    box-sizing: border-box;
+    scroll-padding-top: 3px;
+}
+
+/* Bộ sao tìm được: Đen, nhỏ hơn nhiều so với tên cung, đồng đều giữa mọi cung */
+.cung-item .bo-sao-list,
+.cung-item .bo-sao-list div,
+.cung-item .bo-sao-list span,
+.cung-item > .bo-sao,
+.cung-item > .bo-sao-tim,
+.cung-item > .bo-sao-excel,
+.cung-item > .bo-sao-group {
+    color: #222 !important;
+    font-size: 1em;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-left: 0;
+    margin-bottom: 1px;
+    display: block;
+}
+
+/* Tùy chọn: làm mờ phần không phải tên cung và bộ sao */
+.cung-item *:not(.cung-title):not(.bo-sao-list):not(.bo-sao):not(.bo-sao-tim):not(.bo-sao-excel):not(.bo-sao-group) {
+    color: inherit;
+    font-size: 1em;
+}
+
+/* Advice */
+.advice {
+    background: linear-gradient(90deg, #eafff7 0%, #e0f7fa 100%);
+    border-left: 10px solid #3b82f6;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-size: 1.1em;
+    color: #222;
+    box-shadow: 0 2px 10px rgba(98,168,230,0.06);
+}
+
+/* Khu vực luận chung, đại vận, từng cung, lời khuyên: chiều cao 320px, scroll dọc, relative */
+.luan-chung,
+.daivan,
+.cung,
+.loi-khuyen {
+    height: 450px;
+    max-height: 450px;
+    position: relative;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: #3b82f6 #f3f8fd;
+}
+
+#luanChung,
+#daivan,
+#loiKhuyen {
+    height: 280px;
+    max-height: 280px;
+    position: relative;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: #3b82f6 #f3f8fd;
+}
+
+/* Custom scrollbar style cho Chrome, Edge, Safari */
+.luan-chung-body::-webkit-scrollbar,
+.daivan-body::-webkit-scrollbar,
+.cung-content::-webkit-scrollbar,
+.loi-khuyen-body::-webkit-scrollbar,
+.section-body::-webkit-scrollbar,
+#luanChung .section-body::-webkit-scrollbar,
+#daivan .section-body::-webkit-scrollbar,
+#loiKhuyen .section-body::-webkit-scrollbar,
+.cung-item .cung-content::-webkit-scrollbar,
+.cung-item .bo-sao-list::-webkit-scrollbar,
+.cung-item .bo-sao-excel::-webkit-scrollbar,
+.cung-item .bo-sao-group::-webkit-scrollbar {
+    width: 7px;
+    background: #f3f8fd;
+}
+.luan-chung-body::-webkit-scrollbar-thumb,
+.daivan-body::-webkit-scrollbar-thumb,
+.cung-content::-webkit-scrollbar-thumb,
+.loi-khuyen-body::-webkit-scrollbar-thumb,
+.section-body::-webkit-scrollbar-thumb,
+#luanChung .section-body::-webkit-scrollbar-thumb,
+#daivan .section-body::-webkit-scrollbar-thumb,
+#loiKhuyen .section-body::-webkit-scrollbar-thumb,
+.cung-item .cung-content::-webkit-scrollbar-thumb,
+.cung-item .bo-sao-list::-webkit-scrollbar-thumb,
+
+.cung-item .bo-sao-group::-webkit-scrollbar-thumb {
+    background: #3b82f6;
+    border-radius: 8px;
+}
+
+@media (max-width: 700px) {
+    .container {
+        padding: 10px 2vw;
+    }
+
+    .svg-holder img,
+    .svg-holder svg {
+        width: 98vw;
+    }
+
+    .section {
+        padding: 5px 1px;
+    }
+
+    .advice {
+        padding: 5px 1px;
+    }
+
+    .back-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .cung-item .cung-title {
+        font-size: 1.2em;
+        padding: 6px 2px 4px 2px;
+    }
+    .cung-item {
+        height: 450px;
+        max-height: 450px;
+    }
+    .cung-item .cung-content,
+    .cung-item .bo-sao-list,
+    .cung-item .bo-sao-excel,
+    .cung-item .bo-sao-group {
+        max-height: calc(450px - 36px);
+        padding: 1px 2px 2px 2px;
+    }
+}
