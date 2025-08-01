@@ -3768,6 +3768,15 @@ function LuanCacCachCucKhac(keyArr) {
         keyArr.push("Thân Mệnh đồng cung");
     }
 
+    // Thiên Không đồng cung Đào Hoa
+    if (isHaiSaoDongCungTaiCung("Mệnh", "Thiên Không", "Đào Hoa")) {
+        keyArr.push("Thiên Không, Đào Hoa đồng cung tại Mệnh");
+    }
+    // Thiên Không đồng cung Hồng Loan
+    if (isHaiSaoDongCungTaiCung("Mệnh", "Thiên Không", "Hồng Loan")) {
+        keyArr.push("Thiên Không, Hồng Loan đồng cung tại Mệnh");
+    }
+
 
 
 }
