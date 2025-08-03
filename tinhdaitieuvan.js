@@ -8,12 +8,29 @@
     }
     return daiVanArr;
 }
+let tenCungTieuHan = "";
+function tinhdaivantheoidCung(cucSo, idCung) {
+    let daiVanArr = 0;
+
+
+
+    daiVanArr = cucSo + idCung * 10;
+
+
+    return daiVanArr;
+}
 function getTenCungByChiArr(chiArr, arrCung) {
     // arrCung: mảng 12 object {cungTen, chi, ...}
     return chiArr.map(chi => {
         let found = arrCung.find(c => c.chi === chi);
         return found ? found.cungTen : chi;
     });
+}
+
+function getTenCungByChi(chi, arrCung) {
+    // arrCung: mảng 12 object {cungTen, chi, ...}
+    let found = arrCung.find(c => c.chi === chi);
+    return found ? found.cungTen : chi;
 }
 function tinhTieuvan(chiNamSinh, chiNam, gioitinh) {
     const CHI12 = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"];
@@ -25,18 +42,42 @@ function tinhTieuvan(chiNamSinh, chiNam, gioitinh) {
         return "Tý";
     })();
     const khoiIdx = CUNG_CELLS.findIndex(c => c.chi === tieuvanKhoi);
+    
     if (khoiIdx === -1) return Array(12).fill("");
     const step = gioitinh === "Nam" ? 1 : -1;
 
     let chiIdx = CHI12.indexOf(chiNamSinh);
     let tieuvanArr = Array(12).fill("");
+    const canNam = canchi.nam.split(' ')[0];
+    const amduong = tinhAmDuong(gioitinh, canNam);
+    const lsDaiVan = tinhdaivan(IDCungMenh, cucSo, amduong);
+    let arr = [];
+    for (let i = 0; i < 12; ++i) {
+        const idx = (IDCungMenh + i) % 12;
+        const startAge = lsDaiVan[idx];
+        const endAge = startAge + 9;
+        const cungTen = TEN_CUNG_FULL[i];
+        const chi = CUNG_CELLS[idx].chi;
+        arr.push({
+            cungTen,
+            startAge,
+            endAge,
+            chi
+        });
+    }
+    arr.sort((a, b) => a.startAge - b.startAge);
     for (let i = 0; i < 12; ++i) {
         let cungIdx = (khoiIdx + i * step + 12 * 5) % 12;
         let chi = CHI12[(chiIdx + i) % 12];
+        
+       
+
 
         if (chi == chiNam) {
             tieuvanArr[cungIdx] = chi + " (T.H)";
-            IDTieuHan = cungIdx;
+            IDTieuHan = (cungIdx - IDCungMenh + 12) % 12;
+            tenCungTieuHan = TEN_CUNG_FULL[(cungIdx - IDCungMenh + 12) % 12];
+            console.log(`T.H: ${tenCungTieuHan} (${chi})`);
         } else {
             tieuvanArr[cungIdx] = chi;
         }

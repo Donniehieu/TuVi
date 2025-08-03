@@ -348,7 +348,9 @@ function getDanhSachPhuTinhTungCung() {
 }
 
 
-
+let cungCoThan = "";
+let cungQuaTu = "";
+let cungLuuThaiTue = "";
 
 
 // Cách cục định nghĩa
@@ -529,29 +531,10 @@ const DS_CACH_CUC = [
     { key: "Thiên Tướng Quan Phù Tả Hữu Tướng Ấn", need: ["Thiên Tướng", "Quan Phù", "Tả Phù", "Hữu Bật", "Tướng Quân", "Quốc Ấn"] },
     { key: "Hỏa Tham", need: ["Tham Lang", "Hỏa Tinh"] },
     { key: "Linh Tham", need: ["Tham Lang", "Linh Tinh"] },
-    { key: "Linh Tham Không Kiếp", need: ["Tham Lang", "Linh Tinh", "Địa Không","Địa Kiếp"] },
-    { key: "Hỏa Tham Không Kiếp", need: ["Tham Lang", "Hỏa Tinh", "Địa Không","Địa Kiếp"] },
+    { key: "Linh Tham Không Kiếp", need: ["Tham Lang", "Linh Tinh", "Địa Không", "Địa Kiếp"] },
+    { key: "Hỏa Tham Không Kiếp", need: ["Tham Lang", "Hỏa Tinh", "Địa Không", "Địa Kiếp"] },
     { key: "Linh Tham Lộc", need: ["Tham Lang", "Linh Tinh", "Hóa Lộc"] },
     { key: "Hỏa Tham Lộc", need: ["Tham Lang", "Hỏa Tinh", "Hóa Lộc"] },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ];
 
@@ -742,6 +725,15 @@ function LuanGiaiCacCungVaHienThi() {
 
             if (pt) {
                 keyArr.push(pt + " tọa thủ tại " + item.tenCung);
+                if (pt === "Cô Thần") {
+                    cungCoThan = item.tenCung;
+                }
+                if (pt === "Quả Tú") {
+                    cungQuaTu = item.tenCung;
+                }
+                if (pt === "L. Thái Tuế") {
+                    cungLuuThaiTue = item.tenCung;
+                }
 
 
             }

@@ -392,6 +392,7 @@ function anHongLoanThienHyPhuongCacGiaiThan(chiNam) {
 * An Sao Cô Thần – Quả Tú theo Tam Hội tuổi.
 * @param {string} chiNam - Chi năm sinh ("Tý", "Sửu", ..., "Hợi")
 */
+
 function anCoThanQuaTu(chiNam) {
     // Xóa nhãn cũ
     document.querySelectorAll('.laso-cell').forEach(cell => {
@@ -580,7 +581,7 @@ function anVongTrangSinh(tenCuc, amduong) {
         } else {
             idx = (idxStart - i + 12) % 12;
         }
-        let cellNum = CUNG_CELLS[idx].cell;
+        let cellNum = CUNG_CELLS[idx].cell; // bắt đầu từ dần
         let cell = document.querySelector('.cell' + cellNum);
         if (cell) {
             cell.insertAdjacentHTML('beforeend',
@@ -598,6 +599,44 @@ function anVongTrangSinh(tenCuc, amduong) {
                                                                                     </div>`);
         }
     }
+}
+function getTrangSinhIndex(tenSao, tenCuc, amduong) {
+    // Thứ tự 12 sao vòng Tràng Sinh
+    const SAO_TRANG_SINH = [
+        "Tràng Sinh", "Mộc Dục", "Quan Đới", "Lâm Quan", "Đế Vượng", "Suy",
+        "Bệnh", "Tử", "Mộ", "Tuyệt", "Thai", "Dưỡng"
+    ];
+
+    // Xác định chiều an sao
+    const isThuan = (amduong === "Dương Nam" || amduong === "Âm Nữ") ? 1 : -1;
+
+    // Vị trí khởi vòng Tràng Sinh theo cục
+    const khoiMap = {
+        "Thủy nhị cục": "Thân",
+        "Mộc tam cục": "Hợi",
+        "Kim tứ cục": "Tỵ",
+        "Thổ ngũ cục": "Thân",
+        "Hỏa lục cục": "Dần"
+    };
+    const viTriKhoiChi = khoiMap[tenCuc];
+    if (!viTriKhoiChi) return -1;
+
+    // Tìm vị trí khởi đầu trên bàn lá số
+    let idxStart = CUNG_CELLS.findIndex(c => c.chi === viTriKhoiChi);
+    if (idxStart === -1) return -1;
+
+    // Tìm index của sao trong mảng SAO_TRANG_SINH
+    const idxSao = SAO_TRANG_SINH.indexOf(tenSao);
+    if (idxSao === -1) return -1;
+
+    // Tính index trên bàn lá số (theo thuận/nghịch)
+    let idx;
+    if (isThuan === 1) {
+        idx = (idxStart + idxSao) % 12;
+    } else {
+        idx = (idxStart - idxSao + 12) % 12;
+    }
+    return idx; // có thể trả về idx hoặc cellNum: CUNG_CELLS[idx].cell
 }
 
 /**

@@ -3801,8 +3801,8 @@ function LuanCacCachCucKhacTatAch(keyArr) {
     }
 
     // Các sao tốt hội chiếu
-    const phutinhtatach = getDanhSachPhuTinhTungCung()[7].phuTinh[0].sao;
-
+    const phutinhtatach = getDanhSachPhuTinhTungCung()[7].phuTinh[0];
+    
     if (kiemTraCachCuc(phutinhtatach, ["Thiên Giải"])) {
         
         keyArr.push("Thiên Giải hội chiếu cung Tật Ách");

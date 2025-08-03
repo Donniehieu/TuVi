@@ -1,6 +1,20 @@
 ﻿let cucSo = 0;
 let IDTieuHan = 0;
+let IDDaiVan=0;
 let cungCu = "";
+let idTenSaoThai = 0;
+let idTenSaoDeVuong = 0;
+let tuoivaodaivanHuynhDe = 0;
+let tuoivaodaivanPhuMau = 0;
+let tuoivaodaivanPhuThe = 0;
+let tuoivaodaivanPhucDuc = 0;
+let tuoivaodaivanTuTuc = 0;
+let tuoivaodaivanDienTrach = 0;
+function getCurrentYear() {
+    return new Date().getFullYear();
+}
+
+
 // hàm thực hiện khi nhập dữ liệu các trường
 document.getElementById('form_tuvi').addEventListener('input', function () {
     const hoten = document.getElementById('hoten').value.trim();
@@ -11,7 +25,7 @@ document.getElementById('form_tuvi').addEventListener('input', function () {
     // Chỉ enable nếu hợp lệ ngày tháng năm (được validate ở trên)
     validateDateInput();
 });
-
+let canchi ="";
 // hàm thực hiện khi bấm nút
 document.getElementById('form_tuvi').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -31,14 +45,17 @@ document.getElementById('form_tuvi').addEventListener('submit', function (e) {
     }
     const kq = getCanChiFull(ngay, thang, nam, gio.split(' ')[0]);
     const am = kq.amlich;
-    const canchi = kq.canchi;
+    canchi= kq.canchi;
+
 
     // Năm xem hạn (dương lịch)
     const CAN = ["G.", "Ấ.", "B.", "Đ.", "M.", "K.", "C.", "T.", "N.", "Q."];
     const CHI = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"];
     const canchiNamXemHan = CAN[(namxemhan - 4) % 10] + " " + CHI[(namxemhan - 4) % 12];
     const tuoiAm = namxemhan - am.nam + 1;
+    const tuoiAmThucTe = getCurrentYear() - am.nam + 1;
     const chiNamXemhan = CHI[(namxemhan - 4) % 12];
+    const canNamXemHan = canchiNamXemHan.split(' ')[0];
 
     // --- TÍCH HỢP ÂM DƯƠNG, MỆNH, CỤC ---
     const canNam = canchi.nam.split(' ')[0];
@@ -129,6 +146,24 @@ document.getElementById('form_tuvi').addEventListener('submit', function (e) {
     anDauQuan(chiNam, am.thang, canchi.gio.split(' ')[1]);
     // An vòng Trường Sinh
     anVongTrangSinh(cuc, amduong);
+
+    // tên sao Thai
+    console.log(idTenSaoThai);
+    // Lấy vị trí sao Thai
+    console.log(idTenSaoDeVuong);
+    idTenSaoThai = getTrangSinhIndex("Thai", cuc, amduong);
+    // tên sao Đế Vượng
+    idTenSaoDeVuong = getTrangSinhIndex("Đế Vượng", cuc, amduong);
+
+    // tuổi vào đại vận huynh đệ và phụ mẫu
+    tuoivaodaivanHuynhDe = tinhdaivantheoidCung(cucSo, 1);
+    tuoivaodaivanPhuMau = tinhdaivantheoidCung(cucSo, 1);
+    tuoivaodaivanPhuThe = tinhdaivantheoidCung(cucSo, 2);
+    
+    tuoivaodaivanPhucDuc = tinhdaivantheoidCung(cucSo, 2);
+    tuoivaodaivanTuTuc = tinhdaivantheoidCung(cucSo, 3);
+    tuoivaodaivanDienTrach = tinhdaivantheoidCung(cucSo, 3);
+
     // An sao tứ Hoá
 
     // Sao chính tinh từ Tử Vi
@@ -167,7 +202,7 @@ document.getElementById('form_tuvi').addEventListener('submit', function (e) {
     // An Tuần
     anTuan(canNam, chiNam);
     // An sao lưu  theo Năm xem
-    anSaoLuuTheoNamXem(chiNamXemhan);
+    anSaoLuuTheoNamXem(chiNamXemhan, canNamXemHan);
     // An sao lưu Lộc Tồn
     anLuuLocTon(canchiNamXemHan.split(' ')[0]);
     // An sao Lưu Kình -Đà
@@ -177,16 +212,44 @@ document.getElementById('form_tuvi').addEventListener('submit', function (e) {
     // An đại vận sao
     let daiVanArr = [];
     for (let i = 0; i < 12; ++i) { daiVanArr.push(cucSo + i * 10); }
+
     let idxCungDaiVan = getCungDaiVanHienTai(daiVanArr, tuoiAm);
- 
+  
+    if(amduong==="Âm Nam" || amduong==="Dương Nữ") {
+    IDDaiVan = 12-idxCungDaiVan;}
+    else {
+    IDDaiVan = idxCungDaiVan;
+    }
+      console.log("idxCungDaiVan: ", IDDaiVan);
+
+    let idCungDaiVanHienTaiThucTe = getCungDaiVanHienTai(daiVanArr, tuoiAmThucTe);
+
+    let arr = [];
+    for (let i = 0; i < 12; ++i) {
+        const idx = (IDCungMenh + i) % 12;
+        const startAge = lsDaiVan[idx];
+        const endAge = startAge + 9;
+        const cungTen = TEN_CUNG_FULL[i];
+        const chi = CUNG_CELLS[idx].chi;
+        arr.push({
+            cungTen,
+            startAge,
+            endAge,
+            chi
+        });
+    }
+    arr.sort((a, b) => a.startAge - b.startAge);
+
     let tenCungDaiVan = "";
+    console.log("idxCungDaiVan: ", idxCungDaiVan);
+  
     if (idxCungDaiVan == 0) {
         tenCungDaiVan = CUNG_CELLS[IDCungMenh].chi;
     } else if (idxCungDaiVan > 0 && idxCungDaiVan <= 12) {
         tenCungDaiVan = CUNG_CELLS[idxCungDaiVan].chi;
     }
-   
-
+    
+    tenCungDaiVan = getTenCungByChi(tenCungDaiVan, arr);
 
     let canCung = getCanThang12Cung(ThienCanNamSinh)[idxCungDaiVan];
 
@@ -238,6 +301,18 @@ document.getElementById('form_tuvi').addEventListener('submit', function (e) {
         gioitinh,
         thangsinh,
         giosinh,
+        tuoivaodaivanHuynhDe,
+        tuoivaodaivanPhuMau,
+        tuoivaodaivanPhuThe,
+        tuoivaodaivanPhucDuc,
+        tuoivaodaivanTuTuc,
+        tuoivaodaivanDienTrach,
+        tenCungDaiVan,
+        tenCungTieuHan,
+        IDTieuHan,
+        IDDaiVan,
+        idTenSaoThai,
+        idTenSaoDeVuong,
         // có thể bổ sung các thông tin khác nếu muốn
     };
     // Lưu vào localStorage

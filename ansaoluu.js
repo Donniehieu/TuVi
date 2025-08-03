@@ -1,4 +1,10 @@
-﻿function anSaoLuuTheoNamXem(chiNamXem) {
+﻿function anSaoLuuTheoNamXem(chiNamXem, canNamXem) {
+    let lasoData = {};
+    try {
+        lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
+    } catch (e) { lasoData = {}; }
+
+   
     // Xóa nhãn lưu cũ
     document.querySelectorAll('.laso-cell').forEach(cell => {
         cell.querySelectorAll(`
@@ -112,6 +118,130 @@
             }
         }
     }
+
+
+    // Lưu Đào Hoa, Hồng Loan,
+    let chiLuuDaoHoa = "";
+    [
+        { list: ["Thân", "Tý", "Thìn"], chi: "Dậu" },
+        { list: ["Dần", "Ngọ", "Tuất"], chi: "Mão" },
+        { list: ["Tỵ", "Dậu", "Sửu"], chi: "Ngọ" },
+        { list: ["Hợi", "Mão", "Mùi"], chi: "Tý" },
+    ].forEach(row => {
+        if (row.list.includes(chiNamXem)) chiLuuDaoHoa = row.chi;
+    });
+    if (chiLuuDaoHoa) {
+        const idx = getIndexCungByChi(chiLuuDaoHoa);
+        if (idx !== -1) {
+            const cell = document.querySelector('.cell' + CUNG_CELLS[idx].cell);
+            if (cell) {
+                cell.insertAdjacentHTML('beforeend', `
+                                                                                            <div class="sao-luu-dao-hoa sao-tot hanh-moc phu-tinh">
+                                                                                                L. Đào Hoa
+                                                                                            </div>
+                                                                                             
+                                                                                        `);
+            }
+        }
+    }
+
+    // L. Hồng Loan từ cung Mão là năm Tý, ngược chiều kim đồng hồ đến năm xem hạn
+    const idxCungMao = getIndexCungByChi("Mão");
+    const buocHongLoan = (getIndexChi("Tý") - getIndexChi(chiNamXem) + 12) % 12;
+    const idxHongLoan = (idxCungMao + buocHongLoan) % 12;
+    if (idxHongLoan !== -1) {
+        const cell = document.querySelector('.cell' + CUNG_CELLS[idxHongLoan].cell);
+        if (cell) {
+            cell.insertAdjacentHTML('beforeend', `
+                                                                                            <div class="sao-luu-hong-loan sao-tot hanh-thuy phu-tinh">
+                                                                                                L. Hồng Loan
+                                                                                            </div>
+                                                                                        `);
+        }
+    }
+
+    // L. Nguyệt Đức từ cung Tỵ là năm Tý, thuận chiều kim đồng hồ đến năm xem hạn
+    const idxCungTy = getIndexCungByChi("Tỵ");
+    const buocNguyetDuc = (getIndexChi(chiNamXem) - getIndexChi("Tý") + 12) % 12;
+    const idxNguyetDuc = (idxCungTy + buocNguyetDuc) % 12;
+    if (idxNguyetDuc !== -1) {
+        const cell = document.querySelector('.cell' + CUNG_CELLS[idxNguyetDuc].cell);
+        if (cell) {
+            cell.insertAdjacentHTML('beforeend', `
+                                                                                            <div class="sao-luu-nguyet-duc sao-tot hanh-hoa phu-tinh">
+                                                                                                L. Nguyệt Đức
+                                                                                            </div>
+                                                                                        `);
+        }
+
+    }
+    // L. Long Đức từ cung có L. Thái Tuế là số 1 đếm thuận kim đồng hồ đến số 8 thì tại đó là L. Long Đức
+    if (idxLuuThaiTue !== -1) {
+        const idxLongDuc = (idxLuuThaiTue + 7) % 12;
+        if (idxLongDuc !== -1) {
+            const cell = document.querySelector('.cell' + CUNG_CELLS[idxLongDuc].cell);
+            if (cell) {
+                cell.insertAdjacentHTML('beforeend', `
+                                                                                            <div class="sao-luu-long-duc sao-tot hanh-thuy phu-tinh">
+                                                                                                L. Long Đức
+                                                                                            </div>
+                                                                                        `);
+            }
+        }
+    }
+    document.querySelectorAll('.laso-cell').forEach(cell => {
+        cell.querySelectorAll('.sao-luu-loc-ton').forEach(e => e.remove());
+    });
+
+    // Quy tắc vị trí Lộc Tồn
+    const CAN_MAP = {
+        "G.": "Dần",   // Giáp
+        "Ấ.": "Mão",   // Ất
+        "B.": "Tỵ",    // Bính
+        "Đ.": "Ngọ",   // Đinh
+        "M.": "Tỵ",    // Mậu
+        "K.": "Ngọ",   // Kỷ
+        "C.": "Thân",  // Canh
+        "T.": "Dậu",   // Tân
+        "N.": "Hợi",   // Nhâm
+        "Q.": "Tý"     // Quý
+    };
+    const chiLocTon = CAN_MAP[canNamXem];
+    if (!chiLocTon) return;
+    const idxLocTon = CUNG_CELLS.findIndex(c => c.chi === chiLocTon);
+    if (idxLocTon === -1) return;
+
+    // L. Hỷ Thần từ cung có L. Lộc Tồn là số 1 âm nam dương nữ thì ngược chiều kim đồng hồ đến số 8 thì tại đó là L. Hỷ Thần
+    // Nếu là Âm Nam, Dương Nữ 
+    if (lasoData.amduong === "Âm Nam" || lasoData.amduong === "Dương Nữ") {
+        const idxLuuHyThan = (idxLocTon - 7 + 12) % 12;
+        if (idxLuuHyThan !== -1) {
+            const cell = document.querySelector('.cell' + CUNG_CELLS[idxLuuHyThan].cell);
+            if (cell) {
+                cell.insertAdjacentHTML('beforeend', `
+                                                                                            <div class="sao-luu-hy-than sao-tot hanh-hoa phu-tinh">
+                                                                                                L. Hỷ Thần
+                                                                                            </div>
+                                                                                        `);
+            }
+        }
+    }
+    // Nếu là Dương Nam, Âm Nữ 
+    if (lasoData.amduong === "Âm Nữ" || lasoData.amduong === "Dương Nam") {
+        const idxLuuHyThan = (idxLocTon + 7) % 12;
+        if (idxLuuHyThan !== -1) {
+            const cell = document.querySelector('.cell' + CUNG_CELLS[idxLuuHyThan].cell);
+            if (cell) {
+                cell.insertAdjacentHTML('beforeend', `
+                                                                                            <div class="sao-luu-hy-than sao-tot hanh-hoa phu-tinh">
+                                                                                                L. Hỷ Thần
+                                                                                            </div>
+                                                                                        `);
+            }
+        }
+    }
+
+
 }
 
 function anLuuLocTon(canNamXem) {

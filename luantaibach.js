@@ -3441,7 +3441,7 @@ function LuanCacCachCucKhacTaiBach(keyArr) {
     vtr_daihao = kiemTraSaoSangToi(songhao_dac, songhao_ham, vitri_daihao);
     let vtr_tieuhao = "";
     vtr_tieuhao = kiemTraSaoSangToi(songhao_dac, songhao_ham, vitri_tieucao);
-    const phutinhtaibach = getDanhSachPhuTinhTungCung()[8].phuTinh[0].sao;
+    const phutinhtaibach = getDanhSachPhuTinhTungCung()[8].phuTinh[0];
 
     if (isSaoToaThuTaiCung("Tài Bạch", "Kình Dương") && vtr_kinhduong === "sao sáng") {
         

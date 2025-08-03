@@ -3382,7 +3382,7 @@ function LuanCacCachCucKhacHuynhDe(keyArr) {
     let vtr_kiep = "";
     vtr_kiep = kiemTraSaoSangToi(diakhong_dac, diakhong_ham, vitri_kiep);
 
-    const phutinhhuynhde = getDanhSachPhuTinhTungCung()[11].phuTinh[0].sao;
+    const phutinhhuynhde = getDanhSachPhuTinhTungCung()[11].phuTinh[0];
     if(kiemTraCachCuc(phutinhhuynhde, ["Hỏa Tinh", "Linh Tinh", "Kình Dương", "Đà La"]) && vtr_kinhduong === "sao sáng" && vtr_dala === "sao sáng" && vtr_hoatinh === "sao sáng" && vtr_linhTinh === "sao sáng") {
         
         keyArr.push("Kình Đà Hỏa Linh sáng tại Huynh Đệ");
