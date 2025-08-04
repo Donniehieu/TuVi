@@ -49,9 +49,10 @@ function LuanCungPhuMau(keyArr) {
     try {
         lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
     } catch (e) { lasoData = {}; }
-    const vitriDiaSinhCungMenh = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[0].chi);
-    keyArr.push(`Vị trí địa sinh cung Phụ Mẫu tại ${vitriDiaSinhCungMenh}`);
-    
+    const vitriDiaSinhCungPhuMau = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[1].chi);
+    console.log(`Vị trí địa sinh cung Phụ Mẫu: ${vitriDiaSinhCungPhuMau}`);
+    keyArr.push(`Vị trí địa sinh cung Phụ Mẫu tại ${vitriDiaSinhCungPhuMau}`);
+
     LuanCachCucSaoTuViPhuMau(keyArr);
     LuanCachCucSaoLiemTrinhPhuMau(keyArr);
     LuanCachCucSaoThienDongPhuMau(keyArr);

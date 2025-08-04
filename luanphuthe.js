@@ -3722,70 +3722,70 @@ function LuanCacCachCucKhacPhuThe(keyArr) {
 
 
                 if (cacphutinhhuynhde.includes("Long Trì")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanHuynhDe + " đến " + (lasoData.tuoivaodaivanHuynhDe + 10) + " có sao Long Trì");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanHuynhDe + " đến " + (lasoData.tuoivaodaivanHuynhDe + 10) + " có sao Long Trì");
 
 
                 }
                 if (cacphutinhhuynhde.includes("Phượng Các")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanHuynhDe + " đến " + (lasoData.tuoivaodaivanHuynhDe + 10) + " có sao Phượng Các");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanHuynhDe + " đến " + (lasoData.tuoivaodaivanHuynhDe + 10) + " có sao Phượng Các");
 
 
                 }
                 if (cacphutinhhuynhde.includes("Thanh Long")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanHuynhDe + " đến " + (lasoData.tuoivaodaivanHuynhDe + 10) + " có sao Thanh Long");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanHuynhDe + " đến " + (lasoData.tuoivaodaivanHuynhDe + 10) + " có sao Thanh Long");
 
 
                 }
                 if (cacphutinhhuynhde.includes("Thiên Đức")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanHuynhDe + " đến " + (lasoData.tuoivaodaivanHuynhDe + 10) + " có sao Thiên Đức");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanHuynhDe + " đến " + (lasoData.tuoivaodaivanHuynhDe + 10) + " có sao Thiên Đức");
 
 
                 }
 
                 if (cacphutinhphuthe.includes("Long Trì")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanPhuThe + " đến " + (lasoData.tuoivaodaivanPhuThe + 10) + " có sao Long Trì");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanPhuThe + " đến " + (lasoData.tuoivaodaivanPhuThe + 10) + " có sao Long Trì");
 
 
                 }
                 if (cacphutinhphuthe.includes("Phượng Các")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanPhuThe + " đến " + (lasoData.tuoivaodaivanPhuThe + 10) + " có sao Phượng Các");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanPhuThe + " đến " + (lasoData.tuoivaodaivanPhuThe + 10) + " có sao Phượng Các");
 
 
                 }
                 if (cacphutinhphuthe.includes("Thanh Long")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanPhuThe + " đến " + (lasoData.tuoivaodaivanPhuThe + 10) + " có sao Thanh Long");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanPhuThe + " đến " + (lasoData.tuoivaodaivanPhuThe + 10) + " có sao Thanh Long");
 
 
                 }
                 if (cacphutinhphuthe.includes("Thiên Đức")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanPhuThe + " đến " + (lasoData.tuoivaodaivanPhuThe + 10) + " có sao Thiên Đức");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanPhuThe + " đến " + (lasoData.tuoivaodaivanPhuThe + 10) + " có sao Thiên Đức");
                 }
                 if (cacphutinhtutuc.includes("Long Trì")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanTuTuc + " đến " + (lasoData.tuoivaodaivanTuTuc + 10) + " có sao Long Trì");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanTuTuc + " đến " + (lasoData.tuoivaodaivanTuTuc + 10) + " có sao Long Trì");
 
 
                 }
                 if (cacphutinhtutuc.includes("Phượng Các")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanTuTuc + " đến " + (lasoData.tuoivaodaivanTuTuc + 10) + " có sao Phượng Các");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanTuTuc + " đến " + (lasoData.tuoivaodaivanTuTuc + 10) + " có sao Phượng Các");
 
 
                 }
                 if (cacphutinhtutuc.includes("Thanh Long")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanTuTuc + " đến " + (lasoData.tuoivaodaivanTuTuc + 10) + " có sao Thanh Long");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanTuTuc + " đến " + (lasoData.tuoivaodaivanTuTuc + 10) + " có sao Thanh Long");
                 }
                 if (cacphutinhtutuc.includes("Thiên Đức")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanTuTuc + " đến " + (lasoData.tuoivaodaivanTuTuc + 10) + " có sao Thiên Đức");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanTuTuc + " đến " + (lasoData.tuoivaodaivanTuTuc + 10) + " có sao Thiên Đức");
                 }
 
@@ -3793,72 +3793,72 @@ function LuanCacCachCucKhacPhuThe(keyArr) {
             if (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nữ") {
                 
                 if (cacphutinhphumau.includes("Long Trì")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanPhuMau + " đến " + (lasoData.tuoivaodaivanPhuMau + 10) + " có sao Long Trì");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanPhuMau + " đến " + (lasoData.tuoivaodaivanPhuMau + 10) + " có sao Long Trì");
 
 
                 }
                 if (cacphutinhphumau.includes("Phượng Các")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanPhuMau + " đến " + (lasoData.tuoivaodaivanPhuMau + 10) + " có sao Phượng Các");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanPhuMau + " đến " + (lasoData.tuoivaodaivanPhuMau + 10) + " có sao Phượng Các");
 
 
                 }
                 if (cacphutinhphumau.includes("Thanh Long")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanPhuMau + " đến " + (lasoData.tuoivaodaivanPhuMau + 10) + " có sao Thanh Long");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanPhuMau + " đến " + (lasoData.tuoivaodaivanPhuMau + 10) + " có sao Thanh Long");
 
 
                 }
                  if (cacphutinhphumau.includes("Thiên Đức")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanPhuMau + " đến " + (lasoData.tuoivaodaivanPhuMau + 10) + " có sao Thanh Long");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanPhuMau + " đến " + (lasoData.tuoivaodaivanPhuMau + 10) + " có sao Thanh Long");
 
 
                 }
 
                 if (cacphutinhphucduc.includes("Long Trì")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanPhucDuc + " đến " + (lasoData.tuoivaodaivanPhucDuc + 10) + " có sao Long Trì");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanPhucDuc + " đến " + (lasoData.tuoivaodaivanPhucDuc + 10) + " có sao Long Trì");
 
 
                 }
                 if (cacphutinhphucduc.includes("Phượng Các")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanPhucDuc + " đến " + (lasoData.tuoivaodaivanPhucDuc + 10) + " có sao Phượng Các");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanPhucDuc + " đến " + (lasoData.tuoivaodaivanPhucDuc + 10) + " có sao Phượng Các");
 
 
                 }
                 if (cacphutinhphucduc.includes("Thanh Long")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanPhucDuc + " đến " + (lasoData.tuoivaodaivanPhucDuc + 10) + " có sao Thanh Long");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanPhucDuc + " đến " + (lasoData.tuoivaodaivanPhucDuc + 10) + " có sao Thanh Long");
 
 
                 }
                 if (cacphutinhphucduc.includes("Thiên Đức")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanPhucDuc + " đến " + (lasoData.tuoivaodaivanPhucDuc + 10) + " có sao Thiên Đức");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanPhucDuc + " đến " + (lasoData.tuoivaodaivanPhucDuc + 10) + " có sao Thiên Đức");
                 }
                 if (cacphutinhdientrach.includes("Long Trì")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanDienTrach + " đến " + (lasoData.tuoivaodaivanDienTrach + 10) + " có sao Long Trì");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanDienTrach + " đến " + (lasoData.tuoivaodaivanDienTrach + 10) + " có sao Long Trì");
 
 
                 }
                 if (cacphutinhdientrach.includes("Phượng Các")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanDienTrach + " đến " + (lasoData.tuoivaodaivanDienTrach + 10) + " có sao Phượng Các");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanDienTrach + " đến " + (lasoData.tuoivaodaivanDienTrach + 10) + " có sao Phượng Các");
 
 
                 }
                 if (cacphutinhdientrach.includes("Thanh Long")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanDienTrach + " đến " + (lasoData.tuoivaodaivanDienTrach + 10) + " có sao Thanh Long");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanDienTrach + " đến " + (lasoData.tuoivaodaivanDienTrach + 10) + " có sao Thanh Long");
 
 
                 }
                 if (cacphutinhdientrach.includes("Thiên Đức")) {
-                    console.log("Đại Vận từ " + lasoData.tuoivaodaivanDienTrach + " đến " + (lasoData.tuoivaodaivanDienTrach + 10) + " có sao Thiên Đức");
+                    
                     keyArr.push("Đại Vận từ " + lasoData.tuoivaodaivanDienTrach + " đến " + (lasoData.tuoivaodaivanDienTrach + 10) + " có sao Thiên Đức");
                 }
             }
@@ -3876,11 +3876,11 @@ function LuanCacCachCucKhacPhuThe(keyArr) {
         for (let j = 0; j < saotinhduyen.length; j++) {
             
             for (let k = 0; k < saotinhcamlytan.length; k++) {
-                console.log( "???????????????????"+isHaiSaoDongCungTaiCung(cungLuuThaiTue, "L. Thái Tuế", saotinhcamlytan[k]));
+                
                 if (isSaoToaThuTaiCung(menhthanno[i], saotinhduyen[j]) && isHaiSaoDongCungTaiCung(cungLuuThaiTue, "L. Thái Tuế", saotinhcamlytan[k]) === false) {
                     keyArr.push(saotinhduyen[j] + " tọa thủ tại cung an " + menhthanno[i]);
                     
-                    console.log("CUNG " + lasoData.tenCungDaiVan);
+                    
 
 
                 }
@@ -4172,8 +4172,8 @@ function LuanCacCachCucKhacPhuThe(keyArr) {
                         keyArr.push("Tại cung tiểu hạn năm nay có sao Thiên Đức");
                     }
                 }
-                console.log("Phu tinh dai van"+phutinhcungDaiVan);
-                console.log("Phu tinh tieu han"+phutinhcungTieuHan);
+                
+                
                 if (kiemtraCacCucTamHop(phutinhcungDaiVan, ["Thanh Long"])) {
                     if (kiemtraCacCucTamHop(phutinhcungTieuHan, ["Long Trì"])) {
                         if (isSaoToaThuTaiCung(menhthanno[i], saotinhduyen[j]) && isHaiSaoDongCungTaiCung(cungLuuThaiTue, "L. Thái Tuế", saotinhcamlytan[k]) === false) {
@@ -4415,7 +4415,7 @@ function LuanCacCachCucKhacPhuThe(keyArr) {
     // Thai Phục Vượng Tướng ở Mệnh
     phutinhMenh = getDanhSachPhuTinhTungCung()[0].phuTinh[0];
 
-    console.log(lasoData.idTenSaoThai);
+    
     if (kiemtraCacCucTamHop(phutinhphuthe, ["Phục Binh"]) && ((lasoData.idTenSaoThai + idCungMenh) % 12 === 2 || (lasoData.idTenSaoThai + idCungMenh) % 12 === 10 || (lasoData.idTenSaoThai + idCungMenh) % 12 === 6)) {
 
         keyArr.push("Thai Phục Vượng Tướng hội chiếu tại Phu Thê");

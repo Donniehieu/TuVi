@@ -50,13 +50,13 @@ function LuanCungPhucDuc() {
         lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
     } catch (e) { lasoData = {}; }
 
-    const cungMenh = lasoData.lasoOb[0].chi;
+    const cungPhucDuc = lasoData.lasoOb[2].chi;
     const hanhMenh = lasoData.lasoOb[0].hanh;
-    const danhGia = danhGiaViTriCungMenh(hanhMenh, cungMenh);
+    const danhGia = danhGiaViTriCungMenh(hanhMenh, cungPhucDuc);
 
     return {
         tenCung: 'Phúc Đức',
-        chi: cungMenh,
+        chi: cungPhucDuc,
         hanh: hanhMenh,
         danhGia: danhGia
     };
@@ -66,9 +66,10 @@ function LuanCungPhucDuc(keyArr) {
     try {
         lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
     } catch (e) { lasoData = {}; }
-    const vitriDiaSinhCungMenh = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[0].chi);
-    keyArr.push(`Vị trí địa sinh cung Phúc Đức tại ${vitriDiaSinhCungMenh}`);
-    
+    const vitriDiaSinhCungPhucDuc = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[2].chi);
+    console.log(`Vị trí địa sinh cung Phúc Đức: ${vitriDiaSinhCungPhucDuc}`);
+    keyArr.push(`Vị trí địa sinh cung Phúc Đức tại ${vitriDiaSinhCungPhucDuc}`);
+
     LuanCachCucSaoTuViPhucDuc(keyArr);
     LuanCachCucSaoLiemTrinhPhucDuc(keyArr);
     LuanCachCucSaoThienDongPhucDuc(keyArr);

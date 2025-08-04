@@ -77,7 +77,7 @@ function tinhTieuvan(chiNamSinh, chiNam, gioitinh) {
             tieuvanArr[cungIdx] = chi + " (T.H)";
             IDTieuHan = (cungIdx - IDCungMenh + 12) % 12;
             tenCungTieuHan = TEN_CUNG_FULL[(cungIdx - IDCungMenh + 12) % 12];
-            console.log(`T.H: ${tenCungTieuHan} (${chi})`);
+            
         } else {
             tieuvanArr[cungIdx] = chi;
         }

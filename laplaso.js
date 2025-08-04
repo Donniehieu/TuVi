@@ -148,9 +148,9 @@ document.getElementById('form_tuvi').addEventListener('submit', function (e) {
     anVongTrangSinh(cuc, amduong);
 
     // tên sao Thai
-    console.log(idTenSaoThai);
+    
     // Lấy vị trí sao Thai
-    console.log(idTenSaoDeVuong);
+    
     idTenSaoThai = getTrangSinhIndex("Thai", cuc, amduong);
     // tên sao Đế Vượng
     idTenSaoDeVuong = getTrangSinhIndex("Đế Vượng", cuc, amduong);
@@ -220,7 +220,7 @@ document.getElementById('form_tuvi').addEventListener('submit', function (e) {
     else {
     IDDaiVan = idxCungDaiVan;
     }
-      console.log("idxCungDaiVan: ", IDDaiVan);
+      
 
     let idCungDaiVanHienTaiThucTe = getCungDaiVanHienTai(daiVanArr, tuoiAmThucTe);
 
@@ -241,7 +241,7 @@ document.getElementById('form_tuvi').addEventListener('submit', function (e) {
     arr.sort((a, b) => a.startAge - b.startAge);
 
     let tenCungDaiVan = "";
-    console.log("idxCungDaiVan: ", idxCungDaiVan);
+    
   
     if (idxCungDaiVan == 0) {
         tenCungDaiVan = CUNG_CELLS[IDCungMenh].chi;

@@ -52,14 +52,16 @@ function isSaoToaThuTaiCung(tenCungKiemTra, tenSao) {
     if (!Array.isArray(lasoOb)) return false;
     const cung = lasoOb.find(c => c.tenCung === tenCungKiemTra);
     if (!cung || !Array.isArray(cung.sao)) return false;
+    const formattedTenSao = (tenSao || '').toString().replace(/\s+/g, '').toLowerCase();
     return cung.sao.some(
-        sao => sao.ten.replace(/\s+/g, '').toLowerCase() === tenSao.replace(/\s+/g, '').toLowerCase()
+        sao => ((sao.ten || '').toString().replace(/\s+/g, '').toLowerCase() === formattedTenSao)
     );
 }
 
 
 //tìm sao nào đó tọa thủ một cung nào đó tại chi nào đó
 function isSaoToaThuTaiCungVaChi(tenCungKiemTra, chiKiemTra, tenSao) {
+   
     let lasoData = {};
     try {
         lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
@@ -68,8 +70,10 @@ function isSaoToaThuTaiCungVaChi(tenCungKiemTra, chiKiemTra, tenSao) {
     if (!Array.isArray(lasoOb)) return false;
     const cung = lasoOb.find(c => c.tenCung === tenCungKiemTra && c.chi === chiKiemTra);
     if (!cung || !Array.isArray(cung.sao)) return false;
+    // Ép kiểu về chuỗi và kiểm tra null/undefined
+    const formattedTenSao = (tenSao || '').toString().replace(/\s+/g, '').toLowerCase();
     return cung.sao.some(
-        sao => sao.ten.replace(/\s+/g, '').toLowerCase() === tenSao.replace(/\s+/g, '').toLowerCase()
+        sao => ((sao.ten || '').toString().replace(/\s+/g, '').toLowerCase() === formattedTenSao)
     );
 }
 //Hai sao đông cung tại một cung không phân biệt chi
