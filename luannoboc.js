@@ -66,8 +66,10 @@ function LuanCungNoBoc(keyArr) {
     try {
         lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
     } catch (e) { lasoData = {}; }
-    const vitriDiaSinhCungMenh = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[0].chi);
-    keyArr.push(`Vị trí địa sinh cung Nô Bộc tại ${vitriDiaSinhCungMenh}`);
+    const danhgia = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[5].chi);
+    console.log("Vị trí cung Nô Bộc so với ngũ hành Mệnh: " + danhgia);
+    keyArr.push("Vị trí cung Nô Bộc so với ngũ hành Mệnh: " + danhgia);
+    
     
     LuanCachCucSaoTuViNoBoc(keyArr);
     LuanCachCucSaoLiemTrinhNoBoc(keyArr);

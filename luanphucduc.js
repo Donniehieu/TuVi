@@ -66,9 +66,9 @@ function LuanCungPhucDuc(keyArr) {
     try {
         lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
     } catch (e) { lasoData = {}; }
-    const vitriDiaSinhCungPhucDuc = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[2].chi);
-    console.log(`Vị trí địa sinh cung Phúc Đức: ${vitriDiaSinhCungPhucDuc}`);
-    keyArr.push(`Vị trí địa sinh cung Phúc Đức tại ${vitriDiaSinhCungPhucDuc}`);
+    const danhgia = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[2].chi);
+    console.log("Vị trí cung Phúc Đức so với ngũ hành Mệnh: "+ danhgia);
+    keyArr.push("Vị trí cung Phúc Đức so với ngũ hành Mệnh: " + danhgia);
 
     LuanCachCucSaoTuViPhucDuc(keyArr);
     LuanCachCucSaoLiemTrinhPhucDuc(keyArr);

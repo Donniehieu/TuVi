@@ -66,6 +66,15 @@ function LuanCungMenh(keyArr) {
     try {
         lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
     } catch (e) { lasoData = {}; }
+    let danhgia = kiemTraDiaSinh(lasoData.lasoOb[0].hanh, lasoData.lasoOb[0].chi);
+    let chimenh = lasoData.lasoOb[0].chi;
+    console.log("Vị trí cung Mệnh so với ngũ hành Mệnh: " + danhgia);
+    keyArr.push("Vị trí cung Mệnh so với ngũ hành Mệnh: " + danhgia);
+
+    keyArr.push("Vị trí cung Mệnh tại: " + chimenh);
+
+    
+
 
     LuanCachCucSaoTuVi(keyArr);
     LuanCachCucSaoLiemTrinh(keyArr);

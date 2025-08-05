@@ -70,8 +70,9 @@ function LuanCungHuynhDe(keyArr) {
     try {
         lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
     } catch (e) { lasoData = {}; }
-    const vitriDiaSinhCungMenh = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[0].chi);
-    keyArr.push(`Vị trí địa sinh cung Huynh Đệ tại ${vitriDiaSinhCungMenh}`);
+    const danhgia = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[11].chi);
+    console.log("Vị trí cung Huynh Đệ so với ngũ hành Mệnh: " + danhgia);
+    keyArr.push("Vị trí cung Huynh Đệ so với ngũ hành Mệnh: " + danhgia);
     
     LuanCachCucSaoTuViHuynhDe(keyArr);
     LuanCachCucSaoLiemTrinhHuynhDe(keyArr);

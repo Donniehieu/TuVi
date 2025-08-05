@@ -66,8 +66,9 @@ function LuanCungTatAch(keyArr) {
     try {
         lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
     } catch (e) { lasoData = {}; }
-    const vitriDiaSinhCungMenh = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[0].chi);
-    keyArr.push(`Vị trí địa sinh cung Tật Ách tại ${vitriDiaSinhCungMenh}`);
+    let danhgia = kiemTraDiaSinh(lasoData.lasoOb[0].hanh, lasoData.lasoOb[7].chi);
+    console.log("Vị trí cung Tật Ách so với ngũ hành Mệnh: " + danhgia);
+    keyArr.push("Vị trí cung Tật Ách so với ngũ hành Mệnh: " + danhgia);
     
     LuanCachCucSaoTuViTatAch(keyArr);
     LuanCachCucSaoLiemTrinhTatAch(keyArr);
@@ -1225,6 +1226,8 @@ function LuanCacCachCucThienPhuTatAch(keyArr) {
     const ngotuat = ["Ngọ", "Tuất"];
     const mvd = mieu.concat(vuong).concat(dac);
     const TuTuongTham = ["Tử Vi", "Thiên Tướng", "Tham Lang"];
+
+   
 
     if (isSaoToaThuTaiCung("Tật Ách", "Thiên Phủ")) {
         

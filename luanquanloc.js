@@ -66,9 +66,10 @@ function LuanCungQuanLoc(keyArr) {
     try {
         lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
     } catch (e) { lasoData = {}; }
-    const vitriDiaSinhCungMenh = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[0].chi);
-    keyArr.push(`Vị trí địa sinh cung Quan Lộc tại ${vitriDiaSinhCungMenh}`);
-    
+    const danhgia = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[4].chi);
+    console.log("Vị trí cung Quan Lộc so với ngũ hành Mệnh: " + danhgia);
+    keyArr.push("Vị trí cung Quan Lộc so với ngũ hành Mệnh: " + danhgia);
+
     LuanCachCucSaoTuViQuanLoc(keyArr);
     LuanCachCucSaoLiemTrinhQuanLoc(keyArr);
     LuanCachCucSaoThienDongQuanLoc(keyArr);

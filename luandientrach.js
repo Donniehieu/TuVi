@@ -66,8 +66,9 @@ function LuanCungDienTrach(keyArr) {
     try {
         lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
     } catch (e) { lasoData = {}; }
-    const vitriDiaSinhCungMenh = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[0].chi);
-    keyArr.push(`Vị trí địa sinh cung Điền Trạch tại ${vitriDiaSinhCungMenh}`);
+    const danhgia = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[3].chi);
+    console.log("Vị trí cung Điền Trạch so với ngũ hành Mệnh: " + danhgia);
+    keyArr.push("Vị trí cung Điền Trạch so với ngũ hành Mệnh: " + danhgia);
  
     LuanCachCucSaoTuViDienTrach(keyArr);
     LuanCachCucSaoLiemTrinhDienTrach(keyArr);

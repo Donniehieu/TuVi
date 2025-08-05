@@ -180,9 +180,11 @@ function LuanCungTuTuc(keyArr) {
     try {
         lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
     } catch (e) { lasoData = {}; }
-    const vitriDiaSinhCungMenh = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[0].chi);
-    keyArr.push(`Vị trí địa sinh cung Tử Tức tại ${vitriDiaSinhCungMenh}`);
-    
+    const danhgia = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[9].chi);
+    console.log("Vị trí cung Tử Tức so với ngũ hành Mệnh: " + danhgia);
+    keyArr.push("Vị trí cung Tử Tức so với ngũ hành Mệnh: " + danhgia);
+
+
     NhanDinhTuTucChung(keyArr);
     LuanCachCucSaoTuViTuTuc(keyArr);
     LuanCachCucSaoLiemTrinhTuTuc(keyArr);

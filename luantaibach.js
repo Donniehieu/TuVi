@@ -66,8 +66,9 @@ function LuanCungTaiBach(keyArr) {
     try {
         lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
     } catch (e) { lasoData = {}; }
-    const vitriDiaSinhCungMenh = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[0].chi);
-    keyArr.push(`Vị trí địa sinh cung Tài Bạch tại ${vitriDiaSinhCungMenh}`);
+    const danhgia = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[8].chi);
+    console.log("Vị trí cung Tài Bạch so với ngũ hành Mệnh: " + danhgia);
+    keyArr.push("Vị trí cung Tài Bạch so với ngũ hành Mệnh: " + danhgia);
     
     LuanCachCucSaoTuViTaiBach(keyArr);
     LuanCachCucSaoLiemTrinhTaiBach(keyArr);

@@ -66,8 +66,10 @@ function LuanCungThienDi(keyArr) {
     try {
         lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
     } catch (e) { lasoData = {}; }
-    const vitriDiaSinhCungMenh = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[0].chi);
-    keyArr.push(`Vị trí địa sinh cung Thiên Di tại ${vitriDiaSinhCungMenh}`);
+    const danhgia = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[6].chi);
+    console.log("Vị trí cung Thiên Di so với ngũ hành Mệnh: " + danhgia);
+    keyArr.push("Vị trí cung Thiên Di so với ngũ hành Mệnh: " + danhgia);
+   
     
     LuanCachCucSaoTuViThienDi(keyArr);
     LuanCachCucSaoLiemTrinhThienDi(keyArr);

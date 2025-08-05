@@ -66,8 +66,9 @@ function LuanCungPhuThe(keyArr) {
     try {
         lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
     } catch (e) { lasoData = {}; }
-    const vitriDiaSinhCungPhuThe = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[10].chi);
-    keyArr.push(`Vị trí địa sinh cung Phu Thê tại ${vitriDiaSinhCungPhuThe}`);
+    const danhgia = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[10].chi);
+    console.log("Vị trí cung Phu Thê so với ngũ hành Mệnh: " + danhgia);
+    keyArr.push("Vị trí cung Phu Thê so với ngũ hành Mệnh: " + danhgia);
 
     LuanCachCucSaoTuViPhuThe(keyArr);
     LuanCachCucSaoLiemTrinhPhuThe(keyArr);

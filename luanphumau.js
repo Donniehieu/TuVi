@@ -49,9 +49,10 @@ function LuanCungPhuMau(keyArr) {
     try {
         lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
     } catch (e) { lasoData = {}; }
-    const vitriDiaSinhCungPhuMau = kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[1].chi);
-    console.log(`Vị trí địa sinh cung Phụ Mẫu: ${vitriDiaSinhCungPhuMau}`);
-    keyArr.push(`Vị trí địa sinh cung Phụ Mẫu tại ${vitriDiaSinhCungPhuMau}`);
+    let danhgia= kiemTraDiaSinh(lasoData.hanhMenh, lasoData.lasoOb[1].chi);
+    console.log("Vị trí cung Phụ Mẫu so với ngũ hành Mệnh: "+ danhgia);
+    keyArr.push("Vị trí cung Phụ Mẫu so với ngũ hành Mệnh: " + danhgia);
+    
 
     LuanCachCucSaoTuViPhuMau(keyArr);
     LuanCachCucSaoLiemTrinhPhuMau(keyArr);
