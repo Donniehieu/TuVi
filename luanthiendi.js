@@ -3061,6 +3061,11 @@ function LuanCachCucTuHoaThienDi(keyArr) {
         keyArr.push("Hoá Quyền, Thiên Khốc đồng cung tại Thiên Di");
     }
 
+    if (isHaiSaoDongCungTaiCung("Thiên Di", "Tý", "Hóa Quyền", "Phá Quân")) {
+        keyArr.push("Hóa Quyền, Phá Quân đồng cung tại Thiên Di ở Tý");
+
+    }
+
 }
 
 function LuanCachCucLucBaiTinhThienDi(keyArr) {

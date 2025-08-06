@@ -3428,6 +3428,9 @@ function LuanCachCucTuHoaTatAch(keyArr) {
         keyArr.push("Hóa Kỵ toạ thủ cung Tật Ách gặp Tang Môn, Điếu Khách");
     }
 
+
+    
+
 }
 
 function LuanCachCucLucBaiTinhTatAch(keyArr) {

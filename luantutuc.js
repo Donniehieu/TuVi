@@ -3083,6 +3083,20 @@ function LuanCachCucTuHoaTuTuc(keyArr) {
         keyArr.push("Hóa Lộc toạ thủ cung Tử Tức gặp Địa Không, Địa Kiếp");
     }
 
+    if (isSaoToaThuTaiCung("Tử Tức", "Hóa Quyền") && kiemTraCachCuc("Hóa Quyền", ["Địa Không", "Địa Kiếp"])) {
+        keyArr.push("Hóa Quyền toạ thủ cung Tử Tức gặp Địa Không, Địa Kiếp");
+    }
+    if(isSaoToaThuTaiCung("Tử Tức", "Hóa Quyền") && kiemTraCachCuc("Hóa Quyền", ["Hỏa Tinh", "Linh Tinh", "Kình Dương", "Đà La"])) {
+        keyArr.push("Hóa Quyền toạ thủ cung Tử Tức gặp Hỏa Tinh, Linh Tinh, Kình Dương, Đà La");
+    }
+    if(isSaoToaThuTaiCung("Tử Tức", "Hóa Quyền") && kiemTraCachCuc("Hóa Quyền", ["Kình Dương", "Đà La"])) {
+        keyArr.push("Hóa Quyền toạ thủ cung Tử Tức gặp Kình Dương, Đà La");
+    }
+    if(isSaoToaThuTaiCung("Tử Tức", "Hóa Quyền") && kiemTraCachCuc("Hóa Quyền", ["Hỏa Tinh", "Linh Tinh"])) {
+        keyArr.push("Hóa Quyền toạ thủ cung Tử Tức gặp Hỏa Tinh, Linh Tinh");
+    }
+
+
 }
 
 function LuanCachCucLucBaiTinhTuTuc(keyArr) {

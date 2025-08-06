@@ -1188,6 +1188,15 @@ function LuanCachCucThaiDuongQuanLoc(keyArr) {
         }
     }
 
+    if (isToaThuTaiCung("Quan Lộc", "Hóa Quyền")) {
+        if (isHaiSaoDongCungTaiCung("Quan Lộc", "Hỏa Tinh", "Linh Tinh")) {
+            keyArr.push("Hóa Quyền, Hỏa Tinh, Linh Tinh đồng cung tại Quan Lộc");
+        }
+        if(isToaThuTaiCung("Quan Lộc", "Hóa Kỵ")) {
+            keyArr.push("Hóa Quyền, Hóa Kỵ đồng cung tại Quan Lộc");    
+        }
+    }
+
 
 
 
