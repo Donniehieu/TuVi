@@ -2904,7 +2904,7 @@ function LuanCachCucTuHoaTaiBach(keyArr) {
         }
         if (kiemTraCachCuc("Hoá Quyền", ["Địa Không", "Địa Kiếp"])) {
             
-            keyArr.push("Hoá Quyền toạ thủ cung Tài Bạch gặp Địa Không, Địa Kiếp");
+            keyArr.push(" ");
         }
         if (kiemTraCachCuc("Hoá Quyền", ["Tử Vi", "Thiên Phủ"])) {
             

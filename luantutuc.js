@@ -3075,6 +3075,14 @@ function LuanCachCucTuHoaTuTuc(keyArr) {
         keyArr.push("Hoá Quyền, Thiên Khốc đồng cung tại Tử Tức");
     }
 
+    if (isHaiSaoDongCungTaiCung("Tử Tức", "Hóa Lộc", "Lộc Tồn")) {
+
+        keyArr.push("Hóa Lộc, Lộc Tồn đồng cung tại Tử Tức");
+    }
+    if (kiemTraCachCuc("Hóa Lộc", ["Địa Không", "Địa Kiếp"]) && isSaoToaThuTaiCung("Tử Tức", "Hóa Lộc")) {
+        keyArr.push("Hóa Lộc toạ thủ cung Tử Tức gặp Địa Không, Địa Kiếp");
+    }
+
 }
 
 function LuanCachCucLucBaiTinhTuTuc(keyArr) {

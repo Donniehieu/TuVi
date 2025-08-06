@@ -3201,6 +3201,16 @@ function LuanCachCucTuHoaPhuMau(keyArr) {
         keyArr.push("Hoá Quyền, Thiên Khốc đồng cung tại Phụ Mẫu");
     }
 
+    if (isHaiSaoDongCungTaiCung("Phụ Mẫu", "Hóa Lộc", "Thiên Riêu") && isHaiSaoDongCungTaiCung("Phụ Mẫu", "Tả Phù", "Hữu Bật")) {
+        keyArr.push("Hóa Lộc, Thiên Riêu, Tả Phù, Hữu Bật đồng cung tại Phụ Mẫu");
+    }
+    if (isHaiSaoDongCungTaiCung("Phụ Mẫu", "Hóa Lộc", "Thiên Riêu") && isHaiSaoDongCungTaiCung("Huynh Đệ", "Tả Phù", "Hữu Bật")) {
+        keyArr.push("Hóa Lộc, Thiên Riêu đồng cung tại Phụ Mẫu, Tả Phù, Hữu Bật đồng cung tại Huynh Đệ");
+    }
+    if (isHaiSaoDongCungTaiCung("Phụ Mẫu", "Hóa Lộc", "Thiên Riêu") && isSaoToaThuTaiCung("Tật Ách", "Đào Hoa")) {
+        keyArr.push("Hóa Lộc, Thiên Riêu đồng cung tại Phụ Mẫu, Đào Hoa toạ thủ cung Tật Ách");
+    }
+
 }
 
 function LuanCachCucLucBaiTinhPhuMau(keyArr) {
