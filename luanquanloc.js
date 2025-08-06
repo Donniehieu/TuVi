@@ -840,6 +840,9 @@ function LuanCachCucSaoVuKhucQuanLoc(keyArr) {
     if (isHaiSaoDongCungTaiCung("Quan Lộc", "Vũ Khúc", "Tham Lang")) {
         
         keyArr.push("Vũ Khúc tọa thủ cung Quan Lộc đồng cung Tham Lang");
+        if(kiemTraCachCuc("Vũ Khúc", "Kình Dương", "Đà La")){
+            keyArr.push("Vũ Khúc, Tham Lang đồng cung ở Quan Lộc gặp Kình Dương, Đà La");
+        }
 
     }
     // Tại sủu mùi, vũ tham đồng cung và đồng cung kiếp sát
@@ -865,6 +868,9 @@ function LuanCachCucSaoVuKhucQuanLoc(keyArr) {
     if (isHaiSaoDongCungTaiCung("Quan Lộc", "Vũ Khúc", "Thiên Tướng")) {
         
         keyArr.push("Vũ Khúc đồng cung với Thiên Tướng tại Quan Lộc");
+        if(isSaoToaThuTaiCung("Quan Lộc", "Hóa Kỵ")){
+            keyArr.push("Vũ Khúc, Thiên Tướng đồng cung với Hóa Kỵ tại Quan Lộc");
+        }
     }
     if (isHaiSaoDongCungTaiCung("Quan Lộc", "Vũ Khúc", "Thất Sát")) {
         
@@ -873,6 +879,19 @@ function LuanCachCucSaoVuKhucQuanLoc(keyArr) {
     if (isHaiSaoDongCungTaiCung("Quan Lộc", "Vũ Khúc", "Phá Quân")) {
         
         keyArr.push("Vũ Khúc đồng cung với Phá Quân tại Quan Lộc");
+    }
+
+    if(isHaiSaoDongCungTaiCung("Quan Lộc", "Vũ Khúc", "Hóa Kỵ")){
+        keyArr.push("Vũ Khúc đồng cung với Hóa Kỵ tại Quan Lộc");
+        if(isHaiSaoDongCungTaiCung("Quan Lộc", "Địa Không", "Địa Kiếp")){
+            keyArr.push("Vũ Khúc, Hóa Kỵ, Địa Không, Địa Kiếp đồng cung tại Quan Lộc");
+        }
+        if(isSaoToaThuTaiCung("Quan Lộc","Kình Dương")){
+            keyArr.push("Vũ Khúc, Hóa Kỵ, Kình Dương đồng cung tại Quan Lộc");
+        }
+        if(isSaoToaThuTaiCung("Quan Lộc","Thiên Hình")){
+            keyArr.push("Vũ Khúc, Hóa Kỵ, Thiên Hình đồng cung tại Quan Lộc");
+        }
     }
 }
 
@@ -1516,6 +1535,12 @@ function LuanCachCucThamLangQuanLoc(keyArr) {
     if (isHaiSaoDongCungTaiCung("Quan Lộc", "Tham Lang", "Liêm Trinh")) {
         
         keyArr.push("Tham Lang tọa thủ cung Quan Lộc đồng cung Liêm Trinh");
+        if(isSaoToaThuTaiCung("Quan Lộc", "Hóa Kỵ")){
+            keyArr.push("Tham Lang, Liêm Trinh, Hóa Kỵ đồng cung tại Quan Lộc");
+            if(isSaoToaThuTaiCungVaChi("Quan Lộc","Hợi","Tham Lang")){
+                keyArr.push("Tham Lang, Liêm Trinh, Hóa Kỵ đồng cung tại Quan Lộc ở Hợi");
+            }
+        }
 
     }
 
@@ -1541,6 +1566,10 @@ function LuanCachCucThamLangQuanLoc(keyArr) {
     if(isHaiSaoDongCungTaiCungChi("Quan Lộc","Ngọ", "Thiên Đồng","Thái Âm") && isSaoToaThuTaiCung("Quan Lộc", "Kình Dương")){
         
         keyArr.push("Thiên Đồng, Thái Âm, Kình Dương tọa thủ cung Quan Lộc ở Ngọ");
+    }
+    if(isHaiSaoDongCungTaiCung("Quan Lộc", "Hóa Kỵ", "Tham Lang")){
+        keyArr.push("Tham Lang, Hóa Kỵ đồng cung tại Quan Lộc");
+
     }
 
     
