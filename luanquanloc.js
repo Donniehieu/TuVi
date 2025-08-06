@@ -1211,6 +1211,20 @@ function LuanCachCucThienCoQuanLoc(keyArr) {
     if (isHaiSaoDongCungTaiCung("Quan Lộc", "Thiên Cơ", "Thiên Lương")) {
         
         keyArr.push("Thiên Cơ đồng cung với Thiên Lương tại Quan Lộc");
+        if(isHaiSaoDongCungTaiCung("Quan Lộc", "Địa Kiếp", "Địa Không")){
+            keyArr.push("Thiên Cơ, Thiên Lương đồng cung với Địa Kiếp, Địa Không tại Quan Lộc");
+        }
+        if(kiemTraCachCuc("Thiên Cơ", ["Kình Dương", "Đà La"])){
+            keyArr.push("Thiên Cơ, Thiên Lương đồng cung ở Quan Lộc gặp Kình Dương, Đà La");
+        }
+    }
+    // Cơ Kỵ
+    if(isHaiSaoDongCungTaiCung("Quan Lộc", "Thiên Cơ", "Hóa Kỵ")){
+        keyArr.push("Thiên Cơ đồng cung với Hóa Kỵ tại Quan Lộc");
+        if(kiemTraCachCuc("Thiên Cơ", ["Kình Dương", "Đà La", "Địa Không", "Địa Kiếp"])){
+            keyArr.push("Thiên Cơ, Hóa Kỵ đồng cung ở Quan Lộc gặp các sao Kình Dương, Đà La, Địa Không, Địa Kiếp");
+        }
+       
     }
 }
 function LuanCacCachCucThienPhuQuanLoc(keyArr) {
@@ -2362,6 +2376,13 @@ function LuanCachCucXuongKhucQuanLoc(keyArr) {
 
             }
         }
+    }
+
+    if(isHaiSaoDongCungTaiCung("Quan Lộc", "Văn Xương","Hóa Kỵ")){
+        keyArr.push("Văn Xương, Hóa Kỵ đồng cung tại Quan Lộc");
+    }
+    if(isHaiSaoDongCungTaiCung("Quan Lộc", "Văn Khúc","Hóa Kỵ")){
+        keyArr.push("Văn Khúc, Hóa Kỵ đồng cung tại Quan Lộc");
     }
 }
 function LuanCachCucKhoiVietQuanLoc(keyArr) {
