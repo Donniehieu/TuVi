@@ -398,24 +398,24 @@ function LuanCachCucSaoLiemTrinhQuanLoc(keyArr) {
     if (isSaoToaThuTaiCung("Quan Lộc", "Liêm Trinh")) {
 
         keyArr.push("Liêm Trinh tọa thủ cung Quan Lộc");
-        if (isToaThuTaiCung("Quan Lộc", "Hóa Kỵ")) {
+        if (isSaoToaThuTaiCung("Quan Lộc", "Hóa Kỵ")) {
             keyArr.push("Liêm Trinh, Hóa Kỵ đồng cung tại Quan Lộc");
-            if (isToaThuTaiCung("Quan Lộc", "Kình Dương")) {
+            if (isSaoToaThuTaiCung("Quan Lộc", "Kình Dương")) {
                 if (kiemTraCachCuc("Liêm Trinh", ["Bạch Hổ"])) {
                     keyArr.push("Liêm Trinh, Hóa Kỵ, Kình Dương đồng cung tại Quan Lộc gặp Bạch Hổ");
                 }
             }
-            if (isToaThuTaiCung("Quan Lộc", "Đà La")) {
+            if (isSaoToaThuTaiCung("Quan Lộc", "Đà La")) {
                 if (kiemTraCachCuc("Liêm Trinh", ["Bạch Hổ"])) {
                     keyArr.push("Liêm Trinh, Hóa Kỵ, Đà La đồng cung tại Quan Lộc gặp Bạch Hổ");
                 }
             }
-            if (isToaThuTaiCung("Quan Lộc", "Địa Không")) {
+            if (isSaoToaThuTaiCung("Quan Lộc", "Địa Không")) {
                 if (kiemTraCachCuc("Liêm Trinh", ["Bạch Hổ"])) {
                     keyArr.push("Liêm Trinh, Hóa Kỵ, Địa Không đồng cung tại Quan Lộc gặp Bạch Hổ");
                 }
             }
-            if (isToaThuTaiCung("Quan Lộc", "Địa Kiếp")) {
+            if (isSaoToaThuTaiCung("Quan Lộc", "Địa Kiếp")) {
                 if (kiemTraCachCuc("Liêm Trinh", ["Bạch Hổ"])) {
                     keyArr.push("Liêm Trinh, Hóa Kỵ, Địa Kiếp đồng cung tại Quan Lộc gặp Bạch Hổ");
                 }
@@ -571,10 +571,10 @@ function LuanCachCucSaoLiemTrinhQuanLoc(keyArr) {
     if (isHaiSaoDongCungTaiCung("Quan Lộc", "Liêm Trinh", "Thất Sát")) {
 
         keyArr.push("Liêm Trinh đồng cung với Thất Sát tại Quan Lộc");
-        if (isToaThuTaiCung("Quan Lộc", "Hóa Kỵ") && kiemTraCachCuc("Liêm Trinh", lucsattinh) === false) {
+        if (isSaoToaThuTaiCung("Quan Lộc", "Hóa Kỵ") && kiemTraCachCuc("Liêm Trinh", lucsattinh) === false) {
             keyArr.push("Liêm Trinh, Thất Sát, Hóa Kỵ đồng cung tại Quan Lộc không gặp các sao Sát tinh");
         }
-        if (isToaThuTaiCung("Quan Lộc", "Hóa Kỵ") && kiemTraCachCuc("Liêm Trinh", lucsattinh) === true) {
+        if (isSaoToaThuTaiCung("Quan Lộc", "Hóa Kỵ") && kiemTraCachCuc("Liêm Trinh", lucsattinh) === true) {
             keyArr.push("Liêm Trinh, Thất Sát, Hóa Kỵ đồng cung tại Quan Lộc gặp các sao Sát tinh");
         }
 
@@ -582,26 +582,26 @@ function LuanCachCucSaoLiemTrinhQuanLoc(keyArr) {
     if (isHaiSaoDongCungTaiCung("Quan Lộc", "Liêm Trinh", "Phá Quân")) {
 
         keyArr.push("Liêm Trinh đồng cung với Phá Quân tại Quan Lộc");
-        if (isToaThuTaiCung("Quan Lộc", "Hóa Kỵ")) {
+        if (isSaoToaThuTaiCung("Quan Lộc", "Hóa Kỵ")) {
             keyArr.push("Liêm Trinh, Phá Quân, Hóa Kỵ đồng cung tại Quan Lộc");
         }
     }
     if (isHaiSaoDongCungTaiCung("Quan Lộc", "Liêm Trinh", "Tham Lang")) {
 
         keyArr.push("Liêm Trinh đồng cung với Tham Lang tại Quan Lộc");
-        if (isToaThuTaiCung("Quan Lộc", "Hóa Kỵ")) {
+        if (isSaoToaThuTaiCung("Quan Lộc", "Hóa Kỵ")) {
             keyArr.push("Liêm Trinh, Tham Lang, Hóa Kỵ đồng cung tại Quan Lộc");
         }
     }
 
     if (isHaiSaoDongCungTaiCung("Quan Lộc", "Liêm Trinh", "Hóa Kỵ")) {
-        if (isToaThuTaiCung("Quan Lộc", "Văn Xương")) {
+        if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương")) {
             keyArr.push("Liêm Trinh, Hóa Kỵ, Văn Xương đồng cung tại Quan Lộc");
         }
-        if (isToaThuTaiCung("Quan Lộc", "Văn Khúc")) {
+        if (isSaoToaThuTaiCung("Quan Lộc", "Văn Khúc")) {
             keyArr.push("Liêm Trinh, Hóa Kỵ, Văn Khúc đồng cung tại Quan Lộc");
         }
-        if (isToaThuTaiCung("Quan Lộc", "Lộc Tồn")) {
+        if (isSaoToaThuTaiCung("Quan Lộc", "Lộc Tồn")) {
             keyArr.push("Liêm Trinh, Hóa Kỵ, Lộc Tồn đồng cung tại Quan Lộc");
         }
         if (isSaoToaThuTaiCungVaChi("Quan Lộc", "Thân", "Hóa Kỵ")) {
@@ -627,10 +627,10 @@ function LuanCachCucSaoLiemTrinhQuanLoc(keyArr) {
         if (isHaiSaoDongCungTaiCung("Quan Lộc", "Thái Âm", "Địa Kiếp")) {
             keyArr.push("Hóa Kỵ, Thái Âm, Địa Kiếp đồng cung tại Quan Lộc");
         }
-        if (isToaThuTaiCung("Quan Lộc", "Văn Xương")) {
+        if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương")) {
             keyArr.push("Hóa Kỵ, Thái Âm, Văn Xương đồng cung tại Quan Lộc");
         }
-        if (isToaThuTaiCung("Quan Lộc", "Văn Khúc")) {
+        if (isSaoToaThuTaiCung("Quan Lộc", "Văn Khúc")) {
             keyArr.push("Hóa Kỵ, Thái Âm, Văn Khúc đồng cung tại Quan Lộc");
         }
     }
@@ -1173,26 +1173,26 @@ function LuanCachCucThaiDuongQuanLoc(keyArr) {
     // Dương Kỵ
     if (isHaiSaoDongCungTaiCungChi("Quan Lộc", "Thái Dương", "Hóa Kỵ")) {
         keyArr.push("Thái Dương, Hóa Kỵ đồng cung tại Quan Lộc");
-        if (isToaThuTaiCung("Quan Lộc", "Thiên Hình")) {
+        if (isSaoToaThuTaiCung("Quan Lộc", "Thiên Hình")) {
             keyArr.push("Thái Dương, Hóa Kỵ, Thiên Hình đồng cung tại Quan Lộc");
         }
-        if (isToaThuTaiCung("Quan Lộc", "Địa Không")) {
+        if (isSaoToaThuTaiCung("Quan Lộc", "Địa Không")) {
             keyArr.push("Thái Dương, Hóa Kỵ, Địa Không đồng cung tại Quan Lộc");
         }
-        if (isToaThuTaiCung("Quan Lộc", "Địa Kiếp")) {
+        if (isSaoToaThuTaiCung("Quan Lộc", "Địa Kiếp")) {
 
             keyArr.push("Thái Dương, Hóa Kỵ, Địa Kiếp đồng cung tại Quan Lộc");
         }
-        if (isToaThuTaiCung("Quan Lộc", "Kình Dương")) {
+        if (isSaoToaThuTaiCung("Quan Lộc", "Kình Dương")) {
             keyArr.push("Thái Dương, Hóa Kỵ, Kình Dương đồng cung tại Quan Lộc");
         }
     }
 
-    if (isToaThuTaiCung("Quan Lộc", "Hóa Quyền")) {
+    if (isSaoToaThuTaiCung("Quan Lộc", "Hóa Quyền")) {
         if (isHaiSaoDongCungTaiCung("Quan Lộc", "Hỏa Tinh", "Linh Tinh")) {
             keyArr.push("Hóa Quyền, Hỏa Tinh, Linh Tinh đồng cung tại Quan Lộc");
         }
-        if(isToaThuTaiCung("Quan Lộc", "Hóa Kỵ")) {
+        if(isSaoToaThuTaiCung("Quan Lộc", "Hóa Kỵ")) {
             keyArr.push("Hóa Quyền, Hóa Kỵ đồng cung tại Quan Lộc");    
         }
     }
@@ -1940,33 +1940,33 @@ function LuanCachCucCuMonQuanLoc(keyArr) {
 
     if (isHaiSaoDongCungTaiCung("Quan Lộc", "Cự Môn", "Hóa Kỵ")) {
         keyArr.push("Cự Môn, Hóa Kỵ đồng cung tại Quan Lộc");
-        if (isToaThuTaiCung("Quan Lộc", "Kình Dương")) {
+        if (isSaoToaThuTaiCung("Quan Lộc", "Kình Dương")) {
             keyArr.push("Cự Môn, Hóa Kỵ, Kình Dương đồng cung tại Quan Lộc");
         }
-        if (isToaThuTaiCung("Quan Lộc", "Đà La")) {
+        if (isSaoToaThuTaiCung("Quan Lộc", "Đà La")) {
             keyArr.push("Cự Môn, Hóa Kỵ, Đà La đồng cung tại Quan Lộc");
         }
         if (isHaiSaoDongCungTaiCung("Quan Lộc", "Địa Không", "Địa Kiếp")) {
             keyArr.push("Cự Môn, Hóa Kỵ đồng cung Địa Không, Địa Kiếp tại Quan Lộc");
         }
-        if (isToaThuTaiCung("Quan Lộc", "Linh Tinh")) {
+        if (isSaoToaThuTaiCung("Quan Lộc", "Linh Tinh")) {
             keyArr.push("Cự Môn, Hóa Kỵ, Linh Tinh đồng cung tại Quan Lộc");
         }
-        if (isToaThuTaiCung("Quan Lộc", "Hỏa Tinh")) {
+        if (isSaoToaThuTaiCung("Quan Lộc", "Hỏa Tinh")) {
             keyArr.push("Cự Môn, Hóa Kỵ, Hỏa Tinh đồng cung tại Quan Lộc");
         }
-        if (isToaThuTaiCung("Quan Lộc", "Địa Không")) {
+        if (isSaoToaThuTaiCung("Quan Lộc", "Địa Không")) {
             keyArr.push("Cự Môn, Hóa Kỵ, Địa Không đồng cung tại Quan Lộc");
         }
-        if (isToaThuTaiCung("Quan Lộc", "Địa Kiếp")) {
+        if (isSaoToaThuTaiCung("Quan Lộc", "Địa Kiếp")) {
             keyArr.push("Cự Môn, Hóa Kỵ, Địa Kiếp đồng cung tại Quan Lộc");
         }
-        if (isToaThuTaiCung("Quan Lộc", "Thiên Đồng")) {
+        if (isSaoToaThuTaiCung("Quan Lộc", "Thiên Đồng")) {
             keyArr.push("Cự Môn, Hóa Kỵ, Thiên Đồng đồng cung tại Quan Lộc");
         }
         if (isSaoToaThuTaiCungVaChi("Quan Lộc", "Mùi", "Thiên Đồng")) {
             keyArr.push("Cự Môn, Hóa Kỵ, Thiên Đồng đồng cung tại Quan Lộc ở Mùi");
-            if (isToaThuTaiCung("Quan Lộc", "Kình Dương")) {
+            if (isSaoToaThuTaiCung("Quan Lộc", "Kình Dương")) {
                 keyArr.push("Cự Môn, Hóa Kỵ, Thiên Đồng, Kình Dương đồng cung tại Quan Lộc ở Mùi");
             }
         }
