@@ -44,7 +44,7 @@ document.getElementById('form_tuvi').addEventListener('submit', function (e) {
         return;
     }
     const kq = getCanChiFull(ngay, thang, nam, gio.split(' ')[0]);
-    Console.log(gio.split(' ')[0]);
+   
     const am = kq.amlich;
     canchi= kq.canchi;
 
