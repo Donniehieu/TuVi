@@ -75,7 +75,7 @@ function tinhTieuvan(chiNamSinh, chiNam, gioitinh) {
 
         if (chi == chiNam) {
             tieuvanArr[cungIdx] = chi + " (T.H)";
-            IDTieuHan = (cungIdx - IDCungMenh + 12) % 12;
+            IDTieuHan = (cungIdx + 12) % 12;
             tenCungTieuHan = TEN_CUNG_FULL[(cungIdx - IDCungMenh + 12) % 12];
             
         } else {
