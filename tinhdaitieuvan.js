@@ -90,7 +90,7 @@ function anNguyetHan(idxTieuHan, thangSinh, gioSinhChi) {
         olds.forEach(o => o.remove());
     });
 
-    let idxThang = (idxTieuHan - (thangSinh - 1) + 12) % 12;
+    let idxThang = ((idxTieuHan - (thangSinh - 1)) + 12) % 12;
     const GIO12 = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"];
     let gioIdx = GIO12.indexOf(gioSinhChi);
     if (gioIdx === -1) gioIdx = 0;
