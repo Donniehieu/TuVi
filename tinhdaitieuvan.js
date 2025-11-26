@@ -91,6 +91,7 @@ function anNguyetHan(idxTieuHan, thangSinh, gioSinhChi) {
     });
 
     let idxThang = ((idxTieuHan - (thangSinh - 1)) + 12) % 12;
+    console.log(idxThang);
     const GIO12 = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"];
     let gioIdx = GIO12.indexOf(gioSinhChi);
     if (gioIdx === -1) gioIdx = 0;
