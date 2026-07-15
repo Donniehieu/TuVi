@@ -113,7 +113,7 @@ function getLunarMonth11(yy, timeZone) {
 }
 
 function getLeapMonthOffset(a11, timeZone) {
-    var k = INT(0.5 + (a11 - 2415021.076998695) / 29.530588853),
+    var k = INT((a11 - 2415021.076998695) / 29.530588853+0.5);
         last = 0, i = 1,
         arc = getSunLongitude(getNewMoonDay(k + i, timeZone), timeZone);
     do {
@@ -143,9 +143,10 @@ function convertSolar2Lunar(dd, mm, yy, timeZone) {
         b11 = getLunarMonth11(yy + 1, timeZone);
     }
     var lunarDay = dayNumber - monthStart + 1,
-        diff = INT((monthStart - a11) / 29.530588853),
+        diff = INT((monthStart - a11) / 29),
         lunarLeap = 0,
-        lunarMonth = diff + 11,
+        lunarMonth = diff + 11;
+	    
         leapMonthDiff = b11 - a11;
     
     if (leapMonthDiff > 365) {
@@ -159,7 +160,7 @@ function convertSolar2Lunar(dd, mm, yy, timeZone) {
     }
     
     if (lunarMonth > 12) {
-        lunarMonth -= 12;
+        lunarMonth =  lunarMonth -12;
     }
     if (lunarMonth >= 11 && diff < 4) {
         lunarYear -= 1;
