@@ -80,7 +80,7 @@ function getSunLongitude(jdn, timeZone) {
         + 0.000290 * Math.sin(dr * 3 * M);
     var L = L0 + DL;
 	
-   L = L - PI*2*(INT(L/(PI*2))); // Normalize to (0, 2*PI)
+   L = L - Math.PI*2*(INT(L/(Math.PI*2))); // Normalize to (0, 2*PI)
 return INT(L / PI * 6)
 }
 
