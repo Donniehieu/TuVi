@@ -123,20 +123,33 @@ function convertSolar2Lunar(dd, mm, yy, timeZone) {
         lunarYear = yy + 1;
         b11 = getLunarMonth11(yy + 1, timeZone);
     }
+    
     var lunarDay = dayNumber - monthStart + 1,
-        diff = INT((monthStart - a11) / 29),
+        diff = INT((monthStart - a11) / 29.530588853), // SỬA: Tính diff chính xác hơn
         lunarLeap = 0,
         lunarMonth = diff + 11,
         leapMonthDiff = b11 - a11;
+    
+    // SỬA: Xử lý tháng nhuận chính xác
     if (leapMonthDiff > 365) {
         var leapMonth = getLeapMonthOffset(a11, timeZone);
         if (diff >= leapMonth) {
-            lunarMonth = diff + 10;
-            if (diff == leapMonth) lunarLeap = 1;
+            lunarMonth = diff + 10; // Tháng trước tháng nhuận được tính là tháng 10, không phải 11
+            if (diff == leapMonth) {
+                lunarLeap = 1; // Đây là tháng nhuận
+            }
         }
     }
-  if (lunarMonth > 12) lunarMonth -= 12;
-  if (lunarMonth >= 11 && diff < 4) lunarYear -= 1;
+    
+    // SỬA: Điều chỉnh tháng vượt quá 12
+    if (lunarMonth > 12) {
+        lunarMonth -= 12;
+    }
+    
+    // SỬA: Điều chỉnh năm khi tháng < 4 (trước Tết)
+    if (lunarMonth >= 11 && diff < 4) {
+        lunarYear -= 1;
+    }
 
     return [lunarDay, lunarMonth, lunarYear, lunarLeap];
 }
@@ -193,3 +206,14 @@ function getCanChiFull(dd, mm, yy, gioChi) {
     };
 }
 
+// Export cho Node.js hoặc browser
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        convertSolar2Lunar,
+        getCanChiFull,
+        getCanChiNam,
+        getCanChiThang,
+        getCanChiNgay,
+        getCanChiGio
+    };
+}
