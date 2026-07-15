@@ -135,8 +135,8 @@ function convertSolar2Lunar(dd, mm, yy, timeZone) {
             if (diff == leapMonth) lunarLeap = 1;
         }
     }
-    if (lunarMonth > 12) lunarMonth -= 12;
-    if (lunarMonth >= 11 && diff < 4) lunarYear -= 1;
+  if (lunarMonth >= 11 && diff < 4) lunarYear -= 1;
+  if (lunarMonth > 12) lunarMonth -= 12;
     return [lunarDay, lunarMonth, lunarYear, lunarLeap];
 }
 
