@@ -81,7 +81,7 @@ function getSunLongitude(jdn, timeZone) {
     var L = L0 + DL;
 	
    L = L - Math.PI*2*(INT(L/(Math.PI*2))); // Normalize to (0, 2*PI)
-return INT(L / PI * 6)
+return INT(L / Math.PI * 6)
 }
 
 function getLunarMonth11(yy, timeZone) {
