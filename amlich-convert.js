@@ -128,7 +128,7 @@ function convertSolar2Lunar(dd, mm, yy, timeZone) {
     var lunarDay = dayNumber - monthStart + 1,
         diff = INT((monthStart - a11) / 29),
         lunarLeap = 0,
-        lunarMonth = diff + 11;
+        lunarMonth = diff + 11,
 	    
         leapMonthDiff = b11 - a11;
     
