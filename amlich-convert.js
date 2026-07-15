@@ -132,14 +132,14 @@ function convertSolar2Lunar(dd, mm, yy, timeZone) {
     
     // SỬA: Xử lý tháng nhuận chính xác
     if (leapMonthDiff > 365) {
-        var leapMonth = getLeapMonthOffset(a11, timeZone);
-        if (diff >= leapMonth) {
-            lunarMonth = diff + 10; // Tháng trước tháng nhuận được tính là tháng 10, không phải 11
-            if (diff == leapMonth) {
-                lunarLeap = 1; // Đây là tháng nhuận
-            }
-        }
+    var leapMonth = getLeapMonthOffset(a11, timeZone);
+    if (diff > leapMonth) {  // ← THAY >= thành >
+        lunarMonth = diff + 10;
+    } else if (diff == leapMonth) {
+        lunarMonth = diff + 11;  // ← Tháng nhuận giữ nguyên là 11
+        lunarLeap = 1;
     }
+}
     
     // SỬA: Điều chỉnh tháng vượt quá 12
     if (lunarMonth > 12) {
