@@ -31,24 +31,7 @@ function jdFromDate(dd, mm, yy) {
     }
     return jd;
 }
-function jdToDate(jd)
 
-var a, b, c, d, e, m, day, month, year;
-if (jd > 2299160) { // After 5/10/1582, Gregorian calendar
-	a = jd + 32044;
-	b = INT((4*a+3)/146097);
-	c = a - INT((b*146097)/4);
-} else {
-	b = 0;
-	c = jd + 32082;
-}
-d = INT((4*c+3)/1461);
-e = c - INT((1461*d)/4);
-m = INT((5*e+2)/153);
-day = e - INT((153*m+2)/5) + 1;
-month = m + 3 - 12*INT(m/10);
-year = b*100 + d - 4800 + INT(m/10);
-return new Array(day, month, year);
 
 function getNewMoonDay(k, timeZone) {
     var T = k / 1236.85,
