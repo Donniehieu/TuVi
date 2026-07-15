@@ -96,7 +96,7 @@ function getLunarMonth11(yy, timeZone) {
 }
 
 function getLeapMonthOffset(a11, timeZone) {
-    var k = INT((a11 - 2415021.076998695) / 29.530588853+0.5);
+    var k = INT((a11 - 2415021.076998695) / 29.530588853+0.5),
         last = 0, i = 1,
         arc = getSunLongitude(getNewMoonDay(k + i, timeZone), timeZone);
     do {
