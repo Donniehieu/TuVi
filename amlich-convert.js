@@ -135,6 +135,7 @@ function convertSolar2Lunar(dd, mm, yy, timeZone) {
     
     if (leapMonthDiff > 365) {
         var leapMonth = getLeapMonthOffset(a11, timeZone);
+		alert(leapMonth);
         if (diff >= leapMonth) {
             lunarMonth = diff + 10;
             if (diff == leapMonth) {
