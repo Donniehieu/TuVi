@@ -1,11 +1,11 @@
 ﻿function viTriLocTon(canNam) {
 
     const CAN_MAP = {
-        "G.": 0, "K.": 0, // Giáp, Kỷ -> Dần
-        "Ấ.": 1, "C.": 1, // Ất, Canh -> Mão
-        "B.": 3, "T.": 3, // Bính, Tân -> Tỵ
-        "Đ.": 4, "N.": 4, // Đinh, Nhâm -> Ngọ
-        "M.": 6, "Q.": 6  // Mậu, Quý -> Thân
+        "G.": 0, "K.": 4, // Giáp-> dần, Kỷ -> ngọ
+        "Ấ.": 1, "C.": 6, // Ất-> mão, Canh -> thân
+        "B.": 3, "T.": 7, // Bính-> tỵ, Tân -> dậu
+        "Đ.": 4, "N.": 9, // Đinh-> ngọ, Nhâm -> hợi
+        "M.": 3, "Q.": 10  // Mậu- tỵ, Quý -> Tý
     };
     return CAN_MAP[canNam] ?? 0;
 }
