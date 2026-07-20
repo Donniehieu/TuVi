@@ -799,9 +799,9 @@ function anTriet(canNam) {
     ) {
         // Đặt ở cell Tý, góc phải trên cùng
         if (cell1 && cellNum1 === 15) {
-            insertTriet(cell1, "right:-24px; top:-16px;", "transform:rotate(0deg);");
+            insertTriet(cell1, "left:-24px; top:-16px;", "transform:rotate(0deg);");
         } else if (cell2 && cellNum2 === 15) {
-            insertTriet(cell2, "right:-24px; top:-16px;", "transform:rotate(0deg);");
+            insertTriet(cell2, "left:-24px; top:-16px;", "transform:rotate(0deg);");
         }
     }
     else if (
