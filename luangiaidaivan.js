@@ -148,7 +148,7 @@ function HienThiNhanXetDaiVan() {
             <i class="fa fa-star"></i> Tam hợp Dương Tử Phúc ở đại vận Mệnh Tài Quan: Bạn là người thông minh, trực giác nhanh nhạy, luôn có động thái đi trước đón đầu, khẳng định bản thân và đề cao cái tôi của bản thân.
 
         </div>`;
-    } else if (tangTueDieuGroups.some(g => isSameGroup(g.cacChi, menhTamHop))) {nhanXetTamHop = "Tang-Tuế-Điếu";
+    } else if (tangTueDieuGroups.some(g => isSameGroup(g.cacChi, menhTamHop))) {nhanXetTamHop = "Tang Tuế Điếu";
         nhanXetTamHopMenh = `<div style="color:#a600b7;font-weight:bold;margin-bottom:1em;">
             <i class="fa fa-star"></i> Tam hợp Tang-Tuế-Điếu ở đại vận Mệnh Tài Quan: Bạn là người năng động, cuộc đời có rất nhiều thay đổi lớn.
         </div>`;

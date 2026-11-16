@@ -255,7 +255,7 @@ document.getElementById('form_tuvi').addEventListener('submit', function (e) {
 
     hienThiKhoiVietDaiVan(viTriKVDV, CUNG_CELLS);
 
-    const vitriDV_Thiên_Mã = viTriThienMaDaiVan(tenCungDaiVan, CUNG_CELLS);
+    const vitriDV_Thiên_Mã = viTriThienMaDaiVan(CUNG_CELLS[idxCungDaiVan].chi, CUNG_CELLS);
 
     let danhSachSao = getAllStarsInCells();
 

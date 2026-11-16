@@ -734,208 +734,80 @@ function anSaoTuHoa(canNam, saoChinhPos) {
     });
 }
 
-function anTriet(canNam) {
-    document.querySelectorAll('.triet-border').forEach(e => e.remove());
-    const TRIET_CAN_MAP = {
-        "G.": ["Thân", "Dậu"], "K.": ["Thân", "Dậu"],
-        "Ấ.": ["Ngọ", "Mùi"], "C.": ["Ngọ", "Mùi"],
-        "B.": ["Thìn", "Tỵ"], "T.": ["Thìn", "Tỵ"],
-        "N.": ["Dần", "Mão"], "Đ.": ["Dần", "Mão"],
-        "M.": ["Tý", "Sửu"], "Q.": ["Tý", "Sửu"]
-    };
-    const chican = TRIET_CAN_MAP[canNam];
-    if (!chican) return;
-    const idx1 = CUNG_CELLS.findIndex(c => c.chi === chican[0]);
-    const idx2 = CUNG_CELLS.findIndex(c => c.chi === chican[1]);
-    if (idx1 === -1 || idx2 === -1) return;
-    const cellNum1 = CUNG_CELLS[idx1].cell;
-    const cellNum2 = CUNG_CELLS[idx2].cell;
-    const cell1 = document.querySelector('.cell' + cellNum1);
-    const cell2 = document.querySelector('.cell' + cellNum2);
+// Nhãn Tuần / Triệt: đặt đè lên đường viền giữa hai cung bị kẹp, giống bản Unity (TuViApp.PlaceTuanTriet).
+// Ô (hàng, cột) của bàn 4x4; ô giữa là thông tin chung.
+const CELL_POS_TUAN_TRIET = {
+    1: [0, 0], 2: [0, 1], 3: [0, 2], 4: [0, 3],
+    5: [1, 0], 8: [1, 3],
+    9: [2, 0], 12: [2, 3],
+    13: [3, 0], 14: [3, 1], 15: [3, 2], 16: [3, 3]
+};
+const TRIET_CHI_THEO_CAN = {
+    "G.": ["Thân", "Dậu"], "K.": ["Thân", "Dậu"],
+    "Ấ.": ["Ngọ", "Mùi"], "C.": ["Ngọ", "Mùi"],
+    "B.": ["Thìn", "Tỵ"], "T.": ["Thìn", "Tỵ"],
+    "N.": ["Dần", "Mão"], "Đ.": ["Dần", "Mão"],
+    "M.": ["Tý", "Sửu"], "Q.": ["Tý", "Sửu"]
+};
+let __triet_chi_hien_tai = null;
 
-    // Map vị trí cell (row, col)
-    const cellPosMap = {
-        1: [0, 0], 2: [0, 1], 3: [0, 2], 4: [0, 3],
-        5: [1, 0], 8: [1, 3],
-        9: [2, 0], 12: [2, 1],
-        13: [3, 0], 14: [3, 1], 15: [3, 2], 16: [3, 3]
-    };
-    const pos1 = cellPosMap[cellNum1];
-    const pos2 = cellPosMap[cellNum2];
-    if (!pos1 || !pos2) return;
-
-    // Helper: trả về cell DOM đúng để đặt ở góc
-    function insertTriet(cell, styleExtend = '', rotate = '', text = 'TRIỆT') {
-        cell.insertAdjacentHTML('beforeend', `
-                                                                            <div class="triet-border" style="
-                                                                                position:absolute;
-                                                                                ${styleExtend}
-                                                                                width:40px; height:20px;
-                                                                                background:#fffbe7; border:2px solid #d32f2f; border-radius:5px;
-                                                                                color:#d32f2f; font-weight:bold; font-size:0.75em; z-index:100;
-                                                                                display:flex; align-items:center; justify-content:center;
-                                                                                text-align:center; letter-spacing:1px;
-                                                                                box-shadow:1px 1px 5px #0001; opacity:0.96;
-                                                                                ${rotate}
-                                                                            ">${text}</div>
-                                                                        `);
+function datNhanTuanTriet(chiA, chiB, text, w, cls, mau) {
+    const iA = CUNG_CELLS.findIndex(c => c.chi === chiA);
+    const iB = CUNG_CELLS.findIndex(c => c.chi === chiB);
+    if (iA < 0 || iB < 0) return;
+    const pa = CELL_POS_TUAN_TRIET[CUNG_CELLS[iA].cell];
+    const pb = CELL_POS_TUAN_TRIET[CUNG_CELLS[iB].cell];
+    if (!pa || !pb) return;
+    let cellNum, css;
+    if (pa[0] === pb[0]) {
+        // hai cung cạnh nhau trong một hàng: đường viền đứng; hàng trên/dưới đặt sát mép ngoài của bàn
+        const trai = pa[1] < pb[1] ? iA : iB;
+        cellNum = CUNG_CELLS[trai].cell;
+        css = 'right:' + (-w / 2) + 'px;' + (pa[0] === 0 ? 'top:0;' : 'bottom:0;');
+    } else {
+        // hai cung chồng lên nhau trong một cột: đường viền ngang, nhãn ở giữa cạnh dưới của cung trên
+        const tren = pa[0] < pb[0] ? iA : iB;
+        cellNum = CUNG_CELLS[tren].cell;
+        css = 'left:50%;bottom:-10px;transform:translateX(-50%);';
     }
-
-    // Xử lý từng trường hợp đặc biệt (cặp chi)
-    if (
-        // Ngọ-Mùi: góc dưới tiếp giáp (góc đáy giữa 2 cung, cell Ngọ bên trái)
-        (chican[0] === "Ngọ" && chican[1] === "Mùi") || (chican[0] === "Mùi" && chican[1] === "Ngọ")
-    ) {
-        // Đặt ở cell Ngọ, góc phải dưới cùng
-        if (cell1 && cellNum1 === 2) {
-            insertTriet(cell1, "right:-24px; bottom:-16px;", "transform:rotate(0deg);");
-        } else if (cell2 && cellNum2 === 2) {
-            insertTriet(cell2, "right:-24px; bottom:-16px;", "transform:rotate(0deg);");
-        }
-    }
-    else if (
-        // Tý-Sửu: góc trên tiếp giáp (góc đỉnh giữa 2 cung, cell Tý bên trái)
-        (chican[0] === "Tý" && chican[1] === "Sửu") || (chican[0] === "Sửu" && chican[1] === "Tý")
-    ) {
-        // Đặt ở cell Tý, góc phải trên cùng
-        if (cell1 && cellNum1 === 15) {
-            insertTriet(cell1, "left:-24px; top:-16px;", "transform:rotate(0deg);");
-        } else if (cell2 && cellNum2 === 15) {
-            insertTriet(cell2, "left:-24px; top:-16px;", "transform:rotate(0deg);");
-        }
-    }
-    else if (
-        // Mão-Thìn: góc phải tiếp giáp (góc phải giữa 2 cung)
-        (chican[0] === "Mão" && chican[1] === "Thìn") || (chican[0] === "Thìn" && chican[1] === "Mão")
-    ) {
-        // Đặt ở cell Mão, góc phải giữa
-        if (cell1 && cellNum1 === 9) {
-            insertTriet(cell1, "right:-32px; top:50%;", "transform:translateY(-50%) rotate(0deg);");
-        } else if (cell2 && cellNum2 === 9) {
-            insertTriet(cell2, "right:-32px; top:50%;", "transform:translateY(-50%) rotate(0deg);");
-        }
-    }
-    else if (
-        // Dậu-Tuất: góc trái tiếp giáp (góc trái giữa 2 cung)
-        (chican[0] === "Dậu" && chican[1] === "Tuất") || (chican[0] === "Tuất" && chican[1] === "Dậu")
-    ) {
-        // Đặt ở cell Dậu, góc trái giữa
-        if (cell1 && cellNum1 === 8) {
-            insertTriet(cell1, "left:-32px; top:50%;", "transform:translateY(-50%) rotate(0deg);");
-        } else if (cell2 && cellNum2 === 8) {
-            insertTriet(cell2, "left:-32px; top:50%;", "transform:translateY(-50%) rotate(0deg);");
-        }
-    }
-    else {
-        // Các cặp còn lại: tự động căn giữa cạnh tiếp giáp
-        // Nếu là ngang (trái-phải)
-        if (pos1[0] === pos2[0] && Math.abs(pos1[1] - pos2[1]) === 1) {
-            // cell trái (col nhỏ hơn)
-            const cell = pos1[1] < pos2[1] ? cell1 : cell2;
-            if (cell) {
-                insertTriet(cell, "right:-20px; top:50%;", "writing-mode: vertical-lr; transform:translateY(-50%) translateX(50%);");
-            }
-        }
-        // Nếu là dọc (trên-dưới)
-        else if (pos1[1] === pos2[1] && Math.abs(pos1[0] - pos2[0]) === 1) {
-            // cell trên (row nhỏ hơn)
-            const cell = pos1[0] < pos2[0] ? cell1 : cell2;
-            if (cell) {
-                insertTriet(cell, "left:50%; bottom:-16px;", "transform:translateX(-50%);");
-            }
-        }
-        // Trường hợp khác (chéo hoặc không tiếp giáp), đặt ở cạnh phải cell1 cho dễ nhìn
-        else {
-            if (cell1) {
-                insertTriet(cell1, "right:-20px; top:50%;", "writing-mode: vertical-lr; transform:translateY(-50%) translateX(50%);");
-            }
-        }
-    }
+    const cell = document.querySelector('.cell' + cellNum);
+    if (!cell) return;
+    cell.insertAdjacentHTML('beforeend',
+        '<div class="' + cls + '" style="position:absolute;' + css + 'width:' + w + 'px;height:20px;background:#fffbe7;border:2px solid ' + mau +
+        ';border-radius:5px;color:' + mau + ';font-weight:bold;font-size:0.75em;z-index:100;display:flex;align-items:center;justify-content:center;' +
+        'text-align:center;letter-spacing:1px;box-shadow:1px 1px 5px #0001;opacity:0.96;">' + text + '</div>');
 }
+
+function veNhanTuanTriet(trietChi, tuanChi) {
+    document.querySelectorAll('.triet-border, .tuan-border').forEach(e => e.remove());
+    const trung = trietChi && tuanChi && trietChi.length === 2 && tuanChi.length === 2 &&
+        trietChi.every(c => tuanChi.includes(c));
+    if (trung) { datNhanTuanTriet(trietChi[0], trietChi[1], 'TUẦN · TRIỆT', 104, 'tuan-border triet-border', '#5b2a86'); return; }
+    if (trietChi && trietChi.length === 2) datNhanTuanTriet(trietChi[0], trietChi[1], 'TRIỆT', 58, 'triet-border', '#d32f2f');
+    if (tuanChi && tuanChi.length === 2) datNhanTuanTriet(tuanChi[0], tuanChi[1], 'TUẦN', 58, 'tuan-border', '#2949d3');
+}
+
+function anTriet(canNam) {
+    // Triệt: cặp chi theo can năm sinh. Nhãn được vẽ trong anTuan (cần biết cả Tuần để gộp khi trùng cặp).
+    __triet_chi_hien_tai = TRIET_CHI_THEO_CAN[canNam] || null;
+    document.querySelectorAll('.triet-border').forEach(e => e.remove());
+}
+
 function anTuan(canNam, chiNam) {
     document.querySelectorAll('.tuan-border').forEach(e => e.remove());
-
-    // 1. Xác định vị trí cung có chi trùng chi năm sinh (khởi Giáp)
+    // Tuần: đếm lùi từ cung có chi năm sinh theo thứ tự can Giáp..Quý; hai cung Tuần là lùi 1 và lùi 2 cung kể từ cung "khởi Giáp".
     const idxStart = CUNG_CELLS.findIndex(c => c.chi === chiNam);
-    if (idxStart === -1) return;
-
-    // 2. Chạy ngược chiều kim đồng hồ qua 12 cung để an thứ tự can
-    const CAN10 = ["G.", "Ấ.", "B.", "Đ.", "M.", "K.", "C.", "T.", "N.", "Q."]; // Giáp-Quý
-    let idx = idxStart;
-    let canIdx = 0;
-    let foundIdx = null;
+    if (idxStart === -1) { veNhanTuanTriet(__triet_chi_hien_tai, null); return; }
+    const CAN10 = ["G.", "Ấ.", "B.", "Đ.", "M.", "K.", "C.", "T.", "N.", "Q."];
+    let idx = idxStart, canIdx = 0, foundIdx = null;
     for (let i = 0; i < 12; ++i) {
-        if (CAN10[canIdx % 10] === canNam) {
-            foundIdx = idx;
-            break;
-        }
+        if (CAN10[canIdx % 10] === canNam) { foundIdx = idx; break; }
         idx = (idx - 1 + 12) % 12;
         canIdx++;
     }
-    if (foundIdx === null) return;
-
-    // 3. Hai cung Tuần là lùi 1 và lùi 2 cung ngược kim đồng hồ
-    let tuanIdx1 = (foundIdx - 1 + 12) % 12;
-    let tuanIdx2 = (foundIdx - 2 + 12) % 12;
-
-    // Lấy cell nums
-    const cellNum1 = CUNG_CELLS[tuanIdx1].cell;
-    const cellNum2 = CUNG_CELLS[tuanIdx2].cell;
-    const cell1 = document.querySelector('.cell' + cellNum1);
-    const cell2 = document.querySelector('.cell' + cellNum2);
-
-    // Map cellNum -> [row, col]
-    const cellPosMap = {
-        1: [0, 0], 2: [0, 1], 3: [0, 2], 4: [0, 3],
-        5: [1, 0], 8: [1, 3],
-        9: [2, 0], 12: [2, 1],
-        13: [3, 0], 14: [3, 1], 15: [3, 2], 16: [3, 3]
-    };
-    const pos1 = cellPosMap[cellNum1];
-    const pos2 = cellPosMap[cellNum2];
-
-    // Helper: insert label TUẦN vào cell đúng vị trí
-    function insertTuan(cell, styleExtend = '', rotate = '', text = 'TUẦN') {
-        cell.insertAdjacentHTML('beforeend', `
-                                                                                <div class="tuan-border" style="
-                                                                                    position:absolute;
-                                                                                    ${styleExtend}
-                                                                                    width:40px; height:20px;
-                                                                                    background:#fffbe7; border:2px solid #2949d3; border-radius:5px;
-                                                                                    color:#2949d3; font-weight:bold; font-size:0.75em; z-index:100;
-                                                                                    display:flex; align-items:center; justify-content:center;
-                                                                                    text-align:center; letter-spacing:1px;
-                                                                                    box-shadow:1px 1px 5px #0001; opacity:0.96;
-                                                                                    ${rotate}
-                                                                                ">${text}</div>
-                                                                            `);
-    }
-
-    // Chỉ vẽ 1 label (ở cell có chỉ số nhỏ hơn, hoặc ưu tiên cell1)
-    let cell, isVertical = false;
-    if (!pos1 || !pos2) return;
-    // Nếu cùng hàng (ngang)
-    if (pos1[0] === pos2[0] && Math.abs(pos1[1] - pos2[1]) === 1) {
-        // cell trái (col nhỏ hơn)
-        cell = pos1[1] < pos2[1] ? cell1 : cell2;
-        if (cell) {
-            insertTuan(cell, "right:-20px; top:50%;", "writing-mode: vertical-lr; transform:translateY(-50%) translateX(50%);");
-        }
-    }
-    // Nếu cùng cột (dọc)
-    else if (pos1[1] === pos2[1] && Math.abs(pos1[0] - pos2[0]) === 1) {
-        // cell trên (row nhỏ hơn)
-        cell = pos1[0] < pos2[0] ? cell1 : cell2;
-        if (cell) {
-            insertTuan(cell, "left:50%; bottom:-12px;", "transform:translateX(-50%);");
-        }
-    }
-    // Nếu góc (chéo), đặt ở cạnh phải cell đầu
-    else {
-        if (cell1) {
-            insertTuan(cell1, "right:-20px; top:50%;", "writing-mode: vertical-lr; transform:translateY(-50%) translateX(50%);");
-        }
-    }
+    if (foundIdx === null) { veNhanTuanTriet(__triet_chi_hien_tai, null); return; }
+    const tuanChi = [CUNG_CELLS[(foundIdx - 1 + 12) % 12].chi, CUNG_CELLS[(foundIdx - 2 + 12) % 12].chi];
+    veNhanTuanTriet(__triet_chi_hien_tai, tuanChi);
 }
 // === AN SAO CỐ ĐỊNH: Thiên La – Địa Võng, Thiên Thương – Thiên Sứ ===
 const SAO_CODINH = [
