@@ -214,14 +214,14 @@ document.getElementById('form_tuvi').addEventListener('submit', function (e) {
     let daiVanArr = [];
     for (let i = 0; i < 12; ++i) { daiVanArr.push(cucSo + i * 10); }
 
-    let idxCungDaiVan = getCungDaiVanHienTai(daiVanArr, tuoiAm);
-  
-    if(amduong==="Âm Nam" || amduong==="Dương Nữ") {
-    IDDaiVan = 12-idxCungDaiVan;}
-    else {
-    IDDaiVan = idxCungDaiVan;
-    }
-      
+    // Đại vận hiện tại (Tân Biên mục 10.1): số Cục ghi ở cung Mệnh; Dương Nam/Âm Nữ đi thuận, Âm Nam/Dương Nữ đi nghịch, mỗi cung 10 năm.
+    // Tuổi nhỏ hơn số Cục: vẫn ở cung Mệnh. idxCungDaiVan là chỉ số trong CUNG_CELLS (đếm từ Dần) của cung đại vận.
+    const thuanDaiVan = (amduong === "Dương Nam" || amduong === "Âm Nữ");
+    let khoiDaiVan = 0;
+    if (tuoiAm >= cucSo) { khoiDaiVan = Math.min(Math.floor((tuoiAm - cucSo) / 10), 11); }
+    let idxCungDaiVan = (IDCungMenh + (thuanDaiVan ? khoiDaiVan : (12 - khoiDaiVan) % 12)) % 12;
+    // thứ tự cung tính từ Mệnh (0 = Mệnh, 1 = Phụ Mẫu...), dùng cho lasoData.IDDaiVan
+    IDDaiVan = thuanDaiVan ? khoiDaiVan : (12 - khoiDaiVan) % 12;
 
     let idCungDaiVanHienTaiThucTe = getCungDaiVanHienTai(daiVanArr, tuoiAmThucTe);
 
@@ -244,12 +244,7 @@ document.getElementById('form_tuvi').addEventListener('submit', function (e) {
     let tenCungDaiVan = "";
     
   
-    if (idxCungDaiVan == 0) {
-        tenCungDaiVan = CUNG_CELLS[IDCungMenh].chi;
-    } else if (idxCungDaiVan > 0 && idxCungDaiVan <= 12) {
-        tenCungDaiVan = CUNG_CELLS[idxCungDaiVan].chi;
-    }
-    
+    tenCungDaiVan = CUNG_CELLS[idxCungDaiVan].chi;
     tenCungDaiVan = getTenCungByChi(tenCungDaiVan, arr);
 
     let canCung = getCanThang12Cung(ThienCanNamSinh)[idxCungDaiVan];

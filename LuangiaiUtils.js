@@ -159,15 +159,28 @@ function getTamPhuongTuChinhIdx(idxCungGoc) {
 
 
 function getHoiChieuCung(idxCungGoc) {
-    // Trả về chỉ số các cung hội chiếu }
+    // Trả về chỉ số các cung hội chiếu = tam chiếu (2 cung tam hợp) + xung chiếu (cung đối).
+    // idxCungGoc là chỉ số trong lasoOb (xếp từ cung Mệnh), cách nhau 4/6/8 cung tương ứng cách nhau 4/6/8 địa chi.
+    // Đây chỉ là tam phương tứ chính. Cung lục hợp (chỉ sao tốt) và lục hại (chỉ sao xấu) được kiemTraCachCuc thêm riêng qua getNhiHopNhiHaiCung.
     return [
-        // (idxCungGoc)%12, // Cung nhị hợp
         (idxCungGoc + 4) % 12, // Cung tam hợp
         (idxCungGoc + 6) % 12,  // Cung đối
-        (idxCungGoc + 8) % 12, // Cung tam hợp
-        (11 - idxCungGoc + 12) % 12,// Cung nhị hợp
-        (5 - idxCungGoc + 12) % 12  //cung nhị hại
+        (idxCungGoc + 8) % 12  // Cung tam hợp
     ];
+}
+// Nhị hợp (lục hợp) / nhị hại (lục hại) của một cung, tính theo địa chi (vị trí địa chỉ cố định), không theo chỉ số lasoOb.
+// Quy tắc hội chiếu từ hai quan hệ này (xem kiemTraCachCuc):
+//  - Lục hợp: chỉ khi cung kia "sinh xuất" cho cung đang xét thì sao TỐT của cung kia mới chiếu sang; chiều ngược lại không có.
+//    Chiều sinh của từng cặp lục hợp lấy theo xemboituvi.vn (Tý sinh Sửu, Hợi sinh Dần, Tuất sinh Mão, Thìn sinh Dậu, Tỵ sinh Thân, Ngọ sinh Mùi).
+//  - Lục hại: sao XẤU của cung lục hại chiếu sang cung đang xét.
+const NHI_HOP_SINH_XUAT = { "Sửu": "Tý", "Dần": "Hợi", "Mão": "Tuất", "Dậu": "Thìn", "Thân": "Tỵ", "Mùi": "Ngọ" }; // khóa = cung nhận, giá trị = chi cung sinh xuất cho nó
+const NHI_HAI_CHI = { "Tý": "Mùi", "Mùi": "Tý", "Sửu": "Ngọ", "Ngọ": "Sửu", "Dần": "Tỵ", "Tỵ": "Dần", "Mão": "Thìn", "Thìn": "Mão", "Thân": "Hợi", "Hợi": "Thân", "Dậu": "Tuất", "Tuất": "Dậu" };
+function getNhiHopNhiHaiCung(lasoOb, idxCungGoc) {
+    const chi = lasoOb[idxCungGoc] && lasoOb[idxCungGoc].chi;
+    return {
+        nhiHop: lasoOb.findIndex(c => c.chi === NHI_HOP_SINH_XUAT[chi]), // -1 nếu cung đang xét là cung sinh xuất (không nhận sao từ cung lục hợp)
+        nhiHai: lasoOb.findIndex(c => c.chi === NHI_HAI_CHI[chi])
+    };
 }
 function getTamhopchieu(idxCungGoc) {
     // Trả về chỉ số các cung tam hợp chiếu
@@ -209,7 +222,7 @@ function kiemTraCachCuc(tenSaoGoc, boSaoCanKiemTra) {
     const lasoOb = lasoData.lasoOb || [];
     const cungGoc = timCungCuaSao(tenSaoGoc);
     if (!cungGoc) return null;
-    const idxCungGoc = lasoOb.findIndex(c => c.tenCung === cungGoc.tenCung) || cungGoc.idCunggoc;
+    const idxCungGoc = lasoOb.findIndex(c => c.tenCung === cungGoc.tenCung); // bỏ "|| idCunggoc": findIndex trả 0 (cung Mệnh) bị coi là falsy
     const idxHop = getHoiChieuCung(idxCungGoc);
 
     // Gộp các sao của cung gốc + 3 cung hội hợp thành 1 mảng phẳng
@@ -218,6 +231,15 @@ function kiemTraCachCuc(tenSaoGoc, boSaoCanKiemTra) {
     // if (cungGoc && Array.isArray(cungGoc.sao)) {
     //     saoHoiHop.push(...cungGoc.sao.map(sao => sao.ten));
     // }
+    // 1b. Cung lục hợp (nhị hợp): chỉ sao TỐT hội chiếu sang; cung lục hại (nhị hại): chỉ sao XẤU hội chiếu sang.
+    const nhi = getNhiHopNhiHaiCung(lasoOb, idxCungGoc);
+    const coClass = (sao, tok) => String(sao.class || '').split(/\s+/).includes(tok);
+    if (nhi.nhiHop >= 0 && nhi.nhiHop !== idxCungGoc && Array.isArray(lasoOb[nhi.nhiHop].sao)) {
+        saoHoiHop.push(...lasoOb[nhi.nhiHop].sao.filter(s => coClass(s, 'sao-tot')).map(s => s.ten));
+    }
+    if (nhi.nhiHai >= 0 && nhi.nhiHai !== idxCungGoc && Array.isArray(lasoOb[nhi.nhiHai].sao)) {
+        saoHoiHop.push(...lasoOb[nhi.nhiHai].sao.filter(s => coClass(s, 'sao-xau')).map(s => s.ten));
+    }
     // 2. Các sao của các cung hội hợp (tránh trùng cung gốc)
     idxHop.forEach(idx => {
         if (idx !== idxCungGoc) {
@@ -259,7 +281,7 @@ function kiemtraCacCucTamHop(tenSaoGoc, boSaoCanKiemTra) {
     const lasoOb = lasoData.lasoOb || [];
     const cungGoc = timCungCuaSao(tenSaoGoc);
     if (!cungGoc) return null;
-    const idxCungGoc = lasoOb.findIndex(c => c.tenCung === cungGoc.tenCung) || cungGoc.idCunggoc;
+    const idxCungGoc = lasoOb.findIndex(c => c.tenCung === cungGoc.tenCung); // bỏ "|| idCunggoc": findIndex trả 0 (cung Mệnh) bị coi là falsy
     const idxHop = getTamhopchieu(idxCungGoc);
 
     // Gộp các sao của cung gốc + 3 cung hội hợp thành 1 mảng phẳng
@@ -311,7 +333,7 @@ function kiemtraCacCucTamHop(tenSaoGoc, boSaoCanKiemTra) {
 //     const lasoOb = lasoData.lasoOb || [];
 //     const cungGoc = timCungCuaSao(tenSaoGoc);
 //     if (!cungGoc) return null;
-//     const idxCungGoc = lasoOb.findIndex(c => c.tenCung === cungGoc.tenCung) || cungGoc.idCunggoc;
+//     const idxCungGoc = lasoOb.findIndex(c => c.tenCung === cungGoc.tenCung); // bỏ "|| idCunggoc": findIndex trả 0 (cung Mệnh) bị coi là falsy
 //     const idxHop = getHoiChieuCung(idxCungGoc);
 
 //     // Gộp các sao của cung gốc và các cung hội hợp thành 1 mảng phẳng
@@ -374,3 +396,79 @@ function isSaoToaThuTaiChi(tenSao, chiKiemTra) {
 
 
 
+
+
+// ====================================================================================
+// V3 lần 11: Tuần, Triệt, vòng Tràng Sinh, vô chính diệu, cung theo chi.
+// Không có trong lasoOb nên tính lại từ canNam/chiNam/cucSo/amduong (cùng quy tắc với ansaophutinh.js:
+// anTriet, anTuan, anVongTrangSinh). Mỗi hàm chỉ đọc lasoData, không đổi gì ở các hàm có sẵn.
+// ====================================================================================
+const CHI12_TT = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"];
+const CAN10_TT = ["G.", "Ấ.", "B.", "Đ.", "M.", "K.", "C.", "T.", "N.", "Q."];
+const TRIET_CAN_TT = { "G.": ["Thân", "Dậu"], "K.": ["Thân", "Dậu"], "Ấ.": ["Ngọ", "Mùi"], "C.": ["Ngọ", "Mùi"], "B.": ["Thìn", "Tỵ"], "T.": ["Thìn", "Tỵ"], "N.": ["Dần", "Mão"], "Đ.": ["Dần", "Mão"], "M.": ["Tý", "Sửu"], "Q.": ["Tý", "Sửu"] };
+const VONG_TRANG_SINH_TT = ["Tràng Sinh", "Mộc Dục", "Quan Đới", "Lâm Quan", "Đế Vượng", "Suy", "Bệnh", "Tử", "Mộ", "Tuyệt", "Thai", "Dưỡng"];
+const KHOI_TRANG_SINH_TT = { 2: "Thân", 3: "Hợi", 4: "Tỵ", 5: "Thân", 6: "Dần" };
+
+function docLasoTT() {
+    try { return JSON.parse(localStorage.getItem('laso_data')) || {}; } catch (e) { return {}; }
+}
+function chiCuaCungTT(lasoData, tenCung) {
+    const ob = lasoData.lasoOb || [];
+    const c = ob.find(x => x.tenCung === tenCung);
+    return c ? c.chi : null;
+}
+// cung có Tuần án ngữ: hai chi ngay trước chi của Giáp thuộc tuần chứa năm sinh
+function isCungCoTuan(tenCung) {
+    const d = docLasoTT();
+    const chi = chiCuaCungTT(d, tenCung);
+    const iChi = CHI12_TT.indexOf(d.chiNam), iCan = CAN10_TT.indexOf(d.canNam);
+    if (!chi || iChi < 0 || iCan < 0) return false;
+    const giap = (iChi - iCan + 12) % 12;
+    return chi === CHI12_TT[(giap + 11) % 12] || chi === CHI12_TT[(giap + 10) % 12];
+}
+function isCungCoTriet(tenCung) {
+    const d = docLasoTT();
+    const chi = chiCuaCungTT(d, tenCung);
+    const t = TRIET_CAN_TT[d.canNam];
+    return !!(chi && t && t.includes(chi));
+}
+// sao thuộc vòng Tràng Sinh đóng ở cung nào
+function isTrangSinhTaiCung(tenCung, tenSaoTrangSinh) {
+    const d = docLasoTT();
+    const chi = chiCuaCungTT(d, tenCung);
+    const khoi = KHOI_TRANG_SINH_TT[d.cucSo];
+    const k = VONG_TRANG_SINH_TT.indexOf(tenSaoTrangSinh);
+    if (!chi || !khoi || k < 0) return false;
+    const thuan = (d.amduong === "Dương Nam" || d.amduong === "Âm Nữ") ? 1 : -1;
+    return chi === CHI12_TT[(CHI12_TT.indexOf(khoi) + thuan * k + 120) % 12];
+}
+// cung vô chính diệu: không có chính tinh nào đóng trong cung
+function laCungVoChinhDieu(tenCung) {
+    const d = docLasoTT();
+    const c = (d.lasoOb || []).find(x => x.tenCung === tenCung);
+    if (!c || !Array.isArray(c.sao)) return false;
+    return !c.sao.some(s => String(s.class || '').split(/\s+/).includes('chinh-tinh'));
+}
+// cung có chi cho trước
+function isCungTaiChi(tenCung, chi) {
+    return chiCuaCungTT(docLasoTT(), tenCung) === chi;
+}
+
+// V3 lần 12: sao nằm trong "hội chiếu" của một cung.
+// rong = false: cùng cung hoặc tam phương tứ chính (hai cung tam hợp + cung đối).
+// rong = true : thêm cung nhị hợp (lục hợp) và nhị hại (lục hại), không phân sinh xuất hay tốt xấu.
+//               Dùng cho Đại Hao, Tiểu Hao: hai sao luôn đối xung nhau nên chỉ "gặp" một cung khi
+//               chúng ở cung đó và cung đối, hoặc ở cung nhị hợp và cung nhị hại của cung đó.
+const LUC_HOP_TT = { "Tý": "Sửu", "Sửu": "Tý", "Dần": "Hợi", "Hợi": "Dần", "Mão": "Tuất", "Tuất": "Mão", "Thìn": "Dậu", "Dậu": "Thìn", "Tỵ": "Thân", "Thân": "Tỵ", "Ngọ": "Mùi", "Mùi": "Ngọ" };
+const LUC_HAI_TT = { "Tý": "Mùi", "Mùi": "Tý", "Sửu": "Ngọ", "Ngọ": "Sửu", "Dần": "Tỵ", "Tỵ": "Dần", "Mão": "Thìn", "Thìn": "Mão", "Thân": "Hợi", "Hợi": "Thân", "Dậu": "Tuất", "Tuất": "Dậu" };
+function isSaoHoiChieuRong(tenCung, tenSao, rong) {
+    const d = docLasoTT(); const ob = d.lasoOb || [];
+    const i = ob.findIndex(c => c.tenCung === tenCung);
+    if (i < 0) return false;
+    const idxs = [i, (i + 4) % 12, (i + 6) % 12, (i + 8) % 12];
+    if (rong) {
+        [LUC_HOP_TT[ob[i].chi], LUC_HAI_TT[ob[i].chi]].forEach(ch => { const j = ob.findIndex(c => c.chi === ch); if (j >= 0) idxs.push(j); });
+    }
+    const f = (tenSao || '').toString().replace(/\s+/g, '').toLowerCase();
+    return idxs.some(k => Array.isArray(ob[k].sao) && ob[k].sao.some(s => ((s.ten || '').toString().replace(/\s+/g, '').toLowerCase() === f)));
+}
