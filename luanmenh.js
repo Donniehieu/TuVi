@@ -3987,6 +3987,913 @@ function MenhKhongThanKiep(idxCungMenh, idxCungThan, dsChinh, dsPhu, keyArr) {
     }
     return false;
 }
+// PHU17-BEGIN
+function phu17DemSao(tenCung, ds, tinhSang) {
+    let d = {};
+    try {
+        d = JSON.parse(localStorage.getItem('laso_data')) || {};
+    } catch (e) { d = {}; }
+    const ob = d.lasoOb || [];
+    let i = 99;
+    for (let k = 0; k < ob.length; k++) { if (ob[k].tenCung === tenCung) { i = k; } }
+    if (i > 11) return 0;
+    const idxs = [i, (i + 4) % 12, (i + 6) % 12, (i + 8) % 12];
+    const tenSang = ["Tử Vi", "Liêm Trinh", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Thất Sát", "Phá Quân", "Tham Lang", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"];
+    const dacSang = [["Thìn", "Tuất", "Sửu", "Mùi", "Tỵ", "Ngọ", "Dần", "Thân"], ["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Dần", "Thân"], ["Dần", "Thân", "Tý", "Ngọ", "Thìn", "Tuất", "Tỵ", "Hợi", "Mùi"], ["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Dần", "Thân", "Dậu", "Mão"], ["Dần", "Thân", "Tý", "Ngọ", "Thìn", "Tuất", "Sửu", "Mùi", "Tỵ", "Hợi"], ["Dần", "Thân", "Tý", "Ngọ", "Tỵ", "Hợi", "Sửu", "Mùi"], ["Tý", "Ngọ", "Sửu", "Mùi", "Thìn", "Tuất"], ["Thìn", "Tuất", "Sửu", "Mùi", "Dần", "Thân"], ["Mão", "Dậu", "Tý", "Ngọ", "Dần", "Thân", "Hợi"], ["Tỵ", "Ngọ", "Dần", "Mão", "Thìn", "Sửu", "Mùi"], ["Thìn", "Tuất", "Mão", "Dậu", "Tỵ", "Thân", "Tý", "Ngọ", "Sửu", "Mùi"], ["Dậu", "Tuất", "Hợi", "Thân", "Tý", "Sửu", "Mùi"], ["Dần", "Thân", "Tý", "Mão", "Tỵ", "Hợi"], ["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Mão", "Dần", "Thân"]];
+    let dem = 0;
+    for (let a = 0; a < idxs.length; a++) {
+        const c = ob[idxs[a]];
+        let saoC = [];
+        if (c && Array.isArray(c.sao)) { saoC = c.sao; }
+        for (let b = 0; b < saoC.length; b++) {
+            const ten = saoC[b].ten;
+            let dung = false;
+            for (let m = 0; m < ds.length; m++) { if (ds[m] === ten) { dung = true; } }
+            if (!dung && tinhSang) {
+                for (let m = 0; m < tenSang.length; m++) {
+                    if (tenSang[m] === ten) {
+                        for (let n = 0; n < dacSang[m].length; n++) { if (dacSang[m][n] === c.chi) { dung = true; } }
+                    }
+                }
+            }
+            if (dung) dem++;
+        }
+    }
+    return dem;
+}
+function phu17DemCatTinh(tenCung) { return phu17DemSao(tenCung, ["Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Lộc Tồn", "Quốc Ấn", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt", "Long Trì", "Phượng Các", "Thanh Long", "Thiên Quan", "Thiên Phúc", "Ân Quang", "Thiên Quý", "Tam Thai", "Bát Tọa", "Thiên Giải", "Địa Giải"], true); }
+function phu17DemSatTinh(tenCung) { return phu17DemSao(tenCung, ["Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"], false); }
+function LuanPhuGiaiLan17_menh(keyArr) {
+    let lasoData = {};
+    try {
+        lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
+    } catch (e) { lasoData = {}; }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Phú Giải số 2 (TỬ VI) - Mệnh: Tử Vi tọa thủ ở Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
+        keyArr.push("Phú Giải số 3 (TỬ VI) - Mệnh: Tử Vi tọa thủ ở Mão/Dậu, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !isSaoHoiChieuRong("Mệnh", "Đại Hao", false) && !isSaoHoiChieuRong("Mệnh", "Tiểu Hao", false) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) && !isSaoHoiChieuRong("Mệnh", "Kiếp Sát", false)) {
+        keyArr.push("Phú Giải số 9 (TỬ VI) - Mệnh: Tử Vi tọa thủ ở Ngọ, gặp Thiên Khôi + Hóa Khoa, không gặp Đại Hao hoặc Tiểu Hao hoặc Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Kiếp Sát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) {
+        keyArr.push("Phú Giải số 19 (TỬ VI) - Mệnh: Tử Vi tọa thủ, gặp Văn Xương + Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Tả Phù") && isSaoToaThuTaiCung("Mệnh", "Hữu Bật")) {
+        keyArr.push("Phú Giải số 20 (TỬ VI) - Mệnh: Tử Vi + Tả Phù + Hữu Bật tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false))) {
+        keyArr.push("Phú Giải số 21 (TỬ VI)b - Mệnh: Tử Vi tọa thủ, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
+        keyArr.push("Phú Giải số 21 (TỬ VI)a - Mệnh: Tử Vi tọa thủ, gặp Hóa Khoa + Hóa Quyền + Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false))) {
+        keyArr.push("Phú Giải số 22 (TỬ VI) - Mệnh: Tử Vi tọa thủ, gặp Hóa Quyền + Hóa Lộc + Kình Dương hoặc Đà La");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && isSaoHoiChieuRong("Mệnh", "Hữu Bật", false)) {
+        keyArr.push("Phú Giải số 23 (TỬ VI) - Mệnh: Tử Vi + Hóa Lộc tọa thủ, gặp Tả Phù + Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Phú Giải số 34 (TỬ VI) - Mệnh: Tử Vi + Thiên Phủ tọa thủ ở Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Phú Giải số 39 (TỬ VI) - Mệnh: Thiên Cơ + Thái Âm tọa thủ ở Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && (isCungTaiChi("Mệnh", "Tuất"))) {
+        keyArr.push("Phú Giải số 41 (TỬ VI)b - Mệnh: Thiên Phủ + Hóa Lộc tọa thủ ở Tuất");
+    }
+    if ((isSaoToaThuTaiCung("Mệnh", "Tử Vi") || isSaoToaThuTaiCung("Mệnh", "Vũ Khúc")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
+        keyArr.push("Phú Giải số 49 (TỬ VI) - Mệnh: Tử Vi hoặc Vũ Khúc tọa thủ, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất"))) {
+        keyArr.push("Phú Giải số 50 (TỬ VI) - Mệnh: Tử Vi tọa thủ ở Thìn/Tuất");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Phá Quân", false)) {
+        keyArr.push("Phú Giải số 51 (TỬ VI) - Mệnh: Tử Vi tọa thủ ở Thìn/Tuất, gặp Phá Quân");
+    }
+    if ((isSaoToaThuTaiCung("Mệnh", "Tử Vi") || isSaoToaThuTaiCung("Mệnh", "Phá Quân")) && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Phú Giải số 53 (TỬ VI) - Mệnh: Tử Vi hoặc Phá Quân tọa thủ ở Thìn/Tuất/Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Phá Quân", false)) {
+        keyArr.push("Phú Giải số 56 (TỬ VI)a - Mệnh: Tử Vi + Thiên Tướng tọa thủ ở Thìn/Tuất, gặp Phá Quân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Tử Vi", false) && isSaoHoiChieuRong("Mệnh", "Thiên Tướng", false)) {
+        keyArr.push("Phú Giải số 56 (TỬ VI)b - Mệnh: Phá Quân tọa thủ ở Thìn/Tuất, gặp Tử Vi + Thiên Tướng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Phá Quân", false)) {
+        keyArr.push("Phú Giải số 61 (TỬ VI) - Mệnh: Tử Vi + Thiên Tướng tọa thủ ở Thìn/Tuất, gặp Phá Quân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Phú Giải số 62 (TỬ VI) - Mệnh: Tử Vi + Thất Sát tọa thủ ở Tỵ/Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Mệnh", "Hóa Quyền") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Phú Giải số 64 (TỬ VI) - Mệnh: Tử Vi + Thất Sát + Hóa Quyền tọa thủ ở Tỵ/Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ")) {
+        keyArr.push("Phú Giải số 1 (THIÊN – PHỦ) - Mệnh: Thiên Phủ tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Vũ Khúc")) {
+        keyArr.push("Phú Giải số 13 (THIÊN – PHỦ) - Mệnh: Thiên Phủ + Vũ Khúc tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) {
+        keyArr.push("Phú Giải số 15 (THIÊN – PHỦ) - Mệnh: Thiên Phủ + Lộc Tồn tọa thủ, gặp Văn Xương + Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && isSaoHoiChieuRong("Mệnh", "Hữu Bật", false)) {
+        keyArr.push("Phú Giải số 16 (THIÊN – PHỦ) - Mệnh: Thiên Phủ tọa thủ, gặp Văn Xương + Văn Khúc + Tả Phù + Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Thái Tuế", false) && isSaoHoiChieuRong("Mệnh", "Đà La", false)) {
+        keyArr.push("Phú Giải số 17 (THIÊN – PHỦ) - Mệnh: Thiên Phủ tọa thủ ở Tỵ, gặp Thái Tuế + Đà La");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc")) {
+        keyArr.push("Phú Giải số 1 (VŨ KHÚC) - Mệnh: Vũ Khúc tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc")) {
+        keyArr.push("Phú Giải số 3 (VŨ KHÚC) - Mệnh: Vũ Khúc tọa thủ");
+    }
+    if (lasoData.cungCu !== "Mệnh" && isSaoToaThuTaiCung(lasoData.cungCu, "Vũ Khúc")) {
+        keyArr.push("Phú Giải số 3 (VŨ KHÚC) - Thân cư: Vũ Khúc tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Phú Giải số 5 (VŨ KHÚC) - Mệnh: Vũ Khúc tọa thủ ở Tỵ/Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Phú Giải số 6 (VŨ KHÚC) - Mệnh: Vũ Khúc + Thiên Tướng tọa thủ ở Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
+        keyArr.push("Phú Giải số 9 (VŨ KHÚC) - Mệnh: Vũ Khúc + Tham Lang tọa thủ, gặp Hóa Kỵ + Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Phú Giải số 13 (VŨ KHÚC) - Mệnh: Vũ Khúc + Phá Quân tọa thủ ở Tỵ/Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Mão"))) {
+        keyArr.push("Phú Giải số 14 (VŨ KHÚC)a - Mệnh: Vũ Khúc + Thất Sát tọa thủ ở Mão");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Mão"))) {
+        keyArr.push("Phú Giải số 14 (VŨ KHÚC)b - Mệnh: Phá Quân + Liêm Trinh tọa thủ ở Mão");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Phú Giải số 15 (VŨ KHÚC) - Mệnh: Vũ Khúc + Phá Quân tọa thủ ở Tỵ/Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Phú Giải số 17 (VŨ KHÚC) - Mệnh: Vũ Khúc + Phá Quân tọa thủ ở Tỵ/Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) {
+        keyArr.push("Phú Giải số 18 (VŨ KHÚC) - Mệnh: Vũ Khúc + Phá Quân tọa thủ ở Tỵ/Hợi, gặp Văn Xương + Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoHoiChieuRong("Mệnh", "Liêm Trinh", false) && isSaoHoiChieuRong("Mệnh", "Thất Sát", false)) {
+        keyArr.push("Phú Giải số 19 (VŨ KHÚC) - Mệnh: Vũ Khúc + Tham Lang tọa thủ, gặp Liêm Trinh + Thất Sát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
+        keyArr.push("Phú Giải số 21 (VŨ KHÚC) - Mệnh: Vũ Khúc tọa thủ, gặp Kình Dương hoặc Đà La hoặc Hỏa Tinh hoặc Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoHoiChieuRong("Mệnh", "Thiên Mã", false) && (isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) || isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false))) {
+        keyArr.push("Phú Giải số 24 (VŨ KHÚC) - Mệnh: Vũ Khúc tọa thủ, gặp Thiên Mã + Hóa Lộc hoặc Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Phá Quân", false)) {
+        keyArr.push("Phú Giải số 3 (THIÊN – TƯỚNG) - Mệnh: Thiên Tướng tọa thủ ở Tỵ/Hợi, gặp Phá Quân");
+    }
+    if (lasoData.cungCu !== "Mệnh" && isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Tướng") && (isCungTaiChi(lasoData.cungCu, "Tỵ") || isCungTaiChi(lasoData.cungCu, "Hợi")) && isSaoHoiChieuRong(lasoData.cungCu, "Phá Quân", false)) {
+        keyArr.push("Phú Giải số 3 (THIÊN – TƯỚNG) - Thân cư: Thiên Tướng tọa thủ ở Tỵ/Hợi, gặp Phá Quân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Mệnh", "Phong Cáo")) {
+        keyArr.push("Phú Giải số 4 (THIÊN – TƯỚNG) - Mệnh: Thiên Tướng + Phong Cáo tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất"))) {
+        keyArr.push("Phú Giải số 15 (THIÊN – TƯỚNG) - Mệnh: Thiên Tướng + Tử Vi tọa thủ ở Thìn/Tuất");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && isSaoHoiChieuRong("Mệnh", "Hữu Bật", false)) {
+        keyArr.push("Phú Giải số 16 (THIÊN – TƯỚNG) - Mệnh: Thiên Tướng + Liêm Trinh tọa thủ ở Tý/Ngọ, gặp Tả Phù + Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoHoiChieuRong("Mệnh", "Thái Tuế", false)) {
+        keyArr.push("Phú Giải số 2 (THẤT – SÁT) - Mệnh: Thất Sát tọa thủ, gặp Thái Tuế");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Phú Giải số 6 (THẤT – SÁT) - Mệnh: Thất Sát tọa thủ ở Tý/Ngọ/Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Phú Giải số 7 (THẤT – SÁT) - Mệnh: Thất Sát tọa thủ ở Tý/Ngọ/Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Phú Giải số 17 (THẤT – SÁT) - Mệnh: Thất Sát tọa thủ ở Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) {
+        keyArr.push("Phú Giải số 18 (THẤT – SÁT) - Mệnh: Thất Sát tọa thủ ở Tý/Ngọ, gặp Tả Phù + Hữu Bật + Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Phú Giải số 19 (THẤT – SÁT) - Mệnh: Thất Sát tọa thủ ở Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Phú Giải số 20 (THẤT – SÁT) - Mệnh: Thất Sát tọa thủ ở Tý/Ngọ/Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (isSaoHoiChieuRong("Mệnh", "Thiên Hình", false) || isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false))) {
+        keyArr.push("Phú Giải số 21 (THẤT – SÁT) - Mệnh: Thất Sát + Liêm Trinh tọa thủ ở Sửu/Mùi, gặp Thiên Hình hoặc Hóa Kỵ hoặc Địa Không hoặc Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false))) {
+        keyArr.push("Phú Giải số 24 (THẤT – SÁT) - Mệnh: Thất Sát tọa thủ, gặp Địa Không hoặc Địa Kiếp hoặc Linh Tinh hoặc Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung(lasoData.cungCu, "Thất Sát")) {
+        keyArr.push("Phú Giải số 31 (THẤT – SÁT) - Thân cư: Thất Sát tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Phú Giải số 41 (THẤT – SÁT) - Mệnh: Thất Sát tọa thủ ở Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Phú Giải số 3 (PHÁ – QUÂN) - Mệnh: Phá Quân tọa thủ ở Tý/Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false)) {
+        keyArr.push("Phú Giải số 4 (PHÁ – QUÂN) - Mệnh: Phá Quân tọa thủ ở Tý/Ngọ, không gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && (isSaoHoiChieuRong("Mệnh", "Cô Thần", false) || isSaoHoiChieuRong("Mệnh", "Quả Tú", false) || isSaoHoiChieuRong("Mệnh", "Đẩu Quân", false))) {
+        keyArr.push("Phú Giải số 5 (PHÁ – QUÂN) - Mệnh: Phá Quân tọa thủ ở Tý/Ngọ, gặp Cô Thần hoặc Quả Tú hoặc Đẩu Quân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Phú Giải số 7 (PHÁ – QUÂN)a - Mệnh: Phá Quân tọa thủ ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") || isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") || isSaoToaThuTaiCung("Mệnh", "Thiếu Dương")) && (isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Phú Giải số 7 (PHÁ – QUÂN)b - Mệnh: Phá Quân + Hóa Lộc hoặc Lộc Tồn hoặc Thiếu Dương tọa thủ ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Phú Giải số 9 (PHÁ – QUÂN) - Mệnh: Phá Quân tọa thủ ở Tý/Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Kình Dương", false))) {
+        keyArr.push("Phú Giải số 11 (PHÁ – QUÂN) - Mệnh: Phá Quân + Liêm Trinh tọa thủ ở Mão/Dậu, gặp Địa Kiếp hoặc Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoToaThuTaiCung("Mệnh", "Kình Dương") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && isSaoHoiChieuRong("Mệnh", "Hữu Bật", false)) {
+        keyArr.push("Phú Giải số 12 (PHÁ – QUÂN) - Mệnh: Phá Quân + Kình Dương tọa thủ ở Mão/Dậu, gặp Hóa Khoa + Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && isSaoHoiChieuRong("Mệnh", "Thiên Hình", false) && (isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) || isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false))) {
+        keyArr.push("Phú Giải số 13 (PHÁ – QUÂN) - Mệnh: Phá Quân tọa thủ ở Thìn/Tuất/Sửu/Mùi, gặp Thiên Hình + Hóa Lộc hoặc Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoToaThuTaiCung("Mệnh", "Thiên Mã")) {
+        keyArr.push("Phú Giải số 16 (PHÁ – QUÂN) - Mệnh: Phá Quân + Thiên Mã tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false)) {
+        keyArr.push("Phú Giải số 21 (PHÁ – QUÂN) - Mệnh: Phá Quân tọa thủ, gặp Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh")) {
+        keyArr.push("Phú Giải số 2 (LIÊM TRINH) - Mệnh: Liêm Trinh tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Phú Giải số 5 (LIÊM TRINH) - Mệnh: Liêm Trinh tọa thủ ở Tỵ/Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false))) {
+        keyArr.push("Phú Giải số 6 (LIÊM TRINH) - Mệnh: Liêm Trinh tọa thủ ở Tỵ/Hợi, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Kình Dương", false))) {
+        keyArr.push("Phú Giải số 7 (LIÊM TRINH) - Mệnh: Liêm Trinh tọa thủ ở Mão/Dậu, gặp Địa Kiếp hoặc Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
+        keyArr.push("Phú Giải số 8 (LIÊM TRINH) - Mệnh: Liêm Trinh tọa thủ ở Mão/Dậu, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Mùi")) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Phú Giải số 11 (LIÊM TRINH) - Mệnh: Liêm Trinh tọa thủ ở Thân/Mùi, không gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Phú Giải số 14 (LIÊM TRINH) - Mệnh: Liêm Trinh + Thất Sát tọa thủ ở Thìn/Tuất/Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false))) {
+        keyArr.push("Phú Giải số 17 (LIÊM TRINH) - Mệnh: Liêm Trinh + Thất Sát tọa thủ ở Sửu/Mùi, gặp Địa Không hoặc Địa Kiếp hoặc Linh Tinh hoặc Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Phú Giải số 19 (LIÊM TRINH) - Mệnh: Liêm Trinh + Thất Sát tọa thủ ở Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc")) {
+        keyArr.push("Phú Giải số 24 (LIÊM TRINH) - Mệnh: Liêm Trinh + Văn Khúc tọa thủ");
+    }
+    if ((isSaoToaThuTaiCung("Mệnh", "Tham Lang") || isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") || isSaoToaThuTaiCung("Mệnh", "Phá Quân"))) {
+        keyArr.push("Phú Giải số 6 (THAM LANG)a - Mệnh: Tham Lang hoặc Liêm Trinh hoặc Phá Quân tọa thủ");
+    }
+    if ((isSaoToaThuTaiCung("Mệnh", "Tham Lang") || isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") || isSaoToaThuTaiCung("Mệnh", "Phá Quân")) && (isSaoHoiChieuRong("Mệnh", "Thất Sát", false) || isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false))) {
+        keyArr.push("Phú Giải số 6 (THAM LANG)b - Mệnh: Tham Lang hoặc Liêm Trinh hoặc Phá Quân tọa thủ, gặp Thất Sát hoặc Kình Dương hoặc Đà La");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false)) {
+        keyArr.push("Phú Giải số 11 (THAM LANG) - Mệnh: Tham Lang tọa thủ ở Mão/Dậu, gặp Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
+        keyArr.push("Phú Giải số 13 (THAM LANG) - Mệnh: Tham Lang tọa thủ ở Thìn/Tuất/Sửu/Mùi, gặp Hỏa Tinh hoặc Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Tý")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false))) {
+        keyArr.push("Phú Giải số 20 (THAM LANG) - Mệnh: Tham Lang tọa thủ ở Hợi/Tý, gặp Kình Dương hoặc Đà La");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Mệnh", "Đà La") && (isCungTaiChi("Mệnh", "Dần"))) {
+        keyArr.push("Phú Giải số 21 (THAM LANG) - Mệnh: Tham Lang + Đà La tọa thủ ở Dần");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
+        keyArr.push("Phú Giải số 23 (THAM LANG) - Mệnh: Tham Lang tọa thủ, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Dần")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false)) && (isSaoHoiChieuRong("Mệnh", "Tang Môn", false) || isSaoHoiChieuRong("Mệnh", "Bạch Hổ", false))) {
+        keyArr.push("Phú Giải số 31 (THAM LANG) - Mệnh: Tham Lang tọa thủ ở Ngọ/Dần, gặp Kình Dương hoặc Đà La hoặc Hỏa Tinh hoặc Linh Tinh + Tang Môn hoặc Bạch Hổ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Tý")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false))) {
+        keyArr.push("Phú Giải số 32 (THAM LANG) - Mệnh: Tham Lang tọa thủ ở Hợi/Tý, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung(lasoData.cungCu, "Tham Lang") && isSaoToaThuTaiCung(lasoData.cungCu, "Vũ Khúc")) {
+        keyArr.push("Phú Giải số 38 (THAM LANG) - Thân cư: Tham Lang + Vũ Khúc tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Mệnh", "Vũ Khúc")) {
+        keyArr.push("Phú Giải số 44 (THAM LANG) - Mệnh: Tham Lang + Vũ Khúc tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Hợi")) && (isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Thiên Hư", false) || isSaoHoiChieuRong("Mệnh", "Thiên Mã", false))) {
+        keyArr.push("Phú Giải số 47 (THAM LANG) - Mệnh: Tham Lang + Liêm Trinh tọa thủ ở Hợi, gặp Linh Tinh hoặc Đà La hoặc Kình Dương hoặc Địa Không hoặc Địa Kiếp hoặc Thiên Hư hoặc Thiên Mã");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Kình Dương")) {
+        keyArr.push("Phú Giải số 7 (THIÊN – CƠ) - Mệnh: Thiên Cơ + Kình Dương tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Phục Binh") && (isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Phú Giải số 9 (THIÊN – CƠ) - Mệnh: Thiên Cơ + Phục Binh tọa thủ ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) || isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false)) && isSaoHoiChieuRong("Mệnh", "Thiên Mã", false)) {
+        keyArr.push("Phú Giải số 14 (THIÊN – CƠ) - Mệnh: Thiên Cơ + Thiên Lương tọa thủ, gặp Hóa Lộc hoặc Lộc Tồn + Thiên Mã");
+    }
+    if (lasoData.cungCu !== "Mệnh" && isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Cơ") && isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Lương") && (isSaoHoiChieuRong(lasoData.cungCu, "Hóa Lộc", false) || isSaoHoiChieuRong(lasoData.cungCu, "Lộc Tồn", false)) && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Mã", false)) {
+        keyArr.push("Phú Giải số 14 (THIÊN – CƠ) - Thân cư: Thiên Cơ + Thiên Lương tọa thủ, gặp Hóa Lộc hoặc Lộc Tồn + Thiên Mã");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất"))) {
+        keyArr.push("Phú Giải số 16 (THIÊN – CƠ) - Mệnh: Thiên Cơ + Thiên Lương tọa thủ ở Thìn/Tuất");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Hình", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
+        keyArr.push("Phú Giải số 17 (THIÊN – CƠ) - Mệnh: Thiên Cơ + Thiên Lương tọa thủ ở Thìn/Tuất, gặp Hóa Khoa + Hóa Quyền + Hóa Lộc, không gặp Thiên Hình hoặc Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false)) && isSaoHoiChieuRong("Mệnh", "Tướng Quân", false)) {
+        keyArr.push("Phú Giải số 21 (THIÊN – CƠ) - Mệnh: Thiên Cơ + Thiên Lương tọa thủ ở Thìn/Tuất, gặp Kình Dương hoặc Đà La hoặc Hỏa Tinh hoặc Linh Tinh + Tướng Quân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Phú Giải số 3 (CỰ MÔN) - Mệnh: Cự Môn + Thái Dương tọa thủ ở Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Phú Giải số 4 (CỰ MÔN) - Mệnh: Cự Môn + Thái Dương tọa thủ ở Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Dần"))) {
+        keyArr.push("Phú Giải số 6 (CỰ MÔN) - Mệnh: Cự Môn + Thái Dương tọa thủ ở Dần");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Dậu")) && !(phu17DemCatTinh("Mệnh") > 2)) {
+        keyArr.push("Phú Giải số 15 (CỰ MÔN) - Mệnh: Cự Môn + Thiên Cơ tọa thủ ở Dậu, không gặp nhiều cát tinh (từ 3 sao)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Đại Hao", true) && isSaoHoiChieuRong("Mệnh", "Tiểu Hao", true)) {
+        keyArr.push("Phú Giải số 18 (CỰ MÔN)a - Mệnh: Cự Môn + Thiên Cơ tọa thủ ở Mão/Dậu, gặp Đại Hao + Tiểu Hao");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
+        keyArr.push("Phú Giải số 18 (CỰ MÔN)b - Mệnh: Cự Môn + Thiên Cơ tọa thủ ở Mão/Dậu, gặp Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Phú Giải số 21 (CỰ MÔN) - Mệnh: Cự Môn + Thiên Cơ + Lộc Tồn tọa thủ ở Mão/Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Đại Hao", true) && isSaoHoiChieuRong("Mệnh", "Tiểu Hao", true)) {
+        keyArr.push("Phú Giải số 22 (CỰ MÔN) - Mệnh: Cự Môn + Thiên Cơ tọa thủ ở Mão/Dậu, gặp Đại Hao + Tiểu Hao");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Thiên Đồng", false) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !(phu17DemCatTinh("Mệnh") > 2)) {
+        keyArr.push("Phú Giải số 28 (CỰ MÔN) - Mệnh: Cự Môn tọa thủ ở Thìn/Tuất, gặp Thiên Đồng + Hóa Khoa, không gặp nhiều cát tinh (từ 3 sao)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Phú Giải số 30 (CỰ MÔN)a - Mệnh: Cự Môn + Lộc Tồn tọa thủ ở Tỵ/Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
+        keyArr.push("Phú Giải số 30 (CỰ MÔN)b - Mệnh: Cự Môn + Lộc Tồn tọa thủ ở Tỵ/Hợi, gặp Hóa Quyền + Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoHoiChieuRong("Mệnh", "Đà La", false) && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
+        keyArr.push("Phú Giải số 33 (CỰ MÔN) - Mệnh: Cự Môn tọa thủ, gặp Đà La + Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
+        keyArr.push("Phú Giải số 36 (CỰ MÔN) - Mệnh: Cự Môn tọa thủ, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn")) {
+        keyArr.push("Phú Giải số 38 (CỰ MÔN) - Mệnh: Cự Môn + Lộc Tồn tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng")) {
+        keyArr.push("Phú Giải số 2 (THIÊN ĐỒNG) - Mệnh: Thiên Đồng tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Kình Dương") && (isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Phú Giải số 6 (THIÊN ĐỒNG) - Mệnh: Thiên Đồng + Kình Dương tọa thủ ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương")) {
+        keyArr.push("Phú Giải số 1 (THIÊN LƯƠNG) - Mệnh: Thiên Lương tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Thái Âm", false) && isSaoHoiChieuRong("Mệnh", "Linh Tinh", false)) {
+        keyArr.push("Phú Giải số 7 (THIÊN LƯƠNG) - Mệnh: Thiên Lương tọa thủ ở Tý/Sửu/Dần/Mão/Thìn/Tỵ/Ngọ, gặp Thái Âm + Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Thiên Mã", false)) {
+        keyArr.push("Phú Giải số 8 (THIÊN LƯƠNG) - Mệnh: Thiên Lương tọa thủ ở Tỵ/Hợi, gặp Thiên Mã");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Mão"))) {
+        keyArr.push("Phú Giải số 11 (THIÊN LƯƠNG) - Mệnh: Thiên Lương + Thái Dương tọa thủ ở Mão");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && (isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Phú Giải số 12 (THIÊN LƯƠNG) - Mệnh: Thiên Lương + Thiên Khôi tọa thủ ở Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && isSaoHoiChieuRong("Mệnh", "Thiên Cơ", false) && isSaoHoiChieuRong("Mệnh", "Thái Âm", false)) {
+        keyArr.push("Phú Giải số 16 (THIÊN LƯƠNG) - Mệnh: Thiên Lương + Thiên Đồng tọa thủ ở Dần/Thân, gặp Thiên Cơ + Thái Âm");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Thái Dương", false) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && (isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) || isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false))) {
+        keyArr.push("Phú Giải số 18 (THIÊN LƯƠNG)a - Mệnh: Thiên Lương tọa thủ ở Tỵ, gặp Thái Dương + Văn Xương + Hóa Lộc hoặc Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Thiên Lương", false) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && (isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) || isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false))) {
+        keyArr.push("Phú Giải số 18 (THIÊN LƯƠNG)b - Mệnh: Thái Dương tọa thủ ở Ngọ, gặp Thiên Lương + Văn Xương + Hóa Lộc hoặc Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Thìn")) && isSaoHoiChieuRong("Mệnh", "Thái Dương", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Phú Giải số 3 (THÁI DƯƠNG)a - Mệnh: Thái Âm tọa thủ ở Thìn, gặp Thái Dương, không gặp Thiên Khôi hoặc Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Thái Âm", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Phú Giải số 3 (THÁI DƯƠNG)b - Mệnh: Thái Dương tọa thủ ở Tuất, gặp Thái Âm, không gặp Thiên Khôi hoặc Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Phú Giải số 4 (THÁI DƯƠNG) - Mệnh: Thái Dương tọa thủ ở Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Dần"))) {
+        keyArr.push("Phú Giải số 5 (THÁI DƯƠNG) - Mệnh: Thái Âm tọa thủ ở Dần");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tỵ"))) {
+        keyArr.push("Phú Giải số 8 (THÁI DƯƠNG) - Mệnh: Thái Dương tọa thủ ở Mão/Thìn/Tỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Thìn")) && isSaoHoiChieuRong("Mệnh", "Thái Âm", false)) {
+        keyArr.push("Phú Giải số 12 (THÁI DƯƠNG)a - Mệnh: Thái Dương tọa thủ ở Thìn, gặp Thái Âm");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Thái Dương", false)) {
+        keyArr.push("Phú Giải số 12 (THÁI DƯƠNG)b - Mệnh: Thái Âm tọa thủ ở Tuất, gặp Thái Dương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Sửu"))) {
+        keyArr.push("Phú Giải số 20 (THÁI DƯƠNG) - Mệnh: Thái Dương + Thái Âm tọa thủ ở Sửu");
+    }
+    if (laCungVoChinhDieu("Mệnh") && (isCungTaiChi("Mệnh", "Sửu")) && isSaoHoiChieuRong("Mệnh", "Thái Dương", false) && isSaoHoiChieuRong("Mệnh", "Thái Âm", false)) {
+        keyArr.push("Phú Giải số 21 (THÁI DƯƠNG) - Mệnh: vô chính diệu ở Sửu, gặp Thái Dương + Thái Âm");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Sửu")) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
+        keyArr.push("Phú Giải số 23 (THÁI DƯƠNG) - Mệnh: Thái Dương + Thái Âm tọa thủ ở Sửu, gặp Hóa Khoa + Hóa Lộc");
+    }
+    if ((isSaoToaThuTaiCung("Mệnh", "Thái Dương") || isSaoToaThuTaiCung("Mệnh", "Thái Âm")) && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
+        keyArr.push("Phú Giải số 28 (THÁI DƯƠNG) - Mệnh: Thái Dương hoặc Thái Âm tọa thủ ở Thìn/Tuất/Sửu/Mùi, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Dậu") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Tý"))) {
+        keyArr.push("Phú Giải số 35 (THÁI DƯƠNG) - Mệnh: Thái Dương tọa thủ ở Thân/Dậu/Tuất/Hợi/Tý");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Tý"))) {
+        keyArr.push("Phú Giải số 38 (THÁI DƯƠNG)a - Mệnh: Thái Âm tọa thủ ở Tý");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Phú Giải số 38 (THÁI DƯƠNG)b - Mệnh: Thái Dương tọa thủ ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
+        keyArr.push("Phú Giải số 40 (THÁI DƯƠNG) - Mệnh: Thái Dương tọa thủ ở Hợi, gặp Hóa Khoa + Hóa Quyền + Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Hợi")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
+        keyArr.push("Phú Giải số 41 (THÁI DƯƠNG) - Mệnh: Thái Dương tọa thủ ở Hợi, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
+        keyArr.push("Phú Giải số 51 (THÁI DƯƠNG) - Mệnh: Thái Dương tọa thủ, gặp Hóa Kỵ");
+    }
+    if ((isSaoToaThuTaiCung("Mệnh", "Thái Dương") || isSaoToaThuTaiCung("Mệnh", "Thái Âm")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false))) {
+        keyArr.push("Phú Giải số 53 (THÁI DƯƠNG) - Mệnh: Thái Dương hoặc Thái Âm tọa thủ, gặp Kình Dương hoặc Đà La");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Cự Môn", false)) {
+        keyArr.push("Phú Giải số 59 (THÁI DƯƠNG) - Mệnh: Thái Dương tọa thủ ở Tỵ, gặp Cự Môn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Cự Môn", false)) {
+        keyArr.push("Phú Giải số 60 (THÁI DƯƠNG) - Mệnh: Thái Dương tọa thủ ở Hợi, gặp Cự Môn");
+    }
+    if ((isSaoToaThuTaiCung("Mệnh", "Thái Dương") || isSaoToaThuTaiCung("Mệnh", "Thái Âm")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
+        keyArr.push("Phú Giải số 66 (THÁI DƯƠNG) - Mệnh: Thái Dương hoặc Thái Âm tọa thủ, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
+    }
+    if (lasoData.cungCu !== "Mệnh" && (isSaoToaThuTaiCung(lasoData.cungCu, "Thái Dương") || isSaoToaThuTaiCung(lasoData.cungCu, "Thái Âm")) && (isSaoHoiChieuRong(lasoData.cungCu, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.cungCu, "Đà La", false) || isSaoHoiChieuRong(lasoData.cungCu, "Địa Không", false) || isSaoHoiChieuRong(lasoData.cungCu, "Địa Kiếp", false) || isSaoHoiChieuRong(lasoData.cungCu, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.cungCu, "Linh Tinh", false))) {
+        keyArr.push("Phú Giải số 66 (THÁI DƯƠNG) - Thân cư: Thái Dương hoặc Thái Âm tọa thủ, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
+    }
+    if ((isSaoToaThuTaiCung("Mệnh", "Thái Dương") || isSaoToaThuTaiCung("Mệnh", "Thái Âm")) && isSaoHoiChieuRong("Mệnh", "Thiên Hình", false) && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false)) {
+        keyArr.push("Phú Giải số 71 (THÁI DƯƠNG) - Mệnh: Thái Dương hoặc Thái Âm tọa thủ, gặp Thiên Hình + Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Tý"))) {
+        keyArr.push("Phú Giải số 10 (THÁI ÂM) - Mệnh: Thái Âm tọa thủ ở Tý");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Khoa") && isSaoToaThuTaiCung("Mệnh", "Hóa Quyền") && (isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Phú Giải số 1 (HÓA KỴ) - Mệnh: Hóa Khoa + Hóa Quyền tọa thủ ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Khoa") && isSaoToaThuTaiCung("Mệnh", "Hóa Quyền")) {
+        keyArr.push("Phú Giải số 4 (HÓA KỴ) - Mệnh: Hóa Khoa + Hóa Quyền tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Khoa") && (isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) || isSaoHoiChieuRong("Mệnh", "Thiên Việt", false) || isSaoHoiChieuRong("Mệnh", "Văn Xương", false) || isSaoHoiChieuRong("Mệnh", "Văn Khúc", false))) {
+        keyArr.push("Phú Giải số 7 (HÓA KỴ) - Mệnh: Hóa Khoa tọa thủ, gặp Thiên Khôi hoặc Thiên Việt hoặc Văn Xương hoặc Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Khoa") && isSaoToaThuTaiCung("Mệnh", "Hóa Quyền") && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Phú Giải số 9 (HÓA KỴ) - Mệnh: Hóa Khoa + Hóa Quyền tọa thủ, gặp Thiên Khôi + Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Quyền") && isSaoToaThuTaiCung("Mệnh", "Thiên Khốc")) {
+        keyArr.push("Phú Giải số 20 (HÓA KỴ)a - Mệnh: Hóa Quyền + Thiên Khốc tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Quyền") && isSaoToaThuTaiCung("Mệnh", "Thiên Khốc") && (isCungTaiChi("Mệnh", "Tỵ"))) {
+        keyArr.push("Phú Giải số 20 (HÓA KỴ)b - Mệnh: Hóa Quyền + Thiên Khốc tọa thủ ở Tỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Quyền") && isSaoToaThuTaiCung("Mệnh", "Hóa Lộc")) {
+        keyArr.push("Phú Giải số 21 (HÓA KỴ) - Mệnh: Hóa Quyền + Hóa Lộc tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn")) {
+        keyArr.push("Phú Giải số 27 (HÓA KỴ) - Mệnh: Hóa Lộc + Lộc Tồn tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Phú Giải số 28 (HÓA KỴ) - Mệnh: Hóa Lộc tọa thủ ở Thìn/Tuất/Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false)) {
+        keyArr.push("Phú Giải số 30 (HÓA KỴ) - Mệnh: Hóa Lộc tọa thủ, không gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Dậu")) && (isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false))) {
+        keyArr.push("Phú Giải số 34 (HÓA KỴ) - Mệnh: Hóa Lộc tọa thủ ở Tý/Ngọ/Thân/Dậu, gặp Địa Không hoặc Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Phú Giải số 35 (HÓA KỴ)a - Mệnh: Hóa Lộc tọa thủ ở Thìn/Tuất/Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && isSaoHoiChieuRong("Mệnh", "Tham Lang", false) && isSaoHoiChieuRong("Mệnh", "Vũ Khúc", false)) {
+        keyArr.push("Phú Giải số 35 (HÓA KỴ)b - Mệnh: Hóa Lộc tọa thủ ở Thìn/Tuất/Sửu/Mùi, gặp Tham Lang + Vũ Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Mão"))) {
+        keyArr.push("Phú Giải số 36 (HÓA KỴ) - Mệnh: Hóa Lộc tọa thủ ở Dần/Mão");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (isSaoHoiChieuRong("Mệnh", "Văn Xương", false) || isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) || isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) || isSaoHoiChieuRong("Mệnh", "Thiên Việt", false))) {
+        keyArr.push("Phú Giải số 37 (HÓA KỴ) - Mệnh: Hóa Kỵ tọa thủ, gặp Văn Xương hoặc Văn Khúc hoặc Thiên Khôi hoặc Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ")) {
+        keyArr.push("Phú Giải số 44 (HÓA KỴ) - Mệnh: Hóa Kỵ tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && isSaoHoiChieuRong("Mệnh", "Đà La", false) && isSaoHoiChieuRong("Mệnh", "Bạch Hổ", false)) {
+        keyArr.push("Phú Giải số 49 (HÓA KỴ) - Mệnh: Hóa Kỵ tọa thủ ở Thìn/Tuất/Sửu/Mùi, gặp Đà La + Bạch Hổ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Tý")) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false)) {
+        keyArr.push("Phú Giải số 50 (HÓA KỴ) - Mệnh: Hóa Kỵ tọa thủ ở Hợi/Tý, gặp Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (isCungTaiChi("Mệnh", "Tý")) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && isSaoHoiChieuRong("Mệnh", "Thiên Lương", false)) {
+        keyArr.push("Phú Giải số 51 (HÓA KỴ) - Mệnh: Hóa Kỵ tọa thủ ở Tý, gặp Hóa Khoa + Thiên Lương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
+        keyArr.push("Phú Giải số 6 (TRÀNG SINH) - Mệnh: Thiên Cơ + Thiên Lương tọa thủ ở Thìn/Tuất, gặp Lộc Tồn + Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && (isSaoHoiChieuRong("Mệnh", "Cự Môn", false) || isSaoHoiChieuRong("Mệnh", "Quả Tú", false) || isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false))) {
+        keyArr.push("Phú Giải số 9 (TRÀNG SINH) - Mệnh: Lộc Tồn tọa thủ, gặp Cự Môn hoặc Quả Tú hoặc Hóa Kỵ hoặc Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && isSaoToaThuTaiCung("Thiên Di", "Hóa Lộc")) {
+        keyArr.push("Phú Giải số 12 (TRÀNG SINH)a - Mệnh: Lộc Tồn tọa thủ (kèm điều kiện cung đối)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && isSaoToaThuTaiCung("Thiên Di", "Lộc Tồn")) {
+        keyArr.push("Phú Giải số 12 (TRÀNG SINH)b - Mệnh: Hóa Lộc tọa thủ (kèm điều kiện cung đối)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && isSaoToaThuTaiCung("Mệnh", "Hóa Lộc")) {
+        keyArr.push("Phú Giải số 17 (TRÀNG SINH) - Mệnh: Lộc Tồn + Hóa Lộc tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && isSaoToaThuTaiCung("Mệnh", "Thiên Mã") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Phú Giải số 18 (TRÀNG SINH) - Mệnh: Lộc Tồn + Thiên Mã tọa thủ ở Dần/Thân/Tỵ/Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && (isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Không") || isSaoToaThuTaiCung(lasoData.cungCu, "Địa Không"))) {
+        keyArr.push("Phú Giải số 21 (TRÀNG SINH) - Mệnh: Lộc Tồn tọa thủ (kèm điều kiện về Thân cư)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && isSaoToaThuTaiCung("Mệnh", "Thiên Mã")) {
+        keyArr.push("Phú Giải số 24 (TRÀNG SINH) - Mệnh: Lộc Tồn + Thiên Mã tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Tuế")) {
+        keyArr.push("Phú Giải số 25 (TRÀNG SINH) - Mệnh: Thái Tuế tọa thủ");
+    }
+    if (lasoData.cungCu !== "Mệnh" && isSaoToaThuTaiCung(lasoData.cungCu, "Thái Tuế")) {
+        keyArr.push("Phú Giải số 25 (TRÀNG SINH) - Thân cư: Thái Tuế tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Tuế") && (isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Thiên Hình", false)) {
+        keyArr.push("Phú Giải số 30 (TRÀNG SINH) - Mệnh: Thái Tuế tọa thủ ở Dậu, gặp Thiên Hình");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Kình Dương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Thất Sát", false) && isSaoHoiChieuRong("Mệnh", "Thiên Hình", false)) {
+        keyArr.push("Phú Giải số 5 (ĐÀ LA) - Mệnh: Kình Dương tọa thủ ở Ngọ, gặp Thất Sát + Thiên Hình");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && isSaoToaThuTaiCung("Mệnh", "Kình Dương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Phượng Các", false) && isSaoHoiChieuRong("Mệnh", "Giải Thần", false)) {
+        keyArr.push("Phú Giải số 6 (ĐÀ LA) - Mệnh: Thiên Đồng + Thái Âm + Kình Dương tọa thủ ở Ngọ, gặp Phượng Các + Giải Thần");
+    }
+    if (isSaoToaThuTaiCung(lasoData.cungCu, "Thái Tuế") && isSaoHoiChieuRong(lasoData.cungCu, "Đà La", false) && isSaoHoiChieuRong(lasoData.cungCu, "Hóa Kỵ", false)) {
+        keyArr.push("Phú Giải số 25 (ĐÀ LA) - Thân cư: Thái Tuế tọa thủ, gặp Đà La + Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Kình Dương") && (isSaoHoiChieuRong("Mệnh", "Thái Dương", false) || isSaoHoiChieuRong("Mệnh", "Thái Âm", false))) {
+        keyArr.push("Phú Giải số 26 (ĐÀ LA) - Mệnh: Kình Dương tọa thủ, gặp Thái Dương hoặc Thái Âm");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Kình Dương") && isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Phú Giải số 42 (ĐÀ LA)a - Mệnh: Kình Dương + Hỏa Tinh tọa thủ ở Thìn/Tuất/Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Kình Dương") && isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Phú Giải số 42 (ĐÀ LA)b - Mệnh: Kình Dương + Hỏa Tinh + Tham Lang + Vũ Khúc tọa thủ ở Thìn/Tuất/Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Địa Kiếp") && isSaoToaThuTaiCung("Mệnh", "Địa Không") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
+        keyArr.push("Phú Giải số 3 (ĐỊA KIẾP) - Mệnh: Địa Kiếp + Địa Không tọa thủ ở Tỵ/Hợi, gặp Hóa Quyền + Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Địa Kiếp") && isSaoToaThuTaiCung("Mệnh", "Địa Không") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Phú Giải số 4 (ĐỊA KIẾP) - Mệnh: Địa Kiếp + Địa Không tọa thủ ở Tỵ/Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Địa Kiếp") && isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false)) {
+        keyArr.push("Phú Giải số 6 (ĐỊA KIẾP) - Mệnh: Địa Kiếp + Thiên Cơ tọa thủ, gặp Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Địa Kiếp") && isSaoToaThuTaiCung("Mệnh", "Tham Lang")) {
+        keyArr.push("Phú Giải số 17 (ĐỊA KIẾP) - Mệnh: Địa Kiếp + Tham Lang tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Địa Không") && isSaoToaThuTaiCung(lasoData.cungCu, "Địa Kiếp")) {
+        keyArr.push("Phú Giải số 19 (ĐỊA KIẾP) - Mệnh: Địa Không tọa thủ (kèm điều kiện về Thân cư)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Bạch Hổ")) {
+        keyArr.push("Phú Giải số 1 (TANG MÔN) - Mệnh: Bạch Hổ tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tang Môn") && (isCungTaiChi("Mệnh", "Thìn"))) {
+        keyArr.push("Phú Giải số 5 (TANG MÔN) - Mệnh: Tang Môn tọa thủ ở Thìn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Đại Hao") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ")) {
+        keyArr.push("Phú Giải số 4 (TIỂU HAO) - Mệnh: Đại Hao + Hóa Kỵ tọa thủ");
+    }
+    if ((isSaoToaThuTaiCung("Mệnh", "Đại Hao") || isSaoToaThuTaiCung("Mệnh", "Tiểu Hao")) && (isSaoHoiChieuRong("Mệnh", "Cự Môn", false) || isSaoHoiChieuRong("Mệnh", "Vũ Khúc", false)) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false)) {
+        keyArr.push("Phú Giải số 5 (TIỂU HAO) - Mệnh: Đại Hao hoặc Tiểu Hao tọa thủ, gặp Cự Môn hoặc Vũ Khúc + Hóa Quyền");
+    }
+    if (((isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) || (isSaoToaThuTaiCung("Mệnh", "Thiên Việt") && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false)))) {
+        keyArr.push("Phú Giải số 1 (THIÊN VIỆT) - Mệnh: Thiên Khôi, Thiên Việt (tọa hoặc chiếu)");
+    }
+    if (lasoData.cungCu !== "Mệnh" && ((isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Khôi") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Việt", false)) || (isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Việt") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Khôi", false)))) {
+        keyArr.push("Phú Giải số 1 (THIÊN VIỆT) - Thân cư: Thiên Khôi, Thiên Việt (tọa hoặc chiếu)");
+    }
+    if (((isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) || (isSaoToaThuTaiCung("Mệnh", "Thiên Việt") && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false)))) {
+        keyArr.push("Phú Giải số 2 (THIÊN VIỆT) - Mệnh: Thiên Khôi, Thiên Việt (tọa hoặc chiếu)");
+    }
+    if (lasoData.cungCu !== "Mệnh" && ((isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Khôi") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Việt", false)) || (isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Việt") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Khôi", false)))) {
+        keyArr.push("Phú Giải số 2 (THIÊN VIỆT) - Thân cư: Thiên Khôi, Thiên Việt (tọa hoặc chiếu)");
+    }
+    if (((isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) || (isSaoToaThuTaiCung("Mệnh", "Thiên Việt") && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false)))) {
+        keyArr.push("Phú Giải số 5 (THIÊN VIỆT) - Mệnh: Thiên Khôi, Thiên Việt (tọa hoặc chiếu)");
+    }
+    if (lasoData.cungCu !== "Mệnh" && ((isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Khôi") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Việt", false)) || (isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Việt") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Khôi", false)))) {
+        keyArr.push("Phú Giải số 5 (THIÊN VIỆT) - Thân cư: Thiên Khôi, Thiên Việt (tọa hoặc chiếu)");
+    }
+    if (((isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) || (isSaoToaThuTaiCung("Mệnh", "Thiên Việt") && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false)))) {
+        keyArr.push("Phú Giải số 6 (THIÊN VIỆT) - Mệnh: Thiên Khôi, Thiên Việt (tọa hoặc chiếu)");
+    }
+    if (((isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) || (isSaoToaThuTaiCung("Mệnh", "Thiên Việt") && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false))) && isSaoHoiChieuRong("Mệnh", "Thiên Quan", false) && isSaoHoiChieuRong("Mệnh", "Thiên Phúc", false)) {
+        keyArr.push("Phú Giải số 10 (THIÊN VIỆT) - Mệnh: Thiên Khôi, Thiên Việt (tọa hoặc chiếu), gặp Thiên Quan + Thiên Phúc");
+    }
+    if (lasoData.cungCu !== "Mệnh" && ((isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Khôi") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Việt", false)) || (isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Việt") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Khôi", false))) && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Quan", false) && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Phúc", false)) {
+        keyArr.push("Phú Giải số 10 (THIÊN VIỆT) - Thân cư: Thiên Khôi, Thiên Việt (tọa hoặc chiếu), gặp Thiên Quan + Thiên Phúc");
+    }
+    if (((isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) || (isSaoToaThuTaiCung("Mệnh", "Thiên Việt") && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false))) && (isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) || isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam")) {
+        keyArr.push("Phú Giải số 12 (THIÊN VIỆT) - Mệnh: Thiên Khôi, Thiên Việt (tọa hoặc chiếu), gặp Hóa Quyền hoặc Hóa Lộc (kèm điều kiện cung đối)");
+    }
+    if (lasoData.cungCu !== "Mệnh" && ((isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Khôi") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Việt", false)) || (isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Việt") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Khôi", false))) && (isSaoHoiChieuRong(lasoData.cungCu, "Hóa Quyền", false) || isSaoHoiChieuRong(lasoData.cungCu, "Hóa Lộc", false)) && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam")) {
+        keyArr.push("Phú Giải số 12 (THIÊN VIỆT) - Thân cư: Thiên Khôi, Thiên Việt (tọa hoặc chiếu), gặp Hóa Quyền hoặc Hóa Lộc (kèm điều kiện cung đối)");
+    }
+    if (((isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) || (isSaoToaThuTaiCung("Mệnh", "Thiên Việt") && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false))) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
+        keyArr.push("Phú Giải số 17 (THIÊN VIỆT) - Mệnh: Thiên Khôi, Thiên Việt (tọa hoặc chiếu), gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc")) {
+        keyArr.push("Phú Giải số 1 (VĂN XƯƠNG) - Mệnh: Văn Xương + Văn Khúc tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Phú Giải số 5 (VĂN XƯƠNG) - Mệnh: Văn Xương + Văn Khúc tọa thủ ở Sửu/Mùi");
+    }
+    if (lasoData.cungCu !== "Mệnh" && isSaoToaThuTaiCung(lasoData.cungCu, "Văn Xương") && isSaoToaThuTaiCung(lasoData.cungCu, "Văn Khúc") && (isCungTaiChi(lasoData.cungCu, "Sửu") || isCungTaiChi(lasoData.cungCu, "Mùi"))) {
+        keyArr.push("Phú Giải số 5 (VĂN XƯƠNG) - Thân cư: Văn Xương + Văn Khúc tọa thủ ở Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc")) {
+        keyArr.push("Phú Giải số 6 (VĂN XƯƠNG) - Mệnh: Văn Xương + Văn Khúc tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Phú Giải số 7 (VĂN XƯƠNG)a - Mệnh: Văn Xương + Văn Khúc tọa thủ ở Thìn/Tuất/Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
+        keyArr.push("Phú Giải số 7 (VĂN XƯƠNG)b - Mệnh: Văn Xương + Văn Khúc tọa thủ ở Thìn/Tuất/Sửu/Mùi, gặp Hóa Khoa + Hóa Quyền + Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Phú Giải số 9 (VĂN XƯƠNG) - Mệnh: Văn Xương + Văn Khúc tọa thủ ở Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Phú Giải số 12 (VĂN XƯƠNG) - Mệnh: Văn Xương + Văn Khúc tọa thủ ở Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && isSaoHoiChieuRong("Mệnh", "Thái Tuế", false) && isSaoHoiChieuRong("Mệnh", "Kình Dương", false)) {
+        keyArr.push("Phú Giải số 17 (VĂN XƯƠNG) - Mệnh: Văn Xương + Văn Khúc tọa thủ, gặp Thái Tuế + Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Quả Tú")) {
+        keyArr.push("Phú Giải số 19 (VĂN XƯƠNG) - Mệnh: Văn Xương + Quả Tú tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Phú Giải số 21 (VĂN XƯƠNG) - Mệnh: Thái Dương + Văn Xương tọa thủ ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc")) {
+        keyArr.push("Phú Giải số 27 (VĂN XƯƠNG) - Mệnh: Văn Xương + Văn Khúc tọa thủ");
+    }
+    if (lasoData.cungCu !== "Mệnh" && isSaoToaThuTaiCung(lasoData.cungCu, "Văn Xương") && isSaoToaThuTaiCung(lasoData.cungCu, "Văn Khúc")) {
+        keyArr.push("Phú Giải số 27 (VĂN XƯƠNG) - Thân cư: Văn Xương + Văn Khúc tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Tả Phù")) {
+        keyArr.push("Phú Giải số 35 (VĂN XƯƠNG) - Mệnh: Văn Xương + Tả Phù tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Thái Dương", false) && isSaoHoiChieuRong("Mệnh", "Thái Âm", false) && isSaoHoiChieuRong("Mệnh", "Thanh Long", false) && isSaoHoiChieuRong("Mệnh", "Long Đức", false)) {
+        keyArr.push("Phú Giải số 36 (VĂN XƯƠNG) - Mệnh: Văn Khúc + Văn Xương tọa thủ, gặp Thái Dương + Thái Âm + Thanh Long + Long Đức");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc")) {
+        keyArr.push("Phú Giải số 37 (VĂN XƯƠNG)a - Mệnh: Thiên Lương + Văn Khúc tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && (isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Phú Giải số 37 (VĂN XƯƠNG)b - Mệnh: Thiên Lương + Văn Khúc tọa thủ ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Thiên Hình", false) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && !(phu17DemCatTinh("Mệnh") > 0)) {
+        keyArr.push("Phú Giải số 55 (VĂN XƯƠNG) - Mệnh: Liêm Trinh tọa thủ ở Tỵ/Hợi, gặp Thiên Hình + Văn Xương + Văn Khúc, không gặp cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tả Phù") && isSaoToaThuTaiCung("Mệnh", "Hữu Bật")) {
+        keyArr.push("Phú Giải số 1 (HỮU BẬT) - Mệnh: Tả Phù + Hữu Bật tọa thủ");
+    }
+    if (lasoData.cungCu !== "Mệnh" && isSaoToaThuTaiCung(lasoData.cungCu, "Tả Phù") && isSaoToaThuTaiCung(lasoData.cungCu, "Hữu Bật")) {
+        keyArr.push("Phú Giải số 1 (HỮU BẬT) - Thân cư: Tả Phù + Hữu Bật tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tả Phù") && isSaoToaThuTaiCung("Mệnh", "Hữu Bật") && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
+        keyArr.push("Phú Giải số 3 (HỮU BẬT) - Mệnh: Tả Phù + Hữu Bật tọa thủ, gặp Hóa Khoa + Hóa Quyền + Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hữu Bật") && isSaoHoiChieuRong("Mệnh", "Quả Tú", false)) {
+        keyArr.push("Phú Giải số 5 (HỮU BẬT) - Mệnh: Hữu Bật tọa thủ, gặp Quả Tú");
+    }
+    if (lasoData.cungCu !== "Mệnh" && isSaoToaThuTaiCung(lasoData.cungCu, "Hữu Bật") && isSaoHoiChieuRong(lasoData.cungCu, "Quả Tú", false)) {
+        keyArr.push("Phú Giải số 5 (HỮU BẬT) - Thân cư: Hữu Bật tọa thủ, gặp Quả Tú");
+    }
+    if ((isSaoToaThuTaiCung("Mệnh", "Tả Phù") || isSaoToaThuTaiCung("Mệnh", "Hữu Bật")) && isSaoHoiChieuRong("Mệnh", "Thiên Tướng", false)) {
+        keyArr.push("Phú Giải số 6 (HỮU BẬT) - Mệnh: Tả Phù hoặc Hữu Bật tọa thủ, gặp Thiên Tướng");
+    }
+    if ((isSaoToaThuTaiCung("Mệnh", "Tả Phù") || isSaoToaThuTaiCung("Mệnh", "Hữu Bật")) && isSaoToaThuTaiCung("Mệnh", "Thiên Phúc")) {
+        keyArr.push("Phú Giải số 9 (HỮU BẬT) - Mệnh: Tả Phù hoặc Hữu Bật + Thiên Phúc tọa thủ");
+    }
+    if (lasoData.cungCu !== "Mệnh" && (isSaoToaThuTaiCung(lasoData.cungCu, "Tả Phù") || isSaoToaThuTaiCung(lasoData.cungCu, "Hữu Bật")) && isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Phúc")) {
+        keyArr.push("Phú Giải số 9 (HỮU BẬT) - Thân cư: Tả Phù hoặc Hữu Bật + Thiên Phúc tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Mệnh", "Hữu Bật")) {
+        keyArr.push("Phú Giải số 16 (HỮU BẬT)a - Mệnh: Thiên Tướng + Hữu Bật tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Mệnh", "Hữu Bật") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Phú Giải số 16 (HỮU BẬT)b - Mệnh: Thiên Tướng + Hữu Bật tọa thủ ở Tỵ/Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Mệnh", "Hữu Bật") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Phú Giải số 16 (HỮU BẬT)c - Mệnh: Thiên Tướng + Hữu Bật tọa thủ ở Mão/Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tả Phù") && isSaoToaThuTaiCung("Mệnh", "Hữu Bật") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (isSaoHoiChieuRong("Mệnh", "Tử Vi", false) || isSaoHoiChieuRong("Mệnh", "Thiên Phủ", false) || isSaoHoiChieuRong("Mệnh", "Thiên Cơ", false) || isSaoHoiChieuRong("Mệnh", "Thái Âm", false) || isSaoHoiChieuRong("Mệnh", "Thiên Đồng", false) || isSaoHoiChieuRong("Mệnh", "Thiên Lương", false) || isSaoHoiChieuRong("Mệnh", "Thất Sát", false) || isSaoHoiChieuRong("Mệnh", "Phá Quân", false) || isSaoHoiChieuRong("Mệnh", "Liêm Trinh", false) || isSaoHoiChieuRong("Mệnh", "Tham Lang", false))) {
+        keyArr.push("Phú Giải số 17 (HỮU BẬT) - Mệnh: Tả Phù + Hữu Bật tọa thủ ở Thìn/Tuất/Sửu/Mùi, gặp Tử Vi hoặc Thiên Phủ hoặc Thiên Cơ hoặc Thái Âm hoặc Thiên Đồng hoặc Thiên Lương hoặc Thất Sát hoặc Phá Quân hoặc Liêm Trinh hoặc Tham Lang");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tả Phù") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất"))) {
+        keyArr.push("Phú Giải số 20 (HỮU BẬT) - Mệnh: Tả Phù + Thiên Phủ tọa thủ ở Thìn/Tuất");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tả Phù")) {
+        keyArr.push("Phú Giải số 22 (HỮU BẬT) - Mệnh: Tả Phù tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tả Phù") && isSaoToaThuTaiCung("Mệnh", "Hữu Bật")) {
+        keyArr.push("Phú Giải số 30 (HỮU BẬT) - Mệnh: Tả Phù + Hữu Bật tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Đào Hoa") && isSaoToaThuTaiCung("Mệnh", "Hồng Loan") && isSaoHoiChieuRong("Mệnh", "Thiên Cơ", false)) {
+        keyArr.push("Phú Giải số 4 (HỒNG LOAN) - Mệnh: Đào Hoa + Hồng Loan tọa thủ, gặp Thiên Cơ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Đào Hoa") && isSaoToaThuTaiCung("Mệnh", "Địa Kiếp")) {
+        keyArr.push("Phú Giải số 5 (HỒNG LOAN) - Mệnh: Đào Hoa + Địa Kiếp tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoHoiChieuRong("Mệnh", "Hồng Loan", false) && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false)) {
+        keyArr.push("Phú Giải số 14 (HỒNG LOAN) - Mệnh: Liêm Trinh tọa thủ, gặp Hồng Loan + Thiên Khôi + Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tam Thai") && isSaoToaThuTaiCung("Mệnh", "Bát Tọa") && isSaoToaThuTaiCung("Mệnh", "Phong Cáo")) {
+        keyArr.push("Phú Giải số 2 (BÁT TỌA) - Mệnh: Tam Thai + Bát Tọa + Phong Cáo tọa thủ");
+    }
+    if (lasoData.cungCu !== "Mệnh" && isSaoToaThuTaiCung(lasoData.cungCu, "Tam Thai") && isSaoToaThuTaiCung(lasoData.cungCu, "Bát Tọa") && isSaoToaThuTaiCung(lasoData.cungCu, "Phong Cáo")) {
+        keyArr.push("Phú Giải số 2 (BÁT TỌA) - Thân cư: Tam Thai + Bát Tọa + Phong Cáo tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Mã")) {
+        keyArr.push("Phú Giải số 1 (THIÊN MÃ) - Mệnh: Thiên Mã tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Mã") && isSaoToaThuTaiCung("Mệnh", "Hóa Lộc")) {
+        keyArr.push("Phú Giải số 7 (THIÊN MÃ) - Mệnh: Thiên Mã + Hóa Lộc tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Mã") && isSaoHoiChieuRong("Mệnh", "Thiên Hình", false) && isSaoHoiChieuRong("Mệnh", "Thiên Khốc", false)) {
+        keyArr.push("Phú Giải số 10 (THIÊN MÃ) - Mệnh: Thiên Mã tọa thủ, gặp Thiên Hình + Thiên Khốc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Mã") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Thiên Lương", false) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false)) {
+        keyArr.push("Phú Giải số 11 (THIÊN MÃ) - Mệnh: Thiên Mã tọa thủ ở Tỵ, gặp Thiên Lương + Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Hình") && isSaoToaThuTaiCung("Mệnh", "Thất Sát")) {
+        keyArr.push("Phú Giải số 1 (THIÊN HÌNH) - Mệnh: Thiên Hình + Thất Sát tọa thủ");
+    }
+    if (lasoData.cungCu !== "Mệnh" && isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Hình") && isSaoToaThuTaiCung(lasoData.cungCu, "Thất Sát")) {
+        keyArr.push("Phú Giải số 1 (THIÊN HÌNH) - Thân cư: Thiên Hình + Thất Sát tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && isSaoHoiChieuRong("Mệnh", "Thiên Hình", false)) {
+        keyArr.push("Phú Giải số 10 (THIÊN HÌNH) - Mệnh: Thất Sát tọa thủ ở Dần/Thân, gặp Thiên Hình");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thanh Long") && (isCungTaiChi("Mệnh", "Tý"))) {
+        keyArr.push("Phú Giải số 4 (THIÊN QUÝ) - Mệnh: Thanh Long tọa thủ ở Tý");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Riêu") && isSaoHoiChieuRong("Mệnh", "Thiên Hỷ", false)) {
+        keyArr.push("Phú Giải số 14 (THIÊN Ý) - Mệnh: Thiên Riêu tọa thủ, gặp Thiên Hỷ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Quan Phù") && (isCungTaiChi("Mệnh", "Tuất"))) {
+        keyArr.push("Phú Giải số 13 (PHỤ LỤC) - Mệnh: Quan Phù tọa thủ ở Tuất");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Quan Phù")) {
+        keyArr.push("Phú Giải số 16 (PHỤ LỤC) - Mệnh: Quan Phù tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoHoiChieuRong("Mệnh", "Thiên Quan", false) && isSaoHoiChieuRong("Mệnh", "Tấu Thư", false)) {
+        keyArr.push("Phú Giải số 21 (PHỤ LỤC) - Mệnh: Thiên Tướng tọa thủ, gặp Thiên Quan + Tấu Thư");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && (isCungTaiChi("Mệnh", "Tý"))) {
+        keyArr.push("Phú Giải số 11 (THIÊN VIỆT) - Mệnh: Thiên Khôi tọa thủ ở Tý");
+    }
+    if ((isSaoToaThuTaiCung("Mệnh", "Tử Vi") || isSaoToaThuTaiCung("Mệnh", "Phá Quân")) && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (phu17DemCatTinh("Mệnh") > 2)) {
+        keyArr.push("Phú Giải số 54 (TỬ VI) - Mệnh: Tử Vi hoặc Phá Quân tọa thủ ở Thìn/Tuất/Sửu/Mùi, gặp nhiều cát tinh (từ 3 sao)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (phu17DemCatTinh("Mệnh") > 2)) {
+        keyArr.push("Phú Giải số 9 (LIÊM TRINH)a - Mệnh: Liêm Trinh tọa thủ ở Mão/Dậu, gặp nhiều cát tinh (từ 3 sao)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (phu17DemSatTinh("Mệnh") > 1)) {
+        keyArr.push("Phú Giải số 9 (LIÊM TRINH)b - Mệnh: Liêm Trinh tọa thủ ở Mão/Dậu, gặp nhiều sát tinh (từ 2 sao)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (phu17DemCatTinh("Mệnh") > 2)) {
+        keyArr.push("Phú Giải số 20 (LIÊM TRINH)a - Mệnh: Liêm Trinh + Thất Sát tọa thủ ở Sửu/Mùi, gặp nhiều cát tinh (từ 3 sao)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (phu17DemSatTinh("Mệnh") > 1)) {
+        keyArr.push("Phú Giải số 20 (LIÊM TRINH)b - Mệnh: Liêm Trinh + Thất Sát tọa thủ ở Sửu/Mùi, gặp nhiều sát tinh (từ 2 sao)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (phu17DemCatTinh("Mệnh") > 0)) {
+        keyArr.push("Phú Giải số 3 (THIÊN ĐỒNG) - Mệnh: Thiên Đồng tọa thủ, gặp cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Dần")) && (phu17DemCatTinh("Mệnh") > 0)) {
+        keyArr.push("Phú Giải số 47 (THÁI DƯƠNG) - Mệnh: Thái Dương tọa thủ ở Hợi/Dần, gặp cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tả Phù") && isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (phu17DemCatTinh("Mệnh") > 2)) {
+        keyArr.push("Phú Giải số 18 (HỮU BẬT) - Mệnh: Tả Phù + Văn Xương tọa thủ, gặp nhiều cát tinh (từ 3 sao)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thanh Long") && isTrangSinhTaiCung("Mệnh", "Mộc Dục")) {
+        keyArr.push("Phú Giải số 1 (THIÊN QUÝ) - Mệnh: Thanh Long + vòng Tràng Sinh: Mộc Dục tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hoa Cái") && isTrangSinhTaiCung("Mệnh", "Mộc Dục")) {
+        keyArr.push("Phú Giải số 9 (PHỤ LỤC) - Mệnh: Hoa Cái + vòng Tràng Sinh: Mộc Dục tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && isTrangSinhTaiCung("Mệnh", "Mộ")) {
+        keyArr.push("Phú Giải số 45 (THAM LANG)b - Mệnh: Tham Lang + Vũ Khúc tọa thủ ở Sửu/Mùi, gặp vòng Tràng Sinh: Mộ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Đào Hoa") && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam")) {
+        keyArr.push("Phú Giải số 7 (HỒNG LOAN) - Mệnh: Đào Hoa tọa thủ (kèm điều kiện cung đối)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
+        keyArr.push("Phú Giải số 27 (THAM LANG)a - Mệnh: Tham Lang + Liêm Trinh tọa thủ ở Tý/Hợi, gặp Văn Xương + Văn Khúc + Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Hợi")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
+        keyArr.push("Phú Giải số 27 (THAM LANG)b - Mệnh: Tham Lang + Liêm Trinh tọa thủ ở Tý/Hợi, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Thân")) && (isSaoHoiChieuRong("Mệnh", "Liêm Trinh", false) || isSaoHoiChieuRong("Mệnh", "Bạch Hổ", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) || isSaoHoiChieuRong("Mệnh", "Thiên Riêu", false))) {
+        keyArr.push("Phú Giải số 30 (THIÊN – CƠ)a - Mệnh: Thiên Cơ + Thái Âm tọa thủ ở Thân, gặp Liêm Trinh hoặc Bạch Hổ hoặc Linh Tinh hoặc Thiên Riêu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Thân")) && isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) && isSaoHoiChieuRong("Mệnh", "Thiên Hình", false)) {
+        keyArr.push("Phú Giải số 30 (THIÊN – CƠ)b - Mệnh: Thiên Cơ + Thái Âm tọa thủ ở Thân, gặp Địa Kiếp + Thiên Hình");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Thân")) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && isSaoHoiChieuRong("Mệnh", "Phượng Các", false)) {
+        keyArr.push("Phú Giải số 30 (THIÊN – CƠ)c - Mệnh: Thiên Cơ + Thái Âm tọa thủ ở Thân, gặp Hóa Khoa + Phượng Các");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) || isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) || isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false) || isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) || isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false))) {
+        keyArr.push("Phú Giải số 19 (THIÊN ĐỒNG) - Mệnh: Thiên Đồng + Thiên Lương tọa thủ ở Dần/Thân, gặp Thiên Khôi hoặc Hóa Quyền hoặc Linh Tinh hoặc Hóa Kỵ hoặc Hóa Lộc hoặc Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && (isSaoHoiChieuRong("Mệnh", "Đại Hao", false) || isSaoHoiChieuRong("Mệnh", "Tiểu Hao", false) || isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Kiếp Sát", false))) {
+        keyArr.push("Phú Giải số 9 (TỬ VI)v - Mệnh: Tử Vi tọa thủ ở Ngọ, gặp Thiên Khôi + Hóa Khoa + Đại Hao hoặc Tiểu Hao hoặc Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Kiếp Sát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (phu17DemCatTinh("Mệnh") > 2)) {
+        keyArr.push("Phú Giải số 13 (THIÊN – PHỦ)g - Mệnh: Thiên Phủ + Vũ Khúc tọa thủ, gặp nhiều cát tinh (từ 3 sao)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (phu17DemSatTinh("Mệnh") > 0)) {
+        keyArr.push("Phú Giải số 13 (THIÊN – PHỦ)h - Mệnh: Thiên Phủ + Vũ Khúc tọa thủ, gặp #SAT1");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && (phu17DemCatTinh("Mệnh") > 0)) {
+        keyArr.push("Phú Giải số 4 (THẤT – SÁT)g - Mệnh: Thất Sát + Phá Quân tọa thủ, gặp Kình Dương + cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && (phu17DemSatTinh("Mệnh") > 1)) {
+        keyArr.push("Phú Giải số 4 (THẤT – SÁT)h - Mệnh: Thất Sát + Phá Quân tọa thủ, gặp Kình Dương + nhiều sát tinh (từ 2 sao)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && (phu17DemCatTinh("Mệnh") > 0)) {
+        keyArr.push("Phú Giải số 9 (PHÁ – QUÂN)g - Mệnh: Phá Quân tọa thủ ở Tý/Ngọ, gặp cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && (isSaoHoiChieuRong("Mệnh", "Thiên Hình", false) || isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false))) {
+        keyArr.push("Phú Giải số 17 (THIÊN – CƠ)v - Mệnh: Thiên Cơ + Thiên Lương tọa thủ ở Thìn/Tuất, gặp Hóa Khoa + Hóa Quyền + Hóa Lộc + Thiên Hình hoặc Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Dậu")) && (phu17DemCatTinh("Mệnh") > 2)) {
+        keyArr.push("Phú Giải số 15 (CỰ MÔN)v - Mệnh: Cự Môn + Thiên Cơ tọa thủ ở Dậu, gặp nhiều cát tinh (từ 3 sao)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Thiên Đồng", false) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && (phu17DemCatTinh("Mệnh") > 2)) {
+        keyArr.push("Phú Giải số 28 (CỰ MÔN)v - Mệnh: Cự Môn tọa thủ ở Thìn/Tuất, gặp Thiên Đồng + Hóa Khoa + nhiều cát tinh (từ 3 sao)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Thiên Mã", false) && (phu17DemCatTinh("Mệnh") > 0)) {
+        keyArr.push("Phú Giải số 8 (THIÊN LƯƠNG)g - Mệnh: Thiên Lương tọa thủ ở Tỵ/Hợi, gặp Thiên Mã + cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Thìn")) && isSaoHoiChieuRong("Mệnh", "Thái Dương", false) && (isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) || isSaoHoiChieuRong("Mệnh", "Thiên Việt", false))) {
+        keyArr.push("Phú Giải số 3 (THÁI DƯƠNG)av - Mệnh: Thái Âm tọa thủ ở Thìn, gặp Thái Dương + Thiên Khôi hoặc Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Thái Âm", false) && (isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) || isSaoHoiChieuRong("Mệnh", "Thiên Việt", false))) {
+        keyArr.push("Phú Giải số 3 (THÁI DƯƠNG)bv - Mệnh: Thái Dương tọa thủ ở Tuất, gặp Thái Âm + Thiên Khôi hoặc Thiên Việt");
+    }
+    if (((isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) || (isSaoToaThuTaiCung("Mệnh", "Thiên Việt") && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false))) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false)) {
+        keyArr.push("Phú Giải số 6 (THIÊN VIỆT)g - Mệnh: Thiên Khôi, Thiên Việt (tọa hoặc chiếu), gặp Văn Xương + Văn Khúc + Hóa Khoa");
+    }
+    if (((isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) || (isSaoToaThuTaiCung("Mệnh", "Thiên Việt") && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false))) && (isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) || isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Phú Giải số 12 (THIÊN VIỆT)n - Mệnh: Thiên Khôi, Thiên Việt (tọa hoặc chiếu), gặp Hóa Quyền hoặc Hóa Lộc (kèm điều kiện cung đối)");
+    }
+    if (lasoData.cungCu !== "Mệnh" && ((isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Khôi") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Việt", false)) || (isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Việt") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Khôi", false))) && (isSaoHoiChieuRong(lasoData.cungCu, "Hóa Quyền", false) || isSaoHoiChieuRong(lasoData.cungCu, "Hóa Lộc", false)) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Phú Giải số 12 (THIÊN VIỆT)n - Thân cư: Thiên Khôi, Thiên Việt (tọa hoặc chiếu), gặp Hóa Quyền hoặc Hóa Lộc (kèm điều kiện cung đối)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Thiên Hình", false) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && (phu17DemCatTinh("Mệnh") > 0)) {
+        keyArr.push("Phú Giải số 55 (VĂN XƯƠNG)v - Mệnh: Liêm Trinh tọa thủ ở Tỵ/Hợi, gặp Thiên Hình + Văn Xương + Văn Khúc + cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Tuất"))) {
+        keyArr.push("Phú Giải số 16 (THIÊN – CƠ)t - Mệnh: Thiên Cơ + Thiên Lương tọa thủ ở Tuất");
+    }
+}
+// PHU17-END
 // VH17-BEGIN
 function phu17ChiCung(lasoData, tenCung) {
     if (!lasoData || !lasoData.lasoOb) return "";
@@ -4379,8 +5286,9 @@ function LuanSaoNhapHan(keyArr, loai) {
     }
 }
 // VH17-END
-// PHU17-BEGIN
-function phu17DemSao(tenCung, ds, tinhSang) {
+// TK18-BEGIN
+function phu17DemKhong(tenCung, loai) {
+    // loai: 0 = cung và ba cung hội; 1 = chỉ cung chính; 2 = chỉ ba cung hội; 3 = như 0 nhưng bỏ Tuần/Triệt của cung chính (đã tháo cởi khi hạn đến)
     let d = {};
     try {
         d = JSON.parse(localStorage.getItem('laso_data')) || {};
@@ -4390,851 +5298,69 @@ function phu17DemSao(tenCung, ds, tinhSang) {
     for (let k = 0; k < ob.length; k++) { if (ob[k].tenCung === tenCung) { i = k; } }
     if (i > 11) return 0;
     const idxs = [i, (i + 4) % 12, (i + 6) % 12, (i + 8) % 12];
-    const tenSang = ["Tử Vi", "Liêm Trinh", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Thất Sát", "Phá Quân", "Tham Lang", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"];
-    const dacSang = [["Thìn", "Tuất", "Sửu", "Mùi", "Tỵ", "Ngọ", "Dần", "Thân"], ["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Dần", "Thân"], ["Dần", "Thân", "Tý", "Ngọ", "Thìn", "Tuất", "Tỵ", "Hợi", "Mùi"], ["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Dần", "Thân", "Dậu", "Mão"], ["Dần", "Thân", "Tý", "Ngọ", "Thìn", "Tuất", "Sửu", "Mùi", "Tỵ", "Hợi"], ["Dần", "Thân", "Tý", "Ngọ", "Tỵ", "Hợi", "Sửu", "Mùi"], ["Tý", "Ngọ", "Sửu", "Mùi", "Thìn", "Tuất"], ["Thìn", "Tuất", "Sửu", "Mùi", "Dần", "Thân"], ["Mão", "Dậu", "Tý", "Ngọ", "Dần", "Thân", "Hợi"], ["Tỵ", "Ngọ", "Dần", "Mão", "Thìn", "Sửu", "Mùi"], ["Thìn", "Tuất", "Mão", "Dậu", "Tỵ", "Thân", "Tý", "Ngọ", "Sửu", "Mùi"], ["Dậu", "Tuất", "Hợi", "Thân", "Tý", "Sửu", "Mùi"], ["Dần", "Thân", "Tý", "Mão", "Tỵ", "Hợi"], ["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Mão", "Dần", "Thân"]];
-    let dem = 0;
-    for (let a = 0; a < idxs.length; a++) {
+    let coTuan = false;
+    let coTriet = false;
+    let coThien = false;
+    let coDia = false;
+    for (let a = 0; a < 4; a++) {
+        let xet = true;
+        if (loai === 1 && a > 0) { xet = false; }
+        if (loai === 2 && a === 0) { xet = false; }
         const c = ob[idxs[a]];
-        let saoC = [];
-        if (c && Array.isArray(c.sao)) { saoC = c.sao; }
-        for (let b = 0; b < saoC.length; b++) {
-            const ten = saoC[b].ten;
-            let dung = false;
-            for (let m = 0; m < ds.length; m++) { if (ds[m] === ten) { dung = true; } }
-            if (!dung && tinhSang) {
-                for (let m = 0; m < tenSang.length; m++) {
-                    if (tenSang[m] === ten) {
-                        for (let n = 0; n < dacSang[m].length; n++) { if (dacSang[m][n] === c.chi) { dung = true; } }
-                    }
-                }
+        if (xet && c) {
+            let boTT = false;
+            if (loai === 3 && a === 0) { boTT = true; }
+            if (!boTT && isCungCoTuan(c.tenCung)) { coTuan = true; }
+            if (!boTT && isCungCoTriet(c.tenCung)) { coTriet = true; }
+            let saoC = [];
+            if (Array.isArray(c.sao)) { saoC = c.sao; }
+            for (let b = 0; b < saoC.length; b++) {
+                if (saoC[b].ten === "Thiên Không") { coThien = true; }
+                if (saoC[b].ten === "Địa Không") { coDia = true; }
             }
-            if (dung) dem++;
         }
     }
+    let dem = 0;
+    if (coTuan) { dem++; }
+    if (coTriet) { dem++; }
+    if (coThien) { dem++; }
+    if (coDia) { dem++; }
     return dem;
 }
-function phu17DemCatTinh(tenCung) { return phu17DemSao(tenCung, ["Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Lộc Tồn", "Quốc Ấn", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt", "Long Trì", "Phượng Các", "Thanh Long", "Thiên Quan", "Thiên Phúc", "Ân Quang", "Thiên Quý", "Tam Thai", "Bát Tọa", "Thiên Giải", "Địa Giải"], true); }
-function phu17DemSatTinh(tenCung) { return phu17DemSao(tenCung, ["Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"], false); }
-function LuanPhuGiaiLan17_menh(keyArr) {
+function LuanTamKhong18_menh(keyArr) {
     let lasoData = {};
     try {
         lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
     } catch (e) { lasoData = {}; }
-    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Dậu"))) {
-        keyArr.push("Phú Giải số 2 (TỬ VI) - Mệnh: Tử Vi tọa thủ ở Dậu");
+    if (laCungVoChinhDieu("Mệnh") && phu17DemKhong("Mệnh", 1) === 1 && phu17DemKhong("Mệnh", 2) === 2) {
+        keyArr.push("Tam Không 01 - Mệnh - Cung Mệnh vô chính diệu có một Không tọa thủ và hai Không củng chiếu (Tam Không thượng cách)");
     }
-    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
-        keyArr.push("Phú Giải số 3 (TỬ VI) - Mệnh: Tử Vi tọa thủ ở Mão/Dậu, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
+    if (laCungVoChinhDieu("Mệnh") && phu17DemKhong("Mệnh", 1) === 3) {
+        keyArr.push("Tam Không 02 - Mệnh - Cung Mệnh vô chính diệu mà ba Không cùng nhập vào cung Mệnh rồi xung phá");
     }
-    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false)) {
-        keyArr.push("Phú Giải số 9 (TỬ VI) - Mệnh: Tử Vi tọa thủ ở Ngọ, gặp Thiên Khôi + Hóa Khoa");
+    if (laCungVoChinhDieu("Mệnh") && phu17DemKhong("Mệnh", 0) === 4 && !(phu17DemKhong("Mệnh", 1) > 2)) {
+        keyArr.push("Tam Không 03 - Mệnh - Cung Mệnh vô chính diệu được đủ Tứ Không (Tuần, Triệt, Thiên Không, Địa Không) hội hợp");
     }
-    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) {
-        keyArr.push("Phú Giải số 19 (TỬ VI) - Mệnh: Tử Vi tọa thủ, gặp Văn Xương + Văn Khúc");
+    if (laCungVoChinhDieu("Mệnh") && phu17DemKhong("Mệnh", 0) === 3 && !(phu17DemKhong("Mệnh", 1) > 2)) {
+        keyArr.push("Tam Không 04 - Mệnh - Cung Mệnh vô chính diệu được Tam Không (ba trong bốn Không) hội hợp");
     }
-    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Tả Phù") && isSaoToaThuTaiCung("Mệnh", "Hữu Bật")) {
-        keyArr.push("Phú Giải số 20 (TỬ VI) - Mệnh: Tử Vi + Tả Phù + Hữu Bật tọa thủ");
+    if (laCungVoChinhDieu("Mệnh") && phu17DemKhong("Mệnh", 0) === 2) {
+        keyArr.push("Tam Không 05 - Mệnh - Cung Mệnh vô chính diệu được Nhị Không (hai trong bốn Không) hội hợp");
     }
-    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false))) {
-        keyArr.push("Phú Giải số 21 (TỬ VI)b - Mệnh: Tử Vi tọa thủ, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp");
+    if (laCungVoChinhDieu("Mệnh") && phu17DemKhong("Mệnh", 0) === 1) {
+        keyArr.push("Tam Không 06 - Mệnh - Cung Mệnh vô chính diệu chỉ có Nhất Không (một trong bốn Không) hội hợp");
     }
-    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
-        keyArr.push("Phú Giải số 21 (TỬ VI)a - Mệnh: Tử Vi tọa thủ, gặp Hóa Khoa + Hóa Quyền + Hóa Lộc");
+    if (laCungVoChinhDieu("Mệnh") && phu17DemKhong("Mệnh", 0) > 2) {
+        keyArr.push("Tam Không 07 - Mệnh - Cung Mệnh vô chính diệu có Tứ hay Tam Không");
     }
-    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false))) {
-        keyArr.push("Phú Giải số 22 (TỬ VI) - Mệnh: Tử Vi tọa thủ, gặp Hóa Quyền + Hóa Lộc + Kình Dương hoặc Đà La");
+    if (laCungVoChinhDieu("Mệnh") && phu17DemKhong("Mệnh", 0) > 2 && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
+        keyArr.push("Tam Không 08 - Mệnh - Cung Mệnh vô chính diệu có Tam Không hội Hóa Lộc");
     }
-    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && isSaoHoiChieuRong("Mệnh", "Hữu Bật", false)) {
-        keyArr.push("Phú Giải số 23 (TỬ VI) - Mệnh: Tử Vi + Hóa Lộc tọa thủ, gặp Tả Phù + Hữu Bật");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
-        keyArr.push("Phú Giải số 34 (TỬ VI) - Mệnh: Tử Vi + Thiên Phủ tọa thủ ở Dần/Thân");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
-        keyArr.push("Phú Giải số 39 (TỬ VI) - Mệnh: Thiên Cơ + Thái Âm tọa thủ ở Dần/Thân");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && (isCungTaiChi("Mệnh", "Tuất"))) {
-        keyArr.push("Phú Giải số 41 (TỬ VI)b - Mệnh: Thiên Phủ + Hóa Lộc tọa thủ ở Tuất");
-    }
-    if ((isSaoToaThuTaiCung("Mệnh", "Tử Vi") || isSaoToaThuTaiCung("Mệnh", "Vũ Khúc")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
-        keyArr.push("Phú Giải số 49 (TỬ VI) - Mệnh: Tử Vi hoặc Vũ Khúc tọa thủ, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất"))) {
-        keyArr.push("Phú Giải số 50 (TỬ VI) - Mệnh: Tử Vi tọa thủ ở Thìn/Tuất");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Phá Quân", false)) {
-        keyArr.push("Phú Giải số 51 (TỬ VI) - Mệnh: Tử Vi tọa thủ ở Thìn/Tuất, gặp Phá Quân");
-    }
-    if ((isSaoToaThuTaiCung("Mệnh", "Tử Vi") || isSaoToaThuTaiCung("Mệnh", "Phá Quân")) && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
-        keyArr.push("Phú Giải số 53 (TỬ VI) - Mệnh: Tử Vi hoặc Phá Quân tọa thủ ở Thìn/Tuất/Sửu/Mùi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Phá Quân", false)) {
-        keyArr.push("Phú Giải số 56 (TỬ VI)a - Mệnh: Tử Vi + Thiên Tướng tọa thủ ở Thìn/Tuất, gặp Phá Quân");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Tử Vi", false) && isSaoHoiChieuRong("Mệnh", "Thiên Tướng", false)) {
-        keyArr.push("Phú Giải số 56 (TỬ VI)b - Mệnh: Phá Quân tọa thủ ở Thìn/Tuất, gặp Tử Vi + Thiên Tướng");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Phá Quân", false)) {
-        keyArr.push("Phú Giải số 61 (TỬ VI) - Mệnh: Tử Vi + Thiên Tướng tọa thủ ở Thìn/Tuất, gặp Phá Quân");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
-        keyArr.push("Phú Giải số 62 (TỬ VI) - Mệnh: Tử Vi + Thất Sát tọa thủ ở Tỵ/Hợi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Mệnh", "Hóa Quyền") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
-        keyArr.push("Phú Giải số 64 (TỬ VI) - Mệnh: Tử Vi + Thất Sát + Hóa Quyền tọa thủ ở Tỵ/Hợi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ")) {
-        keyArr.push("Phú Giải số 1 (THIÊN – PHỦ) - Mệnh: Thiên Phủ tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Vũ Khúc")) {
-        keyArr.push("Phú Giải số 13 (THIÊN – PHỦ) - Mệnh: Thiên Phủ + Vũ Khúc tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) {
-        keyArr.push("Phú Giải số 15 (THIÊN – PHỦ) - Mệnh: Thiên Phủ + Lộc Tồn tọa thủ, gặp Văn Xương + Văn Khúc");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && isSaoHoiChieuRong("Mệnh", "Hữu Bật", false)) {
-        keyArr.push("Phú Giải số 16 (THIÊN – PHỦ) - Mệnh: Thiên Phủ tọa thủ, gặp Văn Xương + Văn Khúc + Tả Phù + Hữu Bật");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Thái Tuế", false) && isSaoHoiChieuRong("Mệnh", "Đà La", false)) {
-        keyArr.push("Phú Giải số 17 (THIÊN – PHỦ) - Mệnh: Thiên Phủ tọa thủ ở Tỵ, gặp Thái Tuế + Đà La");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc")) {
-        keyArr.push("Phú Giải số 1 (VŨ KHÚC) - Mệnh: Vũ Khúc tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc")) {
-        keyArr.push("Phú Giải số 3 (VŨ KHÚC) - Mệnh: Vũ Khúc tọa thủ");
-    }
-    if (lasoData.cungCu !== "Mệnh" && isSaoToaThuTaiCung(lasoData.cungCu, "Vũ Khúc")) {
-        keyArr.push("Phú Giải số 3 (VŨ KHÚC) - Thân cư: Vũ Khúc tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
-        keyArr.push("Phú Giải số 5 (VŨ KHÚC) - Mệnh: Vũ Khúc tọa thủ ở Tỵ/Hợi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
-        keyArr.push("Phú Giải số 6 (VŨ KHÚC) - Mệnh: Vũ Khúc + Thiên Tướng tọa thủ ở Dần/Thân");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
-        keyArr.push("Phú Giải số 9 (VŨ KHÚC) - Mệnh: Vũ Khúc + Tham Lang tọa thủ, gặp Hóa Kỵ + Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
-        keyArr.push("Phú Giải số 13 (VŨ KHÚC) - Mệnh: Vũ Khúc + Phá Quân tọa thủ ở Tỵ/Hợi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Mão"))) {
-        keyArr.push("Phú Giải số 14 (VŨ KHÚC)a - Mệnh: Vũ Khúc + Thất Sát tọa thủ ở Mão");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Mão"))) {
-        keyArr.push("Phú Giải số 14 (VŨ KHÚC)b - Mệnh: Phá Quân + Liêm Trinh tọa thủ ở Mão");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
-        keyArr.push("Phú Giải số 15 (VŨ KHÚC) - Mệnh: Vũ Khúc + Phá Quân tọa thủ ở Tỵ/Hợi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
-        keyArr.push("Phú Giải số 17 (VŨ KHÚC) - Mệnh: Vũ Khúc + Phá Quân tọa thủ ở Tỵ/Hợi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) {
-        keyArr.push("Phú Giải số 18 (VŨ KHÚC) - Mệnh: Vũ Khúc + Phá Quân tọa thủ ở Tỵ/Hợi, gặp Văn Xương + Văn Khúc");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoHoiChieuRong("Mệnh", "Liêm Trinh", false) && isSaoHoiChieuRong("Mệnh", "Thất Sát", false)) {
-        keyArr.push("Phú Giải số 19 (VŨ KHÚC) - Mệnh: Vũ Khúc + Tham Lang tọa thủ, gặp Liêm Trinh + Thất Sát");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
-        keyArr.push("Phú Giải số 21 (VŨ KHÚC) - Mệnh: Vũ Khúc tọa thủ, gặp Kình Dương hoặc Đà La hoặc Hỏa Tinh hoặc Linh Tinh");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoHoiChieuRong("Mệnh", "Thiên Mã", false) && (isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) || isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false))) {
-        keyArr.push("Phú Giải số 24 (VŨ KHÚC) - Mệnh: Vũ Khúc tọa thủ, gặp Thiên Mã + Hóa Lộc hoặc Lộc Tồn");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Phá Quân", false)) {
-        keyArr.push("Phú Giải số 3 (THIÊN – TƯỚNG) - Mệnh: Thiên Tướng tọa thủ ở Tỵ/Hợi, gặp Phá Quân");
-    }
-    if (lasoData.cungCu !== "Mệnh" && isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Tướng") && (isCungTaiChi(lasoData.cungCu, "Tỵ") || isCungTaiChi(lasoData.cungCu, "Hợi")) && isSaoHoiChieuRong(lasoData.cungCu, "Phá Quân", false)) {
-        keyArr.push("Phú Giải số 3 (THIÊN – TƯỚNG) - Thân cư: Thiên Tướng tọa thủ ở Tỵ/Hợi, gặp Phá Quân");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Mệnh", "Phong Cáo")) {
-        keyArr.push("Phú Giải số 4 (THIÊN – TƯỚNG) - Mệnh: Thiên Tướng + Phong Cáo tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất"))) {
-        keyArr.push("Phú Giải số 15 (THIÊN – TƯỚNG) - Mệnh: Thiên Tướng + Tử Vi tọa thủ ở Thìn/Tuất");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && isSaoHoiChieuRong("Mệnh", "Hữu Bật", false)) {
-        keyArr.push("Phú Giải số 16 (THIÊN – TƯỚNG) - Mệnh: Thiên Tướng + Liêm Trinh tọa thủ ở Tý/Ngọ, gặp Tả Phù + Hữu Bật");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoHoiChieuRong("Mệnh", "Thái Tuế", false)) {
-        keyArr.push("Phú Giải số 2 (THẤT – SÁT) - Mệnh: Thất Sát tọa thủ, gặp Thái Tuế");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
-        keyArr.push("Phú Giải số 6 (THẤT – SÁT) - Mệnh: Thất Sát tọa thủ ở Tý/Ngọ/Dần/Thân");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
-        keyArr.push("Phú Giải số 7 (THẤT – SÁT) - Mệnh: Thất Sát tọa thủ ở Tý/Ngọ/Dần/Thân");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Dậu"))) {
-        keyArr.push("Phú Giải số 17 (THẤT – SÁT) - Mệnh: Thất Sát tọa thủ ở Dậu");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) {
-        keyArr.push("Phú Giải số 18 (THẤT – SÁT) - Mệnh: Thất Sát tọa thủ ở Tý/Ngọ, gặp Tả Phù + Hữu Bật + Văn Khúc");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
-        keyArr.push("Phú Giải số 19 (THẤT – SÁT) - Mệnh: Thất Sát tọa thủ ở Dần/Thân");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
-        keyArr.push("Phú Giải số 20 (THẤT – SÁT) - Mệnh: Thất Sát tọa thủ ở Tý/Ngọ/Dần/Thân");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (isSaoHoiChieuRong("Mệnh", "Thiên Hình", false) || isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false))) {
-        keyArr.push("Phú Giải số 21 (THẤT – SÁT) - Mệnh: Thất Sát + Liêm Trinh tọa thủ ở Sửu/Mùi, gặp Thiên Hình hoặc Hóa Kỵ hoặc Địa Không hoặc Địa Kiếp");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false))) {
-        keyArr.push("Phú Giải số 24 (THẤT – SÁT) - Mệnh: Thất Sát tọa thủ, gặp Địa Không hoặc Địa Kiếp hoặc Linh Tinh hoặc Hỏa Tinh");
-    }
-    if (isSaoToaThuTaiCung(lasoData.cungCu, "Thất Sát")) {
-        keyArr.push("Phú Giải số 31 (THẤT – SÁT) - Thân cư: Thất Sát tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
-        keyArr.push("Phú Giải số 41 (THẤT – SÁT) - Mệnh: Thất Sát tọa thủ ở Dần/Thân");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ"))) {
-        keyArr.push("Phú Giải số 3 (PHÁ – QUÂN) - Mệnh: Phá Quân tọa thủ ở Tý/Ngọ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false)) {
-        keyArr.push("Phú Giải số 4 (PHÁ – QUÂN) - Mệnh: Phá Quân tọa thủ ở Tý/Ngọ, không gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && (isSaoHoiChieuRong("Mệnh", "Cô Thần", false) || isSaoHoiChieuRong("Mệnh", "Quả Tú", false) || isSaoHoiChieuRong("Mệnh", "Đẩu Quân", false))) {
-        keyArr.push("Phú Giải số 5 (PHÁ – QUÂN) - Mệnh: Phá Quân tọa thủ ở Tý/Ngọ, gặp Cô Thần hoặc Quả Tú hoặc Đẩu Quân");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Ngọ"))) {
-        keyArr.push("Phú Giải số 7 (PHÁ – QUÂN)a - Mệnh: Phá Quân tọa thủ ở Ngọ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") || isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") || isSaoToaThuTaiCung("Mệnh", "Thiếu Dương")) && (isCungTaiChi("Mệnh", "Ngọ"))) {
-        keyArr.push("Phú Giải số 7 (PHÁ – QUÂN)b - Mệnh: Phá Quân + Hóa Lộc hoặc Lộc Tồn hoặc Thiếu Dương tọa thủ ở Ngọ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ"))) {
-        keyArr.push("Phú Giải số 9 (PHÁ – QUÂN) - Mệnh: Phá Quân tọa thủ ở Tý/Ngọ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Kình Dương", false))) {
-        keyArr.push("Phú Giải số 11 (PHÁ – QUÂN) - Mệnh: Phá Quân + Liêm Trinh tọa thủ ở Mão/Dậu, gặp Địa Kiếp hoặc Kình Dương");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoToaThuTaiCung("Mệnh", "Kình Dương") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && isSaoHoiChieuRong("Mệnh", "Hữu Bật", false)) {
-        keyArr.push("Phú Giải số 12 (PHÁ – QUÂN) - Mệnh: Phá Quân + Kình Dương tọa thủ ở Mão/Dậu, gặp Hóa Khoa + Hữu Bật");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && isSaoHoiChieuRong("Mệnh", "Thiên Hình", false) && (isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) || isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false))) {
-        keyArr.push("Phú Giải số 13 (PHÁ – QUÂN) - Mệnh: Phá Quân tọa thủ ở Thìn/Tuất/Sửu/Mùi, gặp Thiên Hình + Hóa Lộc hoặc Lộc Tồn");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoToaThuTaiCung("Mệnh", "Thiên Mã")) {
-        keyArr.push("Phú Giải số 16 (PHÁ – QUÂN) - Mệnh: Phá Quân + Thiên Mã tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false)) {
-        keyArr.push("Phú Giải số 21 (PHÁ – QUÂN) - Mệnh: Phá Quân tọa thủ, gặp Hỏa Tinh");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh")) {
-        keyArr.push("Phú Giải số 2 (LIÊM TRINH) - Mệnh: Liêm Trinh tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
-        keyArr.push("Phú Giải số 5 (LIÊM TRINH) - Mệnh: Liêm Trinh tọa thủ ở Tỵ/Hợi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false))) {
-        keyArr.push("Phú Giải số 6 (LIÊM TRINH) - Mệnh: Liêm Trinh tọa thủ ở Tỵ/Hợi, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Kình Dương", false))) {
-        keyArr.push("Phú Giải số 7 (LIÊM TRINH) - Mệnh: Liêm Trinh tọa thủ ở Mão/Dậu, gặp Địa Kiếp hoặc Kình Dương");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
-        keyArr.push("Phú Giải số 8 (LIÊM TRINH) - Mệnh: Liêm Trinh tọa thủ ở Mão/Dậu, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Mùi")) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
-        keyArr.push("Phú Giải số 11 (LIÊM TRINH) - Mệnh: Liêm Trinh tọa thủ ở Thân/Mùi, không gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
-        keyArr.push("Phú Giải số 14 (LIÊM TRINH) - Mệnh: Liêm Trinh + Thất Sát tọa thủ ở Thìn/Tuất/Sửu/Mùi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false))) {
-        keyArr.push("Phú Giải số 17 (LIÊM TRINH) - Mệnh: Liêm Trinh + Thất Sát tọa thủ ở Sửu/Mùi, gặp Địa Không hoặc Địa Kiếp hoặc Linh Tinh hoặc Hỏa Tinh");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
-        keyArr.push("Phú Giải số 19 (LIÊM TRINH) - Mệnh: Liêm Trinh + Thất Sát tọa thủ ở Sửu/Mùi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc")) {
-        keyArr.push("Phú Giải số 24 (LIÊM TRINH) - Mệnh: Liêm Trinh + Văn Khúc tọa thủ");
-    }
-    if ((isSaoToaThuTaiCung("Mệnh", "Tham Lang") || isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") || isSaoToaThuTaiCung("Mệnh", "Phá Quân"))) {
-        keyArr.push("Phú Giải số 6 (THAM LANG)a - Mệnh: Tham Lang hoặc Liêm Trinh hoặc Phá Quân tọa thủ");
-    }
-    if ((isSaoToaThuTaiCung("Mệnh", "Tham Lang") || isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") || isSaoToaThuTaiCung("Mệnh", "Phá Quân")) && (isSaoHoiChieuRong("Mệnh", "Thất Sát", false) || isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false))) {
-        keyArr.push("Phú Giải số 6 (THAM LANG)b - Mệnh: Tham Lang hoặc Liêm Trinh hoặc Phá Quân tọa thủ, gặp Thất Sát hoặc Kình Dương hoặc Đà La");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false)) {
-        keyArr.push("Phú Giải số 11 (THAM LANG) - Mệnh: Tham Lang tọa thủ ở Mão/Dậu, gặp Hỏa Tinh");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
-        keyArr.push("Phú Giải số 13 (THAM LANG) - Mệnh: Tham Lang tọa thủ ở Thìn/Tuất/Sửu/Mùi, gặp Hỏa Tinh hoặc Linh Tinh");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Tý")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false))) {
-        keyArr.push("Phú Giải số 20 (THAM LANG) - Mệnh: Tham Lang tọa thủ ở Hợi/Tý, gặp Kình Dương hoặc Đà La");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Mệnh", "Đà La") && (isCungTaiChi("Mệnh", "Dần"))) {
-        keyArr.push("Phú Giải số 21 (THAM LANG) - Mệnh: Tham Lang + Đà La tọa thủ ở Dần");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
-        keyArr.push("Phú Giải số 23 (THAM LANG) - Mệnh: Tham Lang tọa thủ, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Dần")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false)) && (isSaoHoiChieuRong("Mệnh", "Tang Môn", false) || isSaoHoiChieuRong("Mệnh", "Bạch Hổ", false))) {
-        keyArr.push("Phú Giải số 31 (THAM LANG) - Mệnh: Tham Lang tọa thủ ở Ngọ/Dần, gặp Kình Dương hoặc Đà La hoặc Hỏa Tinh hoặc Linh Tinh + Tang Môn hoặc Bạch Hổ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Tý")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false))) {
-        keyArr.push("Phú Giải số 32 (THAM LANG) - Mệnh: Tham Lang tọa thủ ở Hợi/Tý, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp");
-    }
-    if (isSaoToaThuTaiCung(lasoData.cungCu, "Tham Lang") && isSaoToaThuTaiCung(lasoData.cungCu, "Vũ Khúc")) {
-        keyArr.push("Phú Giải số 38 (THAM LANG) - Thân cư: Tham Lang + Vũ Khúc tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Mệnh", "Vũ Khúc")) {
-        keyArr.push("Phú Giải số 44 (THAM LANG) - Mệnh: Tham Lang + Vũ Khúc tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Hợi")) && (isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Thiên Hư", false) || isSaoHoiChieuRong("Mệnh", "Thiên Mã", false))) {
-        keyArr.push("Phú Giải số 47 (THAM LANG) - Mệnh: Tham Lang + Liêm Trinh tọa thủ ở Hợi, gặp Linh Tinh hoặc Đà La hoặc Kình Dương hoặc Địa Không hoặc Địa Kiếp hoặc Thiên Hư hoặc Thiên Mã");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Kình Dương")) {
-        keyArr.push("Phú Giải số 7 (THIÊN – CƠ) - Mệnh: Thiên Cơ + Kình Dương tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Phục Binh") && (isCungTaiChi("Mệnh", "Ngọ"))) {
-        keyArr.push("Phú Giải số 9 (THIÊN – CƠ) - Mệnh: Thiên Cơ + Phục Binh tọa thủ ở Ngọ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) || isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false)) && isSaoHoiChieuRong("Mệnh", "Thiên Mã", false)) {
-        keyArr.push("Phú Giải số 14 (THIÊN – CƠ) - Mệnh: Thiên Cơ + Thiên Lương tọa thủ, gặp Hóa Lộc hoặc Lộc Tồn + Thiên Mã");
-    }
-    if (lasoData.cungCu !== "Mệnh" && isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Cơ") && isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Lương") && (isSaoHoiChieuRong(lasoData.cungCu, "Hóa Lộc", false) || isSaoHoiChieuRong(lasoData.cungCu, "Lộc Tồn", false)) && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Mã", false)) {
-        keyArr.push("Phú Giải số 14 (THIÊN – CƠ) - Thân cư: Thiên Cơ + Thiên Lương tọa thủ, gặp Hóa Lộc hoặc Lộc Tồn + Thiên Mã");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất"))) {
-        keyArr.push("Phú Giải số 16 (THIÊN – CƠ) - Mệnh: Thiên Cơ + Thiên Lương tọa thủ ở Thìn/Tuất");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
-        keyArr.push("Phú Giải số 17 (THIÊN – CƠ) - Mệnh: Thiên Cơ + Thiên Lương tọa thủ ở Thìn/Tuất, gặp Hóa Khoa + Hóa Quyền + Hóa Lộc");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false)) && isSaoHoiChieuRong("Mệnh", "Tướng Quân", false)) {
-        keyArr.push("Phú Giải số 21 (THIÊN – CƠ) - Mệnh: Thiên Cơ + Thiên Lương tọa thủ ở Thìn/Tuất, gặp Kình Dương hoặc Đà La hoặc Hỏa Tinh hoặc Linh Tinh + Tướng Quân");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
-        keyArr.push("Phú Giải số 3 (CỰ MÔN) - Mệnh: Cự Môn + Thái Dương tọa thủ ở Dần/Thân");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Thân"))) {
-        keyArr.push("Phú Giải số 4 (CỰ MÔN) - Mệnh: Cự Môn + Thái Dương tọa thủ ở Thân");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Dần"))) {
-        keyArr.push("Phú Giải số 6 (CỰ MÔN) - Mệnh: Cự Môn + Thái Dương tọa thủ ở Dần");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Dậu"))) {
-        keyArr.push("Phú Giải số 15 (CỰ MÔN) - Mệnh: Cự Môn + Thiên Cơ tọa thủ ở Dậu");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Đại Hao", true) && isSaoHoiChieuRong("Mệnh", "Tiểu Hao", true)) {
-        keyArr.push("Phú Giải số 18 (CỰ MÔN)a - Mệnh: Cự Môn + Thiên Cơ tọa thủ ở Mão/Dậu, gặp Đại Hao + Tiểu Hao");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
-        keyArr.push("Phú Giải số 18 (CỰ MÔN)b - Mệnh: Cự Môn + Thiên Cơ tọa thủ ở Mão/Dậu, gặp Hóa Lộc");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu"))) {
-        keyArr.push("Phú Giải số 21 (CỰ MÔN) - Mệnh: Cự Môn + Thiên Cơ + Lộc Tồn tọa thủ ở Mão/Dậu");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Đại Hao", true) && isSaoHoiChieuRong("Mệnh", "Tiểu Hao", true)) {
-        keyArr.push("Phú Giải số 22 (CỰ MÔN) - Mệnh: Cự Môn + Thiên Cơ tọa thủ ở Mão/Dậu, gặp Đại Hao + Tiểu Hao");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Thiên Đồng", false) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false)) {
-        keyArr.push("Phú Giải số 28 (CỰ MÔN) - Mệnh: Cự Môn tọa thủ ở Thìn/Tuất, gặp Thiên Đồng + Hóa Khoa");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
-        keyArr.push("Phú Giải số 30 (CỰ MÔN)a - Mệnh: Cự Môn + Lộc Tồn tọa thủ ở Tỵ/Hợi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
-        keyArr.push("Phú Giải số 30 (CỰ MÔN)b - Mệnh: Cự Môn + Lộc Tồn tọa thủ ở Tỵ/Hợi, gặp Hóa Quyền + Hóa Lộc");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoHoiChieuRong("Mệnh", "Đà La", false) && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
-        keyArr.push("Phú Giải số 33 (CỰ MÔN) - Mệnh: Cự Môn tọa thủ, gặp Đà La + Hóa Kỵ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
-        keyArr.push("Phú Giải số 36 (CỰ MÔN) - Mệnh: Cự Môn tọa thủ, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn")) {
-        keyArr.push("Phú Giải số 38 (CỰ MÔN) - Mệnh: Cự Môn + Lộc Tồn tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng")) {
-        keyArr.push("Phú Giải số 2 (THIÊN ĐỒNG) - Mệnh: Thiên Đồng tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Kình Dương") && (isCungTaiChi("Mệnh", "Ngọ"))) {
-        keyArr.push("Phú Giải số 6 (THIÊN ĐỒNG) - Mệnh: Thiên Đồng + Kình Dương tọa thủ ở Ngọ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương")) {
-        keyArr.push("Phú Giải số 1 (THIÊN LƯƠNG) - Mệnh: Thiên Lương tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Thái Âm", false) && isSaoHoiChieuRong("Mệnh", "Linh Tinh", false)) {
-        keyArr.push("Phú Giải số 7 (THIÊN LƯƠNG) - Mệnh: Thiên Lương tọa thủ ở Tý/Sửu/Dần/Mão/Thìn/Tỵ/Ngọ, gặp Thái Âm + Linh Tinh");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Thiên Mã", false)) {
-        keyArr.push("Phú Giải số 8 (THIÊN LƯƠNG) - Mệnh: Thiên Lương tọa thủ ở Tỵ/Hợi, gặp Thiên Mã");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Mão"))) {
-        keyArr.push("Phú Giải số 11 (THIÊN LƯƠNG) - Mệnh: Thiên Lương + Thái Dương tọa thủ ở Mão");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && (isCungTaiChi("Mệnh", "Hợi"))) {
-        keyArr.push("Phú Giải số 12 (THIÊN LƯƠNG) - Mệnh: Thiên Lương + Thiên Khôi tọa thủ ở Hợi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && isSaoHoiChieuRong("Mệnh", "Thiên Cơ", false) && isSaoHoiChieuRong("Mệnh", "Thái Âm", false)) {
-        keyArr.push("Phú Giải số 16 (THIÊN LƯƠNG) - Mệnh: Thiên Lương + Thiên Đồng tọa thủ ở Dần/Thân, gặp Thiên Cơ + Thái Âm");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Thái Dương", false) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && (isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) || isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false))) {
-        keyArr.push("Phú Giải số 18 (THIÊN LƯƠNG)a - Mệnh: Thiên Lương tọa thủ ở Tỵ, gặp Thái Dương + Văn Xương + Hóa Lộc hoặc Lộc Tồn");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Thiên Lương", false) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && (isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) || isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false))) {
-        keyArr.push("Phú Giải số 18 (THIÊN LƯƠNG)b - Mệnh: Thái Dương tọa thủ ở Ngọ, gặp Thiên Lương + Văn Xương + Hóa Lộc hoặc Lộc Tồn");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Thìn")) && isSaoHoiChieuRong("Mệnh", "Thái Dương", false)) {
-        keyArr.push("Phú Giải số 3 (THÁI DƯƠNG)a - Mệnh: Thái Âm tọa thủ ở Thìn, gặp Thái Dương");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Thái Âm", false)) {
-        keyArr.push("Phú Giải số 3 (THÁI DƯƠNG)b - Mệnh: Thái Dương tọa thủ ở Tuất, gặp Thái Âm");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Mùi"))) {
-        keyArr.push("Phú Giải số 4 (THÁI DƯƠNG) - Mệnh: Thái Dương tọa thủ ở Mùi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Dần"))) {
-        keyArr.push("Phú Giải số 5 (THÁI DƯƠNG) - Mệnh: Thái Âm tọa thủ ở Dần");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tỵ"))) {
-        keyArr.push("Phú Giải số 8 (THÁI DƯƠNG) - Mệnh: Thái Dương tọa thủ ở Mão/Thìn/Tỵ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Thìn")) && isSaoHoiChieuRong("Mệnh", "Thái Âm", false)) {
-        keyArr.push("Phú Giải số 12 (THÁI DƯƠNG)a - Mệnh: Thái Dương tọa thủ ở Thìn, gặp Thái Âm");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Thái Dương", false)) {
-        keyArr.push("Phú Giải số 12 (THÁI DƯƠNG)b - Mệnh: Thái Âm tọa thủ ở Tuất, gặp Thái Dương");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Sửu"))) {
-        keyArr.push("Phú Giải số 20 (THÁI DƯƠNG) - Mệnh: Thái Dương + Thái Âm tọa thủ ở Sửu");
-    }
-    if (laCungVoChinhDieu("Mệnh") && (isCungTaiChi("Mệnh", "Sửu")) && isSaoHoiChieuRong("Mệnh", "Thái Dương", false) && isSaoHoiChieuRong("Mệnh", "Thái Âm", false)) {
-        keyArr.push("Phú Giải số 21 (THÁI DƯƠNG) - Mệnh: vô chính diệu ở Sửu, gặp Thái Dương + Thái Âm");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Sửu")) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
-        keyArr.push("Phú Giải số 23 (THÁI DƯƠNG) - Mệnh: Thái Dương + Thái Âm tọa thủ ở Sửu, gặp Hóa Khoa + Hóa Lộc");
-    }
-    if ((isSaoToaThuTaiCung("Mệnh", "Thái Dương") || isSaoToaThuTaiCung("Mệnh", "Thái Âm")) && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
-        keyArr.push("Phú Giải số 28 (THÁI DƯƠNG) - Mệnh: Thái Dương hoặc Thái Âm tọa thủ ở Thìn/Tuất/Sửu/Mùi, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Dậu") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Tý"))) {
-        keyArr.push("Phú Giải số 35 (THÁI DƯƠNG) - Mệnh: Thái Dương tọa thủ ở Thân/Dậu/Tuất/Hợi/Tý");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Tý"))) {
-        keyArr.push("Phú Giải số 38 (THÁI DƯƠNG)a - Mệnh: Thái Âm tọa thủ ở Tý");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Ngọ"))) {
-        keyArr.push("Phú Giải số 38 (THÁI DƯƠNG)b - Mệnh: Thái Dương tọa thủ ở Ngọ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
-        keyArr.push("Phú Giải số 40 (THÁI DƯƠNG) - Mệnh: Thái Dương tọa thủ ở Hợi, gặp Hóa Khoa + Hóa Quyền + Hóa Lộc");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Hợi")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
-        keyArr.push("Phú Giải số 41 (THÁI DƯƠNG) - Mệnh: Thái Dương tọa thủ ở Hợi, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
-        keyArr.push("Phú Giải số 51 (THÁI DƯƠNG) - Mệnh: Thái Dương tọa thủ, gặp Hóa Kỵ");
-    }
-    if ((isSaoToaThuTaiCung("Mệnh", "Thái Dương") || isSaoToaThuTaiCung("Mệnh", "Thái Âm")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false))) {
-        keyArr.push("Phú Giải số 53 (THÁI DƯƠNG) - Mệnh: Thái Dương hoặc Thái Âm tọa thủ, gặp Kình Dương hoặc Đà La");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Cự Môn", false)) {
-        keyArr.push("Phú Giải số 59 (THÁI DƯƠNG) - Mệnh: Thái Dương tọa thủ ở Tỵ, gặp Cự Môn");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Cự Môn", false)) {
-        keyArr.push("Phú Giải số 60 (THÁI DƯƠNG) - Mệnh: Thái Dương tọa thủ ở Hợi, gặp Cự Môn");
-    }
-    if ((isSaoToaThuTaiCung("Mệnh", "Thái Dương") || isSaoToaThuTaiCung("Mệnh", "Thái Âm")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
-        keyArr.push("Phú Giải số 66 (THÁI DƯƠNG) - Mệnh: Thái Dương hoặc Thái Âm tọa thủ, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
-    }
-    if (lasoData.cungCu !== "Mệnh" && (isSaoToaThuTaiCung(lasoData.cungCu, "Thái Dương") || isSaoToaThuTaiCung(lasoData.cungCu, "Thái Âm")) && (isSaoHoiChieuRong(lasoData.cungCu, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.cungCu, "Đà La", false) || isSaoHoiChieuRong(lasoData.cungCu, "Địa Không", false) || isSaoHoiChieuRong(lasoData.cungCu, "Địa Kiếp", false) || isSaoHoiChieuRong(lasoData.cungCu, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.cungCu, "Linh Tinh", false))) {
-        keyArr.push("Phú Giải số 66 (THÁI DƯƠNG) - Thân cư: Thái Dương hoặc Thái Âm tọa thủ, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
-    }
-    if ((isSaoToaThuTaiCung("Mệnh", "Thái Dương") || isSaoToaThuTaiCung("Mệnh", "Thái Âm")) && isSaoHoiChieuRong("Mệnh", "Thiên Hình", false) && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false)) {
-        keyArr.push("Phú Giải số 71 (THÁI DƯƠNG) - Mệnh: Thái Dương hoặc Thái Âm tọa thủ, gặp Thiên Hình + Hỏa Tinh");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Tý"))) {
-        keyArr.push("Phú Giải số 10 (THÁI ÂM) - Mệnh: Thái Âm tọa thủ ở Tý");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hóa Khoa") && isSaoToaThuTaiCung("Mệnh", "Hóa Quyền") && (isCungTaiChi("Mệnh", "Ngọ"))) {
-        keyArr.push("Phú Giải số 1 (HÓA KỴ) - Mệnh: Hóa Khoa + Hóa Quyền tọa thủ ở Ngọ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hóa Khoa") && isSaoToaThuTaiCung("Mệnh", "Hóa Quyền")) {
-        keyArr.push("Phú Giải số 4 (HÓA KỴ) - Mệnh: Hóa Khoa + Hóa Quyền tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hóa Khoa") && (isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) || isSaoHoiChieuRong("Mệnh", "Thiên Việt", false) || isSaoHoiChieuRong("Mệnh", "Văn Xương", false) || isSaoHoiChieuRong("Mệnh", "Văn Khúc", false))) {
-        keyArr.push("Phú Giải số 7 (HÓA KỴ) - Mệnh: Hóa Khoa tọa thủ, gặp Thiên Khôi hoặc Thiên Việt hoặc Văn Xương hoặc Văn Khúc");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hóa Khoa") && isSaoToaThuTaiCung("Mệnh", "Hóa Quyền") && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
-        keyArr.push("Phú Giải số 9 (HÓA KỴ) - Mệnh: Hóa Khoa + Hóa Quyền tọa thủ, gặp Thiên Khôi + Thiên Việt");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hóa Quyền") && isSaoToaThuTaiCung("Mệnh", "Thiên Khốc")) {
-        keyArr.push("Phú Giải số 20 (HÓA KỴ)a - Mệnh: Hóa Quyền + Thiên Khốc tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hóa Quyền") && isSaoToaThuTaiCung("Mệnh", "Thiên Khốc") && (isCungTaiChi("Mệnh", "Tỵ"))) {
-        keyArr.push("Phú Giải số 20 (HÓA KỴ)b - Mệnh: Hóa Quyền + Thiên Khốc tọa thủ ở Tỵ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hóa Quyền") && isSaoToaThuTaiCung("Mệnh", "Hóa Lộc")) {
-        keyArr.push("Phú Giải số 21 (HÓA KỴ) - Mệnh: Hóa Quyền + Hóa Lộc tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn")) {
-        keyArr.push("Phú Giải số 27 (HÓA KỴ) - Mệnh: Hóa Lộc + Lộc Tồn tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
-        keyArr.push("Phú Giải số 28 (HÓA KỴ) - Mệnh: Hóa Lộc tọa thủ ở Thìn/Tuất/Sửu/Mùi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false)) {
-        keyArr.push("Phú Giải số 30 (HÓA KỴ) - Mệnh: Hóa Lộc tọa thủ, không gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Dậu")) && (isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false))) {
-        keyArr.push("Phú Giải số 34 (HÓA KỴ) - Mệnh: Hóa Lộc tọa thủ ở Tý/Ngọ/Thân/Dậu, gặp Địa Không hoặc Địa Kiếp");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
-        keyArr.push("Phú Giải số 35 (HÓA KỴ)a - Mệnh: Hóa Lộc tọa thủ ở Thìn/Tuất/Sửu/Mùi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && isSaoHoiChieuRong("Mệnh", "Tham Lang", false) && isSaoHoiChieuRong("Mệnh", "Vũ Khúc", false)) {
-        keyArr.push("Phú Giải số 35 (HÓA KỴ)b - Mệnh: Hóa Lộc tọa thủ ở Thìn/Tuất/Sửu/Mùi, gặp Tham Lang + Vũ Khúc");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Mão"))) {
-        keyArr.push("Phú Giải số 36 (HÓA KỴ) - Mệnh: Hóa Lộc tọa thủ ở Dần/Mão");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (isSaoHoiChieuRong("Mệnh", "Văn Xương", false) || isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) || isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) || isSaoHoiChieuRong("Mệnh", "Thiên Việt", false))) {
-        keyArr.push("Phú Giải số 37 (HÓA KỴ) - Mệnh: Hóa Kỵ tọa thủ, gặp Văn Xương hoặc Văn Khúc hoặc Thiên Khôi hoặc Thiên Việt");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ")) {
-        keyArr.push("Phú Giải số 44 (HÓA KỴ) - Mệnh: Hóa Kỵ tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && isSaoHoiChieuRong("Mệnh", "Đà La", false) && isSaoHoiChieuRong("Mệnh", "Bạch Hổ", false)) {
-        keyArr.push("Phú Giải số 49 (HÓA KỴ) - Mệnh: Hóa Kỵ tọa thủ ở Thìn/Tuất/Sửu/Mùi, gặp Đà La + Bạch Hổ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Tý")) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false)) {
-        keyArr.push("Phú Giải số 50 (HÓA KỴ) - Mệnh: Hóa Kỵ tọa thủ ở Hợi/Tý, gặp Hóa Khoa");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (isCungTaiChi("Mệnh", "Tý")) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && isSaoHoiChieuRong("Mệnh", "Thiên Lương", false)) {
-        keyArr.push("Phú Giải số 51 (HÓA KỴ) - Mệnh: Hóa Kỵ tọa thủ ở Tý, gặp Hóa Khoa + Thiên Lương");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
-        keyArr.push("Phú Giải số 6 (TRÀNG SINH) - Mệnh: Thiên Cơ + Thiên Lương tọa thủ ở Thìn/Tuất, gặp Lộc Tồn + Hóa Lộc");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && (isSaoHoiChieuRong("Mệnh", "Cự Môn", false) || isSaoHoiChieuRong("Mệnh", "Quả Tú", false) || isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false))) {
-        keyArr.push("Phú Giải số 9 (TRÀNG SINH) - Mệnh: Lộc Tồn tọa thủ, gặp Cự Môn hoặc Quả Tú hoặc Hóa Kỵ hoặc Địa Kiếp");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && isSaoToaThuTaiCung("Thiên Di", "Hóa Lộc")) {
-        keyArr.push("Phú Giải số 12 (TRÀNG SINH)a - Mệnh: Lộc Tồn tọa thủ (kèm điều kiện cung đối)");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && isSaoToaThuTaiCung("Thiên Di", "Lộc Tồn")) {
-        keyArr.push("Phú Giải số 12 (TRÀNG SINH)b - Mệnh: Hóa Lộc tọa thủ (kèm điều kiện cung đối)");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && isSaoToaThuTaiCung("Mệnh", "Hóa Lộc")) {
-        keyArr.push("Phú Giải số 17 (TRÀNG SINH) - Mệnh: Lộc Tồn + Hóa Lộc tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && isSaoToaThuTaiCung("Mệnh", "Thiên Mã") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
-        keyArr.push("Phú Giải số 18 (TRÀNG SINH) - Mệnh: Lộc Tồn + Thiên Mã tọa thủ ở Dần/Thân/Tỵ/Hợi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && (isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Không") || isSaoToaThuTaiCung(lasoData.cungCu, "Địa Không"))) {
-        keyArr.push("Phú Giải số 21 (TRÀNG SINH) - Mệnh: Lộc Tồn tọa thủ (kèm điều kiện về Thân cư)");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && isSaoToaThuTaiCung("Mệnh", "Thiên Mã")) {
-        keyArr.push("Phú Giải số 24 (TRÀNG SINH) - Mệnh: Lộc Tồn + Thiên Mã tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Tuế")) {
-        keyArr.push("Phú Giải số 25 (TRÀNG SINH) - Mệnh: Thái Tuế tọa thủ");
-    }
-    if (lasoData.cungCu !== "Mệnh" && isSaoToaThuTaiCung(lasoData.cungCu, "Thái Tuế")) {
-        keyArr.push("Phú Giải số 25 (TRÀNG SINH) - Thân cư: Thái Tuế tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Tuế") && (isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Thiên Hình", false)) {
-        keyArr.push("Phú Giải số 30 (TRÀNG SINH) - Mệnh: Thái Tuế tọa thủ ở Dậu, gặp Thiên Hình");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Kình Dương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Thất Sát", false) && isSaoHoiChieuRong("Mệnh", "Thiên Hình", false)) {
-        keyArr.push("Phú Giải số 5 (ĐÀ LA) - Mệnh: Kình Dương tọa thủ ở Ngọ, gặp Thất Sát + Thiên Hình");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && isSaoToaThuTaiCung("Mệnh", "Kình Dương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Phượng Các", false) && isSaoHoiChieuRong("Mệnh", "Giải Thần", false)) {
-        keyArr.push("Phú Giải số 6 (ĐÀ LA) - Mệnh: Thiên Đồng + Thái Âm + Kình Dương tọa thủ ở Ngọ, gặp Phượng Các + Giải Thần");
-    }
-    if (isSaoToaThuTaiCung(lasoData.cungCu, "Thái Tuế") && isSaoHoiChieuRong(lasoData.cungCu, "Đà La", false) && isSaoHoiChieuRong(lasoData.cungCu, "Hóa Kỵ", false)) {
-        keyArr.push("Phú Giải số 25 (ĐÀ LA) - Thân cư: Thái Tuế tọa thủ, gặp Đà La + Hóa Kỵ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Kình Dương") && (isSaoHoiChieuRong("Mệnh", "Thái Dương", false) || isSaoHoiChieuRong("Mệnh", "Thái Âm", false))) {
-        keyArr.push("Phú Giải số 26 (ĐÀ LA) - Mệnh: Kình Dương tọa thủ, gặp Thái Dương hoặc Thái Âm");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Kình Dương") && isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
-        keyArr.push("Phú Giải số 42 (ĐÀ LA)a - Mệnh: Kình Dương + Hỏa Tinh tọa thủ ở Thìn/Tuất/Sửu/Mùi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Kình Dương") && isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
-        keyArr.push("Phú Giải số 42 (ĐÀ LA)b - Mệnh: Kình Dương + Hỏa Tinh + Tham Lang + Vũ Khúc tọa thủ ở Thìn/Tuất/Sửu/Mùi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Địa Kiếp") && isSaoToaThuTaiCung("Mệnh", "Địa Không") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
-        keyArr.push("Phú Giải số 3 (ĐỊA KIẾP) - Mệnh: Địa Kiếp + Địa Không tọa thủ ở Tỵ/Hợi, gặp Hóa Quyền + Hóa Lộc");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Địa Kiếp") && isSaoToaThuTaiCung("Mệnh", "Địa Không") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
-        keyArr.push("Phú Giải số 4 (ĐỊA KIẾP) - Mệnh: Địa Kiếp + Địa Không tọa thủ ở Tỵ/Hợi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Địa Kiếp") && isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false)) {
-        keyArr.push("Phú Giải số 6 (ĐỊA KIẾP) - Mệnh: Địa Kiếp + Thiên Cơ tọa thủ, gặp Hỏa Tinh");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Địa Kiếp") && isSaoToaThuTaiCung("Mệnh", "Tham Lang")) {
-        keyArr.push("Phú Giải số 17 (ĐỊA KIẾP) - Mệnh: Địa Kiếp + Tham Lang tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Địa Không") && isSaoToaThuTaiCung(lasoData.cungCu, "Địa Kiếp")) {
-        keyArr.push("Phú Giải số 19 (ĐỊA KIẾP) - Mệnh: Địa Không tọa thủ (kèm điều kiện về Thân cư)");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Bạch Hổ")) {
-        keyArr.push("Phú Giải số 1 (TANG MÔN) - Mệnh: Bạch Hổ tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tang Môn") && (isCungTaiChi("Mệnh", "Thìn"))) {
-        keyArr.push("Phú Giải số 5 (TANG MÔN) - Mệnh: Tang Môn tọa thủ ở Thìn");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Đại Hao") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ")) {
-        keyArr.push("Phú Giải số 4 (TIỂU HAO) - Mệnh: Đại Hao + Hóa Kỵ tọa thủ");
-    }
-    if ((isSaoToaThuTaiCung("Mệnh", "Đại Hao") || isSaoToaThuTaiCung("Mệnh", "Tiểu Hao")) && (isSaoHoiChieuRong("Mệnh", "Cự Môn", false) || isSaoHoiChieuRong("Mệnh", "Vũ Khúc", false)) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false)) {
-        keyArr.push("Phú Giải số 5 (TIỂU HAO) - Mệnh: Đại Hao hoặc Tiểu Hao tọa thủ, gặp Cự Môn hoặc Vũ Khúc + Hóa Quyền");
-    }
-    if (((isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) || (isSaoToaThuTaiCung("Mệnh", "Thiên Việt") && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false)))) {
-        keyArr.push("Phú Giải số 1 (THIÊN VIỆT) - Mệnh: Thiên Khôi, Thiên Việt (tọa hoặc chiếu)");
-    }
-    if (lasoData.cungCu !== "Mệnh" && ((isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Khôi") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Việt", false)) || (isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Việt") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Khôi", false)))) {
-        keyArr.push("Phú Giải số 1 (THIÊN VIỆT) - Thân cư: Thiên Khôi, Thiên Việt (tọa hoặc chiếu)");
-    }
-    if (((isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) || (isSaoToaThuTaiCung("Mệnh", "Thiên Việt") && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false)))) {
-        keyArr.push("Phú Giải số 2 (THIÊN VIỆT) - Mệnh: Thiên Khôi, Thiên Việt (tọa hoặc chiếu)");
-    }
-    if (lasoData.cungCu !== "Mệnh" && ((isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Khôi") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Việt", false)) || (isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Việt") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Khôi", false)))) {
-        keyArr.push("Phú Giải số 2 (THIÊN VIỆT) - Thân cư: Thiên Khôi, Thiên Việt (tọa hoặc chiếu)");
-    }
-    if (((isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) || (isSaoToaThuTaiCung("Mệnh", "Thiên Việt") && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false)))) {
-        keyArr.push("Phú Giải số 5 (THIÊN VIỆT) - Mệnh: Thiên Khôi, Thiên Việt (tọa hoặc chiếu)");
-    }
-    if (lasoData.cungCu !== "Mệnh" && ((isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Khôi") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Việt", false)) || (isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Việt") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Khôi", false)))) {
-        keyArr.push("Phú Giải số 5 (THIÊN VIỆT) - Thân cư: Thiên Khôi, Thiên Việt (tọa hoặc chiếu)");
-    }
-    if (((isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) || (isSaoToaThuTaiCung("Mệnh", "Thiên Việt") && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false)))) {
-        keyArr.push("Phú Giải số 6 (THIÊN VIỆT) - Mệnh: Thiên Khôi, Thiên Việt (tọa hoặc chiếu)");
-    }
-    if (((isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) || (isSaoToaThuTaiCung("Mệnh", "Thiên Việt") && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false))) && isSaoHoiChieuRong("Mệnh", "Thiên Quan", false) && isSaoHoiChieuRong("Mệnh", "Thiên Phúc", false)) {
-        keyArr.push("Phú Giải số 10 (THIÊN VIỆT) - Mệnh: Thiên Khôi, Thiên Việt (tọa hoặc chiếu), gặp Thiên Quan + Thiên Phúc");
-    }
-    if (lasoData.cungCu !== "Mệnh" && ((isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Khôi") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Việt", false)) || (isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Việt") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Khôi", false))) && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Quan", false) && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Phúc", false)) {
-        keyArr.push("Phú Giải số 10 (THIÊN VIỆT) - Thân cư: Thiên Khôi, Thiên Việt (tọa hoặc chiếu), gặp Thiên Quan + Thiên Phúc");
-    }
-    if (((isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) || (isSaoToaThuTaiCung("Mệnh", "Thiên Việt") && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false))) && (isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) || isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false))) {
-        keyArr.push("Phú Giải số 12 (THIÊN VIỆT) - Mệnh: Thiên Khôi, Thiên Việt (tọa hoặc chiếu), gặp Hóa Quyền hoặc Hóa Lộc");
-    }
-    if (lasoData.cungCu !== "Mệnh" && ((isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Khôi") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Việt", false)) || (isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Việt") && isSaoHoiChieuRong(lasoData.cungCu, "Thiên Khôi", false))) && (isSaoHoiChieuRong(lasoData.cungCu, "Hóa Quyền", false) || isSaoHoiChieuRong(lasoData.cungCu, "Hóa Lộc", false))) {
-        keyArr.push("Phú Giải số 12 (THIÊN VIỆT) - Thân cư: Thiên Khôi, Thiên Việt (tọa hoặc chiếu), gặp Hóa Quyền hoặc Hóa Lộc");
-    }
-    if (((isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) || (isSaoToaThuTaiCung("Mệnh", "Thiên Việt") && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false))) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
-        keyArr.push("Phú Giải số 17 (THIÊN VIỆT) - Mệnh: Thiên Khôi, Thiên Việt (tọa hoặc chiếu), gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc")) {
-        keyArr.push("Phú Giải số 1 (VĂN XƯƠNG) - Mệnh: Văn Xương + Văn Khúc tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
-        keyArr.push("Phú Giải số 5 (VĂN XƯƠNG) - Mệnh: Văn Xương + Văn Khúc tọa thủ ở Sửu/Mùi");
-    }
-    if (lasoData.cungCu !== "Mệnh" && isSaoToaThuTaiCung(lasoData.cungCu, "Văn Xương") && isSaoToaThuTaiCung(lasoData.cungCu, "Văn Khúc") && (isCungTaiChi(lasoData.cungCu, "Sửu") || isCungTaiChi(lasoData.cungCu, "Mùi"))) {
-        keyArr.push("Phú Giải số 5 (VĂN XƯƠNG) - Thân cư: Văn Xương + Văn Khúc tọa thủ ở Sửu/Mùi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc")) {
-        keyArr.push("Phú Giải số 6 (VĂN XƯƠNG) - Mệnh: Văn Xương + Văn Khúc tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
-        keyArr.push("Phú Giải số 7 (VĂN XƯƠNG)a - Mệnh: Văn Xương + Văn Khúc tọa thủ ở Thìn/Tuất/Sửu/Mùi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
-        keyArr.push("Phú Giải số 7 (VĂN XƯƠNG)b - Mệnh: Văn Xương + Văn Khúc tọa thủ ở Thìn/Tuất/Sửu/Mùi, gặp Hóa Khoa + Hóa Quyền + Hóa Lộc");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
-        keyArr.push("Phú Giải số 9 (VĂN XƯƠNG) - Mệnh: Văn Xương + Văn Khúc tọa thủ ở Sửu/Mùi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
-        keyArr.push("Phú Giải số 12 (VĂN XƯƠNG) - Mệnh: Văn Xương + Văn Khúc tọa thủ ở Sửu/Mùi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && isSaoHoiChieuRong("Mệnh", "Thái Tuế", false) && isSaoHoiChieuRong("Mệnh", "Kình Dương", false)) {
-        keyArr.push("Phú Giải số 17 (VĂN XƯƠNG) - Mệnh: Văn Xương + Văn Khúc tọa thủ, gặp Thái Tuế + Kình Dương");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Quả Tú")) {
-        keyArr.push("Phú Giải số 19 (VĂN XƯƠNG) - Mệnh: Văn Xương + Quả Tú tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ"))) {
-        keyArr.push("Phú Giải số 21 (VĂN XƯƠNG) - Mệnh: Thái Dương + Văn Xương tọa thủ ở Ngọ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc")) {
-        keyArr.push("Phú Giải số 27 (VĂN XƯƠNG) - Mệnh: Văn Xương + Văn Khúc tọa thủ");
-    }
-    if (lasoData.cungCu !== "Mệnh" && isSaoToaThuTaiCung(lasoData.cungCu, "Văn Xương") && isSaoToaThuTaiCung(lasoData.cungCu, "Văn Khúc")) {
-        keyArr.push("Phú Giải số 27 (VĂN XƯƠNG) - Thân cư: Văn Xương + Văn Khúc tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Tả Phù")) {
-        keyArr.push("Phú Giải số 35 (VĂN XƯƠNG) - Mệnh: Văn Xương + Tả Phù tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Thái Dương", false) && isSaoHoiChieuRong("Mệnh", "Thái Âm", false) && isSaoHoiChieuRong("Mệnh", "Thanh Long", false) && isSaoHoiChieuRong("Mệnh", "Long Đức", false)) {
-        keyArr.push("Phú Giải số 36 (VĂN XƯƠNG) - Mệnh: Văn Khúc + Văn Xương tọa thủ, gặp Thái Dương + Thái Âm + Thanh Long + Long Đức");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc")) {
-        keyArr.push("Phú Giải số 37 (VĂN XƯƠNG)a - Mệnh: Thiên Lương + Văn Khúc tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && (isCungTaiChi("Mệnh", "Ngọ"))) {
-        keyArr.push("Phú Giải số 37 (VĂN XƯƠNG)b - Mệnh: Thiên Lương + Văn Khúc tọa thủ ở Ngọ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Thiên Hình", false) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) {
-        keyArr.push("Phú Giải số 55 (VĂN XƯƠNG) - Mệnh: Liêm Trinh tọa thủ ở Tỵ/Hợi, gặp Thiên Hình + Văn Xương + Văn Khúc");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tả Phù") && isSaoToaThuTaiCung("Mệnh", "Hữu Bật")) {
-        keyArr.push("Phú Giải số 1 (HỮU BẬT) - Mệnh: Tả Phù + Hữu Bật tọa thủ");
-    }
-    if (lasoData.cungCu !== "Mệnh" && isSaoToaThuTaiCung(lasoData.cungCu, "Tả Phù") && isSaoToaThuTaiCung(lasoData.cungCu, "Hữu Bật")) {
-        keyArr.push("Phú Giải số 1 (HỮU BẬT) - Thân cư: Tả Phù + Hữu Bật tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tả Phù") && isSaoToaThuTaiCung("Mệnh", "Hữu Bật") && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
-        keyArr.push("Phú Giải số 3 (HỮU BẬT) - Mệnh: Tả Phù + Hữu Bật tọa thủ, gặp Hóa Khoa + Hóa Quyền + Hóa Lộc");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hữu Bật") && isSaoHoiChieuRong("Mệnh", "Quả Tú", false)) {
-        keyArr.push("Phú Giải số 5 (HỮU BẬT) - Mệnh: Hữu Bật tọa thủ, gặp Quả Tú");
-    }
-    if (lasoData.cungCu !== "Mệnh" && isSaoToaThuTaiCung(lasoData.cungCu, "Hữu Bật") && isSaoHoiChieuRong(lasoData.cungCu, "Quả Tú", false)) {
-        keyArr.push("Phú Giải số 5 (HỮU BẬT) - Thân cư: Hữu Bật tọa thủ, gặp Quả Tú");
-    }
-    if ((isSaoToaThuTaiCung("Mệnh", "Tả Phù") || isSaoToaThuTaiCung("Mệnh", "Hữu Bật")) && isSaoHoiChieuRong("Mệnh", "Thiên Tướng", false)) {
-        keyArr.push("Phú Giải số 6 (HỮU BẬT) - Mệnh: Tả Phù hoặc Hữu Bật tọa thủ, gặp Thiên Tướng");
-    }
-    if ((isSaoToaThuTaiCung("Mệnh", "Tả Phù") || isSaoToaThuTaiCung("Mệnh", "Hữu Bật")) && isSaoToaThuTaiCung("Mệnh", "Thiên Phúc")) {
-        keyArr.push("Phú Giải số 9 (HỮU BẬT) - Mệnh: Tả Phù hoặc Hữu Bật + Thiên Phúc tọa thủ");
-    }
-    if (lasoData.cungCu !== "Mệnh" && (isSaoToaThuTaiCung(lasoData.cungCu, "Tả Phù") || isSaoToaThuTaiCung(lasoData.cungCu, "Hữu Bật")) && isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Phúc")) {
-        keyArr.push("Phú Giải số 9 (HỮU BẬT) - Thân cư: Tả Phù hoặc Hữu Bật + Thiên Phúc tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Mệnh", "Hữu Bật")) {
-        keyArr.push("Phú Giải số 16 (HỮU BẬT)a - Mệnh: Thiên Tướng + Hữu Bật tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Mệnh", "Hữu Bật") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
-        keyArr.push("Phú Giải số 16 (HỮU BẬT)b - Mệnh: Thiên Tướng + Hữu Bật tọa thủ ở Tỵ/Hợi");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Mệnh", "Hữu Bật") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu"))) {
-        keyArr.push("Phú Giải số 16 (HỮU BẬT)c - Mệnh: Thiên Tướng + Hữu Bật tọa thủ ở Mão/Dậu");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tả Phù") && isSaoToaThuTaiCung("Mệnh", "Hữu Bật") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (isSaoHoiChieuRong("Mệnh", "Tử Vi", false) || isSaoHoiChieuRong("Mệnh", "Thiên Phủ", false) || isSaoHoiChieuRong("Mệnh", "Thiên Cơ", false) || isSaoHoiChieuRong("Mệnh", "Thái Âm", false) || isSaoHoiChieuRong("Mệnh", "Thiên Đồng", false) || isSaoHoiChieuRong("Mệnh", "Thiên Lương", false) || isSaoHoiChieuRong("Mệnh", "Thất Sát", false) || isSaoHoiChieuRong("Mệnh", "Phá Quân", false) || isSaoHoiChieuRong("Mệnh", "Liêm Trinh", false) || isSaoHoiChieuRong("Mệnh", "Tham Lang", false))) {
-        keyArr.push("Phú Giải số 17 (HỮU BẬT) - Mệnh: Tả Phù + Hữu Bật tọa thủ ở Thìn/Tuất/Sửu/Mùi, gặp Tử Vi hoặc Thiên Phủ hoặc Thiên Cơ hoặc Thái Âm hoặc Thiên Đồng hoặc Thiên Lương hoặc Thất Sát hoặc Phá Quân hoặc Liêm Trinh hoặc Tham Lang");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tả Phù") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất"))) {
-        keyArr.push("Phú Giải số 20 (HỮU BẬT) - Mệnh: Tả Phù + Thiên Phủ tọa thủ ở Thìn/Tuất");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tả Phù")) {
-        keyArr.push("Phú Giải số 22 (HỮU BẬT) - Mệnh: Tả Phù tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tả Phù") && isSaoToaThuTaiCung("Mệnh", "Hữu Bật")) {
-        keyArr.push("Phú Giải số 30 (HỮU BẬT) - Mệnh: Tả Phù + Hữu Bật tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Đào Hoa") && isSaoToaThuTaiCung("Mệnh", "Hồng Loan") && isSaoHoiChieuRong("Mệnh", "Thiên Cơ", false)) {
-        keyArr.push("Phú Giải số 4 (HỒNG LOAN) - Mệnh: Đào Hoa + Hồng Loan tọa thủ, gặp Thiên Cơ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Đào Hoa") && isSaoToaThuTaiCung("Mệnh", "Địa Kiếp")) {
-        keyArr.push("Phú Giải số 5 (HỒNG LOAN) - Mệnh: Đào Hoa + Địa Kiếp tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoHoiChieuRong("Mệnh", "Hồng Loan", false) && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false)) {
-        keyArr.push("Phú Giải số 14 (HỒNG LOAN) - Mệnh: Liêm Trinh tọa thủ, gặp Hồng Loan + Thiên Khôi + Văn Xương");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tam Thai") && isSaoToaThuTaiCung("Mệnh", "Bát Tọa") && isSaoToaThuTaiCung("Mệnh", "Phong Cáo")) {
-        keyArr.push("Phú Giải số 2 (BÁT TỌA) - Mệnh: Tam Thai + Bát Tọa + Phong Cáo tọa thủ");
-    }
-    if (lasoData.cungCu !== "Mệnh" && isSaoToaThuTaiCung(lasoData.cungCu, "Tam Thai") && isSaoToaThuTaiCung(lasoData.cungCu, "Bát Tọa") && isSaoToaThuTaiCung(lasoData.cungCu, "Phong Cáo")) {
-        keyArr.push("Phú Giải số 2 (BÁT TỌA) - Thân cư: Tam Thai + Bát Tọa + Phong Cáo tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Mã")) {
-        keyArr.push("Phú Giải số 1 (THIÊN MÃ) - Mệnh: Thiên Mã tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Mã") && isSaoToaThuTaiCung("Mệnh", "Hóa Lộc")) {
-        keyArr.push("Phú Giải số 7 (THIÊN MÃ) - Mệnh: Thiên Mã + Hóa Lộc tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Mã") && isSaoHoiChieuRong("Mệnh", "Thiên Hình", false) && isSaoHoiChieuRong("Mệnh", "Thiên Khốc", false)) {
-        keyArr.push("Phú Giải số 10 (THIÊN MÃ) - Mệnh: Thiên Mã tọa thủ, gặp Thiên Hình + Thiên Khốc");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Mã") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Thiên Lương", false) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false)) {
-        keyArr.push("Phú Giải số 11 (THIÊN MÃ) - Mệnh: Thiên Mã tọa thủ ở Tỵ, gặp Thiên Lương + Hóa Khoa");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Hình") && isSaoToaThuTaiCung("Mệnh", "Thất Sát")) {
-        keyArr.push("Phú Giải số 1 (THIÊN HÌNH) - Mệnh: Thiên Hình + Thất Sát tọa thủ");
-    }
-    if (lasoData.cungCu !== "Mệnh" && isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Hình") && isSaoToaThuTaiCung(lasoData.cungCu, "Thất Sát")) {
-        keyArr.push("Phú Giải số 1 (THIÊN HÌNH) - Thân cư: Thiên Hình + Thất Sát tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && isSaoHoiChieuRong("Mệnh", "Thiên Hình", false)) {
-        keyArr.push("Phú Giải số 10 (THIÊN HÌNH) - Mệnh: Thất Sát tọa thủ ở Dần/Thân, gặp Thiên Hình");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thanh Long") && (isCungTaiChi("Mệnh", "Tý"))) {
-        keyArr.push("Phú Giải số 4 (THIÊN QUÝ) - Mệnh: Thanh Long tọa thủ ở Tý");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Riêu") && isSaoHoiChieuRong("Mệnh", "Thiên Hỷ", false)) {
-        keyArr.push("Phú Giải số 14 (THIÊN Ý) - Mệnh: Thiên Riêu tọa thủ, gặp Thiên Hỷ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Quan Phù") && (isCungTaiChi("Mệnh", "Tuất"))) {
-        keyArr.push("Phú Giải số 13 (PHỤ LỤC) - Mệnh: Quan Phù tọa thủ ở Tuất");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Quan Phù")) {
-        keyArr.push("Phú Giải số 16 (PHỤ LỤC) - Mệnh: Quan Phù tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoHoiChieuRong("Mệnh", "Thiên Quan", false) && isSaoHoiChieuRong("Mệnh", "Tấu Thư", false)) {
-        keyArr.push("Phú Giải số 21 (PHỤ LỤC) - Mệnh: Thiên Tướng tọa thủ, gặp Thiên Quan + Tấu Thư");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && (isCungTaiChi("Mệnh", "Tý"))) {
-        keyArr.push("Phú Giải số 11 (THIÊN VIỆT) - Mệnh: Thiên Khôi tọa thủ ở Tý");
-    }
-    if ((isSaoToaThuTaiCung("Mệnh", "Tử Vi") || isSaoToaThuTaiCung("Mệnh", "Phá Quân")) && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (phu17DemCatTinh("Mệnh") > 2)) {
-        keyArr.push("Phú Giải số 54 (TỬ VI) - Mệnh: Tử Vi hoặc Phá Quân tọa thủ ở Thìn/Tuất/Sửu/Mùi, gặp nhiều cát tinh (từ 3 sao)");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (phu17DemCatTinh("Mệnh") > 2)) {
-        keyArr.push("Phú Giải số 9 (LIÊM TRINH)a - Mệnh: Liêm Trinh tọa thủ ở Mão/Dậu, gặp nhiều cát tinh (từ 3 sao)");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (phu17DemSatTinh("Mệnh") > 1)) {
-        keyArr.push("Phú Giải số 9 (LIÊM TRINH)b - Mệnh: Liêm Trinh tọa thủ ở Mão/Dậu, gặp nhiều sát tinh (từ 2 sao)");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (phu17DemCatTinh("Mệnh") > 2)) {
-        keyArr.push("Phú Giải số 20 (LIÊM TRINH)a - Mệnh: Liêm Trinh + Thất Sát tọa thủ ở Sửu/Mùi, gặp nhiều cát tinh (từ 3 sao)");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (phu17DemSatTinh("Mệnh") > 1)) {
-        keyArr.push("Phú Giải số 20 (LIÊM TRINH)b - Mệnh: Liêm Trinh + Thất Sát tọa thủ ở Sửu/Mùi, gặp nhiều sát tinh (từ 2 sao)");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (phu17DemCatTinh("Mệnh") > 0)) {
-        keyArr.push("Phú Giải số 3 (THIÊN ĐỒNG) - Mệnh: Thiên Đồng tọa thủ, gặp cát tinh");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Dần")) && (phu17DemCatTinh("Mệnh") > 0)) {
-        keyArr.push("Phú Giải số 47 (THÁI DƯƠNG) - Mệnh: Thái Dương tọa thủ ở Hợi/Dần, gặp cát tinh");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tả Phù") && isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (phu17DemCatTinh("Mệnh") > 2)) {
-        keyArr.push("Phú Giải số 18 (HỮU BẬT) - Mệnh: Tả Phù + Văn Xương tọa thủ, gặp nhiều cát tinh (từ 3 sao)");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thanh Long") && isTrangSinhTaiCung("Mệnh", "Mộc Dục")) {
-        keyArr.push("Phú Giải số 1 (THIÊN QUÝ) - Mệnh: Thanh Long + vòng Tràng Sinh: Mộc Dục tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Hoa Cái") && isTrangSinhTaiCung("Mệnh", "Mộc Dục")) {
-        keyArr.push("Phú Giải số 9 (PHỤ LỤC) - Mệnh: Hoa Cái + vòng Tràng Sinh: Mộc Dục tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && isTrangSinhTaiCung("Mệnh", "Mộ")) {
-        keyArr.push("Phú Giải số 45 (THAM LANG)b - Mệnh: Tham Lang + Vũ Khúc tọa thủ ở Sửu/Mùi, gặp vòng Tràng Sinh: Mộ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Đào Hoa") && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam")) {
-        keyArr.push("Phú Giải số 7 (HỒNG LOAN) - Mệnh: Đào Hoa tọa thủ (kèm điều kiện cung đối)");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
-        keyArr.push("Phú Giải số 27 (THAM LANG)a - Mệnh: Tham Lang + Liêm Trinh tọa thủ ở Tý/Hợi, gặp Văn Xương + Văn Khúc + Hóa Kỵ");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Hợi")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
-        keyArr.push("Phú Giải số 27 (THAM LANG)b - Mệnh: Tham Lang + Liêm Trinh tọa thủ ở Tý/Hợi, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Thân")) && (isSaoHoiChieuRong("Mệnh", "Liêm Trinh", false) || isSaoHoiChieuRong("Mệnh", "Bạch Hổ", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) || isSaoHoiChieuRong("Mệnh", "Thiên Riêu", false))) {
-        keyArr.push("Phú Giải số 30 (THIÊN – CƠ)a - Mệnh: Thiên Cơ + Thái Âm tọa thủ ở Thân, gặp Liêm Trinh hoặc Bạch Hổ hoặc Linh Tinh hoặc Thiên Riêu");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Thân")) && isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) && isSaoHoiChieuRong("Mệnh", "Thiên Hình", false)) {
-        keyArr.push("Phú Giải số 30 (THIÊN – CƠ)b - Mệnh: Thiên Cơ + Thái Âm tọa thủ ở Thân, gặp Địa Kiếp + Thiên Hình");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Thân")) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && isSaoHoiChieuRong("Mệnh", "Phượng Các", false)) {
-        keyArr.push("Phú Giải số 30 (THIÊN – CƠ)c - Mệnh: Thiên Cơ + Thái Âm tọa thủ ở Thân, gặp Hóa Khoa + Phượng Các");
-    }
-    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) || isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) || isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false) || isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) || isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false))) {
-        keyArr.push("Phú Giải số 19 (THIÊN ĐỒNG) - Mệnh: Thiên Đồng + Thiên Lương tọa thủ ở Dần/Thân, gặp Thiên Khôi hoặc Hóa Quyền hoặc Linh Tinh hoặc Hóa Kỵ hoặc Hóa Lộc hoặc Lộc Tồn");
+    if ((isCungCoTuan("Mệnh") && isCungCoTriet("Mệnh"))) {
+        keyArr.push("Tam Không 09 - Mệnh - Cung Mệnh có cả Tuần và Triệt cùng án ngữ (\"Tuần Triệt đương đầu\")");
     }
 }
-// PHU17-END
+// TK18-END
 // VHS17-BEGIN
 function phu17ChiNamXem(lasoData) {
     let r = "";
@@ -5349,9 +5475,9 @@ function LuanVanHanSach(keyArr, loai) {
         if (lasoData.tenCungDaiVan && (phu17CoSaoSang("Mệnh", ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"]) || phu17CoSaoSang(lasoData.cungCu, ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"])) && phu17CoSaoSang(lasoData.tenCungDaiVan, ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"])) { keyArr.push("Sách vận hạn 43 - Đại hạn - Mệnh/Thân có các bộ sao Tử Phủ Vũ Tướng, Cự Nhật, Cơ Nguyệt Đồng Lương sáng sủa, hạn cũng gặp các bộ sao này sáng sủa"); }
         if (lasoData.tenCungDaiVan && (phu17CoSaoSang("Mệnh", ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"]) || phu17CoSaoSang(lasoData.cungCu, ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"])) && phu17CoSaoSang(lasoData.tenCungDaiVan, ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"])) { keyArr.push("Sách vận hạn 44 - Đại hạn - Mệnh/Thân có Tử Phủ Vũ Tướng, Cự Nhật, Cơ Nguyệt Đồng Lương sáng sủa, hạn gặp Sát Phá Liêm Tham hoặc sát tinh sáng sủa"); }
         if (lasoData.tenCungDaiVan && (phu17CoSaoSang("Mệnh", ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"]) || phu17CoSaoSang(lasoData.cungCu, ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"])) && phu17CoSaoSang(lasoData.tenCungDaiVan, ["Vũ Khúc", "Thiên Tướng"])) { keyArr.push("Sách vận hạn 45 - Đại hạn - Mệnh/Thân có Tử Phủ Vũ Tướng, Cự Nhật, Cơ Nguyệt Đồng Lương sáng sủa, hạn gặp Vũ Khúc hoặc Thiên Tướng sáng sủa"); }
-        if (lasoData.tenCungDaiVan && (phu17CoSaoSang("Mệnh", ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"]) || phu17CoSaoSang(lasoData.cungCu, ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"])) && phu17CoSaoSang(lasoData.tenCungDaiVan, ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"])) { keyArr.push("Sách vận hạn 46 - Đại hạn - Mệnh/Thân có Sát Phá Liêm Tham hoặc sát tinh sáng sủa, hạn cũng gặp nhóm này sáng sủa"); }
-        if (lasoData.tenCungDaiVan && (phu17CoSaoSang("Mệnh", ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"]) || phu17CoSaoSang(lasoData.cungCu, ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"])) && phu17CoSaoSang(lasoData.tenCungDaiVan, ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"])) { keyArr.push("Sách vận hạn 47 - Đại hạn - Mệnh/Thân có Sát Phá Liêm Tham hoặc sát tinh sáng sủa, hạn gặp Tử Phủ Vũ Tướng, Cự Nhật, Cơ Nguyệt Đồng Lương sáng sủa"); }
-        if (lasoData.tenCungDaiVan && (phu17CoSaoSang("Mệnh", ["Vũ Khúc", "Thiên Tướng"]) || phu17CoSaoSang(lasoData.cungCu, ["Vũ Khúc", "Thiên Tướng"])) && phu17CoSaoSang(lasoData.tenCungDaiVan, ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương", "Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"])) { keyArr.push("Sách vận hạn 48 - Đại hạn - Mệnh/Thân có Vũ Khúc hoặc Thiên Tướng sáng sủa, hạn gặp các bộ sao chính sáng sủa"); }
+        if (lasoData.tenCungDaiVan && (phu17CoSaoSang("Mệnh", ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"]) || phu17CoSaoSang(lasoData.cungCu, ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"])) && phu17CoSaoSang(lasoData.tenCungDaiVan, ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"]) && !(((((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thất Sát - ĐV)")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Ngọ", "Tỵ", "Hợi", "Sửu", "Mùi"], ["Thìn", "Tuất", "Dậu", "Mão"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Phá Quân") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Phá Quân (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Phá Quân - ĐV)")) && kiemTraSaoSangToi(["Tý", "Ngọ", "Sửu", "Mùi", "Thìn", "Tuất"], ["Dần", "Thân", "Mão", "Dậu", "Tỵ", "Hợi"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Liêm Trinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Liêm Trinh (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Liêm Trinh - ĐV)")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Dần", "Thân"], ["Dậu", "Hợi", "Mão", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Tham Lang - ĐV)")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Dần", "Thân"], ["Tý", "Ngọ", "Mão", "Dậu", "Tỵ", "Hợi"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối")) || phu17DemSatTinh(lasoData.tenCungDaiVan) > 0))) { keyArr.push("Sách vận hạn 46 - Đại hạn - Mệnh/Thân có Sát Phá Liêm Tham hoặc sát tinh sáng sủa, hạn cũng gặp nhóm này sáng sủa"); }
+        if (lasoData.tenCungDaiVan && (phu17CoSaoSang("Mệnh", ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"]) || phu17CoSaoSang(lasoData.cungCu, ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"])) && phu17CoSaoSang(lasoData.tenCungDaiVan, ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"]) && !(((((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tử Vi") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tử Vi (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Tử Vi - ĐV)")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Tỵ", "Ngọ", "Dần", "Thân"], [], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Phủ") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Phủ (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Phủ - ĐV)")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Ngọ", "Thìn", "Tuất", "Tỵ", "Hợi", "Mùi"], [], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Vũ Khúc") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Vũ Khúc (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Vũ Khúc - ĐV)")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Dần", "Thân", "Dậu", "Mão"], ["Hợi", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Tướng") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Tướng (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Tướng - ĐV)")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Ngọ", "Thìn", "Tuất", "Sửu", "Mùi", "Tỵ", "Hợi"], ["Mão", "Dậu"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Cự Môn") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Cự Môn (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Cự Môn - ĐV)")) && kiemTraSaoSangToi(["Mão", "Dậu", "Tý", "Ngọ", "Dần", "Thân", "Hợi"], ["Sửu", "Mùi", "Thìn", "Tuất", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Dương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Dương (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thái Dương - ĐV)")) && kiemTraSaoSangToi(["Tỵ", "Ngọ", "Dần", "Mão", "Thìn", "Sửu", "Mùi"], ["Thân", "Dậu", "Tuất", "Hợi", "Tý"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Cơ") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Cơ (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Cơ - ĐV)")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Mão", "Dậu", "Tỵ", "Thân", "Tý", "Ngọ", "Sửu", "Mùi"], ["Dần", "Hợi"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Âm") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Âm (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thái Âm - ĐV)")) && kiemTraSaoSangToi(["Dậu", "Tuất", "Hợi", "Thân", "Tý", "Sửu", "Mùi"], ["Dần", "Mão", "Ngọ", "Thìn", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Đồng") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Đồng (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Đồng - ĐV)")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Mão", "Tỵ", "Hợi"], ["Ngọ", "Sửu", "Mùi", "Tuất", "Thìn", "Dậu"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Lương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Lương (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Lương - ĐV)")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Mão", "Dần", "Thân"], ["Dậu", "Hợi", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối")) || (isCungCoTuan(lasoData.tenCungDaiVan) || isCungCoTriet(lasoData.tenCungDaiVan)) || phu17DemSatTinh(lasoData.tenCungDaiVan) > 0))) { keyArr.push("Sách vận hạn 47 - Đại hạn - Mệnh/Thân có Sát Phá Liêm Tham hoặc sát tinh sáng sủa, hạn gặp Tử Phủ Vũ Tướng, Cự Nhật, Cơ Nguyệt Đồng Lương sáng sủa"); }
+        if (lasoData.tenCungDaiVan && (phu17CoSaoSang("Mệnh", ["Vũ Khúc", "Thiên Tướng"]) || phu17CoSaoSang(lasoData.cungCu, ["Vũ Khúc", "Thiên Tướng"])) && phu17CoSaoSang(lasoData.tenCungDaiVan, ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương", "Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"]) && !(phu17DemSatTinh(lasoData.tenCungDaiVan) > 0)) { keyArr.push("Sách vận hạn 48 - Đại hạn - Mệnh/Thân có Vũ Khúc hoặc Thiên Tướng sáng sủa, hạn gặp các bộ sao chính sáng sủa"); }
         if (lasoData.tenCungDaiVan && laCungVoChinhDieu("Mệnh") && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thất Sát", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thất Sát (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thất Sát - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phá Quân", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phá Quân (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Phá Quân - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Liêm Trinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Liêm Trinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Liêm Trinh - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tham Lang", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tham Lang (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Tham Lang - ĐV)", false)))) { keyArr.push("Sách vận hạn 49 - Đại hạn - Mệnh vô chính diệu, hạn gặp Sát, Phá, Liêm, Tham (sáng hay tối)"); }
         if (lasoData.tenCungDaiVan && ((isSaoToaThuTaiCung("Mệnh", "Cự Môn") || isSaoToaThuTaiCung(lasoData.cungCu, "Cự Môn")) || (isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") || isSaoToaThuTaiCung(lasoData.cungCu, "Hóa Kỵ"))) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thái Tuế", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thái Tuế (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thái Tuế - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đà La", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đà La (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Đà La - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Quan Phù", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Quan Phù (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Quan Phù - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Quan Phủ", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Quan Phủ (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Quan Phủ - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Bệnh Phù", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Bệnh Phù (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Bệnh Phù - ĐV)", false)))) { keyArr.push("Sách vận hạn 50 - Đại hạn - Mệnh/Thân có Cự Môn hoặc Hóa Kỵ tọa thủ, hạn gặp Thái Tuế, Đà La, Quan Phù, Quan Phủ hoặc Bệnh Phù"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung("Mệnh", "Thất Sát") || isSaoToaThuTaiCung(lasoData.cungCu, "Thất Sát")) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đà La", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đà La (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Đà La - ĐV)", false)))) { keyArr.push("Sách vận hạn 51 - Đại hạn - Mệnh/Thân có Thất Sát, hạn gặp Kình Dương hoặc Đà La"); }
@@ -5407,42 +5533,42 @@ function LuanVanHanSach(keyArr, loai) {
         if (lasoData.tenCungDaiVan && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tham Lang", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tham Lang (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Tham Lang - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Việt", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Việt (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Việt - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phục Binh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phục Binh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Phục Binh - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Kiếp", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Kiếp (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Địa Kiếp - ĐV)", false))) { keyArr.push("Sách vận hạn 108 - Đại hạn - Hạn có Tham Lang, Thiên Việt cùng Phục Binh, Địa Kiếp"); }
         if (lasoData.tenCungDaiVan && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tham Lang", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tham Lang (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Tham Lang - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Vũ Khúc", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Vũ Khúc (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Vũ Khúc - ĐV)", false))) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hư", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hư (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Hư - ĐV)", false))) { keyArr.push("Sách vận hạn 109 - Đại hạn - Hạn có Tham Lang hoặc Vũ Khúc gặp Thiên Hư"); }
         if (lasoData.tenCungDaiVan && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Hình - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phá Quân", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phá Quân (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Phá Quân - ĐV)", false))) { keyArr.push("Sách vận hạn 110 - Đại hạn - Hạn gặp Thiên Hình và Phá Quân"); }
-        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Tham Lang - ĐV)")) && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Văn Xương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Văn Xương (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Văn Xương - ĐV)")) && (phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Dần" || phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Thân")) { keyArr.push("Sách vận hạn 111 - Đại hạn - Hạn có Tham Lang, Văn Xương ở Dần hoặc Thân"); }
+        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Tham Lang - ĐV)")) && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Văn Xương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Văn Xương (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Văn Xương - ĐV)")) && (phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Dần" || phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Thân") && !(((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Hỏa Tinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Hỏa Tinh (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Hỏa Tinh - ĐV)")) || (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Linh Tinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Linh Tinh (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Linh Tinh - ĐV)"))))) { keyArr.push("Sách vận hạn 111 - Đại hạn - Hạn có Tham Lang, Văn Xương ở Dần hoặc Thân"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Dương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Dương (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thái Dương - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tả Phù", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tả Phù (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Tả Phù - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hữu Bật", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hữu Bật (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hữu Bật - ĐV)", false))) { keyArr.push("Sách vận hạn 112 - Đại hạn - Đại hạn hoặc tiểu hạn gặp Thái Dương, thêm Tả Phù, Hữu Bật"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Dương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Dương (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thái Dương - ĐV)")) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đà La", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đà La (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Đà La - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Không", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Không (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Địa Không - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Kiếp", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Kiếp (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Địa Kiếp - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hỏa Tinh - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Linh Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Linh Tinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Linh Tinh - ĐV)", false)))) { keyArr.push("Sách vận hạn 113 - Đại hạn - Đại hạn hoặc tiểu hạn có Thái Dương mà sát tinh tụ nhiều"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Cơ") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Cơ (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Cơ - ĐV)"))) { keyArr.push("Sách vận hạn 114 - Đại hạn - Đại hạn hoặc tiểu hạn gặp Thiên Cơ"); }
         if (lasoData.tenCungDaiVan && (((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Cự Môn") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Cự Môn (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Cự Môn - ĐV)")) && kiemTraSaoSangToi(["Mão", "Dậu", "Tý", "Ngọ", "Dần", "Thân", "Hợi"], ["Sửu", "Mùi", "Thìn", "Tuất", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối"))) { keyArr.push("Sách vận hạn 115 - Đại hạn - Đại hạn hoặc tiểu hạn gặp Cự Môn hãm địa"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Tướng") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Tướng (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Tướng - ĐV)"))) { keyArr.push("Sách vận hạn 116 - Đại hạn - Đại hạn hoặc tiểu hạn gặp Thiên Tướng"); }
-        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung("Mệnh", "Thất Sát") || isSaoToaThuTaiCung(lasoData.cungCu, "Thất Sát")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Hình - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Kỵ", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Kỵ (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hóa Kỵ - ĐV)", false))) { keyArr.push("Sách vận hạn 117 - Đại hạn - Thân hoặc Mệnh có Thất Sát, hạn gặp Thiên Hình và Hóa Kỵ"); }
+        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung("Mệnh", "Thất Sát") || isSaoToaThuTaiCung(lasoData.cungCu, "Thất Sát")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Hình - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Kỵ", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Kỵ (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hóa Kỵ - ĐV)", false)) && !(((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tử Vi", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tử Vi (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Tử Vi - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Lộc Tồn", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Lộc Tồn (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Lộc Tồn - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Tướng", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Tướng (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Tướng - ĐV)", false))))) { keyArr.push("Sách vận hạn 117 - Đại hạn - Thân hoặc Mệnh có Thất Sát, hạn gặp Thiên Hình và Hóa Kỵ"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Tham Lang - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Khúc", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Khúc (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Văn Khúc - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Vũ Khúc", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Vũ Khúc (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Vũ Khúc - ĐV)", false)) && (phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Ngọ" || phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Sửu")) { keyArr.push("Sách vận hạn 119 - Đại hạn - Hạn có Tham Lang hội Văn Khúc, Vũ Khúc ở Ngọ hoặc Sửu"); }
         if (lasoData.tenCungDaiVan && (lasoData.canNam === "K." || lasoData.canNam === "T." || lasoData.canNam === "N.") && (isSaoToaThuTaiCung("Mệnh", "Văn Xương") || isSaoToaThuTaiCung("Mệnh", "Văn Khúc")) && (phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Thìn" || phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Tuất")) { keyArr.push("Sách vận hạn 120 - Đại hạn - Tuổi Kỷ, Tân hoặc Nhâm có Xương hoặc Khúc ở Mệnh, hạn gặp Thìn hoặc Tuất"); }
         if (lasoData.tenCungDaiVan && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Khôi", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Khôi (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Khôi - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Việt", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Việt (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Việt - ĐV)", false))) { keyArr.push("Sách vận hạn 121 - Đại hạn - Hạn gặp Thiên Khôi và Thiên Việt"); }
         if (lasoData.tenCungDaiVan && ((isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") || isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Khôi")) || (isSaoToaThuTaiCung("Mệnh", "Thiên Việt") || isSaoToaThuTaiCung(lasoData.cungCu, "Thiên Việt"))) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Xương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Xương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Văn Xương - ĐV)", false))) { keyArr.push("Sách vận hạn 122 - Đại hạn - Khôi hoặc Việt ở Mệnh/Thân, hạn gặp Văn Xương"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Hóa Lộc") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Hóa Lộc (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Hóa Lộc - ĐV)"))) { keyArr.push("Sách vận hạn 124 - Đại hạn - Đại hạn mười năm gặp Hóa Lộc"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Hóa Kỵ") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Hóa Kỵ (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Hóa Kỵ - ĐV)"))) { keyArr.push("Sách vận hạn 127 - Đại hạn - Đại hạn gặp Hóa Kỵ"); }
-        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Hóa Kỵ") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Hóa Kỵ (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Hóa Kỵ - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thái Tuế", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thái Tuế (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thái Tuế - ĐV)", false))) { keyArr.push("Sách vận hạn 128 - Đại hạn - Đại hạn hoặc tiểu hạn có Hóa Kỵ lại thêm Thái Tuế"); }
+        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Hóa Kỵ") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Hóa Kỵ (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Hóa Kỵ - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thái Tuế", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thái Tuế (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thái Tuế - ĐV)", false)) && !(((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tử Vi", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tử Vi (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Tử Vi - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Phủ", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Phủ (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Phủ - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Xương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Xương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Văn Xương - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Khúc", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Khúc (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Văn Khúc - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tả Phù", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tả Phù (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Tả Phù - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hữu Bật", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hữu Bật (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hữu Bật - ĐV)", false))))) { keyArr.push("Sách vận hạn 128 - Đại hạn - Đại hạn hoặc tiểu hạn có Hóa Kỵ lại thêm Thái Tuế"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Mã") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Mã (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Mã - ĐV)")) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Lộc Tồn", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Lộc Tồn (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Lộc Tồn - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tử Vi", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tử Vi (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Tử Vi - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Phủ", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Phủ (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Phủ - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Xương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Xương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Văn Xương - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Khúc", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Khúc (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Văn Khúc - ĐV)", false)))) { keyArr.push("Sách vận hạn 129 - Đại hạn - Thiên Mã nhập hạn gặp Lộc Tồn, Tử Vi, Thiên Phủ hoặc Xương, Khúc"); }
         if (lasoData.tenCungDaiVan && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Thương", false) || lasoData.tenCungDaiVan === "Tật Ách") && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Cự Môn", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Cự Môn (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Cự Môn - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Cơ", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Cơ (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Cơ - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đà La", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đà La (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Đà La - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hỏa Tinh - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Kỵ", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Kỵ (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hóa Kỵ - ĐV)", false)))) { keyArr.push("Sách vận hạn 130 - Đại hạn - Hạn gặp Thiên Thương hoặc Thiên Sứ cùng Cự Môn, Thiên Cơ, Kình, Đà, Hỏa hoặc Hóa Kỵ"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Riêu") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Riêu (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Riêu - ĐV)"))) { keyArr.push("Sách vận hạn 131 - Đại hạn - Hạn gặp Thiên Riêu"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tấu Thư") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tấu Thư (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Tấu Thư - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Bạch Hổ", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Bạch Hổ (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Bạch Hổ - ĐV)", false))) { keyArr.push("Sách vận hạn 132 - Đại hạn - Tấu Thư gặp Bạch Hổ trong đại hạn hoặc tiểu hạn"); }
         if (lasoData.tenCungDaiVan && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỷ Thần", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỷ Thần (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hỷ Thần - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hỷ", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hỷ (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Hỷ - ĐV)", false))) { keyArr.push("Sách vận hạn 133 - Đại hạn - Đại hạn hoặc tiểu hạn có Song Hỷ (Hỷ Thần, Thiên Hỷ)"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tử Vi") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tử Vi (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Tử Vi - ĐV)")) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thất Sát", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thất Sát (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thất Sát - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phá Quân", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phá Quân (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Phá Quân - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tham Lang", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tham Lang (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Tham Lang - ĐV)", false)))) { keyArr.push("Sách vận hạn 134 - Đại hạn - Tử Vi nhập hạn mà tam phương có Thất Sát, Phá Quân hoặc Tham Lang"); }
-        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Cơ") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Cơ (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Cơ - ĐV)")) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đà La", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đà La (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Đà La - ĐV)", false)))) { keyArr.push("Sách vận hạn 135 - Đại hạn - Thiên Cơ nhập hạn gặp Kình Dương hoặc Đà La"); }
-        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Vũ Khúc") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Vũ Khúc (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Vũ Khúc - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Quyền", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Quyền (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hóa Quyền - ĐV)", false))) { keyArr.push("Sách vận hạn 136 - Đại hạn - Vũ Khúc nhập hạn có Hóa Quyền"); }
+        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Cơ") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Cơ (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Cơ - ĐV)")) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đà La", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đà La (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Đà La - ĐV)", false))) && !((((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Cự Môn") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Cự Môn (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Cự Môn - ĐV)")) && kiemTraSaoSangToi(["Mão", "Dậu", "Tý", "Ngọ", "Dần", "Thân", "Hợi"], ["Sửu", "Mùi", "Thìn", "Tuất", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối")))) { keyArr.push("Sách vận hạn 135 - Đại hạn - Thiên Cơ nhập hạn gặp Kình Dương hoặc Đà La"); }
+        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Vũ Khúc") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Vũ Khúc (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Vũ Khúc - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Quyền", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Quyền (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hóa Quyền - ĐV)", false)) && !(phu17DemCatTinh(lasoData.tenCungDaiVan) > 1)) { keyArr.push("Sách vận hạn 136 - Đại hạn - Vũ Khúc nhập hạn có Hóa Quyền"); }
         if (lasoData.tenCungDaiVan && (((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Vũ Khúc") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Vũ Khúc (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Vũ Khúc - ĐV)")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Dần", "Thân", "Dậu", "Mão"], ["Hợi", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối"))) { keyArr.push("Sách vận hạn 137 - Đại hạn - Vũ Khúc nhập hạn ở hãm địa"); }
-        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Liêm Trinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Liêm Trinh (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Liêm Trinh - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Hình - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)", false))) { keyArr.push("Sách vận hạn 138 - Đại hạn - Liêm Trinh nhập hạn gặp Thiên Hình, tối kỵ có Kình Dương"); }
+        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Liêm Trinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Liêm Trinh (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Liêm Trinh - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Hình - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)", false)) && !((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phá Quân", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phá Quân (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Phá Quân - ĐV)", false)))) { keyArr.push("Sách vận hạn 138 - Đại hạn - Liêm Trinh nhập hạn gặp Thiên Hình, tối kỵ có Kình Dương"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Phủ") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Phủ (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Phủ - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Khoa", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Khoa (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hóa Khoa - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Quyền", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Quyền (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hóa Quyền - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Lộc", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Lộc (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hóa Lộc - ĐV)", false))) { keyArr.push("Sách vận hạn 139 - Đại hạn - Thiên Phủ nhập hạn có đủ Khoa, Quyền, Lộc"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Âm") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Âm (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thái Âm - ĐV)")) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hỏa Tinh - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Linh Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Linh Tinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Linh Tinh - ĐV)", false)))) { keyArr.push("Sách vận hạn 140 - Đại hạn - Thái Âm nhập hạn gặp Hỏa Tinh hoặc Linh Tinh"); }
         if (lasoData.tenCungDaiVan && (((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Âm") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Âm (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thái Âm - ĐV)")) && kiemTraSaoSangToi(["Dậu", "Tuất", "Hợi", "Thân", "Tý", "Sửu", "Mùi"], ["Dần", "Mão", "Ngọ", "Thìn", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối")) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đà La", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đà La (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Đà La - ĐV)", false))) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hỏa Tinh - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Linh Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Linh Tinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Linh Tinh - ĐV)", false)))) { keyArr.push("Sách vận hạn 141 - Đại hạn - Thái Âm hãm địa nhập hạn, lại thêm Kình Đà và Hỏa Linh"); }
         if (lasoData.tenCungDaiVan && (lasoData.chiNam === "Thìn" || lasoData.chiNam === "Tuất" || lasoData.chiNam === "Sửu" || lasoData.chiNam === "Mùi") && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Tham Lang - ĐV)")) && (phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Thìn" || phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Tuất" || phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Sửu" || phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Mùi") && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hỏa Tinh - ĐV)", false))) { keyArr.push("Sách vận hạn 142 - Đại hạn - Tham Lang nhập hạn ở tứ mộ, người sinh năm Thìn, Tuất, Sửu, Mùi, gặp Hỏa Tinh"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Cự Môn") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Cự Môn (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Cự Môn - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tang Môn", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tang Môn (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Tang Môn - ĐV)", false))) { keyArr.push("Sách vận hạn 143 - Đại hạn - Cự Môn nhập hạn gặp Tang Môn"); }
-        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Tướng") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Tướng (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Tướng - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)", false))) { keyArr.push("Sách vận hạn 144 - Đại hạn - Thiên Tướng nhập hạn gặp Kình Dương"); }
+        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Tướng") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Tướng (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Tướng - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)", false)) && !(((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hỏa Tinh - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Linh Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Linh Tinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Linh Tinh - ĐV)", false))))) { keyArr.push("Sách vận hạn 144 - Đại hạn - Thiên Tướng nhập hạn gặp Kình Dương"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Lương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Lương (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Lương - ĐV)")) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hỏa Tinh - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Linh Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Linh Tinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Linh Tinh - ĐV)", false)))) { keyArr.push("Sách vận hạn 145 - Đại hạn - Thiên Lương nhập hạn gặp Hỏa Tinh hoặc Linh Tinh"); }
         if (lasoData.tenCungDaiVan && (((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thất Sát - ĐV)")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Ngọ", "Tỵ", "Hợi", "Sửu", "Mùi"], ["Thìn", "Tuất", "Dậu", "Mão"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao sáng")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Phủ", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Phủ (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Phủ - ĐV)", false))) { keyArr.push("Sách vận hạn 146 - Đại hạn - Thất Sát đắc địa nhập hạn, đối cung có Thiên Phủ triều"); }
-        if (lasoData.tenCungDaiVan && (((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thất Sát - ĐV)")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Ngọ", "Tỵ", "Hợi", "Sửu", "Mùi"], ["Thìn", "Tuất", "Dậu", "Mão"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối"))) { keyArr.push("Sách vận hạn 147 - Đại hạn - Thất Sát hãm địa nhập hạn"); }
+        if (lasoData.tenCungDaiVan && (((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thất Sát - ĐV)")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Ngọ", "Tỵ", "Hợi", "Sửu", "Mùi"], ["Thìn", "Tuất", "Dậu", "Mão"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối")) && !(phu17DemSatTinh(lasoData.tenCungDaiVan) > 0)) { keyArr.push("Sách vận hạn 147 - Đại hạn - Thất Sát hãm địa nhập hạn"); }
         if (lasoData.tenCungDaiVan && (((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Phá Quân") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Phá Quân (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Phá Quân - ĐV)")) && kiemTraSaoSangToi(["Tý", "Ngọ", "Sửu", "Mùi", "Thìn", "Tuất"], ["Dần", "Thân", "Mão", "Dậu", "Tỵ", "Hợi"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao sáng")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Xương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Xương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Văn Xương - ĐV)", false)) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Khôi", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Khôi (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Khôi - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Việt", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Việt (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Việt - ĐV)", false)))) { keyArr.push("Sách vận hạn 148 - Đại hạn - Phá Quân miếu địa nhập hạn, thêm Văn Xương, Khôi hoặc Việt"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Lộc Tồn") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Lộc Tồn (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Lộc Tồn - ĐV)")) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phá Quân", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phá Quân (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Phá Quân - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Kiếp", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Kiếp (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Địa Kiếp - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Không", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Không (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Địa Không - ĐV)", false))) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thái Tuế", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thái Tuế (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thái Tuế - ĐV)", false))) { keyArr.push("Sách vận hạn 149 - Đại hạn - Lộc Tồn nhập hạn gặp Phá, Kiếp, Không cùng Thái Tuế"); }
-        if (lasoData.tenCungDaiVan && (lasoData.chiNam === "Thìn" || lasoData.chiNam === "Tuất" || lasoData.chiNam === "Sửu" || lasoData.chiNam === "Mùi") && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Kình Dương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Kình Dương (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)"))) { keyArr.push("Sách vận hạn 150 - Đại hạn - Hạn có Kình Dương, người tuổi Thìn, Tuất, Sửu, Mùi không sợ họa ương"); }
+        if (lasoData.tenCungDaiVan && (lasoData.chiNam === "Thìn" || lasoData.chiNam === "Tuất" || lasoData.chiNam === "Sửu" || lasoData.chiNam === "Mùi") && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Kình Dương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Kình Dương (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)")) && !(((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tử Vi", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tử Vi (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Tử Vi - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Xương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Xương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Văn Xương - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Phủ", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Phủ (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Phủ - ĐV)", false))))) { keyArr.push("Sách vận hạn 150 - Đại hạn - Hạn có Kình Dương, người tuổi Thìn, Tuất, Sửu, Mùi"); }
         if (lasoData.tenCungDaiVan && (((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Hỏa Tinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Hỏa Tinh (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Hỏa Tinh - ĐV)")) && kiemTraSaoSangToi(["Dần", "Mão", "Thìn", "Tỵ", "Ngọ"], ["Thân", "Dậu", "Tuất", "Hợi", "Sửu", "Mùi", "Tý", "Ngọ"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối"))) { keyArr.push("Sách vận hạn 151 - Đại hạn - Hạn có Hỏa Tinh hãm địa"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Linh Tinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Linh Tinh (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Linh Tinh - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tham Lang", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tham Lang (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Tham Lang - ĐV)", false))) { keyArr.push("Sách vận hạn 152 - Đại hạn - Hạn có Linh Tinh gặp Tham Lang"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Không") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Không (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Không - ĐV)"))) { keyArr.push("Sách vận hạn 153 - Đại hạn - Thiên Không nhập hạn"); }
@@ -5454,10 +5580,10 @@ function LuanVanHanSach(keyArr, loai) {
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Linh Tinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Linh Tinh (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Linh Tinh - ĐV)")) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thất Sát", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thất Sát (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thất Sát - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phá Quân", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phá Quân (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Phá Quân - ĐV)", false)))) { keyArr.push("Sách vận hạn 159 - Đại hạn - Linh Tinh gặp Thất Sát hoặc Phá Quân nhập hạn"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Dương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Dương (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thái Dương - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Cự Môn", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Cự Môn (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Cự Môn - ĐV)", false))) { keyArr.push("Sách vận hạn 160 - Đại hạn - Thái Dương nhập hạn gặp Cự Môn"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Dương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Dương (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thái Dương - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Kỵ", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Kỵ (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hóa Kỵ - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Hình - ĐV)", false)) && (phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Tý" || phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Hợi")) { keyArr.push("Sách vận hạn 161 - Đại hạn - Thái Dương nhập hạn ở Tý hoặc Hợi gặp Hóa Kỵ, Thiên Hình"); }
-        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Liêm Trinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Liêm Trinh (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Liêm Trinh - ĐV)")) && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Tham Lang - ĐV)")) && (phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Tỵ" || phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Hợi")) { keyArr.push("Sách vận hạn 162 - Đại hạn - Liêm Trinh, Tham Lang ở Tỵ hoặc Hợi nhập hạn"); }
+        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Liêm Trinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Liêm Trinh (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Liêm Trinh - ĐV)")) && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Tham Lang - ĐV)")) && (phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Tỵ" || phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Hợi") && !(((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Kỵ", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Kỵ (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hóa Kỵ - ĐV)", false)) || (isCungCoTuan(lasoData.tenCungDaiVan) || isCungCoTriet(lasoData.tenCungDaiVan))))) { keyArr.push("Sách vận hạn 162 - Đại hạn - Liêm Trinh, Tham Lang ở Tỵ hoặc Hợi nhập hạn"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thất Sát - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Liêm Trinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Liêm Trinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Liêm Trinh - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hỏa Tinh - ĐV)", false))) { keyArr.push("Sách vận hạn 163 - Đại hạn - Thất Sát nhập hạn gặp Liêm Trinh, Hỏa Tinh"); }
         if (lasoData.tenCungDaiVan && lasoData.tenCungDaiVan === "Điền Trạch" && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thất Sát - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Liêm Trinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Liêm Trinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Liêm Trinh - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hỏa Tinh - ĐV)", false))) { keyArr.push("Sách vận hạn 164 - Đại hạn - Thất Sát, Liêm Trinh, Hỏa Tinh nhập hạn ở cung Điền Trạch"); }
-        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thất Sát - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Hình - ĐV)", false)) && (phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Ngọ")) { keyArr.push("Sách vận hạn 165 - Đại hạn - Thất Sát nhập hạn ở Ngọ gặp Kình Dương, Thiên Hình"); }
+        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thất Sát - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Hình - ĐV)", false)) && (phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Ngọ") && !(phu17DemSatTinh(lasoData.tenCungDaiVan) > 2)) { keyArr.push("Sách vận hạn 165 - Đại hạn - Thất Sát nhập hạn ở Ngọ gặp Kình Dương, Thiên Hình"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Cơ") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Cơ (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Cơ - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Thương", false) || lasoData.tenCungDaiVan === "Tật Ách")) { keyArr.push("Sách vận hạn 166 - Đại hạn - Thiên Cơ nhập hạn gặp Thiên Thương hoặc Thiên Sứ"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Cơ") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Cơ (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Cơ - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Khốc", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Khốc (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Khốc - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hỏa Tinh - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Hình - ĐV)", false))) { keyArr.push("Sách vận hạn 167 - Đại hạn - Thiên Cơ nhập hạn gặp Khốc, Hỏa, Hình"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Tướng") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Tướng (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Tướng - ĐV)")) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Hình - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Không", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Không (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Địa Không - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Kiếp", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Kiếp (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Địa Kiếp - ĐV)", false)))) { keyArr.push("Sách vận hạn 168 - Đại hạn - Thiên Tướng nhập hạn gặp Thiên Hình, Địa Không hoặc Địa Kiếp"); }
@@ -5469,9 +5595,9 @@ function LuanVanHanSach(keyArr, loai) {
         if (lasoData.tenCungDaiVan && (((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Địa Kiếp") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Địa Kiếp (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Địa Kiếp - ĐV)")) && kiemTraSaoSangToi(["Dần", "Thân", "Tỵ", "Hợi"], ["Tý", "Ngọ", "Mão", "Dậu", "Sửu", "Mùi", "Tuất", "Thìn"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao sáng"))) { keyArr.push("Sách vận hạn 176 - Đại hạn - Địa Kiếp đắc địa nhập hạn"); }
         if (lasoData.tenCungDaiVan && (((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Địa Kiếp") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Địa Kiếp (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Địa Kiếp - ĐV)")) && kiemTraSaoSangToi(["Dần", "Thân", "Tỵ", "Hợi"], ["Tý", "Ngọ", "Mão", "Dậu", "Sửu", "Mùi", "Tuất", "Thìn"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối"))) { keyArr.push("Sách vận hạn 177 - Đại hạn - Địa Kiếp hãm địa nhập hạn"); }
         if (lasoData.tenCungDaiVan && (((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Linh Tinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Linh Tinh (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Linh Tinh - ĐV)")) && kiemTraSaoSangToi(["Dần", "Mão", "Thìn", "Tỵ", "Ngọ"], ["Thân", "Dậu", "Tuất", "Hợi", "Sửu", "Mùi", "Tý", "Ngọ"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao sáng"))) { keyArr.push("Sách vận hạn 178 - Đại hạn - Linh Tinh đắc địa nhập hạn"); }
-        if (lasoData.tenCungDaiVan && (((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Linh Tinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Linh Tinh (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Linh Tinh - ĐV)")) && kiemTraSaoSangToi(["Dần", "Mão", "Thìn", "Tỵ", "Ngọ"], ["Thân", "Dậu", "Tuất", "Hợi", "Sửu", "Mùi", "Tý", "Ngọ"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối"))) { keyArr.push("Sách vận hạn 179 - Đại hạn - Linh Tinh hãm địa nhập hạn"); }
+        if (lasoData.tenCungDaiVan && (((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Linh Tinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Linh Tinh (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Linh Tinh - ĐV)")) && kiemTraSaoSangToi(["Dần", "Mão", "Thìn", "Tỵ", "Ngọ"], ["Thân", "Dậu", "Tuất", "Hợi", "Sửu", "Mùi", "Tý", "Ngọ"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối")) && !((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tang Môn", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tang Môn (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Tang Môn - ĐV)", false)))) { keyArr.push("Sách vận hạn 179 - Đại hạn - Linh Tinh hãm địa nhập hạn"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Hỷ Thần") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Hỷ Thần (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Hỷ Thần - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Điếu Khách", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Điếu Khách (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Điếu Khách - ĐV)", false))) { keyArr.push("Sách vận hạn 180 - Đại hạn - Hỷ Thần gặp Điếu Khách"); }
-        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Kình Dương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Kình Dương (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Hình - ĐV)", false)) && (phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Ngọ")) { keyArr.push("Sách vận hạn 181 - Đại hạn - Kình Dương, Thiên Hình nhập hạn ở Ngọ"); }
+        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Kình Dương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Kình Dương (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Hình - ĐV)", false)) && (phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Ngọ") && !(phu17DemSatTinh(lasoData.tenCungDaiVan) > 2)) { keyArr.push("Sách vận hạn 181 - Đại hạn - Kình Dương, Thiên Hình nhập hạn ở Ngọ"); }
         if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Kình Dương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Kình Dương (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Vũ Khúc", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Vũ Khúc (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Vũ Khúc - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phá Quân", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phá Quân (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Phá Quân - ĐV)", false))) { keyArr.push("Sách vận hạn 182 - Đại hạn - Kình Dương gặp Vũ Khúc, Phá Quân"); }
         if (lasoData.tenCungDaiVan && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Nguyệt Đức", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Nguyệt Đức (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Nguyệt Đức - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đào Hoa", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đào Hoa (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Đào Hoa - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hồng Loan", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hồng Loan (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hồng Loan - ĐV)", false))) { keyArr.push("Sách vận hạn 183 - Đại hạn - Hạn gặp Nguyệt Đức, Đào Hoa, Hồng Loan"); }
         if (lasoData.tenCungDaiVan && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Long Trì", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Long Trì (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Long Trì - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phượng Các", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phượng Các (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Phượng Các - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phong Cáo", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phong Cáo (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Phong Cáo - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Quốc Ấn", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Quốc Ấn (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Quốc Ấn - ĐV)", false))) { keyArr.push("Sách vận hạn 185 - Đại hạn - Hạn gặp Long Trì, Phượng Các, Phong Cáo, Quốc Ấn"); }
@@ -5515,11 +5641,28 @@ function LuanVanHanSach(keyArr, loai) {
         if (lasoData.tenCungDaiVan && ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thất Sát - ĐV)")) || (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Phá Quân") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Phá Quân (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Phá Quân - ĐV)")) || (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Liêm Trinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Liêm Trinh (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Liêm Trinh - ĐV)")) || (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Tham Lang - ĐV)"))) && phu17DemKhong(lasoData.tenCungDaiVan, 0) > 1 && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Linh Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Linh Tinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Linh Tinh - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hỏa Tinh - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Kỵ", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Kỵ (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hóa Kỵ - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đại Hao", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đại Hao (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Đại Hao - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tiểu Hao", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tiểu Hao (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Tiểu Hao - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Hình - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phục Binh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phục Binh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Phục Binh - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tang Môn", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tang Môn (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Tang Môn - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Bạch Hổ", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Bạch Hổ (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Bạch Hổ - ĐV)", false)))) { keyArr.push("Sách vận hạn 226 - Đại hạn - Sát, Phá, Liêm hoặc Tham nhập hạn gặp nhị hay tam Không cùng Linh, Hỏa, Kình, Kỵ (hoặc Hao, Hình, Phục Binh, Tang, Hổ)"); }
         if (lasoData.tenCungDaiVan && ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Cơ") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Cơ (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Cơ - ĐV)")) || (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Âm") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Âm (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thái Âm - ĐV)")) || (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Đồng") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Đồng (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Đồng - ĐV)")) || (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Lương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Lương (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Lương - ĐV)")) || (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Cự Môn") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Cự Môn (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Cự Môn - ĐV)")) || (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Dương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Dương (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thái Dương - ĐV)"))) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đà La", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đà La (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Đà La - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Không", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Không (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Địa Không - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Kiếp", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Kiếp (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Địa Kiếp - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phá Toái", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phá Toái (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Phá Toái - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kiếp Sát", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kiếp Sát (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Kiếp Sát - ĐV)", false)))) { keyArr.push("Sách vận hạn 227 - Đại hạn - Cơ, Nguyệt, Đồng, Lương hoặc Cự, Nhật nhập hạn gặp Kình, Đà, Không, Kiếp, Phá Toái hoặc Kiếp Sát"); }
         if (lasoData.tenCungDaiVan && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đà La", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đà La (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Đà La - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Không", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Không (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Địa Không - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Kiếp", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Địa Kiếp (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Địa Kiếp - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hỏa Tinh - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Linh Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Linh Tinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Linh Tinh - ĐV)", false))) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Lộc", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Lộc (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hóa Lộc - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Lộc Tồn", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Lộc Tồn (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Lộc Tồn - ĐV)", false))) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Mã", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Mã (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Mã - ĐV)", false)) && phu17DemKhong(lasoData.tenCungDaiVan, 0) > 2) { keyArr.push("Sách vận hạn 228 - Đại hạn - Hạn gặp sát tinh, Lộc, Mã hội hợp và bị Tam Không xâm phạm"); }
+        if (lasoData.tenCungDaiVan && (phu17CoSaoSang("Mệnh", ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"]) || phu17CoSaoSang(lasoData.cungCu, ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"])) && phu17CoSaoSang(lasoData.tenCungDaiVan, ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"]) && ((((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thất Sát - ĐV)")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Ngọ", "Tỵ", "Hợi", "Sửu", "Mùi"], ["Thìn", "Tuất", "Dậu", "Mão"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Phá Quân") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Phá Quân (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Phá Quân - ĐV)")) && kiemTraSaoSangToi(["Tý", "Ngọ", "Sửu", "Mùi", "Thìn", "Tuất"], ["Dần", "Thân", "Mão", "Dậu", "Tỵ", "Hợi"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Liêm Trinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Liêm Trinh (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Liêm Trinh - ĐV)")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Dần", "Thân"], ["Dậu", "Hợi", "Mão", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Tham Lang - ĐV)")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Dần", "Thân"], ["Tý", "Ngọ", "Mão", "Dậu", "Tỵ", "Hợi"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối")) || phu17DemSatTinh(lasoData.tenCungDaiVan) > 0)) { keyArr.push("Sách vận hạn 238 - Đại hạn - Mệnh/Thân có Sát Phá Liêm Tham hoặc sát tinh sáng sủa, hạn cũng gặp nhóm này sáng sủa nhưng có sao hãm địa hoặc thêm sao mờ ám"); }
+        if (lasoData.tenCungDaiVan && (phu17CoSaoSang("Mệnh", ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"]) || phu17CoSaoSang(lasoData.cungCu, ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"])) && phu17CoSaoSang(lasoData.tenCungDaiVan, ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"]) && ((((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tử Vi") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tử Vi (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Tử Vi - ĐV)")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Tỵ", "Ngọ", "Dần", "Thân"], [], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Phủ") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Phủ (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Phủ - ĐV)")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Ngọ", "Thìn", "Tuất", "Tỵ", "Hợi", "Mùi"], [], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Vũ Khúc") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Vũ Khúc (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Vũ Khúc - ĐV)")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Dần", "Thân", "Dậu", "Mão"], ["Hợi", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Tướng") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Tướng (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Tướng - ĐV)")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Ngọ", "Thìn", "Tuất", "Sửu", "Mùi", "Tỵ", "Hợi"], ["Mão", "Dậu"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Cự Môn") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Cự Môn (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Cự Môn - ĐV)")) && kiemTraSaoSangToi(["Mão", "Dậu", "Tý", "Ngọ", "Dần", "Thân", "Hợi"], ["Sửu", "Mùi", "Thìn", "Tuất", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Dương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Dương (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thái Dương - ĐV)")) && kiemTraSaoSangToi(["Tỵ", "Ngọ", "Dần", "Mão", "Thìn", "Sửu", "Mùi"], ["Thân", "Dậu", "Tuất", "Hợi", "Tý"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Cơ") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Cơ (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Cơ - ĐV)")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Mão", "Dậu", "Tỵ", "Thân", "Tý", "Ngọ", "Sửu", "Mùi"], ["Dần", "Hợi"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Âm") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thái Âm (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thái Âm - ĐV)")) && kiemTraSaoSangToi(["Dậu", "Tuất", "Hợi", "Thân", "Tý", "Sửu", "Mùi"], ["Dần", "Mão", "Ngọ", "Thìn", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Đồng") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Đồng (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Đồng - ĐV)")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Mão", "Tỵ", "Hợi"], ["Ngọ", "Sửu", "Mùi", "Tuất", "Thìn", "Dậu"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Lương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Lương (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Lương - ĐV)")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Mão", "Dần", "Thân"], ["Dậu", "Hợi", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối")) || (isCungCoTuan(lasoData.tenCungDaiVan) || isCungCoTriet(lasoData.tenCungDaiVan)) || phu17DemSatTinh(lasoData.tenCungDaiVan) > 0)) { keyArr.push("Sách vận hạn 239 - Đại hạn - Mệnh/Thân có Sát Phá Liêm Tham hoặc sát tinh sáng sủa, hạn gặp Tử Phủ Vũ Tướng, Cự Nhật, Cơ Nguyệt Đồng Lương sáng sủa nhưng có sao hãm địa, Tuần, Triệt hoặc sao mờ ám"); }
+        if (lasoData.tenCungDaiVan && (phu17CoSaoSang("Mệnh", ["Vũ Khúc", "Thiên Tướng"]) || phu17CoSaoSang(lasoData.cungCu, ["Vũ Khúc", "Thiên Tướng"])) && phu17CoSaoSang(lasoData.tenCungDaiVan, ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương", "Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"]) && phu17DemSatTinh(lasoData.tenCungDaiVan) > 0) { keyArr.push("Sách vận hạn 240 - Đại hạn - Mệnh/Thân có Vũ Khúc hoặc Thiên Tướng sáng sủa, hạn gặp các bộ sao chính sáng sủa nhưng có sao mờ ám"); }
+        if (lasoData.tenCungDaiVan && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kiếp Sát", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kiếp Sát (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Kiếp Sát - ĐV)", false)) && lasoData.tuoiAm > 49) { keyArr.push("Sách vận hạn 241 - Đại hạn - Hạn gặp Kiếp Sát khi đã lớn tuổi (từ 50)"); }
+        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Tham Lang - ĐV)")) && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Văn Xương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Văn Xương (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Văn Xương - ĐV)")) && (phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Dần" || phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Thân") && ((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Hỏa Tinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Hỏa Tinh (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Hỏa Tinh - ĐV)")) || (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Linh Tinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Linh Tinh (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Linh Tinh - ĐV)")))) { keyArr.push("Sách vận hạn 242 - Đại hạn - Hạn có Tham Lang, Văn Xương ở Dần hoặc Thân nhưng có Hỏa hoặc Linh đồng vị"); }
+        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung("Mệnh", "Thất Sát") || isSaoToaThuTaiCung(lasoData.cungCu, "Thất Sát")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Hình - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Kỵ", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Kỵ (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hóa Kỵ - ĐV)", false)) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tử Vi", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tử Vi (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Tử Vi - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Lộc Tồn", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Lộc Tồn (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Lộc Tồn - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Tướng", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Tướng (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Tướng - ĐV)", false)))) { keyArr.push("Sách vận hạn 243 - Đại hạn - Thân hoặc Mệnh có Thất Sát, hạn gặp Thiên Hình và Hóa Kỵ nhưng có Tử Vi, Lộc Tồn hoặc Thiên Tướng"); }
+        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Hóa Kỵ") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Hóa Kỵ (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Hóa Kỵ - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thái Tuế", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thái Tuế (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thái Tuế - ĐV)", false)) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tử Vi", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tử Vi (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Tử Vi - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Phủ", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Phủ (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Phủ - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Xương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Xương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Văn Xương - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Khúc", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Khúc (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Văn Khúc - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tả Phù", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tả Phù (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Tả Phù - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hữu Bật", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hữu Bật (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hữu Bật - ĐV)", false)))) { keyArr.push("Sách vận hạn 244 - Đại hạn - Đại hạn hoặc tiểu hạn có Hóa Kỵ lại thêm Thái Tuế nhưng hội Tử Vi, Thiên Phủ, Xương, Khúc, Tả hoặc Hữu"); }
+        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Cơ") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Cơ (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Cơ - ĐV)")) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đà La", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Đà La (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Đà La - ĐV)", false))) && (((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Cự Môn") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Cự Môn (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Cự Môn - ĐV)")) && kiemTraSaoSangToi(["Mão", "Dậu", "Tý", "Ngọ", "Dần", "Thân", "Hợi"], ["Sửu", "Mùi", "Thìn", "Tuất", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối"))) { keyArr.push("Sách vận hạn 245 - Đại hạn - Thiên Cơ nhập hạn gặp Kình Dương hoặc Đà La, thêm Cự Môn hãm địa cùng cung"); }
+        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Vũ Khúc") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Vũ Khúc (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Vũ Khúc - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Quyền", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Quyền (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hóa Quyền - ĐV)", false)) && phu17DemCatTinh(lasoData.tenCungDaiVan) > 1) { keyArr.push("Sách vận hạn 246 - Đại hạn - Vũ Khúc nhập hạn có Hóa Quyền lại có thêm sao tốt khác trợ lực"); }
+        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Liêm Trinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Liêm Trinh (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Liêm Trinh - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Hình - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phá Quân", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Phá Quân (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Phá Quân - ĐV)", false))) { keyArr.push("Sách vận hạn 247 - Đại hạn - Liêm Trinh nhập hạn gặp Thiên Hình và Kình Dương, thêm Phá Quân"); }
+        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Tướng") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Tướng (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thiên Tướng - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)", false)) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hỏa Tinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hỏa Tinh - ĐV)", false)) || (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Linh Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Linh Tinh (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Linh Tinh - ĐV)", false)))) { keyArr.push("Sách vận hạn 248 - Đại hạn - Thiên Tướng nhập hạn gặp Kình Dương, thêm Hỏa hoặc Linh"); }
+        if (lasoData.tenCungDaiVan && (((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thất Sát - ĐV)")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Ngọ", "Tỵ", "Hợi", "Sửu", "Mùi"], ["Thìn", "Tuất", "Dậu", "Mão"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối")) && phu17DemSatTinh(lasoData.tenCungDaiVan) > 0) { keyArr.push("Sách vận hạn 249 - Đại hạn - Thất Sát hãm địa nhập hạn lại bị thêm ác diệu"); }
+        if (lasoData.tenCungDaiVan && (lasoData.chiNam === "Thìn" || lasoData.chiNam === "Tuất" || lasoData.chiNam === "Sửu" || lasoData.chiNam === "Mùi") && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Kình Dương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Kình Dương (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)")) && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tử Vi", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tử Vi (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Tử Vi - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Xương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Văn Xương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Văn Xương - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Phủ", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Phủ (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Phủ - ĐV)", false)))) { keyArr.push("Sách vận hạn 250 - Đại hạn - Hạn có Kình Dương, người tuổi Thìn, Tuất, Sửu, Mùi gặp thêm Tử Vi, Văn Xương, Thiên Phủ"); }
+        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Liêm Trinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Liêm Trinh (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Liêm Trinh - ĐV)")) && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tham Lang (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Tham Lang - ĐV)")) && (phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Tỵ" || phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Hợi") && ((isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Kỵ", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Hóa Kỵ (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Hóa Kỵ - ĐV)", false)) || (isCungCoTuan(lasoData.tenCungDaiVan) || isCungCoTriet(lasoData.tenCungDaiVan)))) { keyArr.push("Sách vận hạn 251 - Đại hạn - Liêm Trinh, Tham Lang ở Tỵ hoặc Hợi nhập hạn nhưng gặp Hóa Kỵ hoặc Tuần, Triệt"); }
+        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Thất Sát - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Kình Dương (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)", false)) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Hình - ĐV)", false)) && (phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Ngọ") && phu17DemSatTinh(lasoData.tenCungDaiVan) > 2) { keyArr.push("Sách vận hạn 252 - Đại hạn - Thất Sát nhập hạn ở Ngọ gặp Kình Dương, Thiên Hình, thêm nhiều sát tinh"); }
+        if (lasoData.tenCungDaiVan && (((isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Linh Tinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Linh Tinh (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Linh Tinh - ĐV)")) && kiemTraSaoSangToi(["Dần", "Mão", "Thìn", "Tỵ", "Ngọ"], ["Thân", "Dậu", "Tuất", "Hợi", "Sửu", "Mùi", "Tý", "Ngọ"], phu17ChiCung(lasoData, lasoData.tenCungDaiVan)) === "sao tối")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tang Môn", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Tang Môn (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Tang Môn - ĐV)", false))) { keyArr.push("Sách vận hạn 253 - Đại hạn - Linh Tinh hãm địa nhập hạn gặp thêm Tang Môn"); }
+        if (lasoData.tenCungDaiVan && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Kình Dương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Kình Dương (ĐV)") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "(Kình Dương - ĐV)")) && (isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "Thiên Hình (ĐV)", false) || isSaoHoiChieuRong(lasoData.tenCungDaiVan, "(Thiên Hình - ĐV)", false)) && (phu17ChiCung(lasoData, lasoData.tenCungDaiVan) === "Ngọ") && phu17DemSatTinh(lasoData.tenCungDaiVan) > 2) { keyArr.push("Sách vận hạn 254 - Đại hạn - Kình Dương, Thiên Hình nhập hạn ở Ngọ, thêm nhiều sát tinh"); }
     }
     if (loai === "tieu") {
-        if (lasoData.tenCungTieuHan && (lasoData.chiNam === "Tý") && (phu17ChiNamXem(lasoData) === "Dần" || phu17ChiNamXem(lasoData) === "Thân" || phu17ChiNamXem(lasoData) === "Tý" || phu17ChiNamXem(lasoData) === "Ngọ")) { keyArr.push("Sách vận hạn 01 - Tiểu hạn - Tuổi Tý gặp năm xem hạn thuộc Dần/Thân/Tý/Ngọ là năm kỵ"); }
-        if (lasoData.tenCungTieuHan && (lasoData.chiNam === "Dần") && (phu17ChiNamXem(lasoData) === "Dần" || phu17ChiNamXem(lasoData) === "Thân" || phu17ChiNamXem(lasoData) === "Tỵ" || phu17ChiNamXem(lasoData) === "Hợi")) { keyArr.push("Sách vận hạn 02 - Tiểu hạn - Tuổi Dần gặp năm xem hạn thuộc Dần/Thân/Tỵ/Hợi là năm kỵ"); }
-        if (lasoData.tenCungTieuHan && (lasoData.chiNam === "Mão") && (phu17ChiNamXem(lasoData) === "Mão" || phu17ChiNamXem(lasoData) === "Dậu" || phu17ChiNamXem(lasoData) === "Tỵ" || phu17ChiNamXem(lasoData) === "Hợi")) { keyArr.push("Sách vận hạn 03 - Tiểu hạn - Tuổi Mão gặp năm xem hạn thuộc Mão/Dậu/Tỵ/Hợi là năm kỵ"); }
+        if (lasoData.tenCungTieuHan && (lasoData.chiNam === "Tý") && (phu17ChiNamXem(lasoData) === "Dần" || phu17ChiNamXem(lasoData) === "Thân" || phu17ChiNamXem(lasoData) === "Tý" || phu17ChiNamXem(lasoData) === "Ngọ") && !(phu17DemCatTinh(lasoData.tenCungTieuHan) > 2)) { keyArr.push("Sách vận hạn 01 - Tiểu hạn - Tuổi Tý gặp năm xem hạn thuộc Dần/Thân/Tý/Ngọ là năm kỵ"); }
+        if (lasoData.tenCungTieuHan && (lasoData.chiNam === "Dần") && (phu17ChiNamXem(lasoData) === "Dần" || phu17ChiNamXem(lasoData) === "Thân" || phu17ChiNamXem(lasoData) === "Tỵ" || phu17ChiNamXem(lasoData) === "Hợi") && !(phu17DemCatTinh(lasoData.tenCungTieuHan) > 2)) { keyArr.push("Sách vận hạn 02 - Tiểu hạn - Tuổi Dần gặp năm xem hạn thuộc Dần/Thân/Tỵ/Hợi là năm kỵ"); }
+        if (lasoData.tenCungTieuHan && (lasoData.chiNam === "Mão") && (phu17ChiNamXem(lasoData) === "Mão" || phu17ChiNamXem(lasoData) === "Dậu" || phu17ChiNamXem(lasoData) === "Tỵ" || phu17ChiNamXem(lasoData) === "Hợi") && !(phu17DemCatTinh(lasoData.tenCungTieuHan) > 2)) { keyArr.push("Sách vận hạn 03 - Tiểu hạn - Tuổi Mão gặp năm xem hạn thuộc Mão/Dậu/Tỵ/Hợi là năm kỵ"); }
         if (lasoData.tenCungTieuHan && (lasoData.chiNam === "Tý") && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Sửu" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Ngọ") && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thất Sát"))) { keyArr.push("Sách vận hạn 04 - Tiểu hạn - Tuổi Tý, hạn đến cung Sửu hoặc Ngọ có Thất Sát tọa thủ"); }
         if (lasoData.tenCungTieuHan && (lasoData.chiNam === "Thìn") && ((phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Thìn" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Tuất") || lasoData.tenCungTieuHan === lasoData.cungCu)) { keyArr.push("Sách vận hạn 05 - Tiểu hạn - Tuổi Thìn, hạn đến cung Thìn, cung Tuất hoặc cung an Thân"); }
         if (lasoData.tenCungTieuHan && (lasoData.chiNam === "Tỵ") && ((phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Tỵ") || lasoData.tenCungTieuHan === lasoData.cungCu)) { keyArr.push("Sách vận hạn 06 - Tiểu hạn - Tuổi Tỵ, hạn đến cung Tỵ hoặc cung an Thân"); }
@@ -5533,11 +5676,11 @@ function LuanVanHanSach(keyArr, loai) {
         if (lasoData.tenCungTieuHan && (lasoData.canNam === "G.") && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Thương", false) || lasoData.tenCungTieuHan === "Tật Ách") && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thái Tuế", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thái Tuế", false))) { keyArr.push("Sách vận hạn 14 - Tiểu hạn - Tuổi Giáp, hạn gặp Thiên Thương hoặc Thiên Sứ cùng Thái Tuế (hoặc Lưu Thái Tuế)"); }
         if (lasoData.tenCungTieuHan && (lasoData.canNam === "C.") && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Thương", false) || lasoData.tenCungTieuHan === "Tật Ách" || ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Linh Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Linh Tinh", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hỏa Tinh", false))))) { keyArr.push("Sách vận hạn 15 - Tiểu hạn - Tuổi Canh, hạn gặp Thiên Thương, Thiên Sứ, Linh Tinh hoặc Hỏa Tinh"); }
         if (lasoData.tenCungTieuHan && (lasoData.canNam === "C.") && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Thương", false) || lasoData.tenCungTieuHan === "Tật Ách" || ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Linh Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Linh Tinh", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hỏa Tinh", false)))) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thái Tuế", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thái Tuế", false))) { keyArr.push("Sách vận hạn 16 - Tiểu hạn - Tuổi Canh, hạn gặp Thiên Thương, Thiên Sứ, Linh Tinh hoặc Hỏa Tinh cùng Thái Tuế (hoặc Lưu Thái Tuế)"); }
-        if (lasoData.tenCungTieuHan && lasoData.hanhMenh === "Thủy" && lasoData.cucSo === 2 && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Sửu" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Dần")) { keyArr.push("Sách vận hạn 17 - Tiểu hạn - Hành Mệnh Thủy, Thủy Nhị Cục, tiểu hạn đến Sửu hoặc Dần"); }
-        if (lasoData.tenCungTieuHan && lasoData.hanhMenh === "Mộc" && lasoData.cucSo === 3 && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Ngọ")) { keyArr.push("Sách vận hạn 18 - Tiểu hạn - Hành Mệnh Mộc, Mộc Tam Cục, tiểu hạn đến Ngọ"); }
-        if (lasoData.tenCungTieuHan && lasoData.hanhMenh === "Kim" && lasoData.cucSo === 4 && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Tý")) { keyArr.push("Sách vận hạn 19 - Tiểu hạn - Hành Mệnh Kim, Kim Tứ Cục, tiểu hạn đến Tý"); }
-        if (lasoData.tenCungTieuHan && lasoData.hanhMenh === "Thổ" && lasoData.cucSo === 5 && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Mão" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Thìn" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Tỵ")) { keyArr.push("Sách vận hạn 20 - Tiểu hạn - Hành Mệnh Thổ, Thổ Ngũ Cục, tiểu hạn đến Mão, Thìn hoặc Tỵ"); }
-        if (lasoData.tenCungTieuHan && lasoData.hanhMenh === "Hỏa" && lasoData.cucSo === 6 && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Dậu")) { keyArr.push("Sách vận hạn 21 - Tiểu hạn - Hành Mệnh Hỏa, Hỏa Lục Cục, tiểu hạn đến Dậu"); }
+        if (lasoData.tenCungTieuHan && lasoData.hanhMenh === "Thủy" && lasoData.cucSo === 2 && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Sửu" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Dần") && !(((isCungCoTuan(lasoData.tenCungTieuHan) || isCungCoTriet(lasoData.tenCungTieuHan)) || phu17DemCatTinh(lasoData.tenCungTieuHan) > 2))) { keyArr.push("Sách vận hạn 17 - Tiểu hạn - Hành Mệnh Thủy, Thủy Nhị Cục, tiểu hạn đến Sửu hoặc Dần"); }
+        if (lasoData.tenCungTieuHan && lasoData.hanhMenh === "Mộc" && lasoData.cucSo === 3 && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Ngọ") && !(((isCungCoTuan(lasoData.tenCungTieuHan) || isCungCoTriet(lasoData.tenCungTieuHan)) || phu17DemCatTinh(lasoData.tenCungTieuHan) > 2))) { keyArr.push("Sách vận hạn 18 - Tiểu hạn - Hành Mệnh Mộc, Mộc Tam Cục, tiểu hạn đến Ngọ"); }
+        if (lasoData.tenCungTieuHan && lasoData.hanhMenh === "Kim" && lasoData.cucSo === 4 && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Tý") && !(((isCungCoTuan(lasoData.tenCungTieuHan) || isCungCoTriet(lasoData.tenCungTieuHan)) || phu17DemCatTinh(lasoData.tenCungTieuHan) > 2))) { keyArr.push("Sách vận hạn 19 - Tiểu hạn - Hành Mệnh Kim, Kim Tứ Cục, tiểu hạn đến Tý"); }
+        if (lasoData.tenCungTieuHan && lasoData.hanhMenh === "Thổ" && lasoData.cucSo === 5 && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Mão" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Thìn" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Tỵ") && !(((isCungCoTuan(lasoData.tenCungTieuHan) || isCungCoTriet(lasoData.tenCungTieuHan)) || phu17DemCatTinh(lasoData.tenCungTieuHan) > 2))) { keyArr.push("Sách vận hạn 20 - Tiểu hạn - Hành Mệnh Thổ, Thổ Ngũ Cục, tiểu hạn đến Mão, Thìn hoặc Tỵ"); }
+        if (lasoData.tenCungTieuHan && lasoData.hanhMenh === "Hỏa" && lasoData.cucSo === 6 && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Dậu") && !(((isCungCoTuan(lasoData.tenCungTieuHan) || isCungCoTriet(lasoData.tenCungTieuHan)) || phu17DemCatTinh(lasoData.tenCungTieuHan) > 2))) { keyArr.push("Sách vận hạn 21 - Tiểu hạn - Hành Mệnh Hỏa, Hỏa Lục Cục, tiểu hạn đến Dậu"); }
         if (lasoData.tenCungTieuHan && lasoData.cucSo === 2 && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Tỵ" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Dậu" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Sửu")) { keyArr.push("Sách vận hạn 22 - Tiểu hạn - Cục Thủy Nhị, cung hạn thuộc tam hợp Kim (Tỵ, Dậu, Sửu) sinh cục"); }
         if (lasoData.tenCungTieuHan && lasoData.cucSo === 2 && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Thân" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Tý" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Thìn")) { keyArr.push("Sách vận hạn 23 - Tiểu hạn - Cục Thủy Nhị, cung hạn thuộc tam hợp Thủy (Thân, Tý, Thìn) cùng hành"); }
         if (lasoData.tenCungTieuHan && lasoData.cucSo === 2 && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Hợi" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Mão" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Mùi")) { keyArr.push("Sách vận hạn 24 - Tiểu hạn - Cục Thủy Nhị, cung hạn thuộc tam hợp Mộc (Hợi, Mão, Mùi) bị cục sinh ra (tiết khí)"); }
@@ -5562,9 +5705,9 @@ function LuanVanHanSach(keyArr, loai) {
         if (lasoData.tenCungTieuHan && (phu17CoSaoSang("Mệnh", ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"]) || phu17CoSaoSang(lasoData.cungCu, ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"])) && phu17CoSaoSang(lasoData.tenCungTieuHan, ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"])) { keyArr.push("Sách vận hạn 43 - Tiểu hạn - Mệnh/Thân có các bộ sao Tử Phủ Vũ Tướng, Cự Nhật, Cơ Nguyệt Đồng Lương sáng sủa, hạn cũng gặp các bộ sao này sáng sủa"); }
         if (lasoData.tenCungTieuHan && (phu17CoSaoSang("Mệnh", ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"]) || phu17CoSaoSang(lasoData.cungCu, ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"])) && phu17CoSaoSang(lasoData.tenCungTieuHan, ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"])) { keyArr.push("Sách vận hạn 44 - Tiểu hạn - Mệnh/Thân có Tử Phủ Vũ Tướng, Cự Nhật, Cơ Nguyệt Đồng Lương sáng sủa, hạn gặp Sát Phá Liêm Tham hoặc sát tinh sáng sủa"); }
         if (lasoData.tenCungTieuHan && (phu17CoSaoSang("Mệnh", ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"]) || phu17CoSaoSang(lasoData.cungCu, ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"])) && phu17CoSaoSang(lasoData.tenCungTieuHan, ["Vũ Khúc", "Thiên Tướng"])) { keyArr.push("Sách vận hạn 45 - Tiểu hạn - Mệnh/Thân có Tử Phủ Vũ Tướng, Cự Nhật, Cơ Nguyệt Đồng Lương sáng sủa, hạn gặp Vũ Khúc hoặc Thiên Tướng sáng sủa"); }
-        if (lasoData.tenCungTieuHan && (phu17CoSaoSang("Mệnh", ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"]) || phu17CoSaoSang(lasoData.cungCu, ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"])) && phu17CoSaoSang(lasoData.tenCungTieuHan, ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"])) { keyArr.push("Sách vận hạn 46 - Tiểu hạn - Mệnh/Thân có Sát Phá Liêm Tham hoặc sát tinh sáng sủa, hạn cũng gặp nhóm này sáng sủa"); }
-        if (lasoData.tenCungTieuHan && (phu17CoSaoSang("Mệnh", ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"]) || phu17CoSaoSang(lasoData.cungCu, ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"])) && phu17CoSaoSang(lasoData.tenCungTieuHan, ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"])) { keyArr.push("Sách vận hạn 47 - Tiểu hạn - Mệnh/Thân có Sát Phá Liêm Tham hoặc sát tinh sáng sủa, hạn gặp Tử Phủ Vũ Tướng, Cự Nhật, Cơ Nguyệt Đồng Lương sáng sủa"); }
-        if (lasoData.tenCungTieuHan && (phu17CoSaoSang("Mệnh", ["Vũ Khúc", "Thiên Tướng"]) || phu17CoSaoSang(lasoData.cungCu, ["Vũ Khúc", "Thiên Tướng"])) && phu17CoSaoSang(lasoData.tenCungTieuHan, ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương", "Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"])) { keyArr.push("Sách vận hạn 48 - Tiểu hạn - Mệnh/Thân có Vũ Khúc hoặc Thiên Tướng sáng sủa, hạn gặp các bộ sao chính sáng sủa"); }
+        if (lasoData.tenCungTieuHan && (phu17CoSaoSang("Mệnh", ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"]) || phu17CoSaoSang(lasoData.cungCu, ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"])) && phu17CoSaoSang(lasoData.tenCungTieuHan, ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"]) && !(((((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thất Sát")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Ngọ", "Tỵ", "Hợi", "Sửu", "Mùi"], ["Thìn", "Tuất", "Dậu", "Mão"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Phá Quân") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Phá Quân")) && kiemTraSaoSangToi(["Tý", "Ngọ", "Sửu", "Mùi", "Thìn", "Tuất"], ["Dần", "Thân", "Mão", "Dậu", "Tỵ", "Hợi"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Liêm Trinh") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Liêm Trinh")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Dần", "Thân"], ["Dậu", "Hợi", "Mão", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Tham Lang") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Tham Lang")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Dần", "Thân"], ["Tý", "Ngọ", "Mão", "Dậu", "Tỵ", "Hợi"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối")) || phu17DemSatTinh(lasoData.tenCungTieuHan) > 0))) { keyArr.push("Sách vận hạn 46 - Tiểu hạn - Mệnh/Thân có Sát Phá Liêm Tham hoặc sát tinh sáng sủa, hạn cũng gặp nhóm này sáng sủa"); }
+        if (lasoData.tenCungTieuHan && (phu17CoSaoSang("Mệnh", ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"]) || phu17CoSaoSang(lasoData.cungCu, ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"])) && phu17CoSaoSang(lasoData.tenCungTieuHan, ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"]) && !(((((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Tử Vi") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Tử Vi")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Tỵ", "Ngọ", "Dần", "Thân"], [], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Phủ") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Phủ")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Ngọ", "Thìn", "Tuất", "Tỵ", "Hợi", "Mùi"], [], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Vũ Khúc") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Vũ Khúc")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Dần", "Thân", "Dậu", "Mão"], ["Hợi", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Tướng") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Tướng")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Ngọ", "Thìn", "Tuất", "Sửu", "Mùi", "Tỵ", "Hợi"], ["Mão", "Dậu"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Cự Môn") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Cự Môn")) && kiemTraSaoSangToi(["Mão", "Dậu", "Tý", "Ngọ", "Dần", "Thân", "Hợi"], ["Sửu", "Mùi", "Thìn", "Tuất", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thái Dương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thái Dương")) && kiemTraSaoSangToi(["Tỵ", "Ngọ", "Dần", "Mão", "Thìn", "Sửu", "Mùi"], ["Thân", "Dậu", "Tuất", "Hợi", "Tý"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Cơ") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Cơ")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Mão", "Dậu", "Tỵ", "Thân", "Tý", "Ngọ", "Sửu", "Mùi"], ["Dần", "Hợi"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thái Âm") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thái Âm")) && kiemTraSaoSangToi(["Dậu", "Tuất", "Hợi", "Thân", "Tý", "Sửu", "Mùi"], ["Dần", "Mão", "Ngọ", "Thìn", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Đồng") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Đồng")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Mão", "Tỵ", "Hợi"], ["Ngọ", "Sửu", "Mùi", "Tuất", "Thìn", "Dậu"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Lương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Lương")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Mão", "Dần", "Thân"], ["Dậu", "Hợi", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối")) || (isCungCoTuan(lasoData.tenCungTieuHan) || isCungCoTriet(lasoData.tenCungTieuHan)) || phu17DemSatTinh(lasoData.tenCungTieuHan) > 0))) { keyArr.push("Sách vận hạn 47 - Tiểu hạn - Mệnh/Thân có Sát Phá Liêm Tham hoặc sát tinh sáng sủa, hạn gặp Tử Phủ Vũ Tướng, Cự Nhật, Cơ Nguyệt Đồng Lương sáng sủa"); }
+        if (lasoData.tenCungTieuHan && (phu17CoSaoSang("Mệnh", ["Vũ Khúc", "Thiên Tướng"]) || phu17CoSaoSang(lasoData.cungCu, ["Vũ Khúc", "Thiên Tướng"])) && phu17CoSaoSang(lasoData.tenCungTieuHan, ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương", "Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"]) && !(phu17DemSatTinh(lasoData.tenCungTieuHan) > 0)) { keyArr.push("Sách vận hạn 48 - Tiểu hạn - Mệnh/Thân có Vũ Khúc hoặc Thiên Tướng sáng sủa, hạn gặp các bộ sao chính sáng sủa"); }
         if (lasoData.tenCungTieuHan && laCungVoChinhDieu("Mệnh") && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thất Sát", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thất Sát", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Phá Quân", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Phá Quân", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Liêm Trinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Liêm Trinh", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Tham Lang", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Tham Lang", false)))) { keyArr.push("Sách vận hạn 49 - Tiểu hạn - Mệnh vô chính diệu, hạn gặp Sát, Phá, Liêm, Tham (sáng hay tối)"); }
         if (lasoData.tenCungTieuHan && ((isSaoToaThuTaiCung("Mệnh", "Cự Môn") || isSaoToaThuTaiCung(lasoData.cungCu, "Cự Môn")) || (isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") || isSaoToaThuTaiCung(lasoData.cungCu, "Hóa Kỵ"))) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thái Tuế", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thái Tuế", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Đà La", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Đà La", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Quan Phù", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Quan Phù", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Quan Phủ", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Quan Phủ", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Bệnh Phù", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Bệnh Phù", false)))) { keyArr.push("Sách vận hạn 50 - Tiểu hạn - Mệnh/Thân có Cự Môn hoặc Hóa Kỵ tọa thủ, hạn gặp Thái Tuế, Đà La, Quan Phù, Quan Phủ hoặc Bệnh Phù"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung("Mệnh", "Thất Sát") || isSaoToaThuTaiCung(lasoData.cungCu, "Thất Sát")) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Kình Dương", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Đà La", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Đà La", false)))) { keyArr.push("Sách vận hạn 51 - Tiểu hạn - Mệnh/Thân có Thất Sát, hạn gặp Kình Dương hoặc Đà La"); }
@@ -5627,13 +5770,13 @@ function LuanVanHanSach(keyArr, loai) {
         if (lasoData.tenCungTieuHan && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Tham Lang", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Tham Lang", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Việt", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Việt", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Phục Binh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Phục Binh", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Địa Kiếp", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Địa Kiếp", false))) { keyArr.push("Sách vận hạn 108 - Tiểu hạn - Hạn có Tham Lang, Thiên Việt cùng Phục Binh, Địa Kiếp"); }
         if (lasoData.tenCungTieuHan && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Tham Lang", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Tham Lang", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Vũ Khúc", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Vũ Khúc", false))) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Hư", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Hư", false))) { keyArr.push("Sách vận hạn 109 - Tiểu hạn - Hạn có Tham Lang hoặc Vũ Khúc gặp Thiên Hư"); }
         if (lasoData.tenCungTieuHan && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Hình", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Phá Quân", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Phá Quân", false))) { keyArr.push("Sách vận hạn 110 - Tiểu hạn - Hạn gặp Thiên Hình và Phá Quân"); }
-        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Tham Lang") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Tham Lang")) && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Văn Xương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Văn Xương")) && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Dần" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Thân")) { keyArr.push("Sách vận hạn 111 - Tiểu hạn - Hạn có Tham Lang, Văn Xương ở Dần hoặc Thân"); }
+        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Tham Lang") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Tham Lang")) && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Văn Xương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Văn Xương")) && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Dần" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Thân") && !(((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Hỏa Tinh") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Hỏa Tinh")) || (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Linh Tinh") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Linh Tinh"))))) { keyArr.push("Sách vận hạn 111 - Tiểu hạn - Hạn có Tham Lang, Văn Xương ở Dần hoặc Thân"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thái Dương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thái Dương")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Tả Phù", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Tả Phù", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hữu Bật", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hữu Bật", false))) { keyArr.push("Sách vận hạn 112 - Tiểu hạn - Đại hạn hoặc tiểu hạn gặp Thái Dương, thêm Tả Phù, Hữu Bật"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thái Dương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thái Dương")) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Kình Dương", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Đà La", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Đà La", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Địa Không", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Địa Không", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Địa Kiếp", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Địa Kiếp", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hỏa Tinh", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Linh Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Linh Tinh", false)))) { keyArr.push("Sách vận hạn 113 - Tiểu hạn - Đại hạn hoặc tiểu hạn có Thái Dương mà sát tinh tụ nhiều"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Cơ") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Cơ"))) { keyArr.push("Sách vận hạn 114 - Tiểu hạn - Đại hạn hoặc tiểu hạn gặp Thiên Cơ"); }
         if (lasoData.tenCungTieuHan && (((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Cự Môn") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Cự Môn")) && kiemTraSaoSangToi(["Mão", "Dậu", "Tý", "Ngọ", "Dần", "Thân", "Hợi"], ["Sửu", "Mùi", "Thìn", "Tuất", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối"))) { keyArr.push("Sách vận hạn 115 - Tiểu hạn - Đại hạn hoặc tiểu hạn gặp Cự Môn hãm địa"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Tướng") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Tướng"))) { keyArr.push("Sách vận hạn 116 - Tiểu hạn - Đại hạn hoặc tiểu hạn gặp Thiên Tướng"); }
-        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung("Mệnh", "Thất Sát") || isSaoToaThuTaiCung(lasoData.cungCu, "Thất Sát")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Hình", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hóa Kỵ", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hóa Kỵ", false))) { keyArr.push("Sách vận hạn 117 - Tiểu hạn - Thân hoặc Mệnh có Thất Sát, hạn gặp Thiên Hình và Hóa Kỵ"); }
+        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung("Mệnh", "Thất Sát") || isSaoToaThuTaiCung(lasoData.cungCu, "Thất Sát")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Hình", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hóa Kỵ", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hóa Kỵ", false)) && !(((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Tử Vi", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Tử Vi", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Lộc Tồn", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Lộc Tồn", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Tướng", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Tướng", false))))) { keyArr.push("Sách vận hạn 117 - Tiểu hạn - Thân hoặc Mệnh có Thất Sát, hạn gặp Thiên Hình và Hóa Kỵ"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung("Mệnh", "Thất Sát") || isSaoToaThuTaiCung(lasoData.cungCu, "Thất Sát")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Kình Dương", false))) { keyArr.push("Sách vận hạn 118 - Tiểu hạn - Thất Sát ở Mệnh hoặc Thân gặp Lưu Kình Dương"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Tham Lang") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Tham Lang")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Văn Khúc", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Văn Khúc", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Vũ Khúc", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Vũ Khúc", false)) && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Ngọ" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Sửu")) { keyArr.push("Sách vận hạn 119 - Tiểu hạn - Hạn có Tham Lang hội Văn Khúc, Vũ Khúc ở Ngọ hoặc Sửu"); }
         if (lasoData.tenCungTieuHan && (lasoData.canNam === "K." || lasoData.canNam === "T." || lasoData.canNam === "N.") && (isSaoToaThuTaiCung("Mệnh", "Văn Xương") || isSaoToaThuTaiCung("Mệnh", "Văn Khúc")) && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Thìn" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Tuất")) { keyArr.push("Sách vận hạn 120 - Tiểu hạn - Tuổi Kỷ, Tân hoặc Nhâm có Xương hoặc Khúc ở Mệnh, hạn gặp Thìn hoặc Tuất"); }
@@ -5642,29 +5785,29 @@ function LuanVanHanSach(keyArr, loai) {
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Hóa Lộc") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Hóa Lộc"))) { keyArr.push("Sách vận hạn 123 - Tiểu hạn - Tiểu hạn gặp Hóa Lộc"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Hóa Quyền") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Hóa Quyền"))) { keyArr.push("Sách vận hạn 125 - Tiểu hạn - Tiểu hạn có Hóa Quyền"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Hóa Kỵ") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Hóa Kỵ"))) { keyArr.push("Sách vận hạn 126 - Tiểu hạn - Tiểu hạn gặp Hóa Kỵ"); }
-        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Hóa Kỵ") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Hóa Kỵ")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thái Tuế", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thái Tuế", false))) { keyArr.push("Sách vận hạn 128 - Tiểu hạn - Đại hạn hoặc tiểu hạn có Hóa Kỵ lại thêm Thái Tuế"); }
+        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Hóa Kỵ") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Hóa Kỵ")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thái Tuế", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thái Tuế", false)) && !(((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Tử Vi", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Tử Vi", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Phủ", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Phủ", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Văn Xương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Văn Xương", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Văn Khúc", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Văn Khúc", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Tả Phù", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Tả Phù", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hữu Bật", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hữu Bật", false))))) { keyArr.push("Sách vận hạn 128 - Tiểu hạn - Đại hạn hoặc tiểu hạn có Hóa Kỵ lại thêm Thái Tuế"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Mã") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Mã")) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Lộc Tồn", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Lộc Tồn", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Tử Vi", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Tử Vi", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Phủ", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Phủ", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Văn Xương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Văn Xương", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Văn Khúc", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Văn Khúc", false)))) { keyArr.push("Sách vận hạn 129 - Tiểu hạn - Thiên Mã nhập hạn gặp Lộc Tồn, Tử Vi, Thiên Phủ hoặc Xương, Khúc"); }
         if (lasoData.tenCungTieuHan && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Thương", false) || lasoData.tenCungTieuHan === "Tật Ách") && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Cự Môn", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Cự Môn", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Cơ", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Cơ", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Kình Dương", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Đà La", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Đà La", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hỏa Tinh", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hóa Kỵ", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hóa Kỵ", false)))) { keyArr.push("Sách vận hạn 130 - Tiểu hạn - Hạn gặp Thiên Thương hoặc Thiên Sứ cùng Cự Môn, Thiên Cơ, Kình, Đà, Hỏa hoặc Hóa Kỵ"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Riêu") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Riêu"))) { keyArr.push("Sách vận hạn 131 - Tiểu hạn - Hạn gặp Thiên Riêu"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Tấu Thư") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Tấu Thư")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Bạch Hổ", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Bạch Hổ", false))) { keyArr.push("Sách vận hạn 132 - Tiểu hạn - Tấu Thư gặp Bạch Hổ trong đại hạn hoặc tiểu hạn"); }
         if (lasoData.tenCungTieuHan && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hỷ Thần", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hỷ Thần", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Hỷ", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Hỷ", false))) { keyArr.push("Sách vận hạn 133 - Tiểu hạn - Đại hạn hoặc tiểu hạn có Song Hỷ (Hỷ Thần, Thiên Hỷ)"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Tử Vi") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Tử Vi")) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thất Sát", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thất Sát", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Phá Quân", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Phá Quân", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Tham Lang", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Tham Lang", false)))) { keyArr.push("Sách vận hạn 134 - Tiểu hạn - Tử Vi nhập hạn mà tam phương có Thất Sát, Phá Quân hoặc Tham Lang"); }
-        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Cơ") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Cơ")) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Kình Dương", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Đà La", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Đà La", false)))) { keyArr.push("Sách vận hạn 135 - Tiểu hạn - Thiên Cơ nhập hạn gặp Kình Dương hoặc Đà La"); }
-        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Vũ Khúc") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Vũ Khúc")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hóa Quyền", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hóa Quyền", false))) { keyArr.push("Sách vận hạn 136 - Tiểu hạn - Vũ Khúc nhập hạn có Hóa Quyền"); }
+        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Cơ") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Cơ")) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Kình Dương", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Đà La", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Đà La", false))) && !((((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Cự Môn") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Cự Môn")) && kiemTraSaoSangToi(["Mão", "Dậu", "Tý", "Ngọ", "Dần", "Thân", "Hợi"], ["Sửu", "Mùi", "Thìn", "Tuất", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối")))) { keyArr.push("Sách vận hạn 135 - Tiểu hạn - Thiên Cơ nhập hạn gặp Kình Dương hoặc Đà La"); }
+        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Vũ Khúc") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Vũ Khúc")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hóa Quyền", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hóa Quyền", false)) && !(phu17DemCatTinh(lasoData.tenCungTieuHan) > 1)) { keyArr.push("Sách vận hạn 136 - Tiểu hạn - Vũ Khúc nhập hạn có Hóa Quyền"); }
         if (lasoData.tenCungTieuHan && (((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Vũ Khúc") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Vũ Khúc")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Dần", "Thân", "Dậu", "Mão"], ["Hợi", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối"))) { keyArr.push("Sách vận hạn 137 - Tiểu hạn - Vũ Khúc nhập hạn ở hãm địa"); }
-        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Liêm Trinh") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Liêm Trinh")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Hình", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Kình Dương", false))) { keyArr.push("Sách vận hạn 138 - Tiểu hạn - Liêm Trinh nhập hạn gặp Thiên Hình, tối kỵ có Kình Dương"); }
+        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Liêm Trinh") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Liêm Trinh")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Hình", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Kình Dương", false)) && !((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Phá Quân", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Phá Quân", false)))) { keyArr.push("Sách vận hạn 138 - Tiểu hạn - Liêm Trinh nhập hạn gặp Thiên Hình, tối kỵ có Kình Dương"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Phủ") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Phủ")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hóa Khoa", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hóa Khoa", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hóa Quyền", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hóa Quyền", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hóa Lộc", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hóa Lộc", false))) { keyArr.push("Sách vận hạn 139 - Tiểu hạn - Thiên Phủ nhập hạn có đủ Khoa, Quyền, Lộc"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thái Âm") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thái Âm")) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hỏa Tinh", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Linh Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Linh Tinh", false)))) { keyArr.push("Sách vận hạn 140 - Tiểu hạn - Thái Âm nhập hạn gặp Hỏa Tinh hoặc Linh Tinh"); }
         if (lasoData.tenCungTieuHan && (((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thái Âm") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thái Âm")) && kiemTraSaoSangToi(["Dậu", "Tuất", "Hợi", "Thân", "Tý", "Sửu", "Mùi"], ["Dần", "Mão", "Ngọ", "Thìn", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối")) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Kình Dương", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Đà La", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Đà La", false))) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hỏa Tinh", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Linh Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Linh Tinh", false)))) { keyArr.push("Sách vận hạn 141 - Tiểu hạn - Thái Âm hãm địa nhập hạn, lại thêm Kình Đà và Hỏa Linh"); }
         if (lasoData.tenCungTieuHan && (lasoData.chiNam === "Thìn" || lasoData.chiNam === "Tuất" || lasoData.chiNam === "Sửu" || lasoData.chiNam === "Mùi") && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Tham Lang") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Tham Lang")) && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Thìn" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Tuất" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Sửu" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Mùi") && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hỏa Tinh", false))) { keyArr.push("Sách vận hạn 142 - Tiểu hạn - Tham Lang nhập hạn ở tứ mộ, người sinh năm Thìn, Tuất, Sửu, Mùi, gặp Hỏa Tinh"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Cự Môn") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Cự Môn")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Tang Môn", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Tang Môn", false))) { keyArr.push("Sách vận hạn 143 - Tiểu hạn - Cự Môn nhập hạn gặp Tang Môn"); }
-        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Tướng") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Tướng")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Kình Dương", false))) { keyArr.push("Sách vận hạn 144 - Tiểu hạn - Thiên Tướng nhập hạn gặp Kình Dương"); }
+        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Tướng") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Tướng")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Kình Dương", false)) && !(((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hỏa Tinh", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Linh Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Linh Tinh", false))))) { keyArr.push("Sách vận hạn 144 - Tiểu hạn - Thiên Tướng nhập hạn gặp Kình Dương"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Lương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Lương")) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hỏa Tinh", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Linh Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Linh Tinh", false)))) { keyArr.push("Sách vận hạn 145 - Tiểu hạn - Thiên Lương nhập hạn gặp Hỏa Tinh hoặc Linh Tinh"); }
         if (lasoData.tenCungTieuHan && (((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thất Sát")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Ngọ", "Tỵ", "Hợi", "Sửu", "Mùi"], ["Thìn", "Tuất", "Dậu", "Mão"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao sáng")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Phủ", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Phủ", false))) { keyArr.push("Sách vận hạn 146 - Tiểu hạn - Thất Sát đắc địa nhập hạn, đối cung có Thiên Phủ triều"); }
-        if (lasoData.tenCungTieuHan && (((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thất Sát")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Ngọ", "Tỵ", "Hợi", "Sửu", "Mùi"], ["Thìn", "Tuất", "Dậu", "Mão"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối"))) { keyArr.push("Sách vận hạn 147 - Tiểu hạn - Thất Sát hãm địa nhập hạn"); }
+        if (lasoData.tenCungTieuHan && (((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thất Sát")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Ngọ", "Tỵ", "Hợi", "Sửu", "Mùi"], ["Thìn", "Tuất", "Dậu", "Mão"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối")) && !(phu17DemSatTinh(lasoData.tenCungTieuHan) > 0)) { keyArr.push("Sách vận hạn 147 - Tiểu hạn - Thất Sát hãm địa nhập hạn"); }
         if (lasoData.tenCungTieuHan && (((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Phá Quân") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Phá Quân")) && kiemTraSaoSangToi(["Tý", "Ngọ", "Sửu", "Mùi", "Thìn", "Tuất"], ["Dần", "Thân", "Mão", "Dậu", "Tỵ", "Hợi"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao sáng")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Văn Xương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Văn Xương", false)) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Khôi", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Khôi", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Việt", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Việt", false)))) { keyArr.push("Sách vận hạn 148 - Tiểu hạn - Phá Quân miếu địa nhập hạn, thêm Văn Xương, Khôi hoặc Việt"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Lộc Tồn") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Lộc Tồn")) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Phá Quân", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Phá Quân", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Địa Kiếp", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Địa Kiếp", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Địa Không", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Địa Không", false))) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thái Tuế", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thái Tuế", false))) { keyArr.push("Sách vận hạn 149 - Tiểu hạn - Lộc Tồn nhập hạn gặp Phá, Kiếp, Không cùng Thái Tuế"); }
-        if (lasoData.tenCungTieuHan && (lasoData.chiNam === "Thìn" || lasoData.chiNam === "Tuất" || lasoData.chiNam === "Sửu" || lasoData.chiNam === "Mùi") && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Kình Dương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Kình Dương"))) { keyArr.push("Sách vận hạn 150 - Tiểu hạn - Hạn có Kình Dương, người tuổi Thìn, Tuất, Sửu, Mùi không sợ họa ương"); }
+        if (lasoData.tenCungTieuHan && (lasoData.chiNam === "Thìn" || lasoData.chiNam === "Tuất" || lasoData.chiNam === "Sửu" || lasoData.chiNam === "Mùi") && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Kình Dương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Kình Dương")) && !(((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Tử Vi", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Tử Vi", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Văn Xương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Văn Xương", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Phủ", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Phủ", false))))) { keyArr.push("Sách vận hạn 150 - Tiểu hạn - Hạn có Kình Dương, người tuổi Thìn, Tuất, Sửu, Mùi"); }
         if (lasoData.tenCungTieuHan && (((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Hỏa Tinh") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Hỏa Tinh")) && kiemTraSaoSangToi(["Dần", "Mão", "Thìn", "Tỵ", "Ngọ"], ["Thân", "Dậu", "Tuất", "Hợi", "Sửu", "Mùi", "Tý", "Ngọ"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối"))) { keyArr.push("Sách vận hạn 151 - Tiểu hạn - Hạn có Hỏa Tinh hãm địa"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Linh Tinh") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Linh Tinh")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Tham Lang", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Tham Lang", false))) { keyArr.push("Sách vận hạn 152 - Tiểu hạn - Hạn có Linh Tinh gặp Tham Lang"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Không") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Không"))) { keyArr.push("Sách vận hạn 153 - Tiểu hạn - Thiên Không nhập hạn"); }
@@ -5676,10 +5819,10 @@ function LuanVanHanSach(keyArr, loai) {
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Linh Tinh") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Linh Tinh")) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thất Sát", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thất Sát", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Phá Quân", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Phá Quân", false)))) { keyArr.push("Sách vận hạn 159 - Tiểu hạn - Linh Tinh gặp Thất Sát hoặc Phá Quân nhập hạn"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thái Dương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thái Dương")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Cự Môn", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Cự Môn", false))) { keyArr.push("Sách vận hạn 160 - Tiểu hạn - Thái Dương nhập hạn gặp Cự Môn"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thái Dương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thái Dương")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hóa Kỵ", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hóa Kỵ", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Hình", false)) && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Tý" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Hợi")) { keyArr.push("Sách vận hạn 161 - Tiểu hạn - Thái Dương nhập hạn ở Tý hoặc Hợi gặp Hóa Kỵ, Thiên Hình"); }
-        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Liêm Trinh") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Liêm Trinh")) && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Tham Lang") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Tham Lang")) && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Tỵ" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Hợi")) { keyArr.push("Sách vận hạn 162 - Tiểu hạn - Liêm Trinh, Tham Lang ở Tỵ hoặc Hợi nhập hạn"); }
+        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Liêm Trinh") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Liêm Trinh")) && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Tham Lang") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Tham Lang")) && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Tỵ" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Hợi") && !(((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hóa Kỵ", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hóa Kỵ", false)) || (isCungCoTuan(lasoData.tenCungTieuHan) || isCungCoTriet(lasoData.tenCungTieuHan))))) { keyArr.push("Sách vận hạn 162 - Tiểu hạn - Liêm Trinh, Tham Lang ở Tỵ hoặc Hợi nhập hạn"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thất Sát")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Liêm Trinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Liêm Trinh", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hỏa Tinh", false))) { keyArr.push("Sách vận hạn 163 - Tiểu hạn - Thất Sát nhập hạn gặp Liêm Trinh, Hỏa Tinh"); }
         if (lasoData.tenCungTieuHan && lasoData.tenCungTieuHan === "Điền Trạch" && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thất Sát")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Liêm Trinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Liêm Trinh", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hỏa Tinh", false))) { keyArr.push("Sách vận hạn 164 - Tiểu hạn - Thất Sát, Liêm Trinh, Hỏa Tinh nhập hạn ở cung Điền Trạch"); }
-        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thất Sát")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Kình Dương", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Hình", false)) && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Ngọ")) { keyArr.push("Sách vận hạn 165 - Tiểu hạn - Thất Sát nhập hạn ở Ngọ gặp Kình Dương, Thiên Hình"); }
+        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thất Sát")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Kình Dương", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Hình", false)) && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Ngọ") && !(phu17DemSatTinh(lasoData.tenCungTieuHan) > 2)) { keyArr.push("Sách vận hạn 165 - Tiểu hạn - Thất Sát nhập hạn ở Ngọ gặp Kình Dương, Thiên Hình"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Cơ") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Cơ")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Thương", false) || lasoData.tenCungTieuHan === "Tật Ách")) { keyArr.push("Sách vận hạn 166 - Tiểu hạn - Thiên Cơ nhập hạn gặp Thiên Thương hoặc Thiên Sứ"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Cơ") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Cơ")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Khốc", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Khốc", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hỏa Tinh", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Hình", false))) { keyArr.push("Sách vận hạn 167 - Tiểu hạn - Thiên Cơ nhập hạn gặp Khốc, Hỏa, Hình"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Tướng") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Tướng")) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Hình", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Địa Không", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Địa Không", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Địa Kiếp", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Địa Kiếp", false)))) { keyArr.push("Sách vận hạn 168 - Tiểu hạn - Thiên Tướng nhập hạn gặp Thiên Hình, Địa Không hoặc Địa Kiếp"); }
@@ -5692,9 +5835,9 @@ function LuanVanHanSach(keyArr, loai) {
         if (lasoData.tenCungTieuHan && (((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Địa Kiếp") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Địa Kiếp")) && kiemTraSaoSangToi(["Dần", "Thân", "Tỵ", "Hợi"], ["Tý", "Ngọ", "Mão", "Dậu", "Sửu", "Mùi", "Tuất", "Thìn"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao sáng"))) { keyArr.push("Sách vận hạn 176 - Tiểu hạn - Địa Kiếp đắc địa nhập hạn"); }
         if (lasoData.tenCungTieuHan && (((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Địa Kiếp") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Địa Kiếp")) && kiemTraSaoSangToi(["Dần", "Thân", "Tỵ", "Hợi"], ["Tý", "Ngọ", "Mão", "Dậu", "Sửu", "Mùi", "Tuất", "Thìn"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối"))) { keyArr.push("Sách vận hạn 177 - Tiểu hạn - Địa Kiếp hãm địa nhập hạn"); }
         if (lasoData.tenCungTieuHan && (((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Linh Tinh") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Linh Tinh")) && kiemTraSaoSangToi(["Dần", "Mão", "Thìn", "Tỵ", "Ngọ"], ["Thân", "Dậu", "Tuất", "Hợi", "Sửu", "Mùi", "Tý", "Ngọ"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao sáng"))) { keyArr.push("Sách vận hạn 178 - Tiểu hạn - Linh Tinh đắc địa nhập hạn"); }
-        if (lasoData.tenCungTieuHan && (((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Linh Tinh") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Linh Tinh")) && kiemTraSaoSangToi(["Dần", "Mão", "Thìn", "Tỵ", "Ngọ"], ["Thân", "Dậu", "Tuất", "Hợi", "Sửu", "Mùi", "Tý", "Ngọ"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối"))) { keyArr.push("Sách vận hạn 179 - Tiểu hạn - Linh Tinh hãm địa nhập hạn"); }
+        if (lasoData.tenCungTieuHan && (((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Linh Tinh") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Linh Tinh")) && kiemTraSaoSangToi(["Dần", "Mão", "Thìn", "Tỵ", "Ngọ"], ["Thân", "Dậu", "Tuất", "Hợi", "Sửu", "Mùi", "Tý", "Ngọ"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối")) && !((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Tang Môn", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Tang Môn", false)))) { keyArr.push("Sách vận hạn 179 - Tiểu hạn - Linh Tinh hãm địa nhập hạn"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Hỷ Thần") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Hỷ Thần")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Điếu Khách", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Điếu Khách", false))) { keyArr.push("Sách vận hạn 180 - Tiểu hạn - Hỷ Thần gặp Điếu Khách"); }
-        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Kình Dương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Kình Dương")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Hình", false)) && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Ngọ")) { keyArr.push("Sách vận hạn 181 - Tiểu hạn - Kình Dương, Thiên Hình nhập hạn ở Ngọ"); }
+        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Kình Dương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Kình Dương")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Hình", false)) && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Ngọ") && !(phu17DemSatTinh(lasoData.tenCungTieuHan) > 2)) { keyArr.push("Sách vận hạn 181 - Tiểu hạn - Kình Dương, Thiên Hình nhập hạn ở Ngọ"); }
         if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Kình Dương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Kình Dương")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Vũ Khúc", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Vũ Khúc", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Phá Quân", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Phá Quân", false))) { keyArr.push("Sách vận hạn 182 - Tiểu hạn - Kình Dương gặp Vũ Khúc, Phá Quân"); }
         if (lasoData.tenCungTieuHan && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Nguyệt Đức", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Nguyệt Đức", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Đào Hoa", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Đào Hoa", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hồng Loan", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hồng Loan", false))) { keyArr.push("Sách vận hạn 183 - Tiểu hạn - Hạn gặp Nguyệt Đức, Đào Hoa, Hồng Loan"); }
         if (lasoData.tenCungTieuHan && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Long Trì", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Long Trì", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Phượng Các", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Phượng Các", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Phong Cáo", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Phong Cáo", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Quốc Ấn", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Quốc Ấn", false))) { keyArr.push("Sách vận hạn 185 - Tiểu hạn - Hạn gặp Long Trì, Phượng Các, Phong Cáo, Quốc Ấn"); }
@@ -5738,81 +5881,31 @@ function LuanVanHanSach(keyArr, loai) {
         if (lasoData.tenCungTieuHan && ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Cơ") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Cơ")) || (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thái Âm") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thái Âm")) || (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Đồng") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Đồng")) || (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Lương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Lương")) || (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Cự Môn") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Cự Môn")) || (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thái Dương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thái Dương"))) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Kình Dương", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Đà La", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Đà La", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Địa Không", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Địa Không", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Địa Kiếp", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Địa Kiếp", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Phá Toái", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Phá Toái", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Kiếp Sát", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Kiếp Sát", false)))) { keyArr.push("Sách vận hạn 227 - Tiểu hạn - Cơ, Nguyệt, Đồng, Lương hoặc Cự, Nhật nhập hạn gặp Kình, Đà, Không, Kiếp, Phá Toái hoặc Kiếp Sát"); }
         if (lasoData.tenCungTieuHan && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Kình Dương", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Đà La", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Đà La", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Địa Không", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Địa Không", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Địa Kiếp", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Địa Kiếp", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hỏa Tinh", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Linh Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Linh Tinh", false))) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hóa Lộc", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hóa Lộc", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Lộc Tồn", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Lộc Tồn", false))) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Mã", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Mã", false)) && phu17DemKhong(lasoData.tenCungTieuHan, 0) > 2) { keyArr.push("Sách vận hạn 228 - Tiểu hạn - Hạn gặp sát tinh, Lộc, Mã hội hợp và bị Tam Không xâm phạm"); }
         if (lasoData.tenCungTieuHan && phu17CungLucHai(phu17ChiCung(lasoData, lasoData.tenCungDaiVan), phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) && ((lasoData.tenCungDaiVan === "Tật Ách" && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Hình") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Không") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Kình Dương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Đà La") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Hỏa Tinh") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Linh Tinh") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Địa Không") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Địa Kiếp") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Hóa Kỵ") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Đại Hao") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Tiểu Hao") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Bạch Hổ") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Tang Môn") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Khốc") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Hư"))) || (lasoData.tenCungTieuHan === "Tật Ách" && (isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Hình") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Không") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Kình Dương") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Đà La") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Hỏa Tinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Linh Tinh") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Địa Không") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Địa Kiếp") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Hóa Kỵ") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Đại Hao") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tiểu Hao") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Bạch Hổ") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Tang Môn") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Khốc") || isSaoToaThuTaiCung(lasoData.tenCungDaiVan, "Thiên Hư"))))) { keyArr.push("Sách vận hạn 229 - Tiểu hạn - Đại hạn và tiểu hạn ở hai cung lục hại nhau (Tý-Mùi, Sửu-Ngọ, Dần-Tỵ, Mão-Thìn, Thân-Hợi, Dậu-Tuất), một bên là cung Tật Ách (có Thiên Sứ), bên kia có sao hình thương (Thiên Hình, Thiên Không, lục sát, Hóa Kỵ, Thất Sát hoặc sáu bại tinh Đại Hao, Tiểu Hao, Bạch Hổ, Tang Môn, Thiên Khốc, Thiên Hư)"); }
+        if (lasoData.tenCungTieuHan && (lasoData.chiNam === "Tý") && (phu17ChiNamXem(lasoData) === "Dần" || phu17ChiNamXem(lasoData) === "Thân" || phu17ChiNamXem(lasoData) === "Tý" || phu17ChiNamXem(lasoData) === "Ngọ") && phu17DemCatTinh(lasoData.tenCungTieuHan) > 2) { keyArr.push("Sách vận hạn 230 - Tiểu hạn - Tuổi Tý gặp năm xem hạn thuộc Dần/Thân/Tý/Ngọ là năm kỵ, có nhiều sao tốt hội hợp"); }
+        if (lasoData.tenCungTieuHan && (lasoData.chiNam === "Dần") && (phu17ChiNamXem(lasoData) === "Dần" || phu17ChiNamXem(lasoData) === "Thân" || phu17ChiNamXem(lasoData) === "Tỵ" || phu17ChiNamXem(lasoData) === "Hợi") && phu17DemCatTinh(lasoData.tenCungTieuHan) > 2) { keyArr.push("Sách vận hạn 231 - Tiểu hạn - Tuổi Dần gặp năm xem hạn thuộc Dần/Thân/Tỵ/Hợi là năm kỵ, có nhiều sao tốt hội hợp"); }
+        if (lasoData.tenCungTieuHan && (lasoData.chiNam === "Mão") && (phu17ChiNamXem(lasoData) === "Mão" || phu17ChiNamXem(lasoData) === "Dậu" || phu17ChiNamXem(lasoData) === "Tỵ" || phu17ChiNamXem(lasoData) === "Hợi") && phu17DemCatTinh(lasoData.tenCungTieuHan) > 2) { keyArr.push("Sách vận hạn 232 - Tiểu hạn - Tuổi Mão gặp năm xem hạn thuộc Mão/Dậu/Tỵ/Hợi là năm kỵ, có nhiều sao tốt hội hợp"); }
+        if (lasoData.tenCungTieuHan && lasoData.hanhMenh === "Thủy" && lasoData.cucSo === 2 && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Sửu" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Dần") && ((isCungCoTuan(lasoData.tenCungTieuHan) || isCungCoTriet(lasoData.tenCungTieuHan)) || phu17DemCatTinh(lasoData.tenCungTieuHan) > 2)) { keyArr.push("Sách vận hạn 233 - Tiểu hạn - Hành Mệnh Thủy, Thủy Nhị Cục, tiểu hạn đến Sửu hoặc Dần, có Tuần, Triệt án ngữ hoặc nhiều sao tốt hội hợp"); }
+        if (lasoData.tenCungTieuHan && lasoData.hanhMenh === "Mộc" && lasoData.cucSo === 3 && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Ngọ") && ((isCungCoTuan(lasoData.tenCungTieuHan) || isCungCoTriet(lasoData.tenCungTieuHan)) || phu17DemCatTinh(lasoData.tenCungTieuHan) > 2)) { keyArr.push("Sách vận hạn 234 - Tiểu hạn - Hành Mệnh Mộc, Mộc Tam Cục, tiểu hạn đến Ngọ, có Tuần, Triệt án ngữ hoặc nhiều sao tốt hội hợp"); }
+        if (lasoData.tenCungTieuHan && lasoData.hanhMenh === "Kim" && lasoData.cucSo === 4 && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Tý") && ((isCungCoTuan(lasoData.tenCungTieuHan) || isCungCoTriet(lasoData.tenCungTieuHan)) || phu17DemCatTinh(lasoData.tenCungTieuHan) > 2)) { keyArr.push("Sách vận hạn 235 - Tiểu hạn - Hành Mệnh Kim, Kim Tứ Cục, tiểu hạn đến Tý, có Tuần, Triệt án ngữ hoặc nhiều sao tốt hội hợp"); }
+        if (lasoData.tenCungTieuHan && lasoData.hanhMenh === "Thổ" && lasoData.cucSo === 5 && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Mão" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Thìn" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Tỵ") && ((isCungCoTuan(lasoData.tenCungTieuHan) || isCungCoTriet(lasoData.tenCungTieuHan)) || phu17DemCatTinh(lasoData.tenCungTieuHan) > 2)) { keyArr.push("Sách vận hạn 236 - Tiểu hạn - Hành Mệnh Thổ, Thổ Ngũ Cục, tiểu hạn đến Mão, Thìn hoặc Tỵ, có Tuần, Triệt án ngữ hoặc nhiều sao tốt hội hợp"); }
+        if (lasoData.tenCungTieuHan && lasoData.hanhMenh === "Hỏa" && lasoData.cucSo === 6 && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Dậu") && ((isCungCoTuan(lasoData.tenCungTieuHan) || isCungCoTriet(lasoData.tenCungTieuHan)) || phu17DemCatTinh(lasoData.tenCungTieuHan) > 2)) { keyArr.push("Sách vận hạn 237 - Tiểu hạn - Hành Mệnh Hỏa, Hỏa Lục Cục, tiểu hạn đến Dậu, có Tuần, Triệt án ngữ hoặc nhiều sao tốt hội hợp"); }
+        if (lasoData.tenCungTieuHan && (phu17CoSaoSang("Mệnh", ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"]) || phu17CoSaoSang(lasoData.cungCu, ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"])) && phu17CoSaoSang(lasoData.tenCungTieuHan, ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"]) && ((((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thất Sát")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Ngọ", "Tỵ", "Hợi", "Sửu", "Mùi"], ["Thìn", "Tuất", "Dậu", "Mão"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Phá Quân") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Phá Quân")) && kiemTraSaoSangToi(["Tý", "Ngọ", "Sửu", "Mùi", "Thìn", "Tuất"], ["Dần", "Thân", "Mão", "Dậu", "Tỵ", "Hợi"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Liêm Trinh") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Liêm Trinh")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Dần", "Thân"], ["Dậu", "Hợi", "Mão", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Tham Lang") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Tham Lang")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Dần", "Thân"], ["Tý", "Ngọ", "Mão", "Dậu", "Tỵ", "Hợi"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối")) || phu17DemSatTinh(lasoData.tenCungTieuHan) > 0)) { keyArr.push("Sách vận hạn 238 - Tiểu hạn - Mệnh/Thân có Sát Phá Liêm Tham hoặc sát tinh sáng sủa, hạn cũng gặp nhóm này sáng sủa nhưng có sao hãm địa hoặc thêm sao mờ ám"); }
+        if (lasoData.tenCungTieuHan && (phu17CoSaoSang("Mệnh", ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"]) || phu17CoSaoSang(lasoData.cungCu, ["Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"])) && phu17CoSaoSang(lasoData.tenCungTieuHan, ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"]) && ((((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Tử Vi") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Tử Vi")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Tỵ", "Ngọ", "Dần", "Thân"], [], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Phủ") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Phủ")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Ngọ", "Thìn", "Tuất", "Tỵ", "Hợi", "Mùi"], [], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Vũ Khúc") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Vũ Khúc")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Dần", "Thân", "Dậu", "Mão"], ["Hợi", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Tướng") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Tướng")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Ngọ", "Thìn", "Tuất", "Sửu", "Mùi", "Tỵ", "Hợi"], ["Mão", "Dậu"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Cự Môn") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Cự Môn")) && kiemTraSaoSangToi(["Mão", "Dậu", "Tý", "Ngọ", "Dần", "Thân", "Hợi"], ["Sửu", "Mùi", "Thìn", "Tuất", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thái Dương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thái Dương")) && kiemTraSaoSangToi(["Tỵ", "Ngọ", "Dần", "Mão", "Thìn", "Sửu", "Mùi"], ["Thân", "Dậu", "Tuất", "Hợi", "Tý"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Cơ") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Cơ")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Mão", "Dậu", "Tỵ", "Thân", "Tý", "Ngọ", "Sửu", "Mùi"], ["Dần", "Hợi"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thái Âm") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thái Âm")) && kiemTraSaoSangToi(["Dậu", "Tuất", "Hợi", "Thân", "Tý", "Sửu", "Mùi"], ["Dần", "Mão", "Ngọ", "Thìn", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Đồng") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Đồng")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Mão", "Tỵ", "Hợi"], ["Ngọ", "Sửu", "Mùi", "Tuất", "Thìn", "Dậu"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối") || ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Lương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Lương")) && kiemTraSaoSangToi(["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Mão", "Dần", "Thân"], ["Dậu", "Hợi", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối")) || (isCungCoTuan(lasoData.tenCungTieuHan) || isCungCoTriet(lasoData.tenCungTieuHan)) || phu17DemSatTinh(lasoData.tenCungTieuHan) > 0)) { keyArr.push("Sách vận hạn 239 - Tiểu hạn - Mệnh/Thân có Sát Phá Liêm Tham hoặc sát tinh sáng sủa, hạn gặp Tử Phủ Vũ Tướng, Cự Nhật, Cơ Nguyệt Đồng Lương sáng sủa nhưng có sao hãm địa, Tuần, Triệt hoặc sao mờ ám"); }
+        if (lasoData.tenCungTieuHan && (phu17CoSaoSang("Mệnh", ["Vũ Khúc", "Thiên Tướng"]) || phu17CoSaoSang(lasoData.cungCu, ["Vũ Khúc", "Thiên Tướng"])) && phu17CoSaoSang(lasoData.tenCungTieuHan, ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương", "Thất Sát", "Phá Quân", "Liêm Trinh", "Tham Lang", "Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"]) && phu17DemSatTinh(lasoData.tenCungTieuHan) > 0) { keyArr.push("Sách vận hạn 240 - Tiểu hạn - Mệnh/Thân có Vũ Khúc hoặc Thiên Tướng sáng sủa, hạn gặp các bộ sao chính sáng sủa nhưng có sao mờ ám"); }
+        if (lasoData.tenCungTieuHan && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Kiếp Sát", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Kiếp Sát", false)) && lasoData.tuoiAm > 49) { keyArr.push("Sách vận hạn 241 - Tiểu hạn - Hạn gặp Kiếp Sát khi đã lớn tuổi (từ 50)"); }
+        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Tham Lang") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Tham Lang")) && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Văn Xương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Văn Xương")) && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Dần" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Thân") && ((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Hỏa Tinh") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Hỏa Tinh")) || (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Linh Tinh") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Linh Tinh")))) { keyArr.push("Sách vận hạn 242 - Tiểu hạn - Hạn có Tham Lang, Văn Xương ở Dần hoặc Thân nhưng có Hỏa hoặc Linh đồng vị"); }
+        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung("Mệnh", "Thất Sát") || isSaoToaThuTaiCung(lasoData.cungCu, "Thất Sát")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Hình", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hóa Kỵ", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hóa Kỵ", false)) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Tử Vi", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Tử Vi", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Lộc Tồn", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Lộc Tồn", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Tướng", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Tướng", false)))) { keyArr.push("Sách vận hạn 243 - Tiểu hạn - Thân hoặc Mệnh có Thất Sát, hạn gặp Thiên Hình và Hóa Kỵ nhưng có Tử Vi, Lộc Tồn hoặc Thiên Tướng"); }
+        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Hóa Kỵ") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Hóa Kỵ")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thái Tuế", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thái Tuế", false)) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Tử Vi", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Tử Vi", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Phủ", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Phủ", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Văn Xương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Văn Xương", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Văn Khúc", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Văn Khúc", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Tả Phù", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Tả Phù", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hữu Bật", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hữu Bật", false)))) { keyArr.push("Sách vận hạn 244 - Tiểu hạn - Đại hạn hoặc tiểu hạn có Hóa Kỵ lại thêm Thái Tuế nhưng hội Tử Vi, Thiên Phủ, Xương, Khúc, Tả hoặc Hữu"); }
+        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Cơ") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Cơ")) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Kình Dương", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Đà La", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Đà La", false))) && (((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Cự Môn") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Cự Môn")) && kiemTraSaoSangToi(["Mão", "Dậu", "Tý", "Ngọ", "Dần", "Thân", "Hợi"], ["Sửu", "Mùi", "Thìn", "Tuất", "Tỵ"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối"))) { keyArr.push("Sách vận hạn 245 - Tiểu hạn - Thiên Cơ nhập hạn gặp Kình Dương hoặc Đà La, thêm Cự Môn hãm địa cùng cung"); }
+        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Vũ Khúc") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Vũ Khúc")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hóa Quyền", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hóa Quyền", false)) && phu17DemCatTinh(lasoData.tenCungTieuHan) > 1) { keyArr.push("Sách vận hạn 246 - Tiểu hạn - Vũ Khúc nhập hạn có Hóa Quyền lại có thêm sao tốt khác trợ lực"); }
+        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Liêm Trinh") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Liêm Trinh")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Hình", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Kình Dương", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Phá Quân", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Phá Quân", false))) { keyArr.push("Sách vận hạn 247 - Tiểu hạn - Liêm Trinh nhập hạn gặp Thiên Hình và Kình Dương, thêm Phá Quân"); }
+        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thiên Tướng") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thiên Tướng")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Kình Dương", false)) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hỏa Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hỏa Tinh", false)) || (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Linh Tinh", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Linh Tinh", false)))) { keyArr.push("Sách vận hạn 248 - Tiểu hạn - Thiên Tướng nhập hạn gặp Kình Dương, thêm Hỏa hoặc Linh"); }
+        if (lasoData.tenCungTieuHan && (((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thất Sát")) && kiemTraSaoSangToi(["Dần", "Thân", "Tý", "Ngọ", "Tỵ", "Hợi", "Sửu", "Mùi"], ["Thìn", "Tuất", "Dậu", "Mão"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối")) && phu17DemSatTinh(lasoData.tenCungTieuHan) > 0) { keyArr.push("Sách vận hạn 249 - Tiểu hạn - Thất Sát hãm địa nhập hạn lại bị thêm ác diệu"); }
+        if (lasoData.tenCungTieuHan && (lasoData.chiNam === "Thìn" || lasoData.chiNam === "Tuất" || lasoData.chiNam === "Sửu" || lasoData.chiNam === "Mùi") && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Kình Dương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Kình Dương")) && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Tử Vi", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Tử Vi", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Văn Xương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Văn Xương", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Phủ", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Phủ", false)))) { keyArr.push("Sách vận hạn 250 - Tiểu hạn - Hạn có Kình Dương, người tuổi Thìn, Tuất, Sửu, Mùi gặp thêm Tử Vi, Văn Xương, Thiên Phủ"); }
+        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Liêm Trinh") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Liêm Trinh")) && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Tham Lang") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Tham Lang")) && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Tỵ" || phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Hợi") && ((isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Hóa Kỵ", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Hóa Kỵ", false)) || (isCungCoTuan(lasoData.tenCungTieuHan) || isCungCoTriet(lasoData.tenCungTieuHan)))) { keyArr.push("Sách vận hạn 251 - Tiểu hạn - Liêm Trinh, Tham Lang ở Tỵ hoặc Hợi nhập hạn nhưng gặp Hóa Kỵ hoặc Tuần, Triệt"); }
+        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Thất Sát") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Thất Sát")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Kình Dương", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Kình Dương", false)) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Hình", false)) && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Ngọ") && phu17DemSatTinh(lasoData.tenCungTieuHan) > 2) { keyArr.push("Sách vận hạn 252 - Tiểu hạn - Thất Sát nhập hạn ở Ngọ gặp Kình Dương, Thiên Hình, thêm nhiều sát tinh"); }
+        if (lasoData.tenCungTieuHan && (((isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Linh Tinh") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Linh Tinh")) && kiemTraSaoSangToi(["Dần", "Mão", "Thìn", "Tỵ", "Ngọ"], ["Thân", "Dậu", "Tuất", "Hợi", "Sửu", "Mùi", "Tý", "Ngọ"], phu17ChiCung(lasoData, lasoData.tenCungTieuHan)) === "sao tối")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Tang Môn", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Tang Môn", false))) { keyArr.push("Sách vận hạn 253 - Tiểu hạn - Linh Tinh hãm địa nhập hạn gặp thêm Tang Môn"); }
+        if (lasoData.tenCungTieuHan && (isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "Kình Dương") || isSaoToaThuTaiCung(lasoData.tenCungTieuHan, "L. Kình Dương")) && (isSaoHoiChieuRong(lasoData.tenCungTieuHan, "Thiên Hình", false) || isSaoHoiChieuRong(lasoData.tenCungTieuHan, "L. Thiên Hình", false)) && (phu17ChiCung(lasoData, lasoData.tenCungTieuHan) === "Ngọ") && phu17DemSatTinh(lasoData.tenCungTieuHan) > 2) { keyArr.push("Sách vận hạn 254 - Tiểu hạn - Kình Dương, Thiên Hình nhập hạn ở Ngọ, thêm nhiều sát tinh"); }
     }
 }
 // VHS17-END
-// TK18-BEGIN
-function phu17DemKhong(tenCung, loai) {
-    // loai: 0 = cung và ba cung hội; 1 = chỉ cung chính; 2 = chỉ ba cung hội; 3 = như 0 nhưng bỏ Tuần/Triệt của cung chính (đã tháo cởi khi hạn đến)
-    let d = {};
-    try {
-        d = JSON.parse(localStorage.getItem('laso_data')) || {};
-    } catch (e) { d = {}; }
-    const ob = d.lasoOb || [];
-    let i = 99;
-    for (let k = 0; k < ob.length; k++) { if (ob[k].tenCung === tenCung) { i = k; } }
-    if (i > 11) return 0;
-    const idxs = [i, (i + 4) % 12, (i + 6) % 12, (i + 8) % 12];
-    let coTuan = false;
-    let coTriet = false;
-    let coThien = false;
-    let coDia = false;
-    for (let a = 0; a < 4; a++) {
-        let xet = true;
-        if (loai === 1 && a > 0) { xet = false; }
-        if (loai === 2 && a === 0) { xet = false; }
-        const c = ob[idxs[a]];
-        if (xet && c) {
-            let boTT = false;
-            if (loai === 3 && a === 0) { boTT = true; }
-            if (!boTT && isCungCoTuan(c.tenCung)) { coTuan = true; }
-            if (!boTT && isCungCoTriet(c.tenCung)) { coTriet = true; }
-            let saoC = [];
-            if (Array.isArray(c.sao)) { saoC = c.sao; }
-            for (let b = 0; b < saoC.length; b++) {
-                if (saoC[b].ten === "Thiên Không") { coThien = true; }
-                if (saoC[b].ten === "Địa Không") { coDia = true; }
-            }
-        }
-    }
-    let dem = 0;
-    if (coTuan) { dem++; }
-    if (coTriet) { dem++; }
-    if (coThien) { dem++; }
-    if (coDia) { dem++; }
-    return dem;
-}
-function LuanTamKhong18_menh(keyArr) {
-    let lasoData = {};
-    try {
-        lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
-    } catch (e) { lasoData = {}; }
-    if (laCungVoChinhDieu("Mệnh") && phu17DemKhong("Mệnh", 1) === 1 && phu17DemKhong("Mệnh", 2) === 2) {
-        keyArr.push("Tam Không 01 - Mệnh - Cung Mệnh vô chính diệu có một Không tọa thủ và hai Không củng chiếu (Tam Không thượng cách)");
-    }
-    if (laCungVoChinhDieu("Mệnh") && phu17DemKhong("Mệnh", 1) === 3) {
-        keyArr.push("Tam Không 02 - Mệnh - Cung Mệnh vô chính diệu mà ba Không cùng nhập vào cung Mệnh rồi xung phá");
-    }
-    if (laCungVoChinhDieu("Mệnh") && phu17DemKhong("Mệnh", 0) === 4 && !(phu17DemKhong("Mệnh", 1) > 2)) {
-        keyArr.push("Tam Không 03 - Mệnh - Cung Mệnh vô chính diệu được đủ Tứ Không (Tuần, Triệt, Thiên Không, Địa Không) hội hợp");
-    }
-    if (laCungVoChinhDieu("Mệnh") && phu17DemKhong("Mệnh", 0) === 3 && !(phu17DemKhong("Mệnh", 1) > 2)) {
-        keyArr.push("Tam Không 04 - Mệnh - Cung Mệnh vô chính diệu được Tam Không (ba trong bốn Không) hội hợp");
-    }
-    if (laCungVoChinhDieu("Mệnh") && phu17DemKhong("Mệnh", 0) === 2) {
-        keyArr.push("Tam Không 05 - Mệnh - Cung Mệnh vô chính diệu được Nhị Không (hai trong bốn Không) hội hợp");
-    }
-    if (laCungVoChinhDieu("Mệnh") && phu17DemKhong("Mệnh", 0) === 1) {
-        keyArr.push("Tam Không 06 - Mệnh - Cung Mệnh vô chính diệu chỉ có Nhất Không (một trong bốn Không) hội hợp");
-    }
-    if (laCungVoChinhDieu("Mệnh") && phu17DemKhong("Mệnh", 0) > 2) {
-        keyArr.push("Tam Không 07 - Mệnh - Cung Mệnh vô chính diệu có Tứ hay Tam Không");
-    }
-    if (laCungVoChinhDieu("Mệnh") && phu17DemKhong("Mệnh", 0) > 2 && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
-        keyArr.push("Tam Không 08 - Mệnh - Cung Mệnh vô chính diệu có Tam Không hội Hóa Lộc");
-    }
-    if ((isCungCoTuan("Mệnh") && isCungCoTriet("Mệnh"))) {
-        keyArr.push("Tam Không 09 - Mệnh - Cung Mệnh có cả Tuần và Triệt cùng án ngữ (\"Tuần Triệt đương đầu\")");
-    }
-}
-// TK18-END

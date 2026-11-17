@@ -3454,8 +3454,11 @@ function LuanPhuGiaiLan17_thiendi(keyArr) {
     if (isSaoToaThuTaiCung("Thiên Di", "Thiên Mã") && (isSaoToaThuTaiCung("Thiên Di", "Hóa Lộc") || isSaoToaThuTaiCung("Thiên Di", "Lộc Tồn"))) {
         keyArr.push("Phú Giải số 14 (THIÊN MÃ) - Thiên Di: Thiên Mã + Hóa Lộc hoặc Lộc Tồn tọa thủ");
     }
-    if (isSaoToaThuTaiCung("Thiên Di", "Thiên Lương") && (phu17DemCatTinh("Thiên Di") > 0)) {
-        keyArr.push("Phú Giải số 10 (THIÊN LƯƠNG) - Thiên Di: Thiên Lương tọa thủ, gặp cát tinh");
+    if (isSaoToaThuTaiCung("Thiên Di", "Thiên Lương") && (phu17DemCatTinh("Thiên Di") > 0) && !isSaoHoiChieuRong("Thiên Di", "Thiên Hình", false) && !isSaoHoiChieuRong("Thiên Di", "Hóa Kỵ", false)) {
+        keyArr.push("Phú Giải số 10 (THIÊN LƯƠNG) - Thiên Di: Thiên Lương tọa thủ, gặp cát tinh, không gặp Thiên Hình hoặc Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Thiên Lương") && (phu17DemCatTinh("Thiên Di") > 0) && (isSaoHoiChieuRong("Thiên Di", "Thiên Hình", false) || isSaoHoiChieuRong("Thiên Di", "Hóa Kỵ", false))) {
+        keyArr.push("Phú Giải số 10 (THIÊN LƯƠNG)v - Thiên Di: Thiên Lương tọa thủ, gặp cát tinh + Thiên Hình hoặc Hóa Kỵ");
     }
 }
 // PHU17-END

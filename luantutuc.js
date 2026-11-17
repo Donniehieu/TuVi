@@ -3584,14 +3584,14 @@ function LuanPhuGiaiLan17_tutuc(keyArr) {
     if (isSaoToaThuTaiCung("Tử Tức", "Thất Sát") && isSaoHoiChieuRong("Tử Tức", "Đà La", false) && isSaoHoiChieuRong("Tử Tức", "Địa Không", false) && isSaoHoiChieuRong("Tử Tức", "Địa Kiếp", false)) {
         keyArr.push("Phú Giải số 13 (THẤT – SÁT) - Tử Tức: Thất Sát tọa thủ, gặp Đà La + Địa Không + Địa Kiếp");
     }
-    if (isSaoToaThuTaiCung("Tử Tức", "Cự Môn") && isSaoToaThuTaiCung("Tử Tức", "Lộc Tồn")) {
-        keyArr.push("Phú Giải số 38 (CỰ MÔN) - Tử Tức: Cự Môn + Lộc Tồn tọa thủ");
-    }
     if (isSaoToaThuTaiCung("Tử Tức", "Địa Không") && isSaoToaThuTaiCung("Tử Tức", "Địa Kiếp")) {
         keyArr.push("Phú Giải số 31 (ĐỊA KIẾP)a - Tử Tức: Địa Không + Địa Kiếp tọa thủ");
     }
     if (isSaoToaThuTaiCung("Tử Tức", "Địa Không") && isSaoToaThuTaiCung("Tử Tức", "Địa Kiếp")) {
         keyArr.push("Phú Giải số 32 (ĐỊA KIẾP)b - Tử Tức: Địa Không + Địa Kiếp tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Tử Tức", "Cự Môn") && isSaoToaThuTaiCung("Tử Tức", "Lộc Tồn")) {
+        keyArr.push("Phú Giải số 38 (CỰ MÔN)t - Tử Tức: Cự Môn + Lộc Tồn tọa thủ");
     }
 }
 // PHU17-END
