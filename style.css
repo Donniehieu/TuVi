@@ -513,3 +513,13 @@ body.board-full { overflow: hidden; }
 .laso-grid .tuan-border, .laso-grid .triet-border { background: #efe9d8 !important; color: #1a1710 !important; border: 0 !important; }
 .laso-grid .tam-hop-line { stroke: #d9b25f; stroke-width: 2.4; opacity: .85; }
 .laso-grid .tam-hop-xung { stroke-dasharray: 9 7; }
+
+/* Hàng dưới, thẻ hạn, độ sáng chính tinh (như bản Unity) */
+.laso-grid .chinh-tinh-group div { text-transform: uppercase; }
+.laso-grid .chinh-tinh-group [data-ds]::after { content: " (" attr(data-ds) ")"; }
+.laso-grid .tieu-han { display: none; }
+.laso-grid .nguyet-han { top: 18px; bottom: auto; right: 0; font-size: .72rem; }
+.laso-grid .ln-dv, .laso-grid .ln-ln { position: absolute; bottom: 3px; font-size: .68rem; color: #8d8878; font-family: Arial, sans-serif; }
+.laso-grid .ln-dv { left: 6px; }
+.laso-grid .ln-ln { right: 6px; }
+.laso-grid .pill-han { position: absolute; bottom: 24px; background: #efe9d8; color: #1a1710; border-radius: 4px; padding: 0 5px; font-size: .68rem; font-weight: bold; line-height: 1.35; font-family: Arial, sans-serif; }

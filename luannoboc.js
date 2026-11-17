@@ -1109,7 +1109,7 @@ function LuanCacCachCucThienPhuNoBoc(keyArr) {
             
             keyArr.push(["Thiên Phủ tọa thủ cung Nô Bộc gặp các sao: ", ["Thiên Không", "Địa Không", "Địa Kiếp"].join(", ")].join(" "));
         }
-        if (kiemTraCachCuc("Thiến Phủ", lucsattinh)) {
+        if (kiemTraCachCuc("Thiên Phủ", lucsattinh)) {
             
             keyArr.push(["Thiên Phủ tọa thủ cung Nô Bộc gặp các sao Sát tinh: ", lucsattinh.join(", ")].join(" "));
         }
@@ -1159,7 +1159,7 @@ function LuanCacCachCucThienPhuNoBoc(keyArr) {
                 
                 keyArr.push([`Người tuổi ${canhnham[i]} có Thiên Phủ tọa thủ cung Nô Bộc ở ${ngotuat[i]} gặp các sao cát tinh: `, XuongKhuc.concat(TaHuu).concat(KhoaLocQuyen).concat(KhoiViet).concat("Thiên Tướng").join(", ")].join(" "));
             }
-            if (kiemTraCachCuc("Thiên Phủ", "Thiên Tướng, Thiên Lương")) {
+            if (kiemTraCachCuc("Thiên Phủ", ["Thiên Tướng", "Thiên Lương"])) {
                 
                 keyArr.push(`Thiên Phủ tọa thủ cung Nô Bộc ở ${ngotuat[i]} gặp Thiên Tướng, Thiên Lương`);
             }
@@ -1505,7 +1505,7 @@ function LuanCachCucCuMonNoBoc(keyArr) {
                 
                 keyArr.push(`Cự Môn tọa thủ cung Nô Bộc ở ${ham[i]} đồng cung Lộc Tồn`);
             }
-            if (kiemTraCachCuc("Cự Môn", ["Hóa Lộc, Thái Tuế"])) {
+            if (kiemTraCachCuc("Cự Môn", ["Hóa Lộc", "Thái Tuế"])) {
                 
                 keyArr.push(`Cự Môn tọa thủ cung Nô Bộc ở ${ham[i]} gặp Hoá Lộc, Thái Tuế`);
             }
@@ -1830,9 +1830,9 @@ function LuanCachCucThienLuongNoBoc(keyArr) {
             keyArr.push(`Thiên Lương đồng cung Văn Xương tại cung Nô Bộc ở ${mieu[i]}`);
         }
     }
-    if (isSaoToaThuTaiCungVaChi("Nô Bộc", "Tỵ", "Thiên Lương") && kiemTraCachCuc("Thiên Lương", lucsattinh.concat("Đại Hao, Tiểu Hao"))) {
+    if (isSaoToaThuTaiCungVaChi("Nô Bộc", "Tỵ", "Thiên Lương") && kiemTraCachCuc("Thiên Lương", lucsattinh.concat(["Đại Hao", "Tiểu Hao"]))) {
         
-        keyArr.push(["Thiên Lương tọa thủ cung Nô Bộc ở Tỵ gặp các sao Sát tinh: ", lucsattinh.concat("Đại Hao, Tiểu Hao").join(", ")].join(" "));
+        keyArr.push(["Thiên Lương tọa thủ cung Nô Bộc ở Tỵ gặp các sao Sát tinh: ", lucsattinh.concat(["Đại Hao", "Tiểu Hao"]).join(", ")].join(" "));
     }
     for (let i = 0; i < tyhoi.length; i++) {
         if (isHaiSaoDongCungTaiCungChi("Nô Bộc", tyhoi[i], "Thiên Lương", "Thiên Mã")) {
@@ -1979,7 +1979,7 @@ function LuanCachCucThatSatNoBoc(keyArr) {
         }
 
     }
-    if (isSaoToaThuTaiCung("Nô Bộc", "Thất Sát") && kiemTraCachCuc("Thất Sát", ["Kình Dương", "Đà La", "Hoả Tinh", "Linh Tinh"])) {
+    if (isSaoToaThuTaiCung("Nô Bộc", "Thất Sát") && kiemTraCachCuc("Thất Sát", ["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"])) {
         
         keyArr.push("Thất Sát tọa thủ cung Nô Bộc gặp Kình Dương, Đà La, Hoả Tinh, Linh Tinh");
     }
@@ -1989,7 +1989,7 @@ function LuanCachCucThatSatNoBoc(keyArr) {
             
             keyArr.push(`Người tuổi ${binhmau[i]} có Thất Sát đồng cung Kình Dương tại cung Nô Bộc`);
         }
-        if (isSaoToaThuTaiCung(lasoData.cungCu, "Thất Sát") && kiemTraCachCuc("Thất Sát", ["Kình Dương", "Đà La", "Hoả Tinh", "Linh Tinh"])) {
+        if (isSaoToaThuTaiCung(lasoData.cungCu, "Thất Sát") && kiemTraCachCuc("Thất Sát", ["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"])) {
             
             keyArr.push(`Thất Sát tọa thủ cung ${lasoData.cungCu} gặp Kình Dương, Đà La, Hoả Tinh, Linh Tinh`);
         }
@@ -2095,12 +2095,12 @@ function LuanCachCucPhaQuanNoBoc(keyArr) {
         }
     }
 
-    if (isSaoToaThuTaiCung("Nô Bộc", "Phá Quân") && kiemTraCachCuc("Phá Quân", ["Thiên Việt", "Đại Hao", "Tiểu Hao", "Hoả Tinh", "Thiên Hình"])) {
+    if (isSaoToaThuTaiCung("Nô Bộc", "Phá Quân") && kiemTraCachCuc("Phá Quân", ["Thiên Việt", "Đại Hao", "Tiểu Hao", "Hỏa Tinh", "Thiên Hình"])) {
         
         keyArr.push("Phá Quân tọa thủ cung Nô Bộc gặp Thiên Việt, Đại Hao, Tiểu Hao, Hoả Tinh, Thiên Hình");
     }
 
-    if (isSaoToaThuTaiCung("Nô Bộc", "Phá Quân") && kiemTraCachCuc("Phá Quân", ["Hoả Tinh", "Linh Tinh", "Thiên Việt", "Thiên Hình"])) {
+    if (isSaoToaThuTaiCung("Nô Bộc", "Phá Quân") && kiemTraCachCuc("Phá Quân", ["Hỏa Tinh", "Linh Tinh", "Thiên Việt", "Thiên Hình"])) {
         
         keyArr.push("Phá Quân tọa thủ cung Nô Bộc gặp Hoả Tinh, Linh Tinh, Thiên Việt, Thiên Hình");
     }
@@ -2689,7 +2689,7 @@ function LuanCachCucKhongKiepNoBoc(keyArr) {
 
     }
 
-    if (isHaiSaoDongCungTaiCung("Nô Bộc", "Địa Kiếp", "Thiên Cơ") && kiemTraCachCuc("Địa Kiếp", ["Hoả Tinh"])) {
+    if (isHaiSaoDongCungTaiCung("Nô Bộc", "Địa Kiếp", "Thiên Cơ") && kiemTraCachCuc("Địa Kiếp", ["Hỏa Tinh"])) {
         
         keyArr.push("Địa Kiếp, Thiên Cơ đồng cung tại Nô Bộc gặp Hoả Tinh");
     }
@@ -2997,12 +2997,12 @@ function LuanCachCucTuHoaNoBoc(keyArr) {
         keyArr.push("Quý Chị có Đào Hoa, Hóa Quyền đồng cung tại Nô Bộc");
     }
 
-    if (isHaiSaoDongCungTaiCung("Nô Bộc", "Hồng Loan", "Đào Hoa") && isHaiSaoDongCungTaiCung("Nô Bộc", "Tả Phủ", "Hữu Bật") && isSaoToaThuTaiCung("Nô Bộc", "Hoa Cái") && lasoData.gioitinh === "Nam") {
+    if (isHaiSaoDongCungTaiCung("Nô Bộc", "Hồng Loan", "Đào Hoa") && isHaiSaoDongCungTaiCung("Nô Bộc", "Tả Phù", "Hữu Bật") && isSaoToaThuTaiCung("Nô Bộc", "Hoa Cái") && lasoData.gioitinh === "Nam") {
         
         keyArr.push("Quý Anh có Đào Hoa, Hồng Loan, Tả Phủ, Hữu Bật,Hoa Cái đồng cung tại Nô Bộc");
 
     }
-    if (isHaiSaoDongCungTaiCung("Nô Bộc", "Hồng Loan", "Đào Hoa") && isHaiSaoDongCungTaiCung("Nô Bộc", "Tả Phủ", "Hữu Bật") && isSaoToaThuTaiCung("Nô Bộc", "Hoa Cái") && lasoData.gioitinh === "Nữ") {
+    if (isHaiSaoDongCungTaiCung("Nô Bộc", "Hồng Loan", "Đào Hoa") && isHaiSaoDongCungTaiCung("Nô Bộc", "Tả Phù", "Hữu Bật") && isSaoToaThuTaiCung("Nô Bộc", "Hoa Cái") && lasoData.gioitinh === "Nữ") {
         
         keyArr.push("Quý Chị có Đào Hoa, Hồng Loan, Tả Phủ, Hữu Bật,Hoa Cái đồng cung tại Nô Bộc");
 
@@ -3070,7 +3070,7 @@ function LuanCachCucLucBaiTinhNoBoc(keyArr) {
 
         }
 
-        if (isHaiSaoDongCungTaiCung("Nô Bộc", tangho[i], "Tham Lang") && kiemTraCachCuc("Tham Lang", ["Hoả Tinh", "Linh Tinh", "Kình Dương", "Đà La"])) {
+        if (isHaiSaoDongCungTaiCung("Nô Bộc", tangho[i], "Tham Lang") && kiemTraCachCuc("Tham Lang", ["Hỏa Tinh", "Linh Tinh", "Kình Dương", "Đà La"])) {
             
             keyArr.push(tangho[i] + ", Tham Lang đồng cung tại Nô Bộc gặp Hỏa Tinh, Linh Tinh, Kình Dương, Đà La");
         }

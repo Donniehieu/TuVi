@@ -261,9 +261,9 @@ function kiemTraCachCuc(tenSaoGoc, boSaoCanKiemTra) {
     }
 
     // Kiểm tra đủ bộ sao không (bộ hợp phải chứa tất cả phần tử boSaoCanKiemTra)
-    const hopDuBo = boSaoArr.every(
-        s => saoHoiHop.some(hop => normalize(hop) === normalize(s))
-    );
+    // Bộ từ 4 sao trở lên (lục sát, Không Kiếp Kình Đà...) là danh sách "gặp một trong" nên dùng some; bộ ngắn (Khoa Lộc Quyền, Tả Hữu...) phải đủ cả.
+    const khopSao = s => saoHoiHop.some(hop => normalize(hop) === normalize(s));
+    const hopDuBo = boSaoArr.length >= 4 ? boSaoArr.some(khopSao) : boSaoArr.every(khopSao);
 
     if (!hopDuBo) return null;
 
@@ -311,9 +311,9 @@ function kiemtraCacCucTamHop(tenSaoGoc, boSaoCanKiemTra) {
     }
 
     // Kiểm tra đủ bộ sao không (bộ hợp phải chứa tất cả phần tử boSaoCanKiemTra)
-    const hopDuBo = boSaoArr.every(
-        s => saoHoiHop.some(hop => normalize(hop) === normalize(s))
-    );
+    // Bộ từ 4 sao trở lên (lục sát, Không Kiếp Kình Đà...) là danh sách "gặp một trong" nên dùng some; bộ ngắn (Khoa Lộc Quyền, Tả Hữu...) phải đủ cả.
+    const khopSao = s => saoHoiHop.some(hop => normalize(hop) === normalize(s));
+    const hopDuBo = boSaoArr.length >= 4 ? boSaoArr.some(khopSao) : boSaoArr.every(khopSao);
 
     if (!hopDuBo) return null;
 
