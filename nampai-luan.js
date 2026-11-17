@@ -7681,6 +7681,498 @@ function LuanCachThienCo22(keyArr) {
     if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
         keyArr.push("Sao nhập Mệnh TC1818 - Phá Quân tại Mệnh, nữ mạng");
     }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Sao nhập Mệnh TC1819 - Văn Xương tại Mệnh, ở Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tý"))) {
+        keyArr.push("Sao nhập Mệnh TC1820 - Văn Xương tại Mệnh, ở Tý");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Thìn"))) {
+        keyArr.push("Sao nhập Mệnh TC1821 - Văn Xương tại Mệnh, ở Thìn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tỵ"))) {
+        keyArr.push("Sao nhập Mệnh TC1822 - Văn Xương tại Mệnh, ở Tỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC1823 - Văn Xương tại Mệnh, ở Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Sửu"))) {
+        keyArr.push("Sao nhập Mệnh TC1824 - Văn Xương tại Mệnh, ở Sửu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Sao nhập Mệnh TC1825 - Văn Xương tại Mệnh, ở Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Mão"))) {
+        keyArr.push("Sao nhập Mệnh TC1826 - Văn Xương tại Mệnh, ở Mão");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Sao nhập Mệnh TC1827 - Văn Xương tại Mệnh, ở Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Sửu")) && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Mệnh TC1828 - Văn Xương tại Mệnh, ở Sửu, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Sửu")) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Mệnh TC1829 - Văn Xương tại Mệnh, ở Sửu, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Sửu")) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Mệnh TC1830 - Văn Xương tại Mệnh, ở Sửu, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Sửu")) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Mệnh TC1831 - Văn Xương tại Mệnh, ở Sửu, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Sửu")) && isSaoHoiChieuRong("Mệnh", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Mệnh TC1832 - Văn Xương tại Mệnh, ở Sửu, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Sửu")) && isSaoHoiChieuRong("Mệnh", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Mệnh TC1833 - Văn Xương tại Mệnh, ở Sửu, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Sửu")) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Mệnh TC1834 - Văn Xương tại Mệnh, ở Sửu, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Sửu")) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Mệnh TC1835 - Văn Xương tại Mệnh, ở Sửu, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Sửu")) && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Mệnh TC1836 - Văn Xương tại Mệnh, ở Sửu, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Sửu")) && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Mệnh TC1837 - Văn Xương tại Mệnh, ở Sửu, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Mệnh TC1838 - Văn Xương tại Mệnh, ở Tỵ, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Mệnh TC1839 - Văn Xương tại Mệnh, ở Tỵ, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Mệnh TC1840 - Văn Xương tại Mệnh, ở Tỵ, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Mệnh TC1841 - Văn Xương tại Mệnh, ở Tỵ, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Mệnh TC1842 - Văn Xương tại Mệnh, ở Tỵ, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Mệnh TC1843 - Văn Xương tại Mệnh, ở Tỵ, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Mệnh TC1844 - Văn Xương tại Mệnh, ở Tỵ, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Mệnh TC1845 - Văn Xương tại Mệnh, ở Tỵ, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Mệnh TC1846 - Văn Xương tại Mệnh, ở Tỵ, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Mệnh TC1847 - Văn Xương tại Mệnh, ở Tỵ, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Mệnh TC1848 - Văn Xương tại Mệnh, ở Dậu, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Mệnh TC1849 - Văn Xương tại Mệnh, ở Dậu, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Mệnh TC1850 - Văn Xương tại Mệnh, ở Dậu, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Mệnh TC1851 - Văn Xương tại Mệnh, ở Dậu, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Mệnh TC1852 - Văn Xương tại Mệnh, ở Dậu, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Mệnh TC1853 - Văn Xương tại Mệnh, ở Dậu, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Mệnh TC1854 - Văn Xương tại Mệnh, ở Dậu, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Mệnh TC1855 - Văn Xương tại Mệnh, ở Dậu, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Mệnh TC1856 - Văn Xương tại Mệnh, ở Dậu, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Mệnh TC1857 - Văn Xương tại Mệnh, ở Dậu, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Mệnh TC1858 - Văn Xương tại Mệnh, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Mệnh TC1859 - Văn Xương tại Mệnh, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Mệnh TC1860 - Văn Xương tại Mệnh, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Mệnh TC1861 - Văn Xương tại Mệnh, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Mệnh TC1862 - Văn Xương tại Mệnh, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Mệnh TC1863 - Văn Xương tại Mệnh, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Mệnh TC1864 - Văn Xương tại Mệnh, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Mệnh TC1865 - Văn Xương tại Mệnh, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Mệnh TC1866 - Văn Xương tại Mệnh, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Mệnh TC1867 - Văn Xương tại Mệnh, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Mệnh TC1868 - Văn Xương tại Mệnh, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Đà La", false)) {
+        keyArr.push("Sao nhập Mệnh TC1869 - Văn Xương tại Mệnh, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Mệnh TC1870 - Văn Xương tại Mệnh, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Mệnh TC1871 - Văn Xương tại Mệnh, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Sao nhập Mệnh TC1872 - Văn Xương tại Mệnh, ở Thân, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isCungTaiChi("Mệnh", "Tý"))) {
+        keyArr.push("Sao nhập Mệnh TC1873 - Văn Xương tại Mệnh, ở Tý, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isCungTaiChi("Mệnh", "Thìn"))) {
+        keyArr.push("Sao nhập Mệnh TC1874 - Văn Xương tại Mệnh, ở Thìn, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isCungTaiChi("Mệnh", "Tỵ"))) {
+        keyArr.push("Sao nhập Mệnh TC1875 - Văn Xương tại Mệnh, ở Tỵ, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC1876 - Văn Xương tại Mệnh, ở Dậu, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isCungTaiChi("Mệnh", "Sửu"))) {
+        keyArr.push("Sao nhập Mệnh TC1877 - Văn Xương tại Mệnh, ở Sửu, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Sao nhập Mệnh TC1878 - Văn Xương tại Mệnh, ở Hợi, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isCungTaiChi("Mệnh", "Mão"))) {
+        keyArr.push("Sao nhập Mệnh TC1879 - Văn Xương tại Mệnh, ở Mão, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Sao nhập Mệnh TC1880 - Văn Xương tại Mệnh, ở Mùi, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dần"))) {
+        keyArr.push("Sao nhập Mệnh TC1881 - Văn Xương tại Mệnh, ở Dần");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Sao nhập Mệnh TC1882 - Văn Xương tại Mệnh, ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tuất"))) {
+        keyArr.push("Sao nhập Mệnh TC1883 - Văn Xương tại Mệnh, ở Tuất");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dần")) && isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC1884 - Văn Xương tại Mệnh, ở Dần, đồng cung hoặc hội chiếu có Kình Dương, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dần")) && isSaoHoiChieuRong("Mệnh", "Đà La", false) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC1885 - Văn Xương tại Mệnh, ở Dần, đồng cung hoặc hội chiếu có Đà La, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dần")) && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC1886 - Văn Xương tại Mệnh, ở Dần, đồng cung hoặc hội chiếu có Hỏa Tinh, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dần")) && isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC1887 - Văn Xương tại Mệnh, ở Dần, đồng cung hoặc hội chiếu có Linh Tinh, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC1888 - Văn Xương tại Mệnh, ở Ngọ, đồng cung hoặc hội chiếu có Kình Dương, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Đà La", false) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC1889 - Văn Xương tại Mệnh, ở Ngọ, đồng cung hoặc hội chiếu có Đà La, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC1890 - Văn Xương tại Mệnh, ở Ngọ, đồng cung hoặc hội chiếu có Hỏa Tinh, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC1891 - Văn Xương tại Mệnh, ở Ngọ, đồng cung hoặc hội chiếu có Linh Tinh, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC1892 - Văn Xương tại Mệnh, ở Tuất, đồng cung hoặc hội chiếu có Kình Dương, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Đà La", false) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC1893 - Văn Xương tại Mệnh, ở Tuất, đồng cung hoặc hội chiếu có Đà La, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC1894 - Văn Xương tại Mệnh, ở Tuất, đồng cung hoặc hội chiếu có Hỏa Tinh, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC1895 - Văn Xương tại Mệnh, ở Tuất, đồng cung hoặc hội chiếu có Linh Tinh, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dần")) && isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam")) {
+        keyArr.push("Sao nhập Mệnh TC1896 - Văn Xương tại Mệnh, ở Dần, đồng cung hoặc hội chiếu có Kình Dương, nam mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dần")) && isSaoHoiChieuRong("Mệnh", "Đà La", false) && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam")) {
+        keyArr.push("Sao nhập Mệnh TC1897 - Văn Xương tại Mệnh, ở Dần, đồng cung hoặc hội chiếu có Đà La, nam mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dần")) && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam")) {
+        keyArr.push("Sao nhập Mệnh TC1898 - Văn Xương tại Mệnh, ở Dần, đồng cung hoặc hội chiếu có Hỏa Tinh, nam mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dần")) && isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam")) {
+        keyArr.push("Sao nhập Mệnh TC1899 - Văn Xương tại Mệnh, ở Dần, đồng cung hoặc hội chiếu có Linh Tinh, nam mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam")) {
+        keyArr.push("Sao nhập Mệnh TC1900 - Văn Xương tại Mệnh, ở Ngọ, đồng cung hoặc hội chiếu có Kình Dương, nam mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Đà La", false) && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam")) {
+        keyArr.push("Sao nhập Mệnh TC1901 - Văn Xương tại Mệnh, ở Ngọ, đồng cung hoặc hội chiếu có Đà La, nam mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam")) {
+        keyArr.push("Sao nhập Mệnh TC1902 - Văn Xương tại Mệnh, ở Ngọ, đồng cung hoặc hội chiếu có Hỏa Tinh, nam mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam")) {
+        keyArr.push("Sao nhập Mệnh TC1903 - Văn Xương tại Mệnh, ở Ngọ, đồng cung hoặc hội chiếu có Linh Tinh, nam mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam")) {
+        keyArr.push("Sao nhập Mệnh TC1904 - Văn Xương tại Mệnh, ở Tuất, đồng cung hoặc hội chiếu có Kình Dương, nam mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Đà La", false) && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam")) {
+        keyArr.push("Sao nhập Mệnh TC1905 - Văn Xương tại Mệnh, ở Tuất, đồng cung hoặc hội chiếu có Đà La, nam mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam")) {
+        keyArr.push("Sao nhập Mệnh TC1906 - Văn Xương tại Mệnh, ở Tuất, đồng cung hoặc hội chiếu có Hỏa Tinh, nam mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam")) {
+        keyArr.push("Sao nhập Mệnh TC1907 - Văn Xương tại Mệnh, ở Tuất, đồng cung hoặc hội chiếu có Linh Tinh, nam mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dần")) && isSaoHoiChieuRong("Mệnh", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Mệnh TC1908 - Văn Xương tại Mệnh, ở Dần, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dần")) && isSaoHoiChieuRong("Mệnh", "Đà La", false)) {
+        keyArr.push("Sao nhập Mệnh TC1909 - Văn Xương tại Mệnh, ở Dần, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dần")) && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Mệnh TC1910 - Văn Xương tại Mệnh, ở Dần, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dần")) && isSaoHoiChieuRong("Mệnh", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Mệnh TC1911 - Văn Xương tại Mệnh, ở Dần, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dần")) && isSaoHoiChieuRong("Mệnh", "Địa Không", false)) {
+        keyArr.push("Sao nhập Mệnh TC1912 - Văn Xương tại Mệnh, ở Dần, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dần")) && isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC1913 - Văn Xương tại Mệnh, ở Dần, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Mệnh TC1914 - Văn Xương tại Mệnh, ở Ngọ, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Đà La", false)) {
+        keyArr.push("Sao nhập Mệnh TC1915 - Văn Xương tại Mệnh, ở Ngọ, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Mệnh TC1916 - Văn Xương tại Mệnh, ở Ngọ, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Mệnh TC1917 - Văn Xương tại Mệnh, ở Ngọ, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Địa Không", false)) {
+        keyArr.push("Sao nhập Mệnh TC1918 - Văn Xương tại Mệnh, ở Ngọ, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC1919 - Văn Xương tại Mệnh, ở Ngọ, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Mệnh TC1920 - Văn Xương tại Mệnh, ở Tuất, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Đà La", false)) {
+        keyArr.push("Sao nhập Mệnh TC1921 - Văn Xương tại Mệnh, ở Tuất, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Mệnh TC1922 - Văn Xương tại Mệnh, ở Tuất, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Mệnh TC1923 - Văn Xương tại Mệnh, ở Tuất, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Địa Không", false)) {
+        keyArr.push("Sao nhập Mệnh TC1924 - Văn Xương tại Mệnh, ở Tuất, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC1925 - Văn Xương tại Mệnh, ở Tuất, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && (isCungTaiChi("Mệnh", "Sửu"))) {
+        keyArr.push("Sao nhập Mệnh TC1926 - Văn Xương và Văn Khúc đồng cung tại Mệnh, ở Sửu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && (isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Sao nhập Mệnh TC1927 - Văn Xương và Văn Khúc đồng cung tại Mệnh, ở Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn")) {
+        keyArr.push("Sao nhập Mệnh TC1928 - Văn Xương, Thiên Cơ, Văn Khúc và Lộc Tồn đồng cung tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Thái Dương", false)) {
+        keyArr.push("Sao nhập Mệnh TC1929 - Văn Xương tại Mệnh, đồng cung hoặc hội chiếu có Thái Dương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Thiên Lương", false)) {
+        keyArr.push("Sao nhập Mệnh TC1930 - Văn Xương tại Mệnh, đồng cung hoặc hội chiếu có Thiên Lương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Thiên Đồng", false)) {
+        keyArr.push("Sao nhập Mệnh TC1931 - Văn Xương tại Mệnh, đồng cung hoặc hội chiếu có Thiên Đồng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Mệnh TC1932 - Văn Xương tại Mệnh, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Vũ Khúc")) {
+        keyArr.push("Sao nhập Mệnh TC1933 - Văn Xương và Vũ Khúc đồng cung tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh")) {
+        keyArr.push("Sao nhập Mệnh TC1934 - Văn Xương và Liêm Trinh đồng cung tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Tham Lang")) {
+        keyArr.push("Sao nhập Mệnh TC1935 - Văn Xương và Tham Lang đồng cung tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Thất Sát")) {
+        keyArr.push("Sao nhập Mệnh TC1936 - Văn Xương và Thất Sát đồng cung tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Kình Dương")) {
+        keyArr.push("Sao nhập Mệnh TC1937 - Văn Xương và Kình Dương đồng cung tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Đà La")) {
+        keyArr.push("Sao nhập Mệnh TC1938 - Văn Xương và Đà La đồng cung tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
+        keyArr.push("Sao nhập Mệnh TC1939 - Văn Xương và Tham Lang đồng cung tại Mệnh, ở Tỵ, đồng cung hoặc hội chiếu có Kình Dương và Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Đà La", false) && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
+        keyArr.push("Sao nhập Mệnh TC1940 - Văn Xương và Tham Lang đồng cung tại Mệnh, ở Tỵ, đồng cung hoặc hội chiếu có Đà La và Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
+        keyArr.push("Sao nhập Mệnh TC1941 - Văn Xương và Tham Lang đồng cung tại Mệnh, ở Tỵ, đồng cung hoặc hội chiếu có Hỏa Tinh và Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
+        keyArr.push("Sao nhập Mệnh TC1942 - Văn Xương và Tham Lang đồng cung tại Mệnh, ở Tỵ, đồng cung hoặc hội chiếu có Linh Tinh và Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
+        keyArr.push("Sao nhập Mệnh TC1943 - Văn Xương và Tham Lang đồng cung tại Mệnh, ở Hợi, đồng cung hoặc hội chiếu có Kình Dương và Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Đà La", false) && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
+        keyArr.push("Sao nhập Mệnh TC1944 - Văn Xương và Tham Lang đồng cung tại Mệnh, ở Hợi, đồng cung hoặc hội chiếu có Đà La và Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
+        keyArr.push("Sao nhập Mệnh TC1945 - Văn Xương và Tham Lang đồng cung tại Mệnh, ở Hợi, đồng cung hoặc hội chiếu có Hỏa Tinh và Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
+        keyArr.push("Sao nhập Mệnh TC1946 - Văn Xương và Tham Lang đồng cung tại Mệnh, ở Hợi, đồng cung hoặc hội chiếu có Linh Tinh và Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Cự Môn")) {
+        keyArr.push("Sao nhập Mệnh TC1947 - Văn Xương và Cự Môn đồng cung tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && isSaoToaThuTaiCung("Mệnh", "Phá Quân")) {
+        keyArr.push("Sao nhập Mệnh TC1948 - Văn Xương, Văn Khúc và Phá Quân đồng cung tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoHoiChieuRong("Mệnh", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Mệnh TC1949 - Văn Xương, Văn Khúc và Phá Quân đồng cung tại Mệnh, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoHoiChieuRong("Mệnh", "Đà La", false)) {
+        keyArr.push("Sao nhập Mệnh TC1950 - Văn Xương, Văn Khúc và Phá Quân đồng cung tại Mệnh, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Mệnh TC1951 - Văn Xương, Văn Khúc và Phá Quân đồng cung tại Mệnh, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoHoiChieuRong("Mệnh", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Mệnh TC1952 - Văn Xương, Văn Khúc và Phá Quân đồng cung tại Mệnh, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoHoiChieuRong("Mệnh", "Địa Không", false)) {
+        keyArr.push("Sao nhập Mệnh TC1953 - Văn Xương, Văn Khúc và Phá Quân đồng cung tại Mệnh, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC1954 - Văn Xương, Văn Khúc và Phá Quân đồng cung tại Mệnh, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Mệnh TC1955 - Văn Xương tại Mệnh, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Tả Phù") && isSaoToaThuTaiCung("Mệnh", "Kình Dương")) {
+        keyArr.push("Sao nhập Mệnh TC1956 - Văn Xương, Tả Phù và Kình Dương đồng cung tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn")) {
+        keyArr.push("Sao nhập Mệnh TC1957 - Văn Xương, Văn Khúc và Lộc Tồn đồng cung tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Tả Phù")) {
+        keyArr.push("Sao nhập Mệnh TC1958 - Văn Xương và Tả Phù đồng cung tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Hữu Bật")) {
+        keyArr.push("Sao nhập Mệnh TC1959 - Văn Xương và Hữu Bật đồng cung tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dần")) && isSaoToaThuTaiCung("Mệnh", "Thiên Thương") && isSaoHoiChieuRong("Mệnh", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Mệnh TC1960 - Văn Xương và Thiên Thương đồng cung tại Mệnh, ở Dần, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dần")) && isSaoToaThuTaiCung("Mệnh", "Thiên Thương") && isSaoHoiChieuRong("Mệnh", "Đà La", false)) {
+        keyArr.push("Sao nhập Mệnh TC1961 - Văn Xương và Thiên Thương đồng cung tại Mệnh, ở Dần, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dần")) && isSaoToaThuTaiCung("Mệnh", "Thiên Thương") && isSaoHoiChieuRong("Mệnh", "Địa Không", false)) {
+        keyArr.push("Sao nhập Mệnh TC1962 - Văn Xương và Thiên Thương đồng cung tại Mệnh, ở Dần, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dần")) && isSaoToaThuTaiCung("Mệnh", "Thiên Thương") && isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC1963 - Văn Xương và Thiên Thương đồng cung tại Mệnh, ở Dần, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoToaThuTaiCung("Mệnh", "Thiên Thương") && isSaoHoiChieuRong("Mệnh", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Mệnh TC1964 - Văn Xương và Thiên Thương đồng cung tại Mệnh, ở Ngọ, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoToaThuTaiCung("Mệnh", "Thiên Thương") && isSaoHoiChieuRong("Mệnh", "Đà La", false)) {
+        keyArr.push("Sao nhập Mệnh TC1965 - Văn Xương và Thiên Thương đồng cung tại Mệnh, ở Ngọ, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoToaThuTaiCung("Mệnh", "Thiên Thương") && isSaoHoiChieuRong("Mệnh", "Địa Không", false)) {
+        keyArr.push("Sao nhập Mệnh TC1966 - Văn Xương và Thiên Thương đồng cung tại Mệnh, ở Ngọ, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoToaThuTaiCung("Mệnh", "Thiên Thương") && isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC1967 - Văn Xương và Thiên Thương đồng cung tại Mệnh, ở Ngọ, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoToaThuTaiCung("Mệnh", "Thiên Thương") && isSaoHoiChieuRong("Mệnh", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Mệnh TC1968 - Văn Xương và Thiên Thương đồng cung tại Mệnh, ở Tuất, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoToaThuTaiCung("Mệnh", "Thiên Thương") && isSaoHoiChieuRong("Mệnh", "Đà La", false)) {
+        keyArr.push("Sao nhập Mệnh TC1969 - Văn Xương và Thiên Thương đồng cung tại Mệnh, ở Tuất, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoToaThuTaiCung("Mệnh", "Thiên Thương") && isSaoHoiChieuRong("Mệnh", "Địa Không", false)) {
+        keyArr.push("Sao nhập Mệnh TC1970 - Văn Xương và Thiên Thương đồng cung tại Mệnh, ở Tuất, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoToaThuTaiCung("Mệnh", "Thiên Thương") && isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC1971 - Văn Xương và Thiên Thương đồng cung tại Mệnh, ở Tuất, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Mệnh TC1972 - Văn Xương và Hóa Kỵ đồng cung tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Dần")) && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Mệnh TC1973 - Văn Xương và Hóa Kỵ đồng cung tại Mệnh, ở Dần");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Mệnh TC1974 - Văn Xương và Hóa Kỵ đồng cung tại Mệnh, ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Mệnh TC1975 - Văn Xương và Hóa Kỵ đồng cung tại Mệnh, ở Tuất");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Hóa Khoa") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Mệnh TC1976 - Văn Xương, Hóa Khoa, Liêm Trinh và Hóa Kỵ đồng cung tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Hóa Khoa")) {
+        keyArr.push("Sao nhập Mệnh TC1977 - Văn Xương và Hóa Khoa đồng cung tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (lasoData.canNam === "C.")) {
+        keyArr.push("Sao nhập Mệnh TC1978 - Văn Xương tại Mệnh, sinh năm Canh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (lasoData.canNam === "T.")) {
+        keyArr.push("Sao nhập Mệnh TC1979 - Văn Xương tại Mệnh, sinh năm Tân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC1980 - Văn Xương, Thiên Tướng và Văn Khúc đồng cung tại Mệnh, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC1981 - Văn Xương, Văn Khúc và Liêm Trinh đồng cung tại Mệnh, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC1982 - Văn Xương, Văn Khúc và Tham Lang đồng cung tại Mệnh, nữ mạng");
+    }
 }
 // CACH22-END
 
@@ -9498,6 +9990,360 @@ function LuanSaoCungTC_hd(keyArr) {
     }
     if (isSaoToaThuTaiCung("Huynh Đệ", "Phá Quân") && isSaoToaThuTaiCung("Huynh Đệ", "Linh Tinh")) {
         keyArr.push("Sao nhập Huynh Đệ TC0603 - Phá Quân và Linh Tinh đồng cung tại Huynh Đệ");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Sửu"))) {
+        keyArr.push("Sao nhập Huynh Đệ TC0604 - Văn Xương tại Huynh Đệ, ở Sửu");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tỵ"))) {
+        keyArr.push("Sao nhập Huynh Đệ TC0605 - Văn Xương tại Huynh Đệ, ở Tỵ");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Dậu"))) {
+        keyArr.push("Sao nhập Huynh Đệ TC0606 - Văn Xương tại Huynh Đệ, ở Dậu");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tý"))) {
+        keyArr.push("Sao nhập Huynh Đệ TC0607 - Văn Xương tại Huynh Đệ, ở Tý");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thìn"))) {
+        keyArr.push("Sao nhập Huynh Đệ TC0608 - Văn Xương tại Huynh Đệ, ở Thìn");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thân"))) {
+        keyArr.push("Sao nhập Huynh Đệ TC0609 - Văn Xương tại Huynh Đệ, ở Thân");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thân"))) {
+        keyArr.push("Sao nhập Huynh Đệ TC0610 - Văn Xương tại Huynh Đệ, ở Thân");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tý"))) {
+        keyArr.push("Sao nhập Huynh Đệ TC0611 - Văn Xương tại Huynh Đệ, ở Tý");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thìn"))) {
+        keyArr.push("Sao nhập Huynh Đệ TC0612 - Văn Xương tại Huynh Đệ, ở Thìn");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tỵ"))) {
+        keyArr.push("Sao nhập Huynh Đệ TC0613 - Văn Xương tại Huynh Đệ, ở Tỵ");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Dậu"))) {
+        keyArr.push("Sao nhập Huynh Đệ TC0614 - Văn Xương tại Huynh Đệ, ở Dậu");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Sửu"))) {
+        keyArr.push("Sao nhập Huynh Đệ TC0615 - Văn Xương tại Huynh Đệ, ở Sửu");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Hợi"))) {
+        keyArr.push("Sao nhập Huynh Đệ TC0616 - Văn Xương tại Huynh Đệ, ở Hợi");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Mão"))) {
+        keyArr.push("Sao nhập Huynh Đệ TC0617 - Văn Xương tại Huynh Đệ, ở Mão");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Mùi"))) {
+        keyArr.push("Sao nhập Huynh Đệ TC0618 - Văn Xương tại Huynh Đệ, ở Mùi");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thân")) && isSaoHoiChieuRong("Huynh Đệ", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0619 - Văn Xương tại Huynh Đệ, ở Thân, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thân")) && isSaoHoiChieuRong("Huynh Đệ", "Đà La", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0620 - Văn Xương tại Huynh Đệ, ở Thân, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thân")) && isSaoHoiChieuRong("Huynh Đệ", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0621 - Văn Xương tại Huynh Đệ, ở Thân, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thân")) && isSaoHoiChieuRong("Huynh Đệ", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0622 - Văn Xương tại Huynh Đệ, ở Thân, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thân")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Không", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0623 - Văn Xương tại Huynh Đệ, ở Thân, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thân")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0624 - Văn Xương tại Huynh Đệ, ở Thân, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tý")) && isSaoHoiChieuRong("Huynh Đệ", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0625 - Văn Xương tại Huynh Đệ, ở Tý, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tý")) && isSaoHoiChieuRong("Huynh Đệ", "Đà La", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0626 - Văn Xương tại Huynh Đệ, ở Tý, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tý")) && isSaoHoiChieuRong("Huynh Đệ", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0627 - Văn Xương tại Huynh Đệ, ở Tý, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tý")) && isSaoHoiChieuRong("Huynh Đệ", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0628 - Văn Xương tại Huynh Đệ, ở Tý, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tý")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Không", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0629 - Văn Xương tại Huynh Đệ, ở Tý, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tý")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0630 - Văn Xương tại Huynh Đệ, ở Tý, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thìn")) && isSaoHoiChieuRong("Huynh Đệ", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0631 - Văn Xương tại Huynh Đệ, ở Thìn, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thìn")) && isSaoHoiChieuRong("Huynh Đệ", "Đà La", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0632 - Văn Xương tại Huynh Đệ, ở Thìn, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thìn")) && isSaoHoiChieuRong("Huynh Đệ", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0633 - Văn Xương tại Huynh Đệ, ở Thìn, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thìn")) && isSaoHoiChieuRong("Huynh Đệ", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0634 - Văn Xương tại Huynh Đệ, ở Thìn, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thìn")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Không", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0635 - Văn Xương tại Huynh Đệ, ở Thìn, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thìn")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0636 - Văn Xương tại Huynh Đệ, ở Thìn, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tỵ")) && isSaoHoiChieuRong("Huynh Đệ", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0637 - Văn Xương tại Huynh Đệ, ở Tỵ, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tỵ")) && isSaoHoiChieuRong("Huynh Đệ", "Đà La", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0638 - Văn Xương tại Huynh Đệ, ở Tỵ, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tỵ")) && isSaoHoiChieuRong("Huynh Đệ", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0639 - Văn Xương tại Huynh Đệ, ở Tỵ, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tỵ")) && isSaoHoiChieuRong("Huynh Đệ", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0640 - Văn Xương tại Huynh Đệ, ở Tỵ, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tỵ")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Không", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0641 - Văn Xương tại Huynh Đệ, ở Tỵ, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tỵ")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0642 - Văn Xương tại Huynh Đệ, ở Tỵ, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Dậu")) && isSaoHoiChieuRong("Huynh Đệ", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0643 - Văn Xương tại Huynh Đệ, ở Dậu, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Dậu")) && isSaoHoiChieuRong("Huynh Đệ", "Đà La", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0644 - Văn Xương tại Huynh Đệ, ở Dậu, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Dậu")) && isSaoHoiChieuRong("Huynh Đệ", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0645 - Văn Xương tại Huynh Đệ, ở Dậu, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Dậu")) && isSaoHoiChieuRong("Huynh Đệ", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0646 - Văn Xương tại Huynh Đệ, ở Dậu, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Dậu")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Không", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0647 - Văn Xương tại Huynh Đệ, ở Dậu, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Dậu")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0648 - Văn Xương tại Huynh Đệ, ở Dậu, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Sửu")) && isSaoHoiChieuRong("Huynh Đệ", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0649 - Văn Xương tại Huynh Đệ, ở Sửu, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Sửu")) && isSaoHoiChieuRong("Huynh Đệ", "Đà La", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0650 - Văn Xương tại Huynh Đệ, ở Sửu, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Sửu")) && isSaoHoiChieuRong("Huynh Đệ", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0651 - Văn Xương tại Huynh Đệ, ở Sửu, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Sửu")) && isSaoHoiChieuRong("Huynh Đệ", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0652 - Văn Xương tại Huynh Đệ, ở Sửu, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Sửu")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Không", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0653 - Văn Xương tại Huynh Đệ, ở Sửu, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Sửu")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0654 - Văn Xương tại Huynh Đệ, ở Sửu, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Hợi")) && isSaoHoiChieuRong("Huynh Đệ", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0655 - Văn Xương tại Huynh Đệ, ở Hợi, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Hợi")) && isSaoHoiChieuRong("Huynh Đệ", "Đà La", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0656 - Văn Xương tại Huynh Đệ, ở Hợi, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Hợi")) && isSaoHoiChieuRong("Huynh Đệ", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0657 - Văn Xương tại Huynh Đệ, ở Hợi, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Hợi")) && isSaoHoiChieuRong("Huynh Đệ", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0658 - Văn Xương tại Huynh Đệ, ở Hợi, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Hợi")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Không", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0659 - Văn Xương tại Huynh Đệ, ở Hợi, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Hợi")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0660 - Văn Xương tại Huynh Đệ, ở Hợi, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Mão")) && isSaoHoiChieuRong("Huynh Đệ", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0661 - Văn Xương tại Huynh Đệ, ở Mão, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Mão")) && isSaoHoiChieuRong("Huynh Đệ", "Đà La", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0662 - Văn Xương tại Huynh Đệ, ở Mão, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Mão")) && isSaoHoiChieuRong("Huynh Đệ", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0663 - Văn Xương tại Huynh Đệ, ở Mão, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Mão")) && isSaoHoiChieuRong("Huynh Đệ", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0664 - Văn Xương tại Huynh Đệ, ở Mão, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Mão")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Không", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0665 - Văn Xương tại Huynh Đệ, ở Mão, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Mão")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0666 - Văn Xương tại Huynh Đệ, ở Mão, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Mùi")) && isSaoHoiChieuRong("Huynh Đệ", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0667 - Văn Xương tại Huynh Đệ, ở Mùi, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Mùi")) && isSaoHoiChieuRong("Huynh Đệ", "Đà La", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0668 - Văn Xương tại Huynh Đệ, ở Mùi, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Mùi")) && isSaoHoiChieuRong("Huynh Đệ", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0669 - Văn Xương tại Huynh Đệ, ở Mùi, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Mùi")) && isSaoHoiChieuRong("Huynh Đệ", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0670 - Văn Xương tại Huynh Đệ, ở Mùi, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Mùi")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Không", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0671 - Văn Xương tại Huynh Đệ, ở Mùi, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Mùi")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0672 - Văn Xương tại Huynh Đệ, ở Mùi, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Dần"))) {
+        keyArr.push("Sao nhập Huynh Đệ TC0673 - Văn Xương tại Huynh Đệ, ở Dần");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Ngọ"))) {
+        keyArr.push("Sao nhập Huynh Đệ TC0674 - Văn Xương tại Huynh Đệ, ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tuất"))) {
+        keyArr.push("Sao nhập Huynh Đệ TC0675 - Văn Xương tại Huynh Đệ, ở Tuất");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Dần")) && isSaoHoiChieuRong("Huynh Đệ", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0676 - Văn Xương tại Huynh Đệ, ở Dần, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Dần")) && isSaoHoiChieuRong("Huynh Đệ", "Đà La", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0677 - Văn Xương tại Huynh Đệ, ở Dần, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Dần")) && isSaoHoiChieuRong("Huynh Đệ", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0678 - Văn Xương tại Huynh Đệ, ở Dần, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Dần")) && isSaoHoiChieuRong("Huynh Đệ", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0679 - Văn Xương tại Huynh Đệ, ở Dần, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Dần")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Không", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0680 - Văn Xương tại Huynh Đệ, ở Dần, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Dần")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0681 - Văn Xương tại Huynh Đệ, ở Dần, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Ngọ")) && isSaoHoiChieuRong("Huynh Đệ", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0682 - Văn Xương tại Huynh Đệ, ở Ngọ, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Ngọ")) && isSaoHoiChieuRong("Huynh Đệ", "Đà La", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0683 - Văn Xương tại Huynh Đệ, ở Ngọ, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Ngọ")) && isSaoHoiChieuRong("Huynh Đệ", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0684 - Văn Xương tại Huynh Đệ, ở Ngọ, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Ngọ")) && isSaoHoiChieuRong("Huynh Đệ", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0685 - Văn Xương tại Huynh Đệ, ở Ngọ, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Ngọ")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Không", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0686 - Văn Xương tại Huynh Đệ, ở Ngọ, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Ngọ")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0687 - Văn Xương tại Huynh Đệ, ở Ngọ, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tuất")) && isSaoHoiChieuRong("Huynh Đệ", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0688 - Văn Xương tại Huynh Đệ, ở Tuất, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tuất")) && isSaoHoiChieuRong("Huynh Đệ", "Đà La", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0689 - Văn Xương tại Huynh Đệ, ở Tuất, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tuất")) && isSaoHoiChieuRong("Huynh Đệ", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0690 - Văn Xương tại Huynh Đệ, ở Tuất, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tuất")) && isSaoHoiChieuRong("Huynh Đệ", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0691 - Văn Xương tại Huynh Đệ, ở Tuất, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tuất")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Không", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0692 - Văn Xương tại Huynh Đệ, ở Tuất, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tuất")) && isSaoHoiChieuRong("Huynh Đệ", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0693 - Văn Xương tại Huynh Đệ, ở Tuất, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Sửu")) && isSaoHoiChieuRong("Huynh Đệ", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0694 - Văn Xương tại Huynh Đệ, ở Sửu, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Sửu")) && isSaoHoiChieuRong("Huynh Đệ", "Đà La", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0695 - Văn Xương tại Huynh Đệ, ở Sửu, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Sửu")) && isSaoHoiChieuRong("Huynh Đệ", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0696 - Văn Xương tại Huynh Đệ, ở Sửu, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Sửu")) && isSaoHoiChieuRong("Huynh Đệ", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0697 - Văn Xương tại Huynh Đệ, ở Sửu, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tỵ")) && isSaoHoiChieuRong("Huynh Đệ", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0698 - Văn Xương tại Huynh Đệ, ở Tỵ, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tỵ")) && isSaoHoiChieuRong("Huynh Đệ", "Đà La", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0699 - Văn Xương tại Huynh Đệ, ở Tỵ, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tỵ")) && isSaoHoiChieuRong("Huynh Đệ", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0700 - Văn Xương tại Huynh Đệ, ở Tỵ, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tỵ")) && isSaoHoiChieuRong("Huynh Đệ", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0701 - Văn Xương tại Huynh Đệ, ở Tỵ, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Dậu")) && isSaoHoiChieuRong("Huynh Đệ", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0702 - Văn Xương tại Huynh Đệ, ở Dậu, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Dậu")) && isSaoHoiChieuRong("Huynh Đệ", "Đà La", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0703 - Văn Xương tại Huynh Đệ, ở Dậu, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Dậu")) && isSaoHoiChieuRong("Huynh Đệ", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0704 - Văn Xương tại Huynh Đệ, ở Dậu, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Dậu")) && isSaoHoiChieuRong("Huynh Đệ", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0705 - Văn Xương tại Huynh Đệ, ở Dậu, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tý")) && isSaoHoiChieuRong("Huynh Đệ", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0706 - Văn Xương tại Huynh Đệ, ở Tý, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tý")) && isSaoHoiChieuRong("Huynh Đệ", "Đà La", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0707 - Văn Xương tại Huynh Đệ, ở Tý, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tý")) && isSaoHoiChieuRong("Huynh Đệ", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0708 - Văn Xương tại Huynh Đệ, ở Tý, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Tý")) && isSaoHoiChieuRong("Huynh Đệ", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0709 - Văn Xương tại Huynh Đệ, ở Tý, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thìn")) && isSaoHoiChieuRong("Huynh Đệ", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0710 - Văn Xương tại Huynh Đệ, ở Thìn, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thìn")) && isSaoHoiChieuRong("Huynh Đệ", "Đà La", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0711 - Văn Xương tại Huynh Đệ, ở Thìn, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thìn")) && isSaoHoiChieuRong("Huynh Đệ", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0712 - Văn Xương tại Huynh Đệ, ở Thìn, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thìn")) && isSaoHoiChieuRong("Huynh Đệ", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0713 - Văn Xương tại Huynh Đệ, ở Thìn, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thân")) && isSaoHoiChieuRong("Huynh Đệ", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0714 - Văn Xương tại Huynh Đệ, ở Thân, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thân")) && isSaoHoiChieuRong("Huynh Đệ", "Đà La", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0715 - Văn Xương tại Huynh Đệ, ở Thân, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thân")) && isSaoHoiChieuRong("Huynh Đệ", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0716 - Văn Xương tại Huynh Đệ, ở Thân, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && (isCungTaiChi("Huynh Đệ", "Thân")) && isSaoHoiChieuRong("Huynh Đệ", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0717 - Văn Xương tại Huynh Đệ, ở Thân, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && isSaoHoiChieuRong("Huynh Đệ", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0718 - Văn Xương tại Huynh Đệ, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && isSaoHoiChieuRong("Huynh Đệ", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0719 - Văn Xương tại Huynh Đệ, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && isSaoHoiChieuRong("Huynh Đệ", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0720 - Văn Xương tại Huynh Đệ, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Huynh Đệ", "Văn Xương") && isSaoHoiChieuRong("Huynh Đệ", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Huynh Đệ TC0721 - Văn Xương tại Huynh Đệ, đồng cung hoặc hội chiếu có Thiên Việt");
     }
 }
 // TCC-hd-END
@@ -13126,6 +13972,96 @@ function LuanSaoCungTC_pt(keyArr) {
     if (isSaoToaThuTaiCung("Phu Thê", "Phá Quân") && isSaoToaThuTaiCung("Phu Thê", "Hóa Lộc") && (lasoData.canNam === "Q.") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
         keyArr.push("Sao nhập Phu Thê TC1206 - Phá Quân và Hóa Lộc đồng cung tại Phu Thê, sinh năm Quý, nữ mạng");
     }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương")) {
+        keyArr.push("Sao nhập Phu Thê TC1207 - Văn Xương tại Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoToaThuTaiCung("Phu Thê", "Văn Khúc") && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam")) {
+        keyArr.push("Sao nhập Phu Thê TC1208 - Văn Xương và Văn Khúc đồng cung tại Phu Thê, nam mạng");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoToaThuTaiCung("Phu Thê", "Văn Khúc") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Phu Thê TC1209 - Văn Xương và Văn Khúc đồng cung tại Phu Thê, nữ mạng");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoHoiChieuRong("Phu Thê", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Phu Thê TC1210 - Văn Xương tại Phu Thê, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoHoiChieuRong("Phu Thê", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Phu Thê TC1211 - Văn Xương tại Phu Thê, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoHoiChieuRong("Phu Thê", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Phu Thê TC1212 - Văn Xương tại Phu Thê, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoHoiChieuRong("Phu Thê", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Phu Thê TC1213 - Văn Xương tại Phu Thê, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoHoiChieuRong("Phu Thê", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Phu Thê TC1214 - Văn Xương tại Phu Thê, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoToaThuTaiCung("Phu Thê", "Tử Vi")) {
+        keyArr.push("Sao nhập Phu Thê TC1215 - Văn Xương và Tử Vi đồng cung tại Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoToaThuTaiCung("Phu Thê", "Thiên Phủ")) {
+        keyArr.push("Sao nhập Phu Thê TC1216 - Văn Xương và Thiên Phủ đồng cung tại Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoToaThuTaiCung("Phu Thê", "Thiên Tướng")) {
+        keyArr.push("Sao nhập Phu Thê TC1217 - Văn Xương và Thiên Tướng đồng cung tại Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoToaThuTaiCung("Phu Thê", "Thái Âm")) {
+        keyArr.push("Sao nhập Phu Thê TC1218 - Văn Xương và Thái Âm đồng cung tại Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoToaThuTaiCung("Phu Thê", "Thái Dương")) {
+        keyArr.push("Sao nhập Phu Thê TC1219 - Văn Xương và Thái Dương đồng cung tại Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoToaThuTaiCung("Phu Thê", "Lộc Tồn")) {
+        keyArr.push("Sao nhập Phu Thê TC1220 - Văn Xương và Lộc Tồn đồng cung tại Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoToaThuTaiCung("Phu Thê", "Thiên Khôi")) {
+        keyArr.push("Sao nhập Phu Thê TC1221 - Văn Xương và Thiên Khôi đồng cung tại Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoToaThuTaiCung("Phu Thê", "Thiên Việt")) {
+        keyArr.push("Sao nhập Phu Thê TC1222 - Văn Xương và Thiên Việt đồng cung tại Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoToaThuTaiCung("Phu Thê", "Tả Phù")) {
+        keyArr.push("Sao nhập Phu Thê TC1223 - Văn Xương và Tả Phù đồng cung tại Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoToaThuTaiCung("Phu Thê", "Hữu Bật")) {
+        keyArr.push("Sao nhập Phu Thê TC1224 - Văn Xương và Hữu Bật đồng cung tại Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoToaThuTaiCung("Phu Thê", "Văn Khúc")) {
+        keyArr.push("Sao nhập Phu Thê TC1225 - Văn Xương và Văn Khúc đồng cung tại Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoToaThuTaiCung("Phu Thê", "Liêm Trinh")) {
+        keyArr.push("Sao nhập Phu Thê TC1226 - Văn Xương và Liêm Trinh đồng cung tại Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoToaThuTaiCung("Phu Thê", "Phá Quân")) {
+        keyArr.push("Sao nhập Phu Thê TC1227 - Văn Xương và Phá Quân đồng cung tại Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoToaThuTaiCung("Phu Thê", "Hỏa Tinh")) {
+        keyArr.push("Sao nhập Phu Thê TC1228 - Văn Xương và Hỏa Tinh đồng cung tại Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoToaThuTaiCung("Phu Thê", "Linh Tinh")) {
+        keyArr.push("Sao nhập Phu Thê TC1229 - Văn Xương và Linh Tinh đồng cung tại Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoToaThuTaiCung("Phu Thê", "Thái Âm")) {
+        keyArr.push("Sao nhập Phu Thê TC1230 - Văn Xương và Thái Âm đồng cung tại Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoToaThuTaiCung("Phu Thê", "Thái Âm") && isSaoToaThuTaiCung("Phu Thê", "Thiên Cơ") && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam")) {
+        keyArr.push("Sao nhập Phu Thê TC1231 - Văn Xương, Thái Âm và Thiên Cơ đồng cung tại Phu Thê, nam mạng");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoToaThuTaiCung("Phu Thê", "Vũ Khúc")) {
+        keyArr.push("Sao nhập Phu Thê TC1232 - Văn Xương và Vũ Khúc đồng cung tại Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoHoiChieuRong("Phu Thê", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Phu Thê TC1233 - Văn Xương tại Phu Thê, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoHoiChieuRong("Phu Thê", "Đà La", false)) {
+        keyArr.push("Sao nhập Phu Thê TC1234 - Văn Xương tại Phu Thê, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoHoiChieuRong("Phu Thê", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Phu Thê TC1235 - Văn Xương tại Phu Thê, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Văn Xương") && isSaoHoiChieuRong("Phu Thê", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Phu Thê TC1236 - Văn Xương tại Phu Thê, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
 }
 // TCC-pt-END
 
@@ -15036,6 +15972,48 @@ function LuanSaoCungTC_tn(keyArr) {
     }
     if (isSaoToaThuTaiCung("Tử Tức", "Phá Quân") && (isCungTaiChi("Tử Tức", "Dần") || isCungTaiChi("Tử Tức", "Thân") || isCungTaiChi("Tử Tức", "Mão") || isCungTaiChi("Tử Tức", "Dậu") || isCungTaiChi("Tử Tức", "Tỵ") || isCungTaiChi("Tử Tức", "Hợi")) && isSaoToaThuTaiCung("Tử Tức", "Địa Kiếp")) {
         keyArr.push("Sao nhập Tử Tức TC0634 - Phá Quân và Địa Kiếp đồng cung tại Tử Tức, Phá Quân ở vị trí hãm");
+    }
+    if (isSaoToaThuTaiCung("Tử Tức", "Văn Xương") && (isCungTaiChi("Tử Tức", "Sửu"))) {
+        keyArr.push("Sao nhập Tử Tức TC0635 - Văn Xương tại Tử Tức, ở Sửu");
+    }
+    if (isSaoToaThuTaiCung("Tử Tức", "Văn Xương") && (isCungTaiChi("Tử Tức", "Tỵ"))) {
+        keyArr.push("Sao nhập Tử Tức TC0636 - Văn Xương tại Tử Tức, ở Tỵ");
+    }
+    if (isSaoToaThuTaiCung("Tử Tức", "Văn Xương") && (isCungTaiChi("Tử Tức", "Dậu"))) {
+        keyArr.push("Sao nhập Tử Tức TC0637 - Văn Xương tại Tử Tức, ở Dậu");
+    }
+    if (isSaoToaThuTaiCung("Tử Tức", "Văn Xương") && isSaoToaThuTaiCung("Tử Tức", "Văn Khúc")) {
+        keyArr.push("Sao nhập Tử Tức TC0638 - Văn Xương và Văn Khúc đồng cung tại Tử Tức");
+    }
+    if (isSaoToaThuTaiCung("Tử Tức", "Văn Xương") && isSaoToaThuTaiCung("Tử Tức", "Thiên Phủ")) {
+        keyArr.push("Sao nhập Tử Tức TC0639 - Văn Xương và Thiên Phủ đồng cung tại Tử Tức");
+    }
+    if (isSaoToaThuTaiCung("Tử Tức", "Văn Xương") && isSaoToaThuTaiCung("Tử Tức", "Tả Phù")) {
+        keyArr.push("Sao nhập Tử Tức TC0640 - Văn Xương và Tả Phù đồng cung tại Tử Tức");
+    }
+    if (isSaoToaThuTaiCung("Tử Tức", "Văn Xương") && isSaoToaThuTaiCung("Tử Tức", "Hữu Bật")) {
+        keyArr.push("Sao nhập Tử Tức TC0641 - Văn Xương và Hữu Bật đồng cung tại Tử Tức");
+    }
+    if (isSaoToaThuTaiCung("Tử Tức", "Văn Xương") && isSaoHoiChieuRong("Tử Tức", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Tử Tức TC0642 - Văn Xương tại Tử Tức, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Tử Tức", "Văn Xương") && isSaoHoiChieuRong("Tử Tức", "Đà La", false)) {
+        keyArr.push("Sao nhập Tử Tức TC0643 - Văn Xương tại Tử Tức, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Tử Tức", "Văn Xương") && isSaoHoiChieuRong("Tử Tức", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Tử Tức TC0644 - Văn Xương tại Tử Tức, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Tử Tức", "Văn Xương") && isSaoHoiChieuRong("Tử Tức", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Tử Tức TC0645 - Văn Xương tại Tử Tức, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Tử Tức", "Văn Xương") && isSaoHoiChieuRong("Tử Tức", "Địa Không", false)) {
+        keyArr.push("Sao nhập Tử Tức TC0646 - Văn Xương tại Tử Tức, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Tử Tức", "Văn Xương") && isSaoHoiChieuRong("Tử Tức", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Tử Tức TC0647 - Văn Xương tại Tử Tức, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Tử Tức", "Văn Xương") && isSaoToaThuTaiCung("Tử Tức", "Văn Khúc")) {
+        keyArr.push("Sao nhập Tử Tức TC0648 - Văn Xương và Văn Khúc đồng cung tại Tử Tức");
     }
 }
 // TCC-tn-END
@@ -17130,6 +18108,435 @@ function LuanSaoCungTC_tb(keyArr) {
     }
     if (isSaoToaThuTaiCung("Tài Bạch", "Phá Quân") && isSaoToaThuTaiCung("Tài Bạch", "Hóa Lộc") && (lasoData.canNam === "Q.")) {
         keyArr.push("Sao nhập Tài Bạch TC0695 - Phá Quân và Hóa Lộc đồng cung tại Tài Bạch, sinh năm Quý");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Sửu"))) {
+        keyArr.push("Sao nhập Tài Bạch TC0696 - Văn Xương tại Tài Bạch, ở Sửu");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tỵ"))) {
+        keyArr.push("Sao nhập Tài Bạch TC0697 - Văn Xương tại Tài Bạch, ở Tỵ");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dậu"))) {
+        keyArr.push("Sao nhập Tài Bạch TC0698 - Văn Xương tại Tài Bạch, ở Dậu");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dần"))) {
+        keyArr.push("Sao nhập Tài Bạch TC0699 - Văn Xương tại Tài Bạch, ở Dần");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Ngọ"))) {
+        keyArr.push("Sao nhập Tài Bạch TC0700 - Văn Xương tại Tài Bạch, ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tuất"))) {
+        keyArr.push("Sao nhập Tài Bạch TC0701 - Văn Xương tại Tài Bạch, ở Tuất");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && isSaoToaThuTaiCung("Tài Bạch", "Cự Môn")) {
+        keyArr.push("Sao nhập Tài Bạch TC0702 - Văn Xương và Cự Môn đồng cung tại Tài Bạch");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && isSaoHoiChieuRong("Tài Bạch", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0703 - Văn Xương tại Tài Bạch, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && isSaoHoiChieuRong("Tài Bạch", "Đà La", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0704 - Văn Xương tại Tài Bạch, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && isSaoHoiChieuRong("Tài Bạch", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0705 - Văn Xương tại Tài Bạch, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && isSaoHoiChieuRong("Tài Bạch", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0706 - Văn Xương tại Tài Bạch, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && isSaoHoiChieuRong("Tài Bạch", "Địa Không", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0707 - Văn Xương tại Tài Bạch, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && isSaoHoiChieuRong("Tài Bạch", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0708 - Văn Xương tại Tài Bạch, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && isSaoHoiChieuRong("Tài Bạch", "Hóa Kỵ", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0709 - Văn Xương tại Tài Bạch, đồng cung hoặc hội chiếu có Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dần")) && isSaoHoiChieuRong("Tài Bạch", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0710 - Văn Xương tại Tài Bạch, ở Dần, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dần")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0711 - Văn Xương tại Tài Bạch, ở Dần, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dần")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0712 - Văn Xương tại Tài Bạch, ở Dần, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dần")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0713 - Văn Xương tại Tài Bạch, ở Dần, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dần")) && isSaoHoiChieuRong("Tài Bạch", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0714 - Văn Xương tại Tài Bạch, ở Dần, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dần")) && isSaoHoiChieuRong("Tài Bạch", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0715 - Văn Xương tại Tài Bạch, ở Dần, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dần")) && isSaoHoiChieuRong("Tài Bạch", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0716 - Văn Xương tại Tài Bạch, ở Dần, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dần")) && isSaoHoiChieuRong("Tài Bạch", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0717 - Văn Xương tại Tài Bạch, ở Dần, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dần")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0718 - Văn Xương tại Tài Bạch, ở Dần, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dần")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0719 - Văn Xương tại Tài Bạch, ở Dần, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Ngọ")) && isSaoHoiChieuRong("Tài Bạch", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0720 - Văn Xương tại Tài Bạch, ở Ngọ, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Ngọ")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0721 - Văn Xương tại Tài Bạch, ở Ngọ, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Ngọ")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0722 - Văn Xương tại Tài Bạch, ở Ngọ, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Ngọ")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0723 - Văn Xương tại Tài Bạch, ở Ngọ, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Ngọ")) && isSaoHoiChieuRong("Tài Bạch", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0724 - Văn Xương tại Tài Bạch, ở Ngọ, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Ngọ")) && isSaoHoiChieuRong("Tài Bạch", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0725 - Văn Xương tại Tài Bạch, ở Ngọ, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Ngọ")) && isSaoHoiChieuRong("Tài Bạch", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0726 - Văn Xương tại Tài Bạch, ở Ngọ, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Ngọ")) && isSaoHoiChieuRong("Tài Bạch", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0727 - Văn Xương tại Tài Bạch, ở Ngọ, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Ngọ")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0728 - Văn Xương tại Tài Bạch, ở Ngọ, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Ngọ")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0729 - Văn Xương tại Tài Bạch, ở Ngọ, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tuất")) && isSaoHoiChieuRong("Tài Bạch", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0730 - Văn Xương tại Tài Bạch, ở Tuất, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tuất")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0731 - Văn Xương tại Tài Bạch, ở Tuất, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tuất")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0732 - Văn Xương tại Tài Bạch, ở Tuất, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tuất")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0733 - Văn Xương tại Tài Bạch, ở Tuất, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tuất")) && isSaoHoiChieuRong("Tài Bạch", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0734 - Văn Xương tại Tài Bạch, ở Tuất, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tuất")) && isSaoHoiChieuRong("Tài Bạch", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0735 - Văn Xương tại Tài Bạch, ở Tuất, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tuất")) && isSaoHoiChieuRong("Tài Bạch", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0736 - Văn Xương tại Tài Bạch, ở Tuất, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tuất")) && isSaoHoiChieuRong("Tài Bạch", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0737 - Văn Xương tại Tài Bạch, ở Tuất, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tuất")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0738 - Văn Xương tại Tài Bạch, ở Tuất, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tuất")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0739 - Văn Xương tại Tài Bạch, ở Tuất, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thân"))) {
+        keyArr.push("Sao nhập Tài Bạch TC0740 - Văn Xương tại Tài Bạch, ở Thân");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tý"))) {
+        keyArr.push("Sao nhập Tài Bạch TC0741 - Văn Xương tại Tài Bạch, ở Tý");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thìn"))) {
+        keyArr.push("Sao nhập Tài Bạch TC0742 - Văn Xương tại Tài Bạch, ở Thìn");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tỵ"))) {
+        keyArr.push("Sao nhập Tài Bạch TC0743 - Văn Xương tại Tài Bạch, ở Tỵ");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dậu"))) {
+        keyArr.push("Sao nhập Tài Bạch TC0744 - Văn Xương tại Tài Bạch, ở Dậu");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Sửu"))) {
+        keyArr.push("Sao nhập Tài Bạch TC0745 - Văn Xương tại Tài Bạch, ở Sửu");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Hợi"))) {
+        keyArr.push("Sao nhập Tài Bạch TC0746 - Văn Xương tại Tài Bạch, ở Hợi");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mão"))) {
+        keyArr.push("Sao nhập Tài Bạch TC0747 - Văn Xương tại Tài Bạch, ở Mão");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mùi"))) {
+        keyArr.push("Sao nhập Tài Bạch TC0748 - Văn Xương tại Tài Bạch, ở Mùi");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thân")) && isSaoHoiChieuRong("Tài Bạch", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0749 - Văn Xương tại Tài Bạch, ở Thân, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thân")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0750 - Văn Xương tại Tài Bạch, ở Thân, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thân")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0751 - Văn Xương tại Tài Bạch, ở Thân, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thân")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0752 - Văn Xương tại Tài Bạch, ở Thân, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thân")) && isSaoHoiChieuRong("Tài Bạch", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0753 - Văn Xương tại Tài Bạch, ở Thân, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thân")) && isSaoHoiChieuRong("Tài Bạch", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0754 - Văn Xương tại Tài Bạch, ở Thân, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thân")) && isSaoHoiChieuRong("Tài Bạch", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0755 - Văn Xương tại Tài Bạch, ở Thân, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thân")) && isSaoHoiChieuRong("Tài Bạch", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0756 - Văn Xương tại Tài Bạch, ở Thân, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thân")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0757 - Văn Xương tại Tài Bạch, ở Thân, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thân")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0758 - Văn Xương tại Tài Bạch, ở Thân, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tý")) && isSaoHoiChieuRong("Tài Bạch", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0759 - Văn Xương tại Tài Bạch, ở Tý, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tý")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0760 - Văn Xương tại Tài Bạch, ở Tý, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tý")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0761 - Văn Xương tại Tài Bạch, ở Tý, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tý")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0762 - Văn Xương tại Tài Bạch, ở Tý, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tý")) && isSaoHoiChieuRong("Tài Bạch", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0763 - Văn Xương tại Tài Bạch, ở Tý, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tý")) && isSaoHoiChieuRong("Tài Bạch", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0764 - Văn Xương tại Tài Bạch, ở Tý, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tý")) && isSaoHoiChieuRong("Tài Bạch", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0765 - Văn Xương tại Tài Bạch, ở Tý, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tý")) && isSaoHoiChieuRong("Tài Bạch", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0766 - Văn Xương tại Tài Bạch, ở Tý, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tý")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0767 - Văn Xương tại Tài Bạch, ở Tý, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tý")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0768 - Văn Xương tại Tài Bạch, ở Tý, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thìn")) && isSaoHoiChieuRong("Tài Bạch", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0769 - Văn Xương tại Tài Bạch, ở Thìn, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thìn")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0770 - Văn Xương tại Tài Bạch, ở Thìn, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thìn")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0771 - Văn Xương tại Tài Bạch, ở Thìn, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thìn")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0772 - Văn Xương tại Tài Bạch, ở Thìn, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thìn")) && isSaoHoiChieuRong("Tài Bạch", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0773 - Văn Xương tại Tài Bạch, ở Thìn, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thìn")) && isSaoHoiChieuRong("Tài Bạch", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0774 - Văn Xương tại Tài Bạch, ở Thìn, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thìn")) && isSaoHoiChieuRong("Tài Bạch", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0775 - Văn Xương tại Tài Bạch, ở Thìn, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thìn")) && isSaoHoiChieuRong("Tài Bạch", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0776 - Văn Xương tại Tài Bạch, ở Thìn, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thìn")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0777 - Văn Xương tại Tài Bạch, ở Thìn, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Thìn")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0778 - Văn Xương tại Tài Bạch, ở Thìn, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tỵ")) && isSaoHoiChieuRong("Tài Bạch", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0779 - Văn Xương tại Tài Bạch, ở Tỵ, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tỵ")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0780 - Văn Xương tại Tài Bạch, ở Tỵ, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tỵ")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0781 - Văn Xương tại Tài Bạch, ở Tỵ, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tỵ")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0782 - Văn Xương tại Tài Bạch, ở Tỵ, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tỵ")) && isSaoHoiChieuRong("Tài Bạch", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0783 - Văn Xương tại Tài Bạch, ở Tỵ, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tỵ")) && isSaoHoiChieuRong("Tài Bạch", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0784 - Văn Xương tại Tài Bạch, ở Tỵ, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tỵ")) && isSaoHoiChieuRong("Tài Bạch", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0785 - Văn Xương tại Tài Bạch, ở Tỵ, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tỵ")) && isSaoHoiChieuRong("Tài Bạch", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0786 - Văn Xương tại Tài Bạch, ở Tỵ, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tỵ")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0787 - Văn Xương tại Tài Bạch, ở Tỵ, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Tỵ")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0788 - Văn Xương tại Tài Bạch, ở Tỵ, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dậu")) && isSaoHoiChieuRong("Tài Bạch", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0789 - Văn Xương tại Tài Bạch, ở Dậu, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dậu")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0790 - Văn Xương tại Tài Bạch, ở Dậu, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dậu")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0791 - Văn Xương tại Tài Bạch, ở Dậu, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dậu")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0792 - Văn Xương tại Tài Bạch, ở Dậu, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dậu")) && isSaoHoiChieuRong("Tài Bạch", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0793 - Văn Xương tại Tài Bạch, ở Dậu, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dậu")) && isSaoHoiChieuRong("Tài Bạch", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0794 - Văn Xương tại Tài Bạch, ở Dậu, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dậu")) && isSaoHoiChieuRong("Tài Bạch", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0795 - Văn Xương tại Tài Bạch, ở Dậu, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dậu")) && isSaoHoiChieuRong("Tài Bạch", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0796 - Văn Xương tại Tài Bạch, ở Dậu, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dậu")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0797 - Văn Xương tại Tài Bạch, ở Dậu, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Dậu")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0798 - Văn Xương tại Tài Bạch, ở Dậu, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Sửu")) && isSaoHoiChieuRong("Tài Bạch", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0799 - Văn Xương tại Tài Bạch, ở Sửu, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Sửu")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0800 - Văn Xương tại Tài Bạch, ở Sửu, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Sửu")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0801 - Văn Xương tại Tài Bạch, ở Sửu, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Sửu")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0802 - Văn Xương tại Tài Bạch, ở Sửu, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Sửu")) && isSaoHoiChieuRong("Tài Bạch", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0803 - Văn Xương tại Tài Bạch, ở Sửu, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Sửu")) && isSaoHoiChieuRong("Tài Bạch", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0804 - Văn Xương tại Tài Bạch, ở Sửu, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Sửu")) && isSaoHoiChieuRong("Tài Bạch", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0805 - Văn Xương tại Tài Bạch, ở Sửu, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Sửu")) && isSaoHoiChieuRong("Tài Bạch", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0806 - Văn Xương tại Tài Bạch, ở Sửu, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Sửu")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0807 - Văn Xương tại Tài Bạch, ở Sửu, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Sửu")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0808 - Văn Xương tại Tài Bạch, ở Sửu, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Hợi")) && isSaoHoiChieuRong("Tài Bạch", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0809 - Văn Xương tại Tài Bạch, ở Hợi, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Hợi")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0810 - Văn Xương tại Tài Bạch, ở Hợi, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Hợi")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0811 - Văn Xương tại Tài Bạch, ở Hợi, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Hợi")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0812 - Văn Xương tại Tài Bạch, ở Hợi, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Hợi")) && isSaoHoiChieuRong("Tài Bạch", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0813 - Văn Xương tại Tài Bạch, ở Hợi, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Hợi")) && isSaoHoiChieuRong("Tài Bạch", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0814 - Văn Xương tại Tài Bạch, ở Hợi, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Hợi")) && isSaoHoiChieuRong("Tài Bạch", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0815 - Văn Xương tại Tài Bạch, ở Hợi, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Hợi")) && isSaoHoiChieuRong("Tài Bạch", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0816 - Văn Xương tại Tài Bạch, ở Hợi, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Hợi")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0817 - Văn Xương tại Tài Bạch, ở Hợi, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Hợi")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0818 - Văn Xương tại Tài Bạch, ở Hợi, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mão")) && isSaoHoiChieuRong("Tài Bạch", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0819 - Văn Xương tại Tài Bạch, ở Mão, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mão")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0820 - Văn Xương tại Tài Bạch, ở Mão, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mão")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0821 - Văn Xương tại Tài Bạch, ở Mão, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mão")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0822 - Văn Xương tại Tài Bạch, ở Mão, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mão")) && isSaoHoiChieuRong("Tài Bạch", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0823 - Văn Xương tại Tài Bạch, ở Mão, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mão")) && isSaoHoiChieuRong("Tài Bạch", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0824 - Văn Xương tại Tài Bạch, ở Mão, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mão")) && isSaoHoiChieuRong("Tài Bạch", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0825 - Văn Xương tại Tài Bạch, ở Mão, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mão")) && isSaoHoiChieuRong("Tài Bạch", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0826 - Văn Xương tại Tài Bạch, ở Mão, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mão")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0827 - Văn Xương tại Tài Bạch, ở Mão, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mão")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0828 - Văn Xương tại Tài Bạch, ở Mão, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mùi")) && isSaoHoiChieuRong("Tài Bạch", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0829 - Văn Xương tại Tài Bạch, ở Mùi, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mùi")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0830 - Văn Xương tại Tài Bạch, ở Mùi, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mùi")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0831 - Văn Xương tại Tài Bạch, ở Mùi, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mùi")) && isSaoHoiChieuRong("Tài Bạch", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0832 - Văn Xương tại Tài Bạch, ở Mùi, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mùi")) && isSaoHoiChieuRong("Tài Bạch", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0833 - Văn Xương tại Tài Bạch, ở Mùi, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mùi")) && isSaoHoiChieuRong("Tài Bạch", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0834 - Văn Xương tại Tài Bạch, ở Mùi, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mùi")) && isSaoHoiChieuRong("Tài Bạch", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0835 - Văn Xương tại Tài Bạch, ở Mùi, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mùi")) && isSaoHoiChieuRong("Tài Bạch", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0836 - Văn Xương tại Tài Bạch, ở Mùi, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mùi")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0837 - Văn Xương tại Tài Bạch, ở Mùi, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Tài Bạch", "Văn Xương") && (isCungTaiChi("Tài Bạch", "Mùi")) && isSaoHoiChieuRong("Tài Bạch", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Tài Bạch TC0838 - Văn Xương tại Tài Bạch, ở Mùi, đồng cung hoặc hội chiếu có Thiên Việt");
     }
 }
 // TCC-tb-END
@@ -19489,6 +20896,156 @@ function LuanSaoCungTC_ta(keyArr) {
     if (isSaoToaThuTaiCung("Tật Ách", "Phá Quân") && isSaoHoiChieuRong("Tật Ách", "Linh Tinh", false) && isSaoHoiChieuRong("Tật Ách", "Vũ Khúc", false) && isSaoHoiChieuRong("Tật Ách", "Hóa Kỵ", false) && (lasoData.canNam === "N.")) {
         keyArr.push("Sao nhập Tật Ách TC0783 - Phá Quân tại Tật Ách, đồng cung hoặc hội chiếu có Linh Tinh, Vũ Khúc và Hóa Kỵ, sinh năm Nhâm");
     }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương")) {
+        keyArr.push("Sao nhập Tật Ách TC0784 - Văn Xương tại Tật Ách");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Sửu")) && isSaoHoiChieuRong("Tật Ách", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0785 - Văn Xương tại Tật Ách, ở Sửu, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Sửu")) && isSaoHoiChieuRong("Tật Ách", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0786 - Văn Xương tại Tật Ách, ở Sửu, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Sửu")) && isSaoHoiChieuRong("Tật Ách", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0787 - Văn Xương tại Tật Ách, ở Sửu, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Sửu")) && isSaoHoiChieuRong("Tật Ách", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0788 - Văn Xương tại Tật Ách, ở Sửu, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Sửu")) && isSaoHoiChieuRong("Tật Ách", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0789 - Văn Xương tại Tật Ách, ở Sửu, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Sửu")) && isSaoHoiChieuRong("Tật Ách", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0790 - Văn Xương tại Tật Ách, ở Sửu, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Sửu")) && isSaoHoiChieuRong("Tật Ách", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0791 - Văn Xương tại Tật Ách, ở Sửu, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Sửu")) && isSaoHoiChieuRong("Tật Ách", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0792 - Văn Xương tại Tật Ách, ở Sửu, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Sửu")) && isSaoHoiChieuRong("Tật Ách", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0793 - Văn Xương tại Tật Ách, ở Sửu, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Sửu")) && isSaoHoiChieuRong("Tật Ách", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0794 - Văn Xương tại Tật Ách, ở Sửu, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Tỵ")) && isSaoHoiChieuRong("Tật Ách", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0795 - Văn Xương tại Tật Ách, ở Tỵ, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Tỵ")) && isSaoHoiChieuRong("Tật Ách", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0796 - Văn Xương tại Tật Ách, ở Tỵ, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Tỵ")) && isSaoHoiChieuRong("Tật Ách", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0797 - Văn Xương tại Tật Ách, ở Tỵ, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Tỵ")) && isSaoHoiChieuRong("Tật Ách", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0798 - Văn Xương tại Tật Ách, ở Tỵ, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Tỵ")) && isSaoHoiChieuRong("Tật Ách", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0799 - Văn Xương tại Tật Ách, ở Tỵ, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Tỵ")) && isSaoHoiChieuRong("Tật Ách", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0800 - Văn Xương tại Tật Ách, ở Tỵ, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Tỵ")) && isSaoHoiChieuRong("Tật Ách", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0801 - Văn Xương tại Tật Ách, ở Tỵ, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Tỵ")) && isSaoHoiChieuRong("Tật Ách", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0802 - Văn Xương tại Tật Ách, ở Tỵ, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Tỵ")) && isSaoHoiChieuRong("Tật Ách", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0803 - Văn Xương tại Tật Ách, ở Tỵ, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Tỵ")) && isSaoHoiChieuRong("Tật Ách", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0804 - Văn Xương tại Tật Ách, ở Tỵ, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Dậu")) && isSaoHoiChieuRong("Tật Ách", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0805 - Văn Xương tại Tật Ách, ở Dậu, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Dậu")) && isSaoHoiChieuRong("Tật Ách", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0806 - Văn Xương tại Tật Ách, ở Dậu, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Dậu")) && isSaoHoiChieuRong("Tật Ách", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0807 - Văn Xương tại Tật Ách, ở Dậu, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Dậu")) && isSaoHoiChieuRong("Tật Ách", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0808 - Văn Xương tại Tật Ách, ở Dậu, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Dậu")) && isSaoHoiChieuRong("Tật Ách", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0809 - Văn Xương tại Tật Ách, ở Dậu, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Dậu")) && isSaoHoiChieuRong("Tật Ách", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0810 - Văn Xương tại Tật Ách, ở Dậu, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Dậu")) && isSaoHoiChieuRong("Tật Ách", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0811 - Văn Xương tại Tật Ách, ở Dậu, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Dậu")) && isSaoHoiChieuRong("Tật Ách", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0812 - Văn Xương tại Tật Ách, ở Dậu, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Dậu")) && isSaoHoiChieuRong("Tật Ách", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0813 - Văn Xương tại Tật Ách, ở Dậu, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Dậu")) && isSaoHoiChieuRong("Tật Ách", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0814 - Văn Xương tại Tật Ách, ở Dậu, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Dần"))) {
+        keyArr.push("Sao nhập Tật Ách TC0815 - Văn Xương tại Tật Ách, ở Dần");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Ngọ"))) {
+        keyArr.push("Sao nhập Tật Ách TC0816 - Văn Xương tại Tật Ách, ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && (isCungTaiChi("Tật Ách", "Tuất"))) {
+        keyArr.push("Sao nhập Tật Ách TC0817 - Văn Xương tại Tật Ách, ở Tuất");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && isSaoHoiChieuRong("Tật Ách", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0818 - Văn Xương tại Tật Ách, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && isSaoHoiChieuRong("Tật Ách", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0819 - Văn Xương tại Tật Ách, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && isSaoHoiChieuRong("Tật Ách", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0820 - Văn Xương tại Tật Ách, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && isSaoHoiChieuRong("Tật Ách", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0821 - Văn Xương tại Tật Ách, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && isSaoHoiChieuRong("Tật Ách", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0822 - Văn Xương tại Tật Ách, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && isSaoHoiChieuRong("Tật Ách", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0823 - Văn Xương tại Tật Ách, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && isSaoHoiChieuRong("Tật Ách", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0824 - Văn Xương tại Tật Ách, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && isSaoHoiChieuRong("Tật Ách", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0825 - Văn Xương tại Tật Ách, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && isSaoHoiChieuRong("Tật Ách", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0826 - Văn Xương tại Tật Ách, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && isSaoHoiChieuRong("Tật Ách", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0827 - Văn Xương tại Tật Ách, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && isSaoHoiChieuRong("Tật Ách", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0828 - Văn Xương tại Tật Ách, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && isSaoHoiChieuRong("Tật Ách", "Đà La", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0829 - Văn Xương tại Tật Ách, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && isSaoHoiChieuRong("Tật Ách", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0830 - Văn Xương tại Tật Ách, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && isSaoHoiChieuRong("Tật Ách", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0831 - Văn Xương tại Tật Ách, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && isSaoHoiChieuRong("Tật Ách", "Địa Không", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0832 - Văn Xương tại Tật Ách, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Văn Xương") && isSaoHoiChieuRong("Tật Ách", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Tật Ách TC0833 - Văn Xương tại Tật Ách, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
 }
 // TCC-ta-END
 
@@ -21270,6 +22827,60 @@ function LuanSaoCungTC_td(keyArr) {
     }
     if (isSaoToaThuTaiCung("Thiên Di", "Phá Quân") && isSaoToaThuTaiCung("Thiên Di", "Địa Kiếp")) {
         keyArr.push("Sao nhập Thiên Di TC0591 - Phá Quân và Địa Kiếp đồng cung tại Thiên Di");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Văn Xương") && (isCungTaiChi("Thiên Di", "Sửu"))) {
+        keyArr.push("Sao nhập Thiên Di TC0592 - Văn Xương tại Thiên Di, ở Sửu");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Văn Xương") && (isCungTaiChi("Thiên Di", "Tỵ"))) {
+        keyArr.push("Sao nhập Thiên Di TC0593 - Văn Xương tại Thiên Di, ở Tỵ");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Văn Xương") && (isCungTaiChi("Thiên Di", "Dậu"))) {
+        keyArr.push("Sao nhập Thiên Di TC0594 - Văn Xương tại Thiên Di, ở Dậu");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Văn Xương") && (isCungTaiChi("Thiên Di", "Tý"))) {
+        keyArr.push("Sao nhập Thiên Di TC0595 - Văn Xương tại Thiên Di, ở Tý");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Văn Xương") && (isCungTaiChi("Thiên Di", "Thìn"))) {
+        keyArr.push("Sao nhập Thiên Di TC0596 - Văn Xương tại Thiên Di, ở Thìn");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Văn Xương") && (isCungTaiChi("Thiên Di", "Thân"))) {
+        keyArr.push("Sao nhập Thiên Di TC0597 - Văn Xương tại Thiên Di, ở Thân");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Văn Xương") && isSaoHoiChieuRong("Thiên Di", "Kình Dương", false) && isSaoToaThuTaiCung("Thiên Di", "Thiên Hình")) {
+        keyArr.push("Sao nhập Thiên Di TC0598 - Văn Xương và Thiên Hình đồng cung tại Thiên Di, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Văn Xương") && isSaoHoiChieuRong("Thiên Di", "Kình Dương", false) && isSaoToaThuTaiCung("Thiên Di", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Thiên Di TC0599 - Văn Xương và Hóa Kỵ đồng cung tại Thiên Di, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Văn Xương") && isSaoHoiChieuRong("Thiên Di", "Đà La", false) && isSaoToaThuTaiCung("Thiên Di", "Thiên Hình")) {
+        keyArr.push("Sao nhập Thiên Di TC0600 - Văn Xương và Thiên Hình đồng cung tại Thiên Di, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Văn Xương") && isSaoHoiChieuRong("Thiên Di", "Đà La", false) && isSaoToaThuTaiCung("Thiên Di", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Thiên Di TC0601 - Văn Xương và Hóa Kỵ đồng cung tại Thiên Di, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Văn Xương") && isSaoHoiChieuRong("Thiên Di", "Hỏa Tinh", false) && isSaoToaThuTaiCung("Thiên Di", "Thiên Hình")) {
+        keyArr.push("Sao nhập Thiên Di TC0602 - Văn Xương và Thiên Hình đồng cung tại Thiên Di, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Văn Xương") && isSaoHoiChieuRong("Thiên Di", "Hỏa Tinh", false) && isSaoToaThuTaiCung("Thiên Di", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Thiên Di TC0603 - Văn Xương và Hóa Kỵ đồng cung tại Thiên Di, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Văn Xương") && isSaoHoiChieuRong("Thiên Di", "Linh Tinh", false) && isSaoToaThuTaiCung("Thiên Di", "Thiên Hình")) {
+        keyArr.push("Sao nhập Thiên Di TC0604 - Văn Xương và Thiên Hình đồng cung tại Thiên Di, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Văn Xương") && isSaoHoiChieuRong("Thiên Di", "Linh Tinh", false) && isSaoToaThuTaiCung("Thiên Di", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Thiên Di TC0605 - Văn Xương và Hóa Kỵ đồng cung tại Thiên Di, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Văn Xương") && isSaoHoiChieuRong("Thiên Di", "Địa Không", false) && isSaoToaThuTaiCung("Thiên Di", "Thiên Hình")) {
+        keyArr.push("Sao nhập Thiên Di TC0606 - Văn Xương và Thiên Hình đồng cung tại Thiên Di, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Văn Xương") && isSaoHoiChieuRong("Thiên Di", "Địa Không", false) && isSaoToaThuTaiCung("Thiên Di", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Thiên Di TC0607 - Văn Xương và Hóa Kỵ đồng cung tại Thiên Di, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Văn Xương") && isSaoHoiChieuRong("Thiên Di", "Địa Kiếp", false) && isSaoToaThuTaiCung("Thiên Di", "Thiên Hình")) {
+        keyArr.push("Sao nhập Thiên Di TC0608 - Văn Xương và Thiên Hình đồng cung tại Thiên Di, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Văn Xương") && isSaoHoiChieuRong("Thiên Di", "Địa Kiếp", false) && isSaoToaThuTaiCung("Thiên Di", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Thiên Di TC0609 - Văn Xương và Hóa Kỵ đồng cung tại Thiên Di, đồng cung hoặc hội chiếu có Địa Kiếp");
     }
 }
 // TCC-td-END
@@ -23184,6 +24795,459 @@ function LuanSaoCungTC_nb(keyArr) {
     }
     if (isSaoToaThuTaiCung("Nô Bộc", "Phá Quân") && isSaoHoiChieuRong("Nô Bộc", "Thiên Hao", false)) {
         keyArr.push("Sao nhập Nô Bộc TC0635 - Phá Quân tại Nô Bộc, đồng cung hoặc hội chiếu có Thiên Hao");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Sửu"))) {
+        keyArr.push("Sao nhập Nô Bộc TC0636 - Văn Xương tại Nô Bộc, ở Sửu");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tỵ"))) {
+        keyArr.push("Sao nhập Nô Bộc TC0637 - Văn Xương tại Nô Bộc, ở Tỵ");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dậu"))) {
+        keyArr.push("Sao nhập Nô Bộc TC0638 - Văn Xương tại Nô Bộc, ở Dậu");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && isSaoToaThuTaiCung("Nô Bộc", "Văn Khúc")) {
+        keyArr.push("Sao nhập Nô Bộc TC0639 - Văn Xương và Văn Khúc đồng cung tại Nô Bộc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dần"))) {
+        keyArr.push("Sao nhập Nô Bộc TC0640 - Văn Xương tại Nô Bộc, ở Dần");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Ngọ"))) {
+        keyArr.push("Sao nhập Nô Bộc TC0641 - Văn Xương tại Nô Bộc, ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tuất"))) {
+        keyArr.push("Sao nhập Nô Bộc TC0642 - Văn Xương tại Nô Bộc, ở Tuất");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dần")) && isSaoHoiChieuRong("Nô Bộc", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0643 - Văn Xương tại Nô Bộc, ở Dần, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dần")) && isSaoHoiChieuRong("Nô Bộc", "Đà La", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0644 - Văn Xương tại Nô Bộc, ở Dần, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dần")) && isSaoHoiChieuRong("Nô Bộc", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0645 - Văn Xương tại Nô Bộc, ở Dần, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dần")) && isSaoHoiChieuRong("Nô Bộc", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0646 - Văn Xương tại Nô Bộc, ở Dần, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dần")) && isSaoHoiChieuRong("Nô Bộc", "Địa Không", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0647 - Văn Xương tại Nô Bộc, ở Dần, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dần")) && isSaoHoiChieuRong("Nô Bộc", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0648 - Văn Xương tại Nô Bộc, ở Dần, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Ngọ")) && isSaoHoiChieuRong("Nô Bộc", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0649 - Văn Xương tại Nô Bộc, ở Ngọ, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Ngọ")) && isSaoHoiChieuRong("Nô Bộc", "Đà La", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0650 - Văn Xương tại Nô Bộc, ở Ngọ, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Ngọ")) && isSaoHoiChieuRong("Nô Bộc", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0651 - Văn Xương tại Nô Bộc, ở Ngọ, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Ngọ")) && isSaoHoiChieuRong("Nô Bộc", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0652 - Văn Xương tại Nô Bộc, ở Ngọ, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Ngọ")) && isSaoHoiChieuRong("Nô Bộc", "Địa Không", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0653 - Văn Xương tại Nô Bộc, ở Ngọ, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Ngọ")) && isSaoHoiChieuRong("Nô Bộc", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0654 - Văn Xương tại Nô Bộc, ở Ngọ, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tuất")) && isSaoHoiChieuRong("Nô Bộc", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0655 - Văn Xương tại Nô Bộc, ở Tuất, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tuất")) && isSaoHoiChieuRong("Nô Bộc", "Đà La", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0656 - Văn Xương tại Nô Bộc, ở Tuất, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tuất")) && isSaoHoiChieuRong("Nô Bộc", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0657 - Văn Xương tại Nô Bộc, ở Tuất, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tuất")) && isSaoHoiChieuRong("Nô Bộc", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0658 - Văn Xương tại Nô Bộc, ở Tuất, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tuất")) && isSaoHoiChieuRong("Nô Bộc", "Địa Không", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0659 - Văn Xương tại Nô Bộc, ở Tuất, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tuất")) && isSaoHoiChieuRong("Nô Bộc", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0660 - Văn Xương tại Nô Bộc, ở Tuất, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dần")) && isSaoHoiChieuRong("Nô Bộc", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0661 - Văn Xương tại Nô Bộc, ở Dần, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dần")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0662 - Văn Xương tại Nô Bộc, ở Dần, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dần")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0663 - Văn Xương tại Nô Bộc, ở Dần, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dần")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0664 - Văn Xương tại Nô Bộc, ở Dần, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dần")) && isSaoHoiChieuRong("Nô Bộc", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0665 - Văn Xương tại Nô Bộc, ở Dần, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dần")) && isSaoHoiChieuRong("Nô Bộc", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0666 - Văn Xương tại Nô Bộc, ở Dần, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dần")) && isSaoHoiChieuRong("Nô Bộc", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0667 - Văn Xương tại Nô Bộc, ở Dần, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dần")) && isSaoHoiChieuRong("Nô Bộc", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0668 - Văn Xương tại Nô Bộc, ở Dần, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dần")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0669 - Văn Xương tại Nô Bộc, ở Dần, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dần")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0670 - Văn Xương tại Nô Bộc, ở Dần, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Ngọ")) && isSaoHoiChieuRong("Nô Bộc", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0671 - Văn Xương tại Nô Bộc, ở Ngọ, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Ngọ")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0672 - Văn Xương tại Nô Bộc, ở Ngọ, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Ngọ")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0673 - Văn Xương tại Nô Bộc, ở Ngọ, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Ngọ")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0674 - Văn Xương tại Nô Bộc, ở Ngọ, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Ngọ")) && isSaoHoiChieuRong("Nô Bộc", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0675 - Văn Xương tại Nô Bộc, ở Ngọ, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Ngọ")) && isSaoHoiChieuRong("Nô Bộc", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0676 - Văn Xương tại Nô Bộc, ở Ngọ, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Ngọ")) && isSaoHoiChieuRong("Nô Bộc", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0677 - Văn Xương tại Nô Bộc, ở Ngọ, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Ngọ")) && isSaoHoiChieuRong("Nô Bộc", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0678 - Văn Xương tại Nô Bộc, ở Ngọ, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Ngọ")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0679 - Văn Xương tại Nô Bộc, ở Ngọ, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Ngọ")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0680 - Văn Xương tại Nô Bộc, ở Ngọ, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tuất")) && isSaoHoiChieuRong("Nô Bộc", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0681 - Văn Xương tại Nô Bộc, ở Tuất, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tuất")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0682 - Văn Xương tại Nô Bộc, ở Tuất, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tuất")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0683 - Văn Xương tại Nô Bộc, ở Tuất, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tuất")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0684 - Văn Xương tại Nô Bộc, ở Tuất, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tuất")) && isSaoHoiChieuRong("Nô Bộc", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0685 - Văn Xương tại Nô Bộc, ở Tuất, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tuất")) && isSaoHoiChieuRong("Nô Bộc", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0686 - Văn Xương tại Nô Bộc, ở Tuất, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tuất")) && isSaoHoiChieuRong("Nô Bộc", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0687 - Văn Xương tại Nô Bộc, ở Tuất, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tuất")) && isSaoHoiChieuRong("Nô Bộc", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0688 - Văn Xương tại Nô Bộc, ở Tuất, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tuất")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0689 - Văn Xương tại Nô Bộc, ở Tuất, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tuất")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0690 - Văn Xương tại Nô Bộc, ở Tuất, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Thân")) && isSaoHoiChieuRong("Nô Bộc", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0691 - Văn Xương tại Nô Bộc, ở Thân, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Thân")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0692 - Văn Xương tại Nô Bộc, ở Thân, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Thân")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0693 - Văn Xương tại Nô Bộc, ở Thân, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Thân")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0694 - Văn Xương tại Nô Bộc, ở Thân, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Thân")) && isSaoHoiChieuRong("Nô Bộc", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0695 - Văn Xương tại Nô Bộc, ở Thân, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Thân")) && isSaoHoiChieuRong("Nô Bộc", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0696 - Văn Xương tại Nô Bộc, ở Thân, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Thân")) && isSaoHoiChieuRong("Nô Bộc", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0697 - Văn Xương tại Nô Bộc, ở Thân, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Thân")) && isSaoHoiChieuRong("Nô Bộc", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0698 - Văn Xương tại Nô Bộc, ở Thân, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Thân")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0699 - Văn Xương tại Nô Bộc, ở Thân, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Thân")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0700 - Văn Xương tại Nô Bộc, ở Thân, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tý")) && isSaoHoiChieuRong("Nô Bộc", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0701 - Văn Xương tại Nô Bộc, ở Tý, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tý")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0702 - Văn Xương tại Nô Bộc, ở Tý, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tý")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0703 - Văn Xương tại Nô Bộc, ở Tý, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tý")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0704 - Văn Xương tại Nô Bộc, ở Tý, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tý")) && isSaoHoiChieuRong("Nô Bộc", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0705 - Văn Xương tại Nô Bộc, ở Tý, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tý")) && isSaoHoiChieuRong("Nô Bộc", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0706 - Văn Xương tại Nô Bộc, ở Tý, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tý")) && isSaoHoiChieuRong("Nô Bộc", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0707 - Văn Xương tại Nô Bộc, ở Tý, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tý")) && isSaoHoiChieuRong("Nô Bộc", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0708 - Văn Xương tại Nô Bộc, ở Tý, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tý")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0709 - Văn Xương tại Nô Bộc, ở Tý, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tý")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0710 - Văn Xương tại Nô Bộc, ở Tý, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Thìn")) && isSaoHoiChieuRong("Nô Bộc", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0711 - Văn Xương tại Nô Bộc, ở Thìn, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Thìn")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0712 - Văn Xương tại Nô Bộc, ở Thìn, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Thìn")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0713 - Văn Xương tại Nô Bộc, ở Thìn, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Thìn")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0714 - Văn Xương tại Nô Bộc, ở Thìn, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Thìn")) && isSaoHoiChieuRong("Nô Bộc", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0715 - Văn Xương tại Nô Bộc, ở Thìn, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Thìn")) && isSaoHoiChieuRong("Nô Bộc", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0716 - Văn Xương tại Nô Bộc, ở Thìn, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Thìn")) && isSaoHoiChieuRong("Nô Bộc", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0717 - Văn Xương tại Nô Bộc, ở Thìn, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Thìn")) && isSaoHoiChieuRong("Nô Bộc", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0718 - Văn Xương tại Nô Bộc, ở Thìn, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Thìn")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0719 - Văn Xương tại Nô Bộc, ở Thìn, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Thìn")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0720 - Văn Xương tại Nô Bộc, ở Thìn, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tỵ")) && isSaoHoiChieuRong("Nô Bộc", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0721 - Văn Xương tại Nô Bộc, ở Tỵ, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tỵ")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0722 - Văn Xương tại Nô Bộc, ở Tỵ, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tỵ")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0723 - Văn Xương tại Nô Bộc, ở Tỵ, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tỵ")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0724 - Văn Xương tại Nô Bộc, ở Tỵ, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tỵ")) && isSaoHoiChieuRong("Nô Bộc", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0725 - Văn Xương tại Nô Bộc, ở Tỵ, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tỵ")) && isSaoHoiChieuRong("Nô Bộc", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0726 - Văn Xương tại Nô Bộc, ở Tỵ, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tỵ")) && isSaoHoiChieuRong("Nô Bộc", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0727 - Văn Xương tại Nô Bộc, ở Tỵ, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tỵ")) && isSaoHoiChieuRong("Nô Bộc", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0728 - Văn Xương tại Nô Bộc, ở Tỵ, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tỵ")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0729 - Văn Xương tại Nô Bộc, ở Tỵ, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Tỵ")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0730 - Văn Xương tại Nô Bộc, ở Tỵ, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dậu")) && isSaoHoiChieuRong("Nô Bộc", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0731 - Văn Xương tại Nô Bộc, ở Dậu, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dậu")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0732 - Văn Xương tại Nô Bộc, ở Dậu, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dậu")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0733 - Văn Xương tại Nô Bộc, ở Dậu, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dậu")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0734 - Văn Xương tại Nô Bộc, ở Dậu, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dậu")) && isSaoHoiChieuRong("Nô Bộc", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0735 - Văn Xương tại Nô Bộc, ở Dậu, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dậu")) && isSaoHoiChieuRong("Nô Bộc", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0736 - Văn Xương tại Nô Bộc, ở Dậu, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dậu")) && isSaoHoiChieuRong("Nô Bộc", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0737 - Văn Xương tại Nô Bộc, ở Dậu, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dậu")) && isSaoHoiChieuRong("Nô Bộc", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0738 - Văn Xương tại Nô Bộc, ở Dậu, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dậu")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0739 - Văn Xương tại Nô Bộc, ở Dậu, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Dậu")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0740 - Văn Xương tại Nô Bộc, ở Dậu, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Sửu")) && isSaoHoiChieuRong("Nô Bộc", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0741 - Văn Xương tại Nô Bộc, ở Sửu, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Sửu")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0742 - Văn Xương tại Nô Bộc, ở Sửu, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Sửu")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0743 - Văn Xương tại Nô Bộc, ở Sửu, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Sửu")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0744 - Văn Xương tại Nô Bộc, ở Sửu, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Sửu")) && isSaoHoiChieuRong("Nô Bộc", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0745 - Văn Xương tại Nô Bộc, ở Sửu, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Sửu")) && isSaoHoiChieuRong("Nô Bộc", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0746 - Văn Xương tại Nô Bộc, ở Sửu, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Sửu")) && isSaoHoiChieuRong("Nô Bộc", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0747 - Văn Xương tại Nô Bộc, ở Sửu, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Sửu")) && isSaoHoiChieuRong("Nô Bộc", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0748 - Văn Xương tại Nô Bộc, ở Sửu, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Sửu")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0749 - Văn Xương tại Nô Bộc, ở Sửu, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Sửu")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0750 - Văn Xương tại Nô Bộc, ở Sửu, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Hợi")) && isSaoHoiChieuRong("Nô Bộc", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0751 - Văn Xương tại Nô Bộc, ở Hợi, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Hợi")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0752 - Văn Xương tại Nô Bộc, ở Hợi, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Hợi")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0753 - Văn Xương tại Nô Bộc, ở Hợi, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Hợi")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0754 - Văn Xương tại Nô Bộc, ở Hợi, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Hợi")) && isSaoHoiChieuRong("Nô Bộc", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0755 - Văn Xương tại Nô Bộc, ở Hợi, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Hợi")) && isSaoHoiChieuRong("Nô Bộc", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0756 - Văn Xương tại Nô Bộc, ở Hợi, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Hợi")) && isSaoHoiChieuRong("Nô Bộc", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0757 - Văn Xương tại Nô Bộc, ở Hợi, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Hợi")) && isSaoHoiChieuRong("Nô Bộc", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0758 - Văn Xương tại Nô Bộc, ở Hợi, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Hợi")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0759 - Văn Xương tại Nô Bộc, ở Hợi, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Hợi")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0760 - Văn Xương tại Nô Bộc, ở Hợi, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Mão")) && isSaoHoiChieuRong("Nô Bộc", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0761 - Văn Xương tại Nô Bộc, ở Mão, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Mão")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0762 - Văn Xương tại Nô Bộc, ở Mão, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Mão")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0763 - Văn Xương tại Nô Bộc, ở Mão, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Mão")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0764 - Văn Xương tại Nô Bộc, ở Mão, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Mão")) && isSaoHoiChieuRong("Nô Bộc", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0765 - Văn Xương tại Nô Bộc, ở Mão, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Mão")) && isSaoHoiChieuRong("Nô Bộc", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0766 - Văn Xương tại Nô Bộc, ở Mão, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Mão")) && isSaoHoiChieuRong("Nô Bộc", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0767 - Văn Xương tại Nô Bộc, ở Mão, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Mão")) && isSaoHoiChieuRong("Nô Bộc", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0768 - Văn Xương tại Nô Bộc, ở Mão, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Mão")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0769 - Văn Xương tại Nô Bộc, ở Mão, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Mão")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0770 - Văn Xương tại Nô Bộc, ở Mão, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Mùi")) && isSaoHoiChieuRong("Nô Bộc", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0771 - Văn Xương tại Nô Bộc, ở Mùi, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Mùi")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0772 - Văn Xương tại Nô Bộc, ở Mùi, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Mùi")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0773 - Văn Xương tại Nô Bộc, ở Mùi, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Mùi")) && isSaoHoiChieuRong("Nô Bộc", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0774 - Văn Xương tại Nô Bộc, ở Mùi, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Mùi")) && isSaoHoiChieuRong("Nô Bộc", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0775 - Văn Xương tại Nô Bộc, ở Mùi, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Mùi")) && isSaoHoiChieuRong("Nô Bộc", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0776 - Văn Xương tại Nô Bộc, ở Mùi, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Mùi")) && isSaoHoiChieuRong("Nô Bộc", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0777 - Văn Xương tại Nô Bộc, ở Mùi, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Mùi")) && isSaoHoiChieuRong("Nô Bộc", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0778 - Văn Xương tại Nô Bộc, ở Mùi, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Mùi")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0779 - Văn Xương tại Nô Bộc, ở Mùi, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && (isCungTaiChi("Nô Bộc", "Mùi")) && isSaoHoiChieuRong("Nô Bộc", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0780 - Văn Xương tại Nô Bộc, ở Mùi, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && isSaoHoiChieuRong("Nô Bộc", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0781 - Văn Xương tại Nô Bộc, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && isSaoHoiChieuRong("Nô Bộc", "Đà La", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0782 - Văn Xương tại Nô Bộc, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && isSaoHoiChieuRong("Nô Bộc", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0783 - Văn Xương tại Nô Bộc, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && isSaoHoiChieuRong("Nô Bộc", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0784 - Văn Xương tại Nô Bộc, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && isSaoHoiChieuRong("Nô Bộc", "Địa Không", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0785 - Văn Xương tại Nô Bộc, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Nô Bộc", "Văn Xương") && isSaoHoiChieuRong("Nô Bộc", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Nô Bộc TC0786 - Văn Xương tại Nô Bộc, đồng cung hoặc hội chiếu có Địa Kiếp");
     }
 }
 // TCC-nb-END
@@ -25209,6 +27273,72 @@ function LuanSaoCungTC_ql(keyArr) {
     }
     if (isSaoToaThuTaiCung("Quan Lộc", "Phá Quân") && isSaoHoiChieuRong("Quan Lộc", "Hóa Lộc", false) && isSaoHoiChieuRong("Quan Lộc", "Hóa Khoa", false) && isSaoHoiChieuRong("Quan Lộc", "Hóa Quyền", false)) {
         keyArr.push("Sao nhập Quan Lộc TC0672 - Phá Quân tại Quan Lộc, đồng cung hoặc hội chiếu có Hóa Lộc, Hóa Khoa và Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && (isCungTaiChi("Quan Lộc", "Sửu")) && isSaoHoiChieuRong("Quan Lộc", "Thái Dương", false) && isSaoHoiChieuRong("Quan Lộc", "Thái Âm", false)) {
+        keyArr.push("Sao nhập Quan Lộc TC0673 - Văn Xương tại Quan Lộc, ở Sửu, đồng cung hoặc hội chiếu có Thái Dương và Thái Âm");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && (isCungTaiChi("Quan Lộc", "Tỵ")) && isSaoHoiChieuRong("Quan Lộc", "Thái Dương", false) && isSaoHoiChieuRong("Quan Lộc", "Thái Âm", false)) {
+        keyArr.push("Sao nhập Quan Lộc TC0674 - Văn Xương tại Quan Lộc, ở Tỵ, đồng cung hoặc hội chiếu có Thái Dương và Thái Âm");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && (isCungTaiChi("Quan Lộc", "Dậu")) && isSaoHoiChieuRong("Quan Lộc", "Thái Dương", false) && isSaoHoiChieuRong("Quan Lộc", "Thái Âm", false)) {
+        keyArr.push("Sao nhập Quan Lộc TC0675 - Văn Xương tại Quan Lộc, ở Dậu, đồng cung hoặc hội chiếu có Thái Dương và Thái Âm");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && (isCungTaiChi("Quan Lộc", "Sửu")) && isSaoHoiChieuRong("Quan Lộc", "Thái Dương", false) && isSaoHoiChieuRong("Quan Lộc", "Thái Âm", false) && isSaoHoiChieuRong("Quan Lộc", "Hóa Khoa", false) && isSaoHoiChieuRong("Quan Lộc", "Hóa Quyền", false) && isSaoHoiChieuRong("Quan Lộc", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Quan Lộc TC0676 - Văn Xương tại Quan Lộc, ở Sửu, đồng cung hoặc hội chiếu có Thái Dương, Thái Âm, Hóa Khoa, Hóa Quyền và Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && (isCungTaiChi("Quan Lộc", "Tỵ")) && isSaoHoiChieuRong("Quan Lộc", "Thái Dương", false) && isSaoHoiChieuRong("Quan Lộc", "Thái Âm", false) && isSaoHoiChieuRong("Quan Lộc", "Hóa Khoa", false) && isSaoHoiChieuRong("Quan Lộc", "Hóa Quyền", false) && isSaoHoiChieuRong("Quan Lộc", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Quan Lộc TC0677 - Văn Xương tại Quan Lộc, ở Tỵ, đồng cung hoặc hội chiếu có Thái Dương, Thái Âm, Hóa Khoa, Hóa Quyền và Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && (isCungTaiChi("Quan Lộc", "Dậu")) && isSaoHoiChieuRong("Quan Lộc", "Thái Dương", false) && isSaoHoiChieuRong("Quan Lộc", "Thái Âm", false) && isSaoHoiChieuRong("Quan Lộc", "Hóa Khoa", false) && isSaoHoiChieuRong("Quan Lộc", "Hóa Quyền", false) && isSaoHoiChieuRong("Quan Lộc", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Quan Lộc TC0678 - Văn Xương tại Quan Lộc, ở Dậu, đồng cung hoặc hội chiếu có Thái Dương, Thái Âm, Hóa Khoa, Hóa Quyền và Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && (isCungTaiChi("Quan Lộc", "Sửu")) && isSaoHoiChieuRong("Quan Lộc", "Tử Vi", false)) {
+        keyArr.push("Sao nhập Quan Lộc TC0679 - Văn Xương tại Quan Lộc, ở Sửu, đồng cung hoặc hội chiếu có Tử Vi");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && (isCungTaiChi("Quan Lộc", "Sửu")) && isSaoHoiChieuRong("Quan Lộc", "Thiên Phủ", false)) {
+        keyArr.push("Sao nhập Quan Lộc TC0680 - Văn Xương tại Quan Lộc, ở Sửu, đồng cung hoặc hội chiếu có Thiên Phủ");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && (isCungTaiChi("Quan Lộc", "Sửu")) && isSaoHoiChieuRong("Quan Lộc", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Quan Lộc TC0681 - Văn Xương tại Quan Lộc, ở Sửu, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && (isCungTaiChi("Quan Lộc", "Sửu")) && isSaoHoiChieuRong("Quan Lộc", "Vũ Khúc", false)) {
+        keyArr.push("Sao nhập Quan Lộc TC0682 - Văn Xương tại Quan Lộc, ở Sửu, đồng cung hoặc hội chiếu có Vũ Khúc");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && (isCungTaiChi("Quan Lộc", "Tỵ")) && isSaoHoiChieuRong("Quan Lộc", "Tử Vi", false)) {
+        keyArr.push("Sao nhập Quan Lộc TC0683 - Văn Xương tại Quan Lộc, ở Tỵ, đồng cung hoặc hội chiếu có Tử Vi");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && (isCungTaiChi("Quan Lộc", "Tỵ")) && isSaoHoiChieuRong("Quan Lộc", "Thiên Phủ", false)) {
+        keyArr.push("Sao nhập Quan Lộc TC0684 - Văn Xương tại Quan Lộc, ở Tỵ, đồng cung hoặc hội chiếu có Thiên Phủ");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && (isCungTaiChi("Quan Lộc", "Tỵ")) && isSaoHoiChieuRong("Quan Lộc", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Quan Lộc TC0685 - Văn Xương tại Quan Lộc, ở Tỵ, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && (isCungTaiChi("Quan Lộc", "Tỵ")) && isSaoHoiChieuRong("Quan Lộc", "Vũ Khúc", false)) {
+        keyArr.push("Sao nhập Quan Lộc TC0686 - Văn Xương tại Quan Lộc, ở Tỵ, đồng cung hoặc hội chiếu có Vũ Khúc");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && (isCungTaiChi("Quan Lộc", "Dậu")) && isSaoHoiChieuRong("Quan Lộc", "Tử Vi", false)) {
+        keyArr.push("Sao nhập Quan Lộc TC0687 - Văn Xương tại Quan Lộc, ở Dậu, đồng cung hoặc hội chiếu có Tử Vi");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && (isCungTaiChi("Quan Lộc", "Dậu")) && isSaoHoiChieuRong("Quan Lộc", "Thiên Phủ", false)) {
+        keyArr.push("Sao nhập Quan Lộc TC0688 - Văn Xương tại Quan Lộc, ở Dậu, đồng cung hoặc hội chiếu có Thiên Phủ");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && (isCungTaiChi("Quan Lộc", "Dậu")) && isSaoHoiChieuRong("Quan Lộc", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Quan Lộc TC0689 - Văn Xương tại Quan Lộc, ở Dậu, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && (isCungTaiChi("Quan Lộc", "Dậu")) && isSaoHoiChieuRong("Quan Lộc", "Vũ Khúc", false)) {
+        keyArr.push("Sao nhập Quan Lộc TC0690 - Văn Xương tại Quan Lộc, ở Dậu, đồng cung hoặc hội chiếu có Vũ Khúc");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && (isCungTaiChi("Quan Lộc", "Dần"))) {
+        keyArr.push("Sao nhập Quan Lộc TC0691 - Văn Xương tại Quan Lộc, ở Dần");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && (isCungTaiChi("Quan Lộc", "Ngọ"))) {
+        keyArr.push("Sao nhập Quan Lộc TC0692 - Văn Xương tại Quan Lộc, ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && (isCungTaiChi("Quan Lộc", "Tuất"))) {
+        keyArr.push("Sao nhập Quan Lộc TC0693 - Văn Xương tại Quan Lộc, ở Tuất");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Văn Xương") && isSaoToaThuTaiCung("Quan Lộc", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Quan Lộc TC0694 - Văn Xương và Hóa Kỵ đồng cung tại Quan Lộc");
     }
 }
 // TCC-ql-END
@@ -27853,6 +29983,57 @@ function LuanSaoCungTC_dt(keyArr) {
     if (isSaoToaThuTaiCung("Điền Trạch", "Phá Quân") && isSaoToaThuTaiCung("Điền Trạch", "Kình Dương") && isSaoToaThuTaiCung("Điền Trạch", "Đà La") && isSaoToaThuTaiCung("Điền Trạch", "Đại Hao")) {
         keyArr.push("Sao nhập Điền Trạch TC0878 - Phá Quân, Kình Dương, Đà La và Đại Hao đồng cung tại Điền Trạch");
     }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Văn Xương")) {
+        keyArr.push("Sao nhập Điền Trạch TC0879 - Văn Xương tại Điền Trạch");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Văn Xương") && isSaoHoiChieuRong("Điền Trạch", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Điền Trạch TC0880 - Văn Xương tại Điền Trạch, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Văn Xương") && isSaoHoiChieuRong("Điền Trạch", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Điền Trạch TC0881 - Văn Xương tại Điền Trạch, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Văn Xương") && isSaoHoiChieuRong("Điền Trạch", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Điền Trạch TC0882 - Văn Xương tại Điền Trạch, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Văn Xương") && isSaoHoiChieuRong("Điền Trạch", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Điền Trạch TC0883 - Văn Xương tại Điền Trạch, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Văn Xương") && isSaoHoiChieuRong("Điền Trạch", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Điền Trạch TC0884 - Văn Xương tại Điền Trạch, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Văn Xương") && isSaoHoiChieuRong("Điền Trạch", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Điền Trạch TC0885 - Văn Xương tại Điền Trạch, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Văn Xương") && isSaoHoiChieuRong("Điền Trạch", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Điền Trạch TC0886 - Văn Xương tại Điền Trạch, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Văn Xương") && isSaoHoiChieuRong("Điền Trạch", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Điền Trạch TC0887 - Văn Xương tại Điền Trạch, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Văn Xương") && isSaoHoiChieuRong("Điền Trạch", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Điền Trạch TC0888 - Văn Xương tại Điền Trạch, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Văn Xương") && isSaoHoiChieuRong("Điền Trạch", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Điền Trạch TC0889 - Văn Xương tại Điền Trạch, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Văn Xương") && isSaoHoiChieuRong("Điền Trạch", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Điền Trạch TC0890 - Văn Xương tại Điền Trạch, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Văn Xương") && isSaoHoiChieuRong("Điền Trạch", "Đà La", false)) {
+        keyArr.push("Sao nhập Điền Trạch TC0891 - Văn Xương tại Điền Trạch, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Văn Xương") && isSaoHoiChieuRong("Điền Trạch", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Điền Trạch TC0892 - Văn Xương tại Điền Trạch, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Văn Xương") && isSaoHoiChieuRong("Điền Trạch", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Điền Trạch TC0893 - Văn Xương tại Điền Trạch, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Văn Xương") && isSaoHoiChieuRong("Điền Trạch", "Địa Không", false) && isSaoHoiChieuRong("Điền Trạch", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Điền Trạch TC0894 - Văn Xương tại Điền Trạch, đồng cung hoặc hội chiếu có Địa Không và Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Văn Xương") && isSaoToaThuTaiCung("Điền Trạch", "Văn Khúc")) {
+        keyArr.push("Sao nhập Điền Trạch TC0895 - Văn Xương và Văn Khúc đồng cung tại Điền Trạch");
+    }
 }
 // TCC-dt-END
 
@@ -30097,6 +32278,153 @@ function LuanSaoCungTC_pd(keyArr) {
     if (isSaoToaThuTaiCung("Phúc Đức", "Phá Quân") && isSaoToaThuTaiCung("Phúc Đức", "Hóa Kỵ")) {
         keyArr.push("Sao nhập Phúc Đức TC0745 - Phá Quân và Hóa Kỵ đồng cung tại Phúc Đức");
     }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0746 - Văn Xương tại Phúc Đức, ở Sửu, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0747 - Văn Xương tại Phúc Đức, ở Sửu, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0748 - Văn Xương tại Phúc Đức, ở Sửu, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0749 - Văn Xương tại Phúc Đức, ở Sửu, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0750 - Văn Xương tại Phúc Đức, ở Sửu, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0751 - Văn Xương tại Phúc Đức, ở Sửu, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0752 - Văn Xương tại Phúc Đức, ở Sửu, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0753 - Văn Xương tại Phúc Đức, ở Sửu, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0754 - Văn Xương tại Phúc Đức, ở Sửu, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0755 - Văn Xương tại Phúc Đức, ở Sửu, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Tỵ")) && isSaoHoiChieuRong("Phúc Đức", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0756 - Văn Xương tại Phúc Đức, ở Tỵ, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Tỵ")) && isSaoHoiChieuRong("Phúc Đức", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0757 - Văn Xương tại Phúc Đức, ở Tỵ, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Tỵ")) && isSaoHoiChieuRong("Phúc Đức", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0758 - Văn Xương tại Phúc Đức, ở Tỵ, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Tỵ")) && isSaoHoiChieuRong("Phúc Đức", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0759 - Văn Xương tại Phúc Đức, ở Tỵ, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Tỵ")) && isSaoHoiChieuRong("Phúc Đức", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0760 - Văn Xương tại Phúc Đức, ở Tỵ, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Tỵ")) && isSaoHoiChieuRong("Phúc Đức", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0761 - Văn Xương tại Phúc Đức, ở Tỵ, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Tỵ")) && isSaoHoiChieuRong("Phúc Đức", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0762 - Văn Xương tại Phúc Đức, ở Tỵ, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Tỵ")) && isSaoHoiChieuRong("Phúc Đức", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0763 - Văn Xương tại Phúc Đức, ở Tỵ, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Tỵ")) && isSaoHoiChieuRong("Phúc Đức", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0764 - Văn Xương tại Phúc Đức, ở Tỵ, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Tỵ")) && isSaoHoiChieuRong("Phúc Đức", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0765 - Văn Xương tại Phúc Đức, ở Tỵ, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Dậu")) && isSaoHoiChieuRong("Phúc Đức", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0766 - Văn Xương tại Phúc Đức, ở Dậu, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Dậu")) && isSaoHoiChieuRong("Phúc Đức", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0767 - Văn Xương tại Phúc Đức, ở Dậu, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Dậu")) && isSaoHoiChieuRong("Phúc Đức", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0768 - Văn Xương tại Phúc Đức, ở Dậu, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Dậu")) && isSaoHoiChieuRong("Phúc Đức", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0769 - Văn Xương tại Phúc Đức, ở Dậu, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Dậu")) && isSaoHoiChieuRong("Phúc Đức", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0770 - Văn Xương tại Phúc Đức, ở Dậu, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Dậu")) && isSaoHoiChieuRong("Phúc Đức", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0771 - Văn Xương tại Phúc Đức, ở Dậu, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Dậu")) && isSaoHoiChieuRong("Phúc Đức", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0772 - Văn Xương tại Phúc Đức, ở Dậu, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Dậu")) && isSaoHoiChieuRong("Phúc Đức", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0773 - Văn Xương tại Phúc Đức, ở Dậu, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Dậu")) && isSaoHoiChieuRong("Phúc Đức", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0774 - Văn Xương tại Phúc Đức, ở Dậu, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Dậu")) && isSaoHoiChieuRong("Phúc Đức", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0775 - Văn Xương tại Phúc Đức, ở Dậu, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Dần")) && isSaoHoiChieuRong("Phúc Đức", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0776 - Văn Xương tại Phúc Đức, ở Dần, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Dần")) && isSaoHoiChieuRong("Phúc Đức", "Đà La", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0777 - Văn Xương tại Phúc Đức, ở Dần, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Dần")) && isSaoHoiChieuRong("Phúc Đức", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0778 - Văn Xương tại Phúc Đức, ở Dần, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Dần")) && isSaoHoiChieuRong("Phúc Đức", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0779 - Văn Xương tại Phúc Đức, ở Dần, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Dần")) && isSaoHoiChieuRong("Phúc Đức", "Địa Không", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0780 - Văn Xương tại Phúc Đức, ở Dần, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Dần")) && isSaoHoiChieuRong("Phúc Đức", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0781 - Văn Xương tại Phúc Đức, ở Dần, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Ngọ")) && isSaoHoiChieuRong("Phúc Đức", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0782 - Văn Xương tại Phúc Đức, ở Ngọ, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Ngọ")) && isSaoHoiChieuRong("Phúc Đức", "Đà La", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0783 - Văn Xương tại Phúc Đức, ở Ngọ, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Ngọ")) && isSaoHoiChieuRong("Phúc Đức", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0784 - Văn Xương tại Phúc Đức, ở Ngọ, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Ngọ")) && isSaoHoiChieuRong("Phúc Đức", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0785 - Văn Xương tại Phúc Đức, ở Ngọ, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Ngọ")) && isSaoHoiChieuRong("Phúc Đức", "Địa Không", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0786 - Văn Xương tại Phúc Đức, ở Ngọ, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Ngọ")) && isSaoHoiChieuRong("Phúc Đức", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0787 - Văn Xương tại Phúc Đức, ở Ngọ, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Tuất")) && isSaoHoiChieuRong("Phúc Đức", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0788 - Văn Xương tại Phúc Đức, ở Tuất, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Tuất")) && isSaoHoiChieuRong("Phúc Đức", "Đà La", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0789 - Văn Xương tại Phúc Đức, ở Tuất, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Tuất")) && isSaoHoiChieuRong("Phúc Đức", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0790 - Văn Xương tại Phúc Đức, ở Tuất, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Tuất")) && isSaoHoiChieuRong("Phúc Đức", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0791 - Văn Xương tại Phúc Đức, ở Tuất, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Tuất")) && isSaoHoiChieuRong("Phúc Đức", "Địa Không", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0792 - Văn Xương tại Phúc Đức, ở Tuất, đồng cung hoặc hội chiếu có Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && (isCungTaiChi("Phúc Đức", "Tuất")) && isSaoHoiChieuRong("Phúc Đức", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Phúc Đức TC0793 - Văn Xương tại Phúc Đức, ở Tuất, đồng cung hoặc hội chiếu có Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Văn Xương") && isSaoToaThuTaiCung("Phúc Đức", "Văn Khúc")) {
+        keyArr.push("Sao nhập Phúc Đức TC0794 - Văn Xương và Văn Khúc đồng cung tại Phúc Đức");
+    }
 }
 // TCC-pd-END
 
@@ -32031,6 +34359,141 @@ function LuanSaoCungTC_pm(keyArr) {
     }
     if (isSaoToaThuTaiCung("Phụ Mẫu", "Phá Quân") && (tccDemHoi("Phụ Mẫu", ["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 1) && isSaoHoiChieuRong("Phụ Mẫu", "Thiên Hình", false) && isSaoHoiChieuRong("Phụ Mẫu", "Hóa Kỵ", false)) {
         keyArr.push("Sao nhập Phụ Mẫu TC0642 - Phá Quân tại Phụ Mẫu, đồng cung hoặc hội chiếu có Thiên Hình và Hóa Kỵ, đồng cung hoặc hội chiếu từ 2 sao trở lên trong nhóm tứ sát (Kình Dương, Đà La, Hỏa Tinh, Linh Tinh)");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Sửu")) && isSaoHoiChieuRong("Phụ Mẫu", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0643 - Văn Xương tại Phụ Mẫu, ở Sửu, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Sửu")) && isSaoHoiChieuRong("Phụ Mẫu", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0644 - Văn Xương tại Phụ Mẫu, ở Sửu, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Sửu")) && isSaoHoiChieuRong("Phụ Mẫu", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0645 - Văn Xương tại Phụ Mẫu, ở Sửu, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Sửu")) && isSaoHoiChieuRong("Phụ Mẫu", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0646 - Văn Xương tại Phụ Mẫu, ở Sửu, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Sửu")) && isSaoHoiChieuRong("Phụ Mẫu", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0647 - Văn Xương tại Phụ Mẫu, ở Sửu, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Sửu")) && isSaoHoiChieuRong("Phụ Mẫu", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0648 - Văn Xương tại Phụ Mẫu, ở Sửu, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Sửu")) && isSaoHoiChieuRong("Phụ Mẫu", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0649 - Văn Xương tại Phụ Mẫu, ở Sửu, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Sửu")) && isSaoHoiChieuRong("Phụ Mẫu", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0650 - Văn Xương tại Phụ Mẫu, ở Sửu, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Sửu")) && isSaoHoiChieuRong("Phụ Mẫu", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0651 - Văn Xương tại Phụ Mẫu, ở Sửu, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Sửu")) && isSaoHoiChieuRong("Phụ Mẫu", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0652 - Văn Xương tại Phụ Mẫu, ở Sửu, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Tỵ")) && isSaoHoiChieuRong("Phụ Mẫu", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0653 - Văn Xương tại Phụ Mẫu, ở Tỵ, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Tỵ")) && isSaoHoiChieuRong("Phụ Mẫu", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0654 - Văn Xương tại Phụ Mẫu, ở Tỵ, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Tỵ")) && isSaoHoiChieuRong("Phụ Mẫu", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0655 - Văn Xương tại Phụ Mẫu, ở Tỵ, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Tỵ")) && isSaoHoiChieuRong("Phụ Mẫu", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0656 - Văn Xương tại Phụ Mẫu, ở Tỵ, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Tỵ")) && isSaoHoiChieuRong("Phụ Mẫu", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0657 - Văn Xương tại Phụ Mẫu, ở Tỵ, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Tỵ")) && isSaoHoiChieuRong("Phụ Mẫu", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0658 - Văn Xương tại Phụ Mẫu, ở Tỵ, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Tỵ")) && isSaoHoiChieuRong("Phụ Mẫu", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0659 - Văn Xương tại Phụ Mẫu, ở Tỵ, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Tỵ")) && isSaoHoiChieuRong("Phụ Mẫu", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0660 - Văn Xương tại Phụ Mẫu, ở Tỵ, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Tỵ")) && isSaoHoiChieuRong("Phụ Mẫu", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0661 - Văn Xương tại Phụ Mẫu, ở Tỵ, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Tỵ")) && isSaoHoiChieuRong("Phụ Mẫu", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0662 - Văn Xương tại Phụ Mẫu, ở Tỵ, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Dậu")) && isSaoHoiChieuRong("Phụ Mẫu", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0663 - Văn Xương tại Phụ Mẫu, ở Dậu, đồng cung hoặc hội chiếu có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Dậu")) && isSaoHoiChieuRong("Phụ Mẫu", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0664 - Văn Xương tại Phụ Mẫu, ở Dậu, đồng cung hoặc hội chiếu có Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Dậu")) && isSaoHoiChieuRong("Phụ Mẫu", "Hóa Quyền", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0665 - Văn Xương tại Phụ Mẫu, ở Dậu, đồng cung hoặc hội chiếu có Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Dậu")) && isSaoHoiChieuRong("Phụ Mẫu", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0666 - Văn Xương tại Phụ Mẫu, ở Dậu, đồng cung hoặc hội chiếu có Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Dậu")) && isSaoHoiChieuRong("Phụ Mẫu", "Tả Phù", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0667 - Văn Xương tại Phụ Mẫu, ở Dậu, đồng cung hoặc hội chiếu có Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Dậu")) && isSaoHoiChieuRong("Phụ Mẫu", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0668 - Văn Xương tại Phụ Mẫu, ở Dậu, đồng cung hoặc hội chiếu có Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Dậu")) && isSaoHoiChieuRong("Phụ Mẫu", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0669 - Văn Xương tại Phụ Mẫu, ở Dậu, đồng cung hoặc hội chiếu có Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Dậu")) && isSaoHoiChieuRong("Phụ Mẫu", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0670 - Văn Xương tại Phụ Mẫu, ở Dậu, đồng cung hoặc hội chiếu có Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Dậu")) && isSaoHoiChieuRong("Phụ Mẫu", "Thiên Khôi", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0671 - Văn Xương tại Phụ Mẫu, ở Dậu, đồng cung hoặc hội chiếu có Thiên Khôi");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Dậu")) && isSaoHoiChieuRong("Phụ Mẫu", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0672 - Văn Xương tại Phụ Mẫu, ở Dậu, đồng cung hoặc hội chiếu có Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Dần"))) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0673 - Văn Xương tại Phụ Mẫu, ở Dần");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Ngọ"))) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0674 - Văn Xương tại Phụ Mẫu, ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && (isCungTaiChi("Phụ Mẫu", "Tuất"))) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0675 - Văn Xương tại Phụ Mẫu, ở Tuất");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && isSaoHoiChieuRong("Phụ Mẫu", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0676 - Văn Xương tại Phụ Mẫu, đồng cung hoặc hội chiếu có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && isSaoHoiChieuRong("Phụ Mẫu", "Đà La", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0677 - Văn Xương tại Phụ Mẫu, đồng cung hoặc hội chiếu có Đà La");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && isSaoHoiChieuRong("Phụ Mẫu", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0678 - Văn Xương tại Phụ Mẫu, đồng cung hoặc hội chiếu có Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && isSaoHoiChieuRong("Phụ Mẫu", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0679 - Văn Xương tại Phụ Mẫu, đồng cung hoặc hội chiếu có Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương")) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0680 - Văn Xương tại Phụ Mẫu");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && isSaoToaThuTaiCung("Phụ Mẫu", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0681 - Văn Xương và Hóa Kỵ đồng cung tại Phụ Mẫu");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && isSaoToaThuTaiCung("Phụ Mẫu", "Hóa Kỵ") && isSaoHoiChieuRong("Phụ Mẫu", "Thiên Cơ", false) && isSaoHoiChieuRong("Phụ Mẫu", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0682 - Văn Xương và Hóa Kỵ đồng cung tại Phụ Mẫu, đồng cung hoặc hội chiếu có Thiên Cơ và Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && isSaoToaThuTaiCung("Phụ Mẫu", "Hóa Kỵ") && isSaoHoiChieuRong("Phụ Mẫu", "Thiên Cơ", false) && isSaoHoiChieuRong("Phụ Mẫu", "Đà La", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0683 - Văn Xương và Hóa Kỵ đồng cung tại Phụ Mẫu, đồng cung hoặc hội chiếu có Thiên Cơ và Đà La");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && isSaoToaThuTaiCung("Phụ Mẫu", "Hóa Kỵ") && isSaoHoiChieuRong("Phụ Mẫu", "Thiên Cơ", false) && isSaoHoiChieuRong("Phụ Mẫu", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0684 - Văn Xương và Hóa Kỵ đồng cung tại Phụ Mẫu, đồng cung hoặc hội chiếu có Thiên Cơ và Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && isSaoToaThuTaiCung("Phụ Mẫu", "Hóa Kỵ") && isSaoHoiChieuRong("Phụ Mẫu", "Thiên Cơ", false) && isSaoHoiChieuRong("Phụ Mẫu", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0685 - Văn Xương và Hóa Kỵ đồng cung tại Phụ Mẫu, đồng cung hoặc hội chiếu có Thiên Cơ và Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && isSaoToaThuTaiCung("Phụ Mẫu", "Hóa Kỵ") && isSaoHoiChieuRong("Phụ Mẫu", "Thiên Cơ", false) && isSaoHoiChieuRong("Phụ Mẫu", "Địa Không", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0686 - Văn Xương và Hóa Kỵ đồng cung tại Phụ Mẫu, đồng cung hoặc hội chiếu có Thiên Cơ và Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Phụ Mẫu", "Văn Xương") && isSaoToaThuTaiCung("Phụ Mẫu", "Hóa Kỵ") && isSaoHoiChieuRong("Phụ Mẫu", "Thiên Cơ", false) && isSaoHoiChieuRong("Phụ Mẫu", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Phụ Mẫu TC0687 - Văn Xương và Hóa Kỵ đồng cung tại Phụ Mẫu, đồng cung hoặc hội chiếu có Thiên Cơ và Địa Kiếp");
     }
 }
 // TCC-pm-END
