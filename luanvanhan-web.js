@@ -147,7 +147,7 @@
 
     /* Tên khóa hiển thị: bỏ số thứ tự nội bộ của các khóa do công cụ sinh ("Sách vận hạn 12 - Đại hạn - ", "Tam Không 03 - Mệnh - ", "Ví dụ lá số 15 - Phu Thê - ") */
     function tenKhoaHienThi(key) {
-        return String(key).replace(/^(Sách vận hạn \d+ - (Đại hạn|Tiểu hạn) - |Tam Không \d+ - [^-]+ - |Ví dụ lá số \d+ - [^-]+ - )/, '');
+        return String(key).replace(/^(Sách vận hạn \d+ - (Đại hạn|Tiểu hạn) - |Tam Không \d+ - [^-]+ - |Ví dụ lá số \d+ - [^-]+ - |Cách cục TC\d+ - )/, '');
     }
     window.tenKhoaHienThi = tenKhoaHienThi;
 
