@@ -144,6 +144,14 @@
         return Array.from(new Set(keys.filter(Boolean)));
     }
     function thoat(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+    /* Thuật ngữ nhóm (cát tinh, sát tinh, lục bại, Không Kiếp, Hỏa Linh, Song Hao ...) được giải nghĩa bằng chính các sao có trong lá số (luanthuatngu.js) */
+    function ghiChuHtml(r, tenCung) {
+        try {
+            if (typeof GhiChuThuatNgu !== 'function' || !tenCung) return '';
+            var gn = GhiChuThuatNgu(r.key + ' ' + r.values.join(' '), tenCung);
+            return gn.length ? '<div><em>Theo lá số này: ' + thoat(gn.join('; ')) + '.</em></div>' : '';
+        } catch (e) { return ''; }
+    }
 
     /* Tên khóa hiển thị: bỏ số thứ tự nội bộ của các khóa do công cụ sinh ("Sách vận hạn 12 - Đại hạn - ", "Tam Không 03 - Mệnh - ", "Ví dụ lá số 15 - Phu Thê - ") */
     function tenKhoaHienThi(key) {
@@ -161,25 +169,25 @@
         if (found.length > 0) {
             excelDiv.innerHTML = found.map(function (r) {
                 return '<div class="bo-sao-group"><b>' + thoat(tenKhoaHienThi(r.key)) + ':</b>' +
-                    r.values.map(function (v) { return '<div>• ' + thoat(v) + '</div>'; }).join('') + '</div>';
+                    r.values.map(function (v) { return '<div>• ' + thoat(v) + '</div>'; }).join('') + ghiChuHtml(r, item.tenCung) + '</div>';
             }).join('');
         } else {
             excelDiv.innerHTML = '<em>Không có thông tin tra cứu từ Excel</em>';
         }
     };
-    function khoiHtml(tieuDe, ketQua) {
+    function khoiHtml(tieuDe, ketQua, tenCung) {
         var tim = ketQua.filter(function (r) { return r.found && r.values.length; });
         var html = '<div class="cung-item vanhan-khoi"><b>' + thoat(tieuDe) + '</b>';
         if (!tim.length) html += '<div><em>Không có dữ liệu cho phần này.</em></div>';
         tim.forEach(function (r) {
             html += '<div class="bo-sao-group"><b>' + thoat(tenKhoaHienThi(r.key)) + ':</b>' +
-                r.values.map(function (v) { return '<div>• ' + thoat(v) + '</div>'; }).join('') + '</div>';
+                r.values.map(function (v) { return '<div>• ' + thoat(v) + '</div>'; }).join('') + ghiChuHtml(r, tenCung) + '</div>';
         });
         return html + '</div>';
     }
-    function dungKhoi(file, tieuDe, keys, el, thuTu) {
+    function dungKhoi(file, tieuDe, keys, el, thuTu, tenCung) {
         loadComboExcel(file, function (arr) {
-            el.slots[thuTu] = khoiHtml(tieuDe, traCuuNhieuBoSao(keys, arr));
+            el.slots[thuTu] = khoiHtml(tieuDe, traCuuNhieuBoSao(keys, arr), tenCung);
             el.node.innerHTML = el.slots.join('');
         });
     }
@@ -197,14 +205,14 @@
         var tenTieu = 'Tiểu hạn năm xem: cung ' + th;
         var n = 0;
         var viec = [
-            ['LuanVanHan_TuongQuanChi', tenDai + ' - tương quan chi (xung chiếu, tam chiếu, nhị hợp)', khoaTuongQuan(d, dv)],
-            ['LuanVanHan_TuongQuanChi', tenTieu + ' - tương quan chi (xung chiếu, tam chiếu, nhị hợp)', khoaTuongQuan(d, th)],
-            ['LuanVanHan_Sach', 'Vận hạn theo sách - ' + tenDai, layKhoa('LuanVanHanSach', 'dai')],
-            ['LuanVanHan_Sach', 'Vận hạn theo sách - ' + tenTieu, layKhoa('LuanVanHanSach', 'tieu')],
-            ['LuanVanHan_SaoNhapHan', 'Sao nhập hạn (Tân Biên mục 3.2) - ' + tenDai, layKhoa('LuanSaoNhapHan', 'dai')],
-            ['LuanVanHan_SaoNhapHan', 'Sao nhập hạn (Tân Biên mục 3.2) - ' + tenTieu, layKhoa('LuanSaoNhapHan', 'tieu')]
+            ['LuanVanHan_TuongQuanChi', tenDai + ' - tương quan chi (xung chiếu, tam chiếu, nhị hợp)', khoaTuongQuan(d, dv), dv],
+            ['LuanVanHan_TuongQuanChi', tenTieu + ' - tương quan chi (xung chiếu, tam chiếu, nhị hợp)', khoaTuongQuan(d, th), th],
+            ['LuanVanHan_Sach', 'Vận hạn theo sách - ' + tenDai, layKhoa('LuanVanHanSach', 'dai'), dv],
+            ['LuanVanHan_Sach', 'Vận hạn theo sách - ' + tenTieu, layKhoa('LuanVanHanSach', 'tieu'), th],
+            ['LuanVanHan_SaoNhapHan', 'Sao nhập hạn (Tân Biên mục 3.2) - ' + tenDai, layKhoa('LuanSaoNhapHan', 'dai'), dv],
+            ['LuanVanHan_SaoNhapHan', 'Sao nhập hạn (Tân Biên mục 3.2) - ' + tenTieu, layKhoa('LuanSaoNhapHan', 'tieu'), th]
         ];
-        viec.forEach(function (v, i) { el.slots[i] = ''; dungKhoi(v[0], v[1], v[2], el, i); });
+        viec.forEach(function (v, i) { el.slots[i] = ''; dungKhoi(v[0], v[1], v[2], el, i, v[3]); });
     };
 
     /* gắn vào hàm chính (luangiai-fix.js đã định nghĩa LuanGiaiLaso) */
