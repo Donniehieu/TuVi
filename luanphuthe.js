@@ -4501,20 +4501,6 @@ function PhuTheKhongThanKiep(idxCungMenh, idxCungThan, dsChinh, dsPhu, keyArr) {
     }
     return false;
 }
-// TK18-BEGIN
-function LuanTamKhong18_phuthe(keyArr) {
-    let lasoData = {};
-    try {
-        lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
-    } catch (e) { lasoData = {}; }
-    if ((lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && isSaoToaThuTaiCung("Phu Thê", "Đào Hoa") && isTrangSinhTaiCung("Phu Thê", "Thai")) {
-        keyArr.push("Ví dụ lá số 15 - Phu Thê - Nữ mệnh có Đào Hoa và Thai (vòng Tràng Sinh) cùng ở cung Phu Thê");
-    }
-    if (isSaoToaThuTaiCung("Phu Thê", "Thái Âm") && (isCungTaiChi("Phu Thê", "Dần") || isCungTaiChi("Phu Thê", "Mão") || isCungTaiChi("Phu Thê", "Ngọ") || isCungTaiChi("Phu Thê", "Thìn") || isCungTaiChi("Phu Thê", "Tỵ")) && isCungCoTriet("Phu Thê") && isSaoHoiChieuRong("Phu Thê", "Đào Hoa", false) && isSaoHoiChieuRong("Phu Thê", "Hồng Loan", false)) {
-        keyArr.push("Ví dụ lá số 16 - Phu Thê - Cung Phu Thê có Thái Âm ở thế tối (hãm), có Triệt án ngữ lại hội Đào Hoa và Hồng Loan");
-    }
-}
-// TK18-END
 // PHU17-BEGIN
 function phu17DemSao(tenCung, ds, tinhSang) {
     let d = {};
@@ -4585,3 +4571,17 @@ function LuanPhuGiaiLan17_phuthe(keyArr) {
     }
 }
 // PHU17-END
+// TK18-BEGIN
+function LuanTamKhong18_phuthe(keyArr) {
+    let lasoData = {};
+    try {
+        lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
+    } catch (e) { lasoData = {}; }
+    if ((lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && isSaoToaThuTaiCung("Phu Thê", "Đào Hoa") && isTrangSinhTaiCung("Phu Thê", "Thai")) {
+        keyArr.push("Ví dụ lá số 16 - Phu Thê - Nữ mệnh có Đào Hoa và Thai (vòng Tràng Sinh) cùng ở cung Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Phu Thê", "Thái Âm") && (isCungTaiChi("Phu Thê", "Dần") || isCungTaiChi("Phu Thê", "Mão") || isCungTaiChi("Phu Thê", "Ngọ") || isCungTaiChi("Phu Thê", "Thìn") || isCungTaiChi("Phu Thê", "Tỵ")) && isCungCoTriet("Phu Thê") && isSaoHoiChieuRong("Phu Thê", "Đào Hoa", false) && isSaoHoiChieuRong("Phu Thê", "Hồng Loan", false)) {
+        keyArr.push("Ví dụ lá số 17 - Phu Thê - Cung Phu Thê có Thái Âm ở thế tối (hãm), có Triệt án ngữ lại hội Đào Hoa và Hồng Loan");
+    }
+}
+// TK18-END

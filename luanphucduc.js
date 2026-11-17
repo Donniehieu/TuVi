@@ -3626,66 +3626,6 @@ function PhucDucKhongThanKiep(idxCungMenh, idxCungThan, dsChinh, dsPhu, keyArr) 
     }
     return false;
 }
-// TK18-BEGIN
-function phu17DemKhong(tenCung, loai) {
-    // loai: 0 = cung và ba cung hội; 1 = chỉ cung chính; 2 = chỉ ba cung hội; 3 = như 0 nhưng bỏ Tuần/Triệt của cung chính (đã tháo cởi khi hạn đến)
-    let d = {};
-    try {
-        d = JSON.parse(localStorage.getItem('laso_data')) || {};
-    } catch (e) { d = {}; }
-    const ob = d.lasoOb || [];
-    let i = 99;
-    for (let k = 0; k < ob.length; k++) { if (ob[k].tenCung === tenCung) { i = k; } }
-    if (i > 11) return 0;
-    const idxs = [i, (i + 4) % 12, (i + 6) % 12, (i + 8) % 12];
-    let coTuan = false;
-    let coTriet = false;
-    let coThien = false;
-    let coDia = false;
-    for (let a = 0; a < 4; a++) {
-        let xet = true;
-        if (loai === 1 && a > 0) { xet = false; }
-        if (loai === 2 && a === 0) { xet = false; }
-        const c = ob[idxs[a]];
-        if (xet && c) {
-            let boTT = false;
-            if (loai === 3 && a === 0) { boTT = true; }
-            if (!boTT && isCungCoTuan(c.tenCung)) { coTuan = true; }
-            if (!boTT && isCungCoTriet(c.tenCung)) { coTriet = true; }
-            let saoC = [];
-            if (Array.isArray(c.sao)) { saoC = c.sao; }
-            for (let b = 0; b < saoC.length; b++) {
-                if (saoC[b].ten === "Thiên Không") { coThien = true; }
-                if (saoC[b].ten === "Địa Không") { coDia = true; }
-            }
-        }
-    }
-    let dem = 0;
-    if (coTuan) { dem++; }
-    if (coTriet) { dem++; }
-    if (coThien) { dem++; }
-    if (coDia) { dem++; }
-    return dem;
-}
-function LuanTamKhong18_phucduc(keyArr) {
-    let lasoData = {};
-    try {
-        lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
-    } catch (e) { lasoData = {}; }
-    if (laCungVoChinhDieu("Phúc Đức") && (isCungCoTuan("Phúc Đức") || isCungCoTriet("Phúc Đức"))) {
-        keyArr.push("Tam Không 10 - Phúc Đức - Cung Phúc Đức vô chính diệu có Tuần hoặc Triệt án ngữ");
-    }
-    if (laCungVoChinhDieu("Phúc Đức") && phu17DemKhong("Phúc Đức", 0) > 2) {
-        keyArr.push("Tam Không 11 - Phúc Đức - Cung Phúc Đức vô chính diệu có Tam Không hội hợp");
-    }
-    if (laCungVoChinhDieu("Phúc Đức") && !((isCungCoTuan("Phúc Đức") || isCungCoTriet("Phúc Đức"))) && !(phu17DemKhong("Phúc Đức", 0) > 2)) {
-        keyArr.push("Tam Không 12 - Phúc Đức - Cung Phúc Đức vô chính diệu không có Tuần, Triệt án ngữ và không có Tam Không hội hợp");
-    }
-    if (isSaoToaThuTaiCung("Phúc Đức", "Thiên Phủ") && phu17DemKhong("Phúc Đức", 1) > 2) {
-        keyArr.push("Tam Không 13 - Phúc Đức - Cung Phúc Đức có Thiên Phủ đồng cung với Tam Không");
-    }
-}
-// TK18-END
 // PHU17-BEGIN
 function phu17DemSao(tenCung, ds, tinhSang) {
     let d = {};
@@ -3888,3 +3828,66 @@ function LuanPhuGiaiLan17_phucduc(keyArr) {
     }
 }
 // PHU17-END
+// TK18-BEGIN
+function phu17DemKhong(tenCung, loai) {
+    // loai: 0 = cung và ba cung hội; 1 = chỉ cung chính; 2 = chỉ ba cung hội; 3 = như 0 nhưng bỏ Tuần/Triệt của cung chính (đã tháo cởi khi hạn đến)
+    let d = {};
+    try {
+        d = JSON.parse(localStorage.getItem('laso_data')) || {};
+    } catch (e) { d = {}; }
+    const ob = d.lasoOb || [];
+    let i = 99;
+    for (let k = 0; k < ob.length; k++) { if (ob[k].tenCung === tenCung) { i = k; } }
+    if (i > 11) return 0;
+    const idxs = [i, (i + 4) % 12, (i + 6) % 12, (i + 8) % 12];
+    let coTuan = false;
+    let coTriet = false;
+    let coThien = false;
+    let coDia = false;
+    for (let a = 0; a < 4; a++) {
+        let xet = true;
+        if (loai === 1 && a > 0) { xet = false; }
+        if (loai === 2 && a === 0) { xet = false; }
+        const c = ob[idxs[a]];
+        if (xet && c) {
+            let boTT = false;
+            if (loai === 3 && a === 0) { boTT = true; }
+            if (!boTT && isCungCoTuan(c.tenCung)) { coTuan = true; }
+            if (!boTT && isCungCoTriet(c.tenCung)) { coTriet = true; }
+            let saoC = [];
+            if (Array.isArray(c.sao)) { saoC = c.sao; }
+            for (let b = 0; b < saoC.length; b++) {
+                if (saoC[b].ten === "Thiên Không") { coThien = true; }
+                if (saoC[b].ten === "Địa Không") { coDia = true; }
+            }
+        }
+    }
+    let dem = 0;
+    if (coTuan) { dem++; }
+    if (coTriet) { dem++; }
+    if (coThien) { dem++; }
+    if (coDia) { dem++; }
+    return dem;
+}
+function LuanTamKhong18_phucduc(keyArr) {
+    let lasoData = {};
+    try {
+        lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
+    } catch (e) { lasoData = {}; }
+    if (laCungVoChinhDieu("Phúc Đức") && isCungCoTuan("Phúc Đức")) {
+        keyArr.push("Tam Không 10 - Phúc Đức - Cung Phúc Đức vô chính diệu có Tuần án ngữ");
+    }
+    if (laCungVoChinhDieu("Phúc Đức") && isCungCoTriet("Phúc Đức")) {
+        keyArr.push("Tam Không 11 - Phúc Đức - Cung Phúc Đức vô chính diệu có Triệt án ngữ");
+    }
+    if (laCungVoChinhDieu("Phúc Đức") && phu17DemKhong("Phúc Đức", 0) > 2) {
+        keyArr.push("Tam Không 12 - Phúc Đức - Cung Phúc Đức vô chính diệu có Tam Không hội hợp");
+    }
+    if (laCungVoChinhDieu("Phúc Đức") && !((isCungCoTuan("Phúc Đức") || isCungCoTriet("Phúc Đức"))) && !(phu17DemKhong("Phúc Đức", 0) > 2)) {
+        keyArr.push("Tam Không 13 - Phúc Đức - Cung Phúc Đức vô chính diệu không có Tuần, Triệt án ngữ và không có Tam Không hội hợp");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Thiên Phủ") && phu17DemKhong("Phúc Đức", 1) > 2) {
+        keyArr.push("Tam Không 14 - Phúc Đức - Cung Phúc Đức có Thiên Phủ đồng cung với Tam Không");
+    }
+}
+// TK18-END
