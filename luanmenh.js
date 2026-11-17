@@ -5924,6 +5924,18 @@ function tc22HoiChi(sao, dsChi, offs) {
     }
     return thay;
 }
+function tc22AmHop(sao) {
+    const ob = tc22Ob();
+    if (ob.length < 12) return false;
+    const i = tc22IdxMenh(ob);
+    const cs = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"];
+    const hop = ["Sửu", "Tý", "Hợi", "Tuất", "Dậu", "Thân", "Mùi", "Ngọ", "Tỵ", "Thìn", "Mão", "Dần"];
+    let chiHop = "";
+    for (let m = 0; m < 12; m++) { if (cs[m] === ob[i].chi) { chiHop = hop[m]; } }
+    let thay = false;
+    for (let k = 0; k < 12; k++) { if (ob[k].chi === chiHop && tc22CoSao(ob[k], sao)) { thay = true; } }
+    return thay;
+}
 function tc22TamHop(ds) {
     return tc22DemHoi(ds, [0, 4, 8]) === ds.length;
 }
@@ -5973,7 +5985,7 @@ function LuanCachThienCo22(keyArr) {
     if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Ngọ")) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
         keyArr.push("Cách cục TC11 - Cực hưởng lý minh: Tử Vi nhập Mệnh ở Ngọ, tam phương tứ chính không có sát tinh");
     }
-    if (isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !(tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 1)) {
+    if (isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !((tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 1))) {
         keyArr.push("Cách cục TC13 - Tam kỳ gia hội: Mệnh hội đủ Hóa Lộc, Hóa Quyền, Hóa Khoa, hội dưới 2 sát tinh");
     }
     if (isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 1)) {
@@ -6043,7 +6055,7 @@ function LuanCachThienCo22(keyArr) {
         keyArr.push("Cách cục TC36 - Đan trì qua trì: Mệnh hội Thái Dương ở Thìn/Tỵ và Thái Âm ở Dậu/Tuất (hai sao đều vượng)");
     }
     if (isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
-        keyArr.push("Cách cục TC37 - Lộc hợp uyên ương: Mệnh hội cả Lộc Tồn và Hóa Lộc");
+        keyArr.push("Cách cục TC37 - Song Lộc giao lưu: Mệnh hội cả Lộc Tồn và Hóa Lộc ở tam phương tứ chính");
     }
     if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
         keyArr.push("Cách cục TC38 - Tham Vũ đồng hành: Vũ Khúc, Tham Lang đồng cung tại Mệnh ở Sửu/Mùi, hội từ 3 cát tinh");
@@ -6182,6 +6194,1893 @@ function LuanCachThienCo22(keyArr) {
     }
     if (isSaoToaThuTaiCung("Mệnh", "Hóa Khoa") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La") || isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") || isSaoToaThuTaiCung("Mệnh", "Linh Tinh") || isSaoToaThuTaiCung("Mệnh", "Địa Không") || isSaoToaThuTaiCung("Mệnh", "Địa Kiếp"))) {
         keyArr.push("Cách cục TC86 - Khoa tinh hãm vu hung hương: Hóa Khoa đồng cung sát tinh và Hóa Kỵ tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && tc22Giap("Kình Dương", "Đà La")) {
+        keyArr.push("Cách cục TC87 - Dương Đà giáp Mệnh: Lộc Tồn tại Mệnh, Kình Dương và Đà La ở hai cung kề bên kẹp Mệnh");
+    }
+    if (tc22Giap("Lộc Tồn", "Hóa Lộc")) {
+        keyArr.push("Cách cục TC88 - Song Lộc giáp Mệnh: Lộc Tồn và Hóa Lộc ở hai cung kề bên kẹp Mệnh");
+    }
+    if ((isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") || (isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && isSaoToaThuTaiCung(lasoData.cungCu, "Hóa Lộc")) || (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && isSaoToaThuTaiCung(lasoData.cungCu, "Lộc Tồn")))) {
+        keyArr.push("Cách cục TC89 - Lộc hợp uyên ương: Lộc Tồn và Hóa Lộc cùng ở Mệnh, hoặc chia ra ở Mệnh và cung Thân");
+    }
+    if ((isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) || isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) && isSaoHoiChieuRong("Mệnh", "Thiên Mã", false)) {
+        keyArr.push("Cách cục TC90 - Lộc Mã giao trì: Mệnh hội Lộc Tồn hoặc Hóa Lộc cùng Thiên Mã");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (lasoData.canNam === "G." || lasoData.canNam === "Ấ." || lasoData.canNam === "C." || lasoData.canNam === "T.")) {
+        keyArr.push("Cách cục TC91 - Thiên Lộc triều viên: Lộc Tồn tại Mệnh ở Dần/Thân/Mão/Dậu, sinh năm Giáp, Ất, Canh hoặc Tân");
+    }
+    if (((isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && tc22AmHop("Hóa Lộc")) || (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && tc22AmHop("Lộc Tồn"))) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Cách cục TC92 - Minh Lộc ám Lộc: Lộc Tồn (hoặc Hóa Lộc) tại Mệnh, Hóa Lộc (hoặc Lộc Tồn) ở cung ám hợp, tam phương hội từ 3 cát tinh");
+    }
+    if ((isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") || isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") || isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && isSaoToaThuTaiCung("Mệnh", "Thiên Không") && isSaoToaThuTaiCung("Mệnh", "Địa Kiếp") || isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && isSaoToaThuTaiCung("Mệnh", "Thiên Không") && isSaoToaThuTaiCung("Mệnh", "Địa Kiếp"))) {
+        keyArr.push("Cách cục TC93 - Lộc phùng xung phá: Lộc Tồn hoặc Hóa Lộc tại Mệnh đồng cung Hóa Kỵ, hoặc đồng cung Thiên Không và Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Cách cục TC94 - Lộc Văn củng Mệnh: Lộc Tồn tại Mệnh, tam phương tứ chính có Văn Xương và Văn Khúc cùng chiếu, không có sát tinh");
+    }
+    if ((((isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La")) && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) || ((isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") || isSaoToaThuTaiCung("Mệnh", "Linh Tinh")) && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Ngọ")))) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Cách cục TC95 - Quyền Sát Hóa Lộc: Kình/Đà nhập miếu (Thìn, Tuất, Sửu, Mùi) hoặc Hỏa/Linh nhập miếu (Dần, Mão, Thìn, Tỵ, Ngọ) tại Mệnh, tam phương hội từ 3 cát tinh");
+    }
+    if ((((isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La")) && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) || ((isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") || isSaoToaThuTaiCung("Mệnh", "Linh Tinh")) && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Ngọ")))) && !isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && !isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && !isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && !isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && !isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Cách cục TC96 - Quyền Sát Hóa Lộc: Kình/Đà nhập miếu hoặc Hỏa/Linh nhập miếu tại Mệnh nhưng tam phương không có cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && tc22Giap("Kình Dương", "Đà La")) {
+        keyArr.push("Cách cục TC97 - Dương Đà giáp Kỵ: Hóa Kỵ tại Mệnh, Kình Dương và Đà La ở hai cung kề bên kẹp Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Kình Dương") && (isCungTaiChi("Mệnh", "Ngọ")) && (isCungTaiChi(lasoData.cungCu, "Thìn")) && (lasoData.canNam === "B." || lasoData.canNam === "M.")) {
+        keyArr.push("Cách cục TC98 - Dương Đà điệp tính: Mệnh ở Ngọ có Kình Dương, cung Thân ở Thìn, sinh năm Bính hoặc Mậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Kình Dương") && isSaoToaThuTaiCung("Mệnh", "Lực Sĩ")) {
+        keyArr.push("Cách cục TC99 - Kình Dương phùng Lực Sĩ: Kình Dương đồng cung Lực Sĩ tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Kình Dương") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && laCungVoChinhDieu("Mệnh")) {
+        keyArr.push("Cách cục TC100 - Mã đầu đới tiễn: Kình Dương lạc hãm đơn thủ tại Mệnh (không có chính tinh) ở Tý/Ngọ/Mão/Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Địa Kiếp") && laCungVoChinhDieu("Mệnh")) {
+        keyArr.push("Cách cục TC101 - Mệnh lý phùng Kiếp: Địa Kiếp độc thủ tại Mệnh, không có chính tinh");
+    }
+    if ((isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && tc22HoiChi("Văn Xương", ["Sửu", "Mùi"], [0, 4, 6, 8]) && tc22HoiChi("Văn Khúc", ["Sửu", "Mùi"], [0, 4, 6, 8]) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Hình", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
+        keyArr.push("Cách cục TC102 - Văn Quế Văn Hoa: Mệnh ở Sửu/Mùi, Văn Xương và Văn Khúc đồng cung hoặc chiếu từ Sửu/Mùi, hội từ 3 cát tinh, không có sát tinh");
+    }
+    if ((isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && tc22HoiChi("Văn Xương", ["Sửu", "Mùi"], [0, 4, 6, 8]) && tc22HoiChi("Văn Khúc", ["Sửu", "Mùi"], [0, 4, 6, 8]) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp", "Thiên Hình", "Hóa Kỵ"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Cách cục TC103 - Văn Quế Văn Hoa: Mệnh ở Sửu/Mùi, Văn Xương và Văn Khúc đồng cung hoặc chiếu từ Sửu/Mùi nhưng hội sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoHoiChieuRong("Mệnh", "Tả Phù", false)) {
+        keyArr.push("Cách cục TC104 - Phù củng văn tinh: Văn Xương tại Mệnh, Tả Phù củng chiếu");
+    }
+    if ((isSaoToaThuTaiCung("Mệnh", "Văn Xương") || isSaoToaThuTaiCung("Mệnh", "Văn Khúc")) && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Tuất")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp", "Thiên Hình", "Hóa Kỵ"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Cách cục TC106 - Văn tinh thất vị: Văn Xương hoặc Văn Khúc lạc hãm (Dần/Ngọ/Tuất) tại Mệnh, gặp sát tinh, Thiên Hình hoặc Hóa Kỵ");
+    }
+    if (((isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && (isSaoToaThuTaiCung("Phu Thê", "Thiên Việt") || isSaoToaThuTaiCung("Thiên Di", "Thiên Việt"))) || (isSaoToaThuTaiCung("Mệnh", "Thiên Việt") && (isSaoToaThuTaiCung("Phu Thê", "Thiên Khôi") || isSaoToaThuTaiCung("Thiên Di", "Thiên Khôi")))) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Cách cục TC107 - Thiên Ất củng Mệnh: Thiên Khôi và Thiên Việt một ở Mệnh, một ở Phu Thê hoặc Thiên Di, tam phương hội từ 3 cát tinh");
+    }
+    if (((isSaoToaThuTaiCung("Mệnh", "Thiên Khôi") && (isSaoToaThuTaiCung("Phu Thê", "Thiên Việt") || isSaoToaThuTaiCung("Thiên Di", "Thiên Việt"))) || (isSaoToaThuTaiCung("Mệnh", "Thiên Việt") && (isSaoToaThuTaiCung("Phu Thê", "Thiên Khôi") || isSaoToaThuTaiCung("Thiên Di", "Thiên Khôi")))) && !((tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2))) {
+        keyArr.push("Cách cục TC108 - Thiên Ất củng Mệnh: Thiên Khôi và Thiên Việt một ở Mệnh, một ở Phu Thê hoặc Thiên Di nhưng tam phương dưới 3 cát tinh");
+    }
+    if (isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 1) && !isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && !isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false)) {
+        keyArr.push("Cách cục TC109 - Khôi Việt hung xung: Mệnh hội Thiên Khôi và Thiên Việt cùng từ 2 sát tinh, không có Khoa, Quyền, Lộc, Lộc Tồn hóa giải");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tả Phù") && isSaoToaThuTaiCung("Mệnh", "Hữu Bật") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Cách cục TC110 - Tả Hữu đồng cung: Tả Phù và Hữu Bật đồng cung tại Mệnh ở Sửu/Mùi, hội từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tả Phù") && isSaoToaThuTaiCung("Mệnh", "Hữu Bật") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && !((tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 1)) {
+        keyArr.push("Cách cục TC111 - Tả Hữu đồng cung: Tả Phù và Hữu Bật đồng cung tại Mệnh ở Sửu/Mùi nhưng hội ít cát tinh, từ 2 sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Khoa") && tc22AmHop("Lộc Tồn")) {
+        keyArr.push("Cách cục TC112 - Khoa minh Lộc ám: Hóa Khoa tại Mệnh, Lộc Tồn ở cung ám hợp của Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && isSaoToaThuTaiCung("Mệnh", "Hóa Quyền") && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Cách cục TC113 - Quyền Lộc tuần phùng: Hóa Lộc và Hóa Quyền cùng tại Mệnh, hội từ 3 cát tinh");
+    }
+    if (isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && !(isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && isSaoToaThuTaiCung("Mệnh", "Hóa Quyền")) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Cách cục TC114 - Quyền Lộc tuần phùng: Hóa Lộc và Hóa Quyền gặp nhau ở tam phương tứ chính của Mệnh, không có sát tinh");
+    }
+    if (isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Cách cục TC115 - Quyền Lộc tuần phùng: Hóa Lộc và Hóa Quyền gặp nhau ở tam phương tứ chính của Mệnh nhưng có sát tinh");
+    }
+    if (((isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && tc22Giap("Hóa Quyền", "Hóa Khoa")) || (isSaoToaThuTaiCung("Mệnh", "Hóa Quyền") && tc22Giap("Hóa Lộc", "Hóa Khoa")) || (isSaoToaThuTaiCung("Mệnh", "Hóa Khoa") && tc22Giap("Hóa Lộc", "Hóa Quyền"))) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Cách cục TC116 - Khoa Quyền Lộc giáp: một trong ba Hóa (Lộc, Quyền, Khoa) tại Mệnh, hai Hóa còn lại ở hai cung kề bên kẹp Mệnh, tam phương hội từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi")) {
+        keyArr.push("Sao nhập Mệnh TC01 - Tử Vi: Tử Vi tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && !isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && !isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && !isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && !isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && !isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Mệnh TC02 - Tử Vi: Tử Vi tại Mệnh, không có cát tinh chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC03 - Tử Vi: Tử Vi tại Mệnh, gặp sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && (tc22DemHoi(["Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt", "Thiên Phủ", "Thiên Tướng", "Lộc Tồn", "Thiên Mã", "Long Trì", "Phượng Các", "Tam Thai", "Bát Tọa"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC04 - Tử Vi độc tọa: Tử Vi độc tọa tại Mệnh (Tý/Ngọ), hội từ 3 cát tinh phụ tá (bách quan)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && !isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && !isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && !isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && !isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && !isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Việt", false) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC05 - Tử Vi độc tọa: Tử Vi độc tọa tại Mệnh (Tý/Ngọ), không có cát tinh mà gặp ác tinh hung tinh tụ hội");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && !isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && !isSaoHoiChieuRong("Mệnh", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Mệnh TC06 - Tử Vi độc tọa: Tử Vi độc tọa tại Mệnh (Tý/Ngọ), không có Tả Phù và Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && (isSaoHoiChieuRong("Mệnh", "Tả Phù", false) || isSaoHoiChieuRong("Mệnh", "Hữu Bật", false)) && !((isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && isSaoHoiChieuRong("Mệnh", "Hữu Bật", false)))) {
+        keyArr.push("Sao nhập Mệnh TC07 - Tử Vi độc tọa: Tử Vi độc tọa tại Mệnh (Tý/Ngọ), chỉ gặp một trong Tả Phù, Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Không", false) && isSaoHoiChieuRong("Mệnh", "Hoa Cái", false) && !isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && !isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && !isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && !isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Mệnh TC08 - Tử Vi độc tọa: Tử Vi độc tọa tại Mệnh (Tý/Ngọ), không có lục cát mà hội Hoa Cái và Không (Địa Không hoặc Thiên Không)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && !((isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi") || isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) && !isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && !isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Mệnh TC09 - Tử Vi cô quân: Tử Vi tại Mệnh không nhập miếu, không có Tả, Hữu, Khôi, Việt chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoHoiChieuRong("Mệnh", "Thiên Phủ", false) && isSaoHoiChieuRong("Mệnh", "Thiên Tướng", false) && isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && !((tc22DemHoi(["Hỏa Tinh", "Hóa Kỵ"], [6]) > 0))) {
+        keyArr.push("Sao nhập Mệnh TC10 - Tử Phủ: Tử Vi tại Mệnh hội Thiên Phủ, Thiên Tướng, Tả Phù, Hữu Bật, đối cung không có Hỏa Tinh, Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoHoiChieuRong("Mệnh", "Thiên Phủ", false) && isSaoHoiChieuRong("Mệnh", "Thiên Tướng", false) && isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && (tc22DemHoi(["Hỏa Tinh", "Hóa Kỵ"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC11 - Tử Phủ: Tử Vi tại Mệnh hội Thiên Phủ, Thiên Tướng, Tả Phù, Hữu Bật nhưng đối cung có Hỏa Tinh hoặc Hóa Kỵ xông phá");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && !isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && !isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && !isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && !isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && !isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Mệnh TC12 - Tử Phủ: Tử Vi đồng cung Thiên Phủ tại Mệnh, không có cát tinh chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Phu Thê", "Phá Quân")) {
+        keyArr.push("Sao nhập Mệnh TC13 - Tử Phủ: Tử Vi đồng cung Thiên Phủ tại Mệnh, Phá Quân ở Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Phu Thê", "Phá Quân") && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam")) {
+        keyArr.push("Sao nhập Mệnh TC14 - Tử Phủ: Nam mệnh có Tử Vi đồng cung Thiên Phủ, Phá Quân ở Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Phu Thê", "Phá Quân") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC15 - Tử Phủ: Nữ mệnh có Tử Vi đồng cung Thiên Phủ, Phá Quân ở Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi") || isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (tc22DemHoi(["Thiên Phủ", "Thiên Tướng", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Lộc Tồn", "Thiên Mã", "Hóa Lộc", "Hóa Khoa"], [0, 4, 6, 8]) > 3)) {
+        keyArr.push("Sao nhập Mệnh TC16 - Tử Vi hội cát: Tử Vi nhập miếu tại Mệnh, hội từ 4 sao trong bộ Phủ, Tướng, Tả, Hữu, Xương, Khúc, Lộc Tồn, Mã, Hóa Lộc, Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Phu Thê", "Thiên Phủ")) {
+        keyArr.push("Sao nhập Mệnh TC17 - Tử Tham: Tử Vi đồng cung Tham Lang tại Mệnh, Thiên Phủ ở Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Thiên Không", false)) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC19 - Tử Tham: Tử Vi đồng cung Tham Lang tại Mệnh, gặp Không (Địa Không, Thiên Không) và sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoHoiChieuRong("Mệnh", "Thiên Tướng", false) && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && isSaoHoiChieuRong("Mệnh", "Thiên Mã", false) && !((isSaoToaThuTaiCung("Mệnh", "Địa Không") || isSaoToaThuTaiCung("Mệnh", "Địa Kiếp") || isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La") || isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") || isSaoToaThuTaiCung("Mệnh", "Linh Tinh")))) {
+        keyArr.push("Sao nhập Mệnh TC20 - Tử Tướng: Tử Vi tại Mệnh hội Thiên Tướng, Lộc Tồn, Thiên Mã, không đồng cung Không, Kiếp, sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isSaoHoiChieuRong("Mệnh", "Thiên Mã", false) || isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) || isSaoHoiChieuRong("Mệnh", "Tam Thai", false) || isSaoHoiChieuRong("Mệnh", "Bát Tọa", false)) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Mệnh TC21 - Tử Tướng: Tử Vi đồng cung Thiên Tướng tại Mệnh, gặp Lộc Mã hoặc Tam Thai, Bát Tọa, không có tứ sát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC22 - Tử Tướng: Tử Vi đồng cung Thiên Tướng tại Mệnh, gặp sát tinh (Kình, Đà, Hỏa, Linh)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (lasoData.canNam === "Ấ." || lasoData.canNam === "K." || lasoData.canNam === "G." || lasoData.canNam === "C." || lasoData.canNam === "Q.")) {
+        keyArr.push("Sao nhập Mệnh TC23 - Tử Tướng: Tử Vi đồng cung Thiên Tướng tại Mệnh ở Thìn/Tuất, sinh năm Giáp, Ất, Kỷ, Canh hoặc Quý");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Mệnh TC24 - Tử Tướng: Tử Vi đồng cung Thiên Tướng tại Mệnh, gặp Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Mệnh TC25 - Tử Tướng: Tử Vi đồng cung Thiên Tướng tại Mệnh, gặp Lộc Tồn (không có Hóa Lộc)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isSaoHoiChieuRong("Mệnh", "Tả Phù", false) || isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) || isSaoHoiChieuRong("Mệnh", "Văn Xương", false) || isSaoHoiChieuRong("Mệnh", "Văn Khúc", false))) {
+        keyArr.push("Sao nhập Mệnh TC26 - Tử Tướng: Tử Vi đồng cung Thiên Tướng tại Mệnh, gặp Tả, Hữu, Xương hoặc Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoHoiChieuRong("Mệnh", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Mệnh TC27 - Tử Tướng: Tử Vi đồng cung Thiên Tướng tại Mệnh, gặp Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoHoiChieuRong("Mệnh", "Đà La", false)) {
+        keyArr.push("Sao nhập Mệnh TC28 - Tử Tướng: Tử Vi đồng cung Thiên Tướng tại Mệnh, gặp Đà La");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Phu Thê", "Tham Lang")) {
+        keyArr.push("Sao nhập Mệnh TC29 - Tử Tướng: Tử Vi đồng cung Thiên Tướng tại Mệnh, Tham Lang ở Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC30 - Tử Sát: Tử Vi đồng cung Thất Sát tại Mệnh (Tỵ/Hợi), hội từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && (isSaoToaThuTaiCung("Mệnh", "Văn Xương") || isSaoToaThuTaiCung("Mệnh", "Văn Khúc"))) {
+        keyArr.push("Sao nhập Mệnh TC32 - Tử Sát: Tử Vi đồng cung Thất Sát tại Mệnh (Tỵ/Hợi), đồng cung Xương hoặc Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && (lasoData.canNam === "B." || lasoData.canNam === "M.")) {
+        keyArr.push("Sao nhập Mệnh TC33 - Tử Sát: Tử Vi đồng cung Thất Sát tại Mệnh (Tỵ/Hợi), sinh năm Bính hoặc Mậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC34 - Tử Sát: Tử Vi đồng cung Thất Sát tại Mệnh, hội tứ sát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (tc22DemHoi(["Thất Sát"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC35 - Tử Sát: Tử Vi tại Mệnh, Thất Sát ở đối cung (không đồng cung)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC36 - Tử Phá: Tử Vi đồng cung Phá Quân tại Mệnh, không có sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && !isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && !isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && !isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Việt", false) && !isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Mệnh TC37 - Tử Phá: Tử Vi đồng cung Phá Quân tại Mệnh, không có tam Hóa cát và cát tinh hỗ trợ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (tc22DemHoi(["Phá Quân"], [6]) > 0) && !isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && !isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && !isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && !isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && !isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Mệnh TC38 - Tử Phá: Tử Vi tại Mệnh ở Thìn/Tuất (thiên la địa võng), Phá Quân ở đối cung, không có cát tinh tương trợ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (tc22DemHoi(["Phá Quân"], [6]) > 0) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC39 - Tử Phá: Tử Vi tại Mệnh ở Thìn/Tuất, Phá Quân ở đối cung, hội từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Phá Quân")) {
+        keyArr.push("Sao nhập Mệnh TC40 - Tử Phá: Tử Vi đồng cung Phá Quân tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && !((isSaoToaThuTaiCung("Phu Thê", "Tử Vi") || isSaoToaThuTaiCung("Phu Thê", "Thiên Phủ") || isSaoToaThuTaiCung("Phu Thê", "Vũ Khúc") || isSaoToaThuTaiCung("Phu Thê", "Thiên Tướng") || isSaoToaThuTaiCung("Phu Thê", "Thất Sát") || isSaoToaThuTaiCung("Phu Thê", "Phá Quân") || isSaoToaThuTaiCung("Phu Thê", "Tham Lang") || isSaoToaThuTaiCung("Phu Thê", "Cự Môn") || isSaoToaThuTaiCung("Phu Thê", "Thái Dương") || isSaoToaThuTaiCung("Phu Thê", "Thiên Cơ") || isSaoToaThuTaiCung("Phu Thê", "Thái Âm") || isSaoToaThuTaiCung("Phu Thê", "Thiên Đồng") || isSaoToaThuTaiCung("Phu Thê", "Thiên Lương") || isSaoToaThuTaiCung("Phu Thê", "Liêm Trinh")))) {
+        keyArr.push("Sao nhập Mệnh TC41 - Tử Phá: Tử Vi đồng cung Phá Quân tại Mệnh, cung Phu Thê không có chính tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC42 - Tử Phá: Tử Vi đồng cung Phá Quân tại Mệnh, thêm sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") || isSaoToaThuTaiCung("Mệnh", "Lộc Tồn"))) {
+        keyArr.push("Sao nhập Mệnh TC43 - Tử Vi Hóa Lộc: Tử Vi đồng cung Hóa Lộc hoặc Lộc Tồn tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Hóa Quyền")) {
+        keyArr.push("Sao nhập Mệnh TC44 - Tử Vi Hóa Quyền: Tử Vi Hóa Quyền tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Hóa Khoa")) {
+        keyArr.push("Sao nhập Mệnh TC45 - Tử Vi Hóa Khoa: Tử Vi Hóa Khoa tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Ngọ")) && ((isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) || tc22Giap("Văn Xương", "Văn Khúc"))) {
+        keyArr.push("Sao nhập Mệnh TC46 - Tử Vi gặp Xương Khúc: Tử Vi tại Mệnh ở Ngọ, Văn Xương và Văn Khúc hội tam phương hoặc kẹp hai bên Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC47 - Tử Vi hãm vào tứ sát: Tử Vi tại Mệnh, hội từ 3 sao trong tứ sát (Kình, Đà, Hỏa, Linh)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Tý"))) {
+        keyArr.push("Sao nhập Mệnh TC48 - Tử Vi tại Tý: Tử Vi độc tọa tại Mệnh ở Tý");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Sao nhập Mệnh TC49 - Tử Vi tại Ngọ: Tử Vi độc tọa tại Mệnh ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Ngọ")) && (isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La") || isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") || isSaoToaThuTaiCung("Mệnh", "Linh Tinh") || isSaoToaThuTaiCung("Mệnh", "Địa Không") || isSaoToaThuTaiCung("Mệnh", "Địa Kiếp"))) {
+        keyArr.push("Sao nhập Mệnh TC50 - Tử Vi tại Ngọ: Tử Vi tại Mệnh ở Ngọ, đồng cung sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Ngọ")) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && (lasoData.canNam === "G." || lasoData.canNam === "Đ." || lasoData.canNam === "K.")) {
+        keyArr.push("Sao nhập Mệnh TC51 - Tử Vi tại Ngọ: Tử Vi tại Mệnh ở Ngọ, không có Kình, Đà, sinh năm Giáp, Đinh hoặc Kỷ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Tý")) && (lasoData.canNam === "B.")) {
+        keyArr.push("Sao nhập Mệnh TC52 - Tử Vi tại Tý: Tử Vi tại Mệnh ở Tý, sinh năm Bính");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Tý")) && (lasoData.chiNam === "Tuất")) {
+        keyArr.push("Sao nhập Mệnh TC53 - Tử Vi tại Tý: Tử Vi tại Mệnh ở Tý, sinh năm Tuất");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Tý")) && (lasoData.canNam === "N.")) {
+        keyArr.push("Sao nhập Mệnh TC54 - Tử Vi tại Tý: Tử Vi tại Mệnh ở Tý, sinh năm Nhâm");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Sao nhập Mệnh TC55 - Tử Vi tại Sửu Mùi: Tử Vi đồng cung Phá Quân tại Mệnh ở Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (lasoData.canNam === "G." || lasoData.canNam === "Ấ." || lasoData.canNam === "M." || lasoData.canNam === "K.")) {
+        keyArr.push("Sao nhập Mệnh TC56 - Tử Vi tại Sửu Mùi: Tử Vi đồng cung Phá Quân tại Mệnh ở Sửu/Mùi, sinh năm Giáp, Ất, Mậu hoặc Kỷ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC57 - Tử Vi tại Sửu Mùi: Tử Vi đồng cung Phá Quân tại Mệnh ở Sửu/Mùi, gặp sát tinh xung hội");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoToaThuTaiCung("Mệnh", "Hoa Cái") && (isCungTaiChi("Mệnh", "Sửu"))) {
+        keyArr.push("Sao nhập Mệnh TC58 - Tử Vi tại Sửu: Tử Vi đồng cung Phá Quân và Hoa Cái tại Mệnh ở Sửu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Sao nhập Mệnh TC59 - Tử Vi tại Dần Thân: Tử Vi đồng cung Thiên Phủ tại Mệnh ở Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && isSaoToaThuTaiCung("Mệnh", "Thiên Mã") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Sao nhập Mệnh TC60 - Tử Vi tại Dần Thân: Tử Vi đồng cung Thiên Phủ, Lộc Tồn, Thiên Mã tại Mệnh ở Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (isSaoToaThuTaiCung("Mệnh", "Địa Không") || isSaoToaThuTaiCung("Mệnh", "Địa Kiếp"))) {
+        keyArr.push("Sao nhập Mệnh TC61 - Tử Vi tại Dần Thân: Tử Vi đồng cung Thiên Phủ tại Mệnh ở Dần/Thân, đồng cung Không hoặc Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC62 - Tử Vi tại Dần Thân: Nữ mệnh có Tử Vi đồng cung Thiên Phủ tại Mệnh ở Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Dần")) && (lasoData.canNam === "N.") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC63 - Tử Vi tại Dần Thân: Nữ mệnh sinh năm Nhâm, Tử Vi đồng cung Thiên Phủ tại Mệnh ở Dần");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC64 - Tử Vi tại Mão Dậu: Tử Vi đồng cung Tham Lang tại Mệnh ở Mão/Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && ((isSaoToaThuTaiCung("Mệnh", "Đào Hoa") || isSaoToaThuTaiCung("Mệnh", "Thiên Riêu") || isSaoToaThuTaiCung("Mệnh", "Văn Khúc") || isSaoToaThuTaiCung("Mệnh", "Hóa Khoa") || isSaoToaThuTaiCung("Mệnh", "Hồng Loan") || isSaoToaThuTaiCung("Mệnh", "Đại Hao")) || isTrangSinhTaiCung("Mệnh", "Mộc Dục"))) {
+        keyArr.push("Sao nhập Mệnh TC65 - Tử Vi tại Mão Dậu: Tử Vi đồng cung Tham Lang tại Mệnh ở Mão/Dậu, đồng cung Hàm Trì (Đào Hoa), Thiên Riêu, Văn Khúc, Hóa Khoa, Hồng Loan hoặc Đại Hao");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La") || isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") || isSaoToaThuTaiCung("Mệnh", "Linh Tinh") || isSaoToaThuTaiCung("Mệnh", "Địa Không") || isSaoToaThuTaiCung("Mệnh", "Địa Kiếp"))) {
+        keyArr.push("Sao nhập Mệnh TC66 - Tử Vi tại Mão Dậu: Tử Vi đồng cung Tham Lang tại Mệnh ở Mão/Dậu, đồng cung sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Mão")) && (lasoData.canNam === "G.")) {
+        keyArr.push("Sao nhập Mệnh TC69 - Tử Vi tại Mão: Tử Vi đồng cung Tham Lang tại Mệnh ở Mão, sinh năm Giáp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Dậu")) && (lasoData.canNam === "C.")) {
+        keyArr.push("Sao nhập Mệnh TC70 - Tử Vi tại Dậu: Tử Vi đồng cung Tham Lang tại Mệnh ở Dậu, sinh năm Canh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất"))) {
+        keyArr.push("Sao nhập Mệnh TC71 - Tử Vi tại Thìn Tuất: Tử Vi đồng cung Thiên Tướng tại Mệnh ở Thìn/Tuất");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isSaoToaThuTaiCung("Mệnh", "Tả Phù") || isSaoToaThuTaiCung("Mệnh", "Hữu Bật")) && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (lasoData.canNam === "G." || lasoData.canNam === "K." || lasoData.canNam === "C.")) {
+        keyArr.push("Sao nhập Mệnh TC72 - Tử Vi tại Thìn Tuất: Tử Vi đồng cung Thiên Tướng và Tả Phù (hoặc Hữu Bật) tại Mệnh ở Thìn/Tuất, sinh năm Giáp, Kỷ hoặc Canh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Thiên Hình", "Thiên Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC73 - Tử Vi tại Thìn Tuất: Tử Vi đồng cung Thiên Tướng tại Mệnh ở Thìn/Tuất, gặp hung tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
+        keyArr.push("Sao nhập Mệnh TC74 - Tử Vi tại Thìn Tuất: Tử Vi đồng cung Thiên Tướng tại Mệnh ở Thìn/Tuất, không gặp Không, Kiếp, Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && !isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && !isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && !isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && !isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && !isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Mệnh TC75 - Tử Vi tại Thìn Tuất: Tử Vi đồng cung Thiên Tướng tại Mệnh ở Thìn/Tuất, không có cát tinh hỗ trợ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Sao nhập Mệnh TC76 - Tử Vi tại Tỵ Hợi: Tử Vi đồng cung Thất Sát tại Mệnh ở Tỵ/Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && (lasoData.canNam === "Ấ." || lasoData.canNam === "B." || lasoData.canNam === "M." || lasoData.canNam === "K.")) {
+        keyArr.push("Sao nhập Mệnh TC77 - Tử Vi tại Tỵ Hợi: Tử Vi đồng cung Thất Sát tại Mệnh ở Tỵ/Hợi, sinh năm Ất, Bính, Mậu hoặc Kỷ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC78 - Tử Vi tại Tỵ Hợi: Nữ mệnh có Tử Vi đồng cung Thất Sát tại Mệnh ở Tỵ/Hợi, thêm sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Mệnh", "Hóa Quyền") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Sao nhập Mệnh TC79 - Tử Vi tại Tỵ Hợi: Tử Vi Hóa Quyền đồng cung Thất Sát tại Mệnh ở Tỵ/Hợi (sinh năm Nhâm)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ")) {
+        keyArr.push("Sao nhập Mệnh TC80 - Thiên Cơ: Thiên Cơ tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC81 - Thiên Cơ: Thiên Cơ tại Mệnh, hội từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC82 - Thiên Cơ: Thiên Cơ tại Mệnh ở Tý/Ngọ/Mão/Dậu (miếu vượng)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất"))) {
+        keyArr.push("Sao nhập Mệnh TC83 - Thiên Cơ: Thiên Cơ tại Mệnh ở Sửu/Mùi/Thìn/Tuất");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Phu Thê", "Thái Dương")) {
+        keyArr.push("Sao nhập Mệnh TC84 - Thiên Cơ: Thiên Cơ tại Mệnh, Thái Dương ở Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoHoiChieuRong("Mệnh", "Thiên Mã", false)) {
+        keyArr.push("Sao nhập Mệnh TC85 - Thiên Cơ: Thiên Cơ tại Mệnh, hội Thiên Mã");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && isSaoHoiChieuRong("Mệnh", "Thiên Mã", false)) {
+        keyArr.push("Sao nhập Mệnh TC86 - Thiên Cơ: Thiên Cơ tại Mệnh, Lộc Tồn và Thiên Mã cùng chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (tc22DemHoi(["Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Hóa Lộc", "Hóa Quyền", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 3)) {
+        keyArr.push("Sao nhập Mệnh TC87 - Thiên Cơ: Thiên Cơ tại Mệnh, hội từ 4 sao trong bộ Tả, Hữu, Xương, Khúc, Hóa Lộc, Hóa Quyền, Khôi, Việt");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Mệnh TC88 - Thiên Cơ: Thiên Cơ tại Mệnh, Văn Xương và Văn Khúc hội chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC89 - Thiên Cơ: Thiên Cơ tại Mệnh, tam Hóa Lộc Quyền Khoa hội chiếu, không có sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
+        keyArr.push("Sao nhập Mệnh TC90 - Thiên Cơ: Thiên Cơ tại Mệnh, Hóa Kỵ đồng cung hoặc hội chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (lasoData.canNam === "M.")) {
+        keyArr.push("Sao nhập Mệnh TC91 - Thiên Cơ: Thiên Cơ hóa Kỵ tại Mệnh (sinh năm Mậu)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La") || isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") || isSaoToaThuTaiCung("Mệnh", "Linh Tinh")) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC92 - Thiên Cơ: Thiên Cơ đồng cung tứ sát tại Mệnh, có cát tinh hội chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La") || isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") || isSaoToaThuTaiCung("Mệnh", "Linh Tinh")) && !isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && !isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && !isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && !isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && !isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Mệnh TC93 - Thiên Cơ: Thiên Cơ đồng cung tứ sát tại Mệnh, không có cát tinh hội chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 3)) {
+        keyArr.push("Sao nhập Mệnh TC94 - Thiên Cơ: Thiên Cơ tại Mệnh, cả bốn sát tinh Kình, Đà, Hỏa, Linh cùng hội chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh")) {
+        keyArr.push("Sao nhập Mệnh TC95 - Thiên Cơ: Thiên Cơ đồng cung Hỏa Tinh tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thiên Riêu")) {
+        keyArr.push("Sao nhập Mệnh TC96 - Thiên Cơ: Thiên Cơ đồng cung Thiên Riêu tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isSaoHoiChieuRong("Mệnh", "Văn Xương", false) || isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Mệnh TC97 - Thiên Cơ: Thiên Cơ tại Mệnh cùng Xương hoặc Khúc, Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu") || isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC98 - Thiên Cơ: Nữ mệnh có Thiên Cơ nhập miếu tại Mệnh, hội từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC99 - Thiên Cơ: Nữ mệnh có Thiên Cơ đồng cung Thái Âm tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Mệnh TC100 - Thiên Cơ: Nữ mệnh có Thiên Cơ tại Mệnh, tam Hóa Lộc Quyền Khoa tương hội");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Mệnh TC101 - Thiên Cơ: Nữ mệnh có Thiên Cơ hóa Kỵ tại Mệnh, Quyền Khoa hội chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC102 - Thiên Cơ: Nữ mệnh có Thiên Cơ đồng cung Thái Âm tại Mệnh ở Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && (tc22DemHoi(["Cự Môn"], [6]) > 0) && (lasoData.canNam === "T." || lasoData.canNam === "Q.")) {
+        keyArr.push("Sao nhập Mệnh TC103 - Thiên Cơ tại Tý Ngọ: Thiên Cơ tại Mệnh ở Tý/Ngọ, đối cung có Cự Môn, sinh năm Tân hoặc Quý (Cự Môn hóa Lộc hoặc Quyền)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && (tc22DemHoi(["Cự Môn"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC104 - Thiên Cơ tại Tý Ngọ: Thiên Cơ tại Mệnh ở Tý/Ngọ, đối cung có Cự Môn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && (tc22DemHoi(["Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 3) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false))) {
+        keyArr.push("Sao nhập Mệnh TC105 - Thiên Cơ tại Tý Ngọ: Thiên Cơ tại Mệnh ở Tý/Ngọ, hội từ 4 sao lục cát cùng Kình hoặc Đà");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC106 - Thiên Cơ tại Tý Ngọ: Thiên Cơ tại Mệnh ở Tý/Ngọ, không có sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Sao nhập Mệnh TC107 - Thiên Cơ tại Sửu Mùi: Thiên Cơ tại Mệnh ở Sửu/Mùi (đơn độc hoặc lạc hãm)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && tc22Giap("Tả Phù", "Hữu Bật")) {
+        keyArr.push("Sao nhập Mệnh TC108 - Thiên Cơ tại Sửu Mùi: Thiên Cơ tại Mệnh ở Sửu/Mùi, Tả Phù và Hữu Bật kẹp hai bên");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC109 - Thiên Cơ tại Sửu Mùi: Thiên Cơ tại Mệnh ở Sửu/Mùi, gặp tứ sát xung phá");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Sao nhập Mệnh TC110 - Thiên Cơ tại Dần Thân: Thiên Cơ đồng cung Thái Âm tại Mệnh ở Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (isSaoHoiChieuRong("Mệnh", "Văn Xương", false) || isSaoHoiChieuRong("Mệnh", "Văn Khúc", false))) {
+        keyArr.push("Sao nhập Mệnh TC111 - Thiên Cơ tại Dần Thân: Thiên Cơ đồng cung Thái Âm tại Mệnh ở Dần/Thân, gặp Xương hoặc Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && isSaoHoiChieuRong("Mệnh", "Thiên Lương", false) && isSaoHoiChieuRong("Mệnh", "Thiên Đồng", false)) {
+        keyArr.push("Sao nhập Mệnh TC112 - Thiên Cơ tại Dần Thân: Thiên Cơ đồng cung Thái Âm tại Mệnh ở Dần/Thân, tam phương hội Thiên Lương và Thiên Đồng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam") && (lasoData.canNam === "G." || lasoData.canNam === "B." || lasoData.canNam === "Đ." || lasoData.canNam === "K." || lasoData.canNam === "C." || lasoData.canNam === "Q.") && (tc22DemHoi(["Tả Phù", "Hữu Bật", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 1)) {
+        keyArr.push("Sao nhập Mệnh TC113 - Thiên Cơ tại Dần Thân: Nam mệnh sinh năm Giáp, Bính, Đinh, Kỷ, Canh hoặc Quý, Thiên Cơ đồng cung Thái Âm ở Dần/Thân, hội từ 2 sao Phù, Bật, Khôi, Việt");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC114 - Thiên Cơ tại Dần Thân: Thiên Cơ đồng cung Thái Âm tại Mệnh ở Dần/Thân, gặp sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC115 - Thiên Cơ tại Mão Dậu: Thiên Cơ đồng cung Cự Môn tại Mệnh ở Mão/Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && isSaoToaThuTaiCung("Mệnh", "Kình Dương")) {
+        keyArr.push("Sao nhập Mệnh TC116 - Thiên Cơ tại Mão Dậu: Thiên Cơ đồng cung Cự Môn và Kình Dương tại Mệnh ở Mão/Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất"))) {
+        keyArr.push("Sao nhập Mệnh TC117 - Thiên Cơ tại Thìn Tuất: Thiên Cơ đồng cung Thiên Lương tại Mệnh ở Thìn/Tuất");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Thiên Không", false) || isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false))) {
+        keyArr.push("Sao nhập Mệnh TC118 - Thiên Cơ tại Thìn Tuất: Thiên Cơ đồng cung Thiên Lương tại Mệnh ở Thìn/Tuất, gặp Không, Kiếp, Kình hoặc Đà");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (lasoData.canNam === "M." || lasoData.canNam === "N.")) {
+        keyArr.push("Sao nhập Mệnh TC119 - Thiên Cơ tại Thìn Tuất: Thiên Cơ đồng cung Thiên Lương tại Mệnh ở Thìn/Tuất, sinh năm Mậu (Cơ hóa Kỵ) hoặc Nhâm (Lương hóa Lộc)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Tuất"))) {
+        keyArr.push("Sao nhập Mệnh TC120 - Thiên Cơ tại Thìn Tuất: Thiên Cơ đồng cung Thiên Lương tại Mệnh ở Tuất");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && (tc22DemHoi(["Thái Âm"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC121 - Thiên Cơ tại Tỵ Hợi: Thiên Cơ độc tọa tại Mệnh ở Tỵ/Hợi, Thái Âm ở đối cung (Nguyệt lãng thiên môn)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Sao nhập Mệnh TC122 - Thiên Cơ tại Tỵ Hợi: Thiên Cơ đồng cung Hỏa Tinh tại Mệnh ở Tỵ/Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC123 - Thiên Cơ tại Tỵ Hợi: Thiên Cơ tại Mệnh ở Tỵ/Hợi, gặp Hóa Kỵ và sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương")) {
+        keyArr.push("Sao nhập Mệnh TC124 - Thái Dương: Thái Dương tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Ngọ")) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC125 - Thái Dương: Thái Dương nhập miếu vượng (Dần/Mão/Thìn/Ngọ) tại Mệnh, không có sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC126 - Thái Dương: Thái Dương nhập miếu vượng tại Mệnh, gặp sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Cự Môn") && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC127 - Thái Dương: Thái Dương đồng cung Cự Môn tại Mệnh, không có sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Mão"))) {
+        keyArr.push("Sao nhập Mệnh TC128 - Thái Dương: Thái Dương tại Mệnh ở Dần/Mão");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tỵ"))) {
+        keyArr.push("Sao nhập Mệnh TC129 - Thái Dương: Thái Dương tại Mệnh ở Thìn/Tỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Sao nhập Mệnh TC130 - Thái Dương: Thái Dương tại Mệnh ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Sao nhập Mệnh TC131 - Thái Dương: Thái Dương tại Mệnh ở Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC132 - Thái Dương: Thái Dương tại Mệnh ở Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Sửu"))) {
+        keyArr.push("Sao nhập Mệnh TC133 - Thái Dương: Thái Dương tại Mệnh ở Tuất/Hợi/Tý/Sửu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Sao nhập Mệnh TC134 - Thái Dương: Thái Dương hóa Kỵ (sinh năm Giáp) tại Mệnh ở miếu vượng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Dậu") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Tý"))) {
+        keyArr.push("Sao nhập Mệnh TC135 - Thái Dương: Thái Dương lạc hãm tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Phu Thê", "Thiên Đồng")) {
+        keyArr.push("Sao nhập Mệnh TC136 - Thái Dương: Thái Dương tại Mệnh, Thiên Đồng ở Phu Thê");
+    }
+    if (tc22Giap("Thái Dương", "Thái Âm") && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC137 - Nhật Nguyệt: Thái Dương và Thái Âm kẹp hai bên Mệnh, hội từ 3 cát tinh");
+    }
+    if (tc22Giap("Thái Dương", "Thái Âm") && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false))) {
+        keyArr.push("Sao nhập Mệnh TC138 - Nhật Nguyệt: Thái Dương và Thái Âm kẹp hai bên Mệnh, gặp Kình hoặc Đà xung thủ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Sao nhập Mệnh TC139 - Nhật Nguyệt: Thái Dương đồng cung Thái Âm tại Mệnh ở Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC140 - Nhật Nguyệt: Thái Dương đồng cung Thái Âm tại Mệnh, hội từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 1)) {
+        keyArr.push("Sao nhập Mệnh TC141 - Nhật Nguyệt: Thái Dương đồng cung Thái Âm tại Mệnh, hội từ 2 sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && isSaoHoiChieuRong("Mệnh", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Mệnh TC142 - Nhật Nguyệt: Thái Dương đồng cung Thái Âm tại Mệnh, Tả Phù và Hữu Bật tương hợp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La"))) {
+        keyArr.push("Sao nhập Mệnh TC143 - Nhật Nguyệt: Thái Dương đồng cung Thái Âm và Kình hoặc Đà tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Thìn")) && (tc22DemHoi(["Thái Âm"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC144 - Nhật Nguyệt: Thái Dương tại Mệnh ở Thìn, Thái Âm ở đối cung (Tuất)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Tuất")) && (tc22DemHoi(["Thái Dương"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC145 - Nhật Nguyệt: Thái Âm tại Mệnh ở Tuất, Thái Dương ở đối cung (Thìn)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Dậu") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Tý")) && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Mệnh TC146 - Thái Dương: Thái Dương lạc hãm tại Mệnh, đồng cung Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Cự Môn")) {
+        keyArr.push("Sao nhập Mệnh TC148 - Thái Dương: Thái Dương đồng cung Cự Môn tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Sao nhập Mệnh TC149 - Thái Dương: Thái Dương đồng cung Cự Môn tại Mệnh ở Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Mệnh TC150 - Thái Dương: Thái Dương đồng cung Cự Môn hóa Kỵ tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Tỵ")) && (tc22DemHoi(["Cự Môn"], [6]) > 0) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC151 - Thái Dương: Thái Dương tại Mệnh ở Tỵ (nhập điện), Cự Môn ở đối cung, hội từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Tỵ")) && (tc22DemHoi(["Cự Môn"], [6]) > 0) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC152 - Thái Dương: Thái Dương tại Mệnh ở Tỵ, Cự Môn ở đối cung, gặp hung tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Hợi")) && (tc22DemHoi(["Cự Môn"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC153 - Thái Dương: Thái Dương lạc hãm tại Mệnh ở Hợi, Cự Môn ở đối cung (Thất huy)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Mão"))) {
+        keyArr.push("Sao nhập Mệnh TC154 - Thái Dương: Thái Dương đồng cung Thiên Lương tại Mệnh ở Mão");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC155 - Thái Dương: Thái Dương đồng cung Thiên Lương tại Mệnh ở Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Sửu")) && (tc22DemHoi(["Thiên Lương"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC156 - Thái Dương: Thái Dương tại Mệnh ở Tý/Sửu, Thiên Lương ở đối cung (cả hai khuyết hãm)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Ngọ")) && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && !isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Mệnh TC157 - Thái Dương: Thái Dương tại Mệnh ở Ngọ, không gặp Quyền, Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (tc22Giap("Văn Xương", "Văn Khúc") || tc22Giap("Thiên Khôi", "Thiên Việt") || tc22Giap("Tả Phù", "Hữu Bật"))) {
+        keyArr.push("Sao nhập Mệnh TC158 - Thái Dương: Thái Dương tại Mệnh, Xương Khúc (hoặc Khôi Việt, hoặc Tả Hữu) kẹp hai bên");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (tc22DemHoi(["Tam Thai", "Bát Tọa", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt", "Tả Phù", "Hữu Bật"], [0, 4, 6, 8]) > 3)) {
+        keyArr.push("Sao nhập Mệnh TC159 - Thái Dương: Thái Dương tại Mệnh, hội từ 4 sao trong bộ Tam Đài, Bát Tọa, Xương, Khúc, Khôi, Việt, Tả, Hữu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (tc22DemHoi(["Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 3)) {
+        keyArr.push("Sao nhập Mệnh TC160 - Thái Dương: Thái Dương tại Mệnh, hội từ 4 sao lục cát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoHoiChieuRong("Mệnh", "Thái Âm", false) && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Mệnh TC161 - Thái Dương: Thái Dương tại Mệnh, gặp Thái Âm và Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn")) {
+        keyArr.push("Sao nhập Mệnh TC162 - Thái Dương: Thái Dương đồng cung Lộc Tồn tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC163 - Thái Dương: Thái Dương tại Mệnh, gặp Kình, Đà, Hỏa hoặc Linh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh")) {
+        keyArr.push("Sao nhập Mệnh TC164 - Thái Dương: Thái Dương đồng cung Hỏa Tinh tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Mão")) && isSaoToaThuTaiCung("Mệnh", "Hóa Lộc")) {
+        keyArr.push("Sao nhập Mệnh TC165 - Thái Dương: Thái Dương tại Mệnh ở Mão, đồng cung Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Hợi")) && (isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) || isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) && isSaoHoiChieuRong("Mệnh", "Thiên Mã", false)) {
+        keyArr.push("Sao nhập Mệnh TC166 - Thái Dương: Thái Dương tại Mệnh ở Hợi, gặp Lộc Tồn (hoặc Hóa Lộc) và Thiên Mã");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (lasoData.canNam === "G.")) {
+        keyArr.push("Sao nhập Mệnh TC167 - Thái Dương: Thái Dương hóa Kỵ tại Mệnh (sinh năm Giáp)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Điền Trạch", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Mệnh TC168 - Thái Dương: Thái Dương tại Mệnh, Hóa Kỵ ở Điền Trạch");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 0) && (isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Dậu") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Tý"))) {
+        keyArr.push("Sao nhập Mệnh TC169 - Thái Dương: Thái Dương lạc hãm tại Mệnh, gặp tứ sát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Sao nhập Mệnh TC170 - Thái Dương: Nữ mệnh có Thái Dương nhập miếu tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt", "Lộc Tồn", "Hóa Lộc", "Thiên Mã", "Tam Thai", "Bát Tọa"], [0, 4, 6, 8]) > 3)) {
+        keyArr.push("Sao nhập Mệnh TC171 - Thái Dương: Nữ mệnh có Thái Dương nhập miếu tại Mệnh, hội từ 4 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Dậu") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Tý"))) {
+        keyArr.push("Sao nhập Mệnh TC172 - Thái Dương: Nữ mệnh có Thái Dương lạc hãm tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Tý"))) {
+        keyArr.push("Sao nhập Mệnh TC173 - Thái Dương: Nữ mệnh có Thái Dương tại Mệnh ở Tuất/Hợi/Tý");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC174 - Thái Dương: Nữ mệnh có Thái Dương hóa Kỵ tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC175 - Thái Dương: Nữ mệnh có Thái Dương đồng cung Hỏa Tinh tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La") || isSaoToaThuTaiCung("Mệnh", "Linh Tinh") || isSaoToaThuTaiCung("Mệnh", "Thiên Hình") || isSaoToaThuTaiCung("Mệnh", "Địa Không") || isSaoToaThuTaiCung("Mệnh", "Địa Kiếp"))) {
+        keyArr.push("Sao nhập Mệnh TC176 - Thái Dương: Nữ mệnh có Thái Dương tại Mệnh, đồng cung Kình, Đà, Linh, Hình, Không hoặc Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Tý"))) {
+        keyArr.push("Sao nhập Mệnh TC177 - Thái Dương tại Tý: Thái Dương độc tọa tại Mệnh ở Tý (lạc hãm)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Tý")) && !isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && !isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && !isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && !isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && !isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Mệnh TC178 - Thái Dương tại Tý: Thái Dương tại Mệnh ở Tý, không có cát tinh hội chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Tý")) && (isSaoToaThuTaiCung("Mệnh", "Địa Không") || isSaoToaThuTaiCung("Mệnh", "Địa Kiếp"))) {
+        keyArr.push("Sao nhập Mệnh TC179 - Thái Dương tại Tý: Thái Dương tại Mệnh ở Tý, đồng cung Không hoặc Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Sao nhập Mệnh TC181 - Thái Dương tại Ngọ: Thái Dương độc tọa tại Mệnh ở Ngọ (vượng)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Ngọ")) && (lasoData.canNam === "Đ." || lasoData.canNam === "K." || lasoData.canNam === "C." || lasoData.canNam === "T.") && (tc22DemHoi(["Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 3)) {
+        keyArr.push("Sao nhập Mệnh TC182 - Thái Dương tại Ngọ: Thái Dương tại Mệnh ở Ngọ, sinh năm Đinh, Kỷ, Canh hoặc Tân, hội từ 4 sao lục cát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Ngọ")) && (isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") || isSaoToaThuTaiCung("Mệnh", "Linh Tinh"))) {
+        keyArr.push("Sao nhập Mệnh TC183 - Thái Dương tại Ngọ: Thái Dương tại Mệnh ở Ngọ, đồng cung Hỏa hoặc Linh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Ngọ")) && (isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La") || isSaoToaThuTaiCung("Mệnh", "Địa Không") || isSaoToaThuTaiCung("Mệnh", "Địa Kiếp"))) {
+        keyArr.push("Sao nhập Mệnh TC184 - Thái Dương tại Ngọ: Thái Dương tại Mệnh ở Ngọ, đồng cung Kình, Đà, Không hoặc Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && (isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) || isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false))) {
+        keyArr.push("Sao nhập Mệnh TC185 - Thái Dương tại Ngọ: Thái Dương tại Mệnh ở Ngọ, gặp Văn Xương và Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thiên Hình") && (isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Sao nhập Mệnh TC186 - Thái Dương tại Ngọ: Thái Dương đồng cung Thiên Hình tại Mệnh ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Sửu"))) {
+        keyArr.push("Sao nhập Mệnh TC187 - Thái Dương tại Sửu: Thái Dương lạc hãm đồng cung Thái Âm miếu tại Mệnh ở Sửu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Sửu")) && (tc22DemHoi(["Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 3)) {
+        keyArr.push("Sao nhập Mệnh TC188 - Thái Dương tại Sửu: Thái Dương đồng cung Thái Âm tại Mệnh ở Sửu, hội từ 4 sao lục cát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Sửu")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 1) && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
+        keyArr.push("Sao nhập Mệnh TC189 - Thái Dương tại Sửu: Thái Dương đồng cung Thái Âm tại Mệnh ở Sửu, gặp từ 2 sát tinh và Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Sao nhập Mệnh TC190 - Thái Dương tại Mùi: Thái Dương đắc địa đồng cung Thái Âm (bình) tại Mệnh ở Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 3)) {
+        keyArr.push("Sao nhập Mệnh TC191 - Thái Dương tại Mùi: Thái Dương đồng cung Thái Âm tại Mệnh ở Mùi, hội từ 4 sao lục cát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 1)) {
+        keyArr.push("Sao nhập Mệnh TC192 - Thái Dương tại Mùi: Thái Dương đồng cung Thái Âm tại Mệnh ở Mùi, hội từ 2 sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Mùi")) && (lasoData.canNam === "B." || lasoData.canNam === "T.")) {
+        keyArr.push("Sao nhập Mệnh TC193 - Thái Dương tại Mùi: Thái Dương đồng cung Thái Âm tại Mệnh ở Mùi, sinh năm Bính hoặc Tân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Dần"))) {
+        keyArr.push("Sao nhập Mệnh TC194 - Thái Dương tại Dần: Thái Dương đồng cung Cự Môn tại Mệnh ở Dần (vượng)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && (isCungTaiChi("Mệnh", "Dần")) && (isSaoHoiChieuRong("Mệnh", "Hồng Loan", false) || isSaoHoiChieuRong("Mệnh", "Đại Hao", false) || isSaoHoiChieuRong("Mệnh", "Đào Hoa", false) || isSaoHoiChieuRong("Mệnh", "Thiên Riêu", false) || isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false))) {
+        keyArr.push("Sao nhập Mệnh TC195 - Thái Dương tại Dần: Thái Dương, Cự Môn, Hóa Lộc đồng cung tại Mệnh ở Dần, hội Hồng Loan, Đại Hao, Hàm Trì, Thiên Riêu hoặc Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Dần")) && (tc22DemHoi(["Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 3) && (lasoData.canNam === "C." || lasoData.canNam === "T.")) {
+        keyArr.push("Sao nhập Mệnh TC196 - Thái Dương tại Dần: Thái Dương đồng cung Cự Môn tại Mệnh ở Dần, sinh năm Canh hoặc Tân, hội từ 4 sao lục cát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Dần")) && (tc22DemHoi(["Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 3) && (lasoData.canNam === "Q.")) {
+        keyArr.push("Sao nhập Mệnh TC197 - Thái Dương tại Dần: Thái Dương đồng cung Cự Môn tại Mệnh ở Dần, sinh năm Quý, hội từ 4 sao lục cát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Sao nhập Mệnh TC198 - Thái Dương tại Thân: Thái Dương đồng cung Cự Môn tại Mệnh ở Thân (đắc địa)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Thân")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 1)) {
+        keyArr.push("Sao nhập Mệnh TC199 - Thái Dương tại Thân: Thái Dương đồng cung Cự Môn tại Mệnh ở Thân, hội từ 2 sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Mão"))) {
+        keyArr.push("Sao nhập Mệnh TC200 - Thái Dương tại Mão: Thái Dương đồng cung Thiên Lương tại Mệnh ở Mão (nhập miếu)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Mão")) && (tc22DemHoi(["Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 3)) {
+        keyArr.push("Sao nhập Mệnh TC201 - Thái Dương tại Mão: Thái Dương đồng cung Thiên Lương tại Mệnh ở Mão, hội từ 4 sao lục cát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Mão")) && (lasoData.canNam === "Ấ." || lasoData.canNam === "K." || lasoData.canNam === "T.")) {
+        keyArr.push("Sao nhập Mệnh TC203 - Thái Dương tại Mão: Thái Dương đồng cung Thiên Lương tại Mệnh ở Mão, sinh năm Ất, Kỷ hoặc Tân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Mão")) && (tc22DemHoi(["Thiên Không"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC204 - Thái Dương tại Mão: Thái Dương đồng cung Thiên Lương tại Mệnh ở Mão, Thiên Không ở đối cung (Dậu)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC205 - Thái Dương tại Dậu: Thái Dương đồng cung Thiên Lương tại Mệnh ở Dậu (bình)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC206 - Thái Dương tại Dậu: Thái Dương đồng cung Thiên Lương tại Mệnh ở Dậu, gặp Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Thìn")) && (tc22DemHoi(["Thái Âm"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC208 - Thái Dương tại Thìn: Thái Dương độc tọa tại Mệnh ở Thìn (vượng), Thái Âm ở đối cung");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Thiên Hình") && (isCungTaiChi("Mệnh", "Thìn"))) {
+        keyArr.push("Sao nhập Mệnh TC210 - Thái Dương tại Thìn: Thái Dương đồng cung Thiên Hình tại Mệnh ở Thìn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Tuất")) && (tc22DemHoi(["Thái Âm"], [6]) > 0) && isSaoHoiChieuRong("Mệnh", "Cự Môn", false)) {
+        keyArr.push("Sao nhập Mệnh TC211 - Thái Dương tại Tuất: Thái Dương tại Mệnh ở Tuất, Thái Âm ở Thìn (cả hai lạc hãm), gặp Cự Môn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Tuất")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC212 - Thái Dương tại Tuất: Thái Dương tại Mệnh ở Tuất, gặp sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (isCungTaiChi("Mệnh", "Tuất"))) {
+        keyArr.push("Sao nhập Mệnh TC213 - Thái Dương tại Tuất: Thái Dương đồng cung Hóa Kỵ tại Mệnh ở Tuất");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Tuất")) && (lasoData.canNam === "C.") && (tc22DemHoi(["Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 3)) {
+        keyArr.push("Sao nhập Mệnh TC214 - Thái Dương tại Tuất: Thái Dương tại Mệnh ở Tuất, sinh năm Canh, hội từ 4 sao lục cát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Tỵ")) && (tc22DemHoi(["Cự Môn"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC215 - Thái Dương tại Tỵ: Thái Dương tại Mệnh ở Tỵ (vượng), Cự Môn ở đối cung");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Tỵ")) && (tc22DemHoi(["Cự Môn"], [6]) > 0) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC216 - Thái Dương tại Tỵ: Thái Dương tại Mệnh ở Tỵ, Cự Môn ở đối cung, hội từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Hợi")) && (tc22DemHoi(["Cự Môn"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC217 - Thái Dương tại Hợi: Thái Dương lạc hãm tại Mệnh ở Hợi, Cự Môn ở đối cung");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Hợi")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC219 - Thái Dương tại Hợi: Thái Dương tại Mệnh ở Hợi, gặp sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Sao nhập Mệnh TC220 - Thái Dương tại Hợi: Thái Dương đồng cung Hóa Kỵ tại Mệnh ở Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Hợi")) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (tc22DemHoi(["Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 3)) {
+        keyArr.push("Sao nhập Mệnh TC221 - Thái Dương tại Hợi: Nữ mệnh có Thái Dương tại Mệnh ở Hợi, hội từ 4 sao lục cát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc")) {
+        keyArr.push("Sao nhập Mệnh TC222 - Vũ Khúc: Vũ Khúc tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC223 - Vũ Khúc: Vũ Khúc tại Mệnh, gặp sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC224 - Vũ Khúc: Vũ Khúc tại Mệnh, không có sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Tý")) && isSaoHoiChieuRong("Mệnh", "Thiên Mã", false) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC225 - Vũ Khúc: Vũ Khúc tại Mệnh ở Tý, gặp cát tinh và Thiên Mã");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Sao nhập Mệnh TC226 - Vũ Khúc: Vũ Khúc tại Mệnh ở Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC228 - Vũ Khúc: Vũ Khúc tại Mệnh ở Hợi/Mão/Mùi, gặp sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Mão")) && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC229 - Vũ Khúc: Vũ Khúc tại Mệnh ở Mão, gặp Hóa Kỵ và sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC230 - Vũ Khúc: Vũ Khúc tại Mệnh ở Dậu, gặp Hóa Kỵ và sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Mão")) && tc22TamHop(["Liêm Trinh", "Phá Quân"])) {
+        keyArr.push("Sao nhập Mệnh TC231 - Vũ Khúc: Vũ Khúc tại Mệnh ở Mão, Liêm Trinh và Phá Quân hội tam hợp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Sao nhập Mệnh TC232 - Vũ Khúc tại Tỵ Hợi: Vũ Khúc đồng cung Phá Quân tại Mệnh ở Tỵ/Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tỵ")) && (lasoData.canNam === "K.")) {
+        keyArr.push("Sao nhập Mệnh TC233 - Vũ Khúc tại Tỵ Hợi: Vũ Khúc đồng cung Phá Quân tại Mệnh ở Tỵ, sinh năm Kỷ (Vũ Khúc hóa Lộc)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh")) {
+        keyArr.push("Sao nhập Mệnh TC235 - Vũ Khúc tại Tỵ Hợi: Vũ Khúc đồng cung Phá Quân và Hỏa Tinh tại Mệnh ở Tỵ/Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && (isSaoToaThuTaiCung("Mệnh", "Văn Xương") || isSaoToaThuTaiCung("Mệnh", "Văn Khúc"))) {
+        keyArr.push("Sao nhập Mệnh TC236 - Vũ Khúc tại Tỵ Hợi: Vũ Khúc đồng cung Phá Quân và Xương hoặc Khúc tại Mệnh ở Tỵ/Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && (isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La"))) {
+        keyArr.push("Sao nhập Mệnh TC237 - Vũ Khúc tại Tỵ Hợi: Vũ Khúc đồng cung Phá Quân và Kình hoặc Đà tại Mệnh ở Tỵ/Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung(lasoData.cungCu, "Liêm Trinh")) {
+        keyArr.push("Sao nhập Mệnh TC238 - Vũ Khúc: Vũ Khúc tại Mệnh, Liêm Trinh ở cung Thân (phân thủ Thân Mệnh)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ")) {
+        keyArr.push("Sao nhập Mệnh TC239 - Vũ Khúc: Vũ Khúc đồng cung Thiên Phủ tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Sao nhập Mệnh TC240 - Vũ Khúc: Vũ Khúc đồng cung Thiên Phủ tại Mệnh ở Tý/Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Mệnh TC241 - Vũ Khúc: Vũ Khúc đồng cung Thiên Phủ tại Mệnh, gặp Tả, Hữu, Xương, Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Mệnh TC242 - Vũ Khúc: Vũ Khúc đồng cung Thiên Phủ tại Mệnh, gặp Khôi và Việt");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && (tc22DemHoi(["Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 3)) {
+        keyArr.push("Sao nhập Mệnh TC243 - Vũ Khúc tại Tý Ngọ: Vũ Khúc đồng cung Thiên Phủ tại Mệnh ở Tý/Ngọ, hội Lộc Tồn và từ 4 sao lục cát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC244 - Vũ Khúc tại Tý Ngọ: Vũ Khúc đồng cung Thiên Phủ tại Mệnh ở Tý/Ngọ, có sát tinh đồng cung hoặc gia hội");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC245 - Vũ Khúc tại Tý Ngọ: Nữ mệnh có Vũ Khúc đồng cung Thiên Phủ tại Mệnh ở Tý/Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Hóa Quyền") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC246 - Vũ Khúc tại Tý Ngọ: Nữ mệnh có Vũ Khúc Hóa Quyền đồng cung Thiên Phủ tại Mệnh ở Tý/Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Sao nhập Mệnh TC247 - Vũ Khúc tại Sửu Mùi: Vũ Khúc đồng cung Tham Lang tại Mệnh ở Sửu/Mùi (nhập miếu)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC248 - Vũ Khúc tại Sửu Mùi: Vũ Khúc đồng cung Tham Lang tại Mệnh ở Sửu/Mùi, gia hội sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && isSaoToaThuTaiCung("Mệnh", "Kình Dương")) {
+        keyArr.push("Sao nhập Mệnh TC249 - Vũ Khúc tại Sửu Mùi: Vũ Khúc đồng cung Tham Lang và Kình Dương tại Mệnh ở Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0) && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
+        keyArr.push("Sao nhập Mệnh TC250 - Vũ Khúc tại Sửu Mùi: Vũ Khúc đồng cung Tham Lang tại Mệnh, gặp sát tinh và Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (tc22DemHoi(["Tham Lang"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC252 - Vũ Khúc: Vũ Khúc tại Mệnh ở Thìn/Tuất, Tham Lang ở đối cung");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (tc22DemHoi(["Tham Lang"], [6]) > 0) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && (tc22DemHoi(["Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 3)) {
+        keyArr.push("Sao nhập Mệnh TC253 - Vũ Khúc: Vũ Khúc tại Mệnh ở Thìn/Tuất, Tham Lang đối cung, gặp Hóa Quyền và từ 4 sao lục cát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (isSaoToaThuTaiCung("Mệnh", "Văn Xương") || isSaoToaThuTaiCung("Mệnh", "Văn Khúc"))) {
+        keyArr.push("Sao nhập Mệnh TC254 - Vũ Khúc: Vũ Khúc tại Mệnh ở Thìn/Tuất, đồng cung Xương hoặc Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (isSaoToaThuTaiCung("Mệnh", "Văn Xương") || isSaoToaThuTaiCung("Mệnh", "Văn Khúc")) && (isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) || isSaoHoiChieuRong("Mệnh", "Thiên Việt", false))) {
+        keyArr.push("Sao nhập Mệnh TC255 - Vũ Khúc: Vũ Khúc tại Mệnh ở Thìn/Tuất, đồng cung Xương hoặc Khúc, thêm Khôi hoặc Việt");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC256 - Vũ Khúc: Vũ Khúc tại Mệnh ở Thìn/Tuất, đồng cung tứ sát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất"))) {
+        keyArr.push("Sao nhập Mệnh TC257 - Vũ Khúc: Vũ Khúc đồng cung Hỏa Tinh tại Mệnh ở Thìn/Tuất");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Tham Lang", false) && (isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) || isSaoHoiChieuRong("Mệnh", "Thiên Mã", false)) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC258 - Vũ Khúc: Vũ Khúc tại Mệnh ở Hợi, Tham Lang ở tam phương, gặp Lộc Tồn hoặc Thiên Mã và từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") || isSaoToaThuTaiCung("Mệnh", "Linh Tinh")) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Hình", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false) && !isSaoHoiChieuRong("Mệnh", "Đại Hao", false) && !isSaoHoiChieuRong("Mệnh", "Tiểu Hao", false)) {
+        keyArr.push("Sao nhập Mệnh TC259 - Vũ Khúc: Vũ Khúc, Tham Lang đồng cung Hỏa hoặc Linh tại Mệnh, không có Không, Kiếp, Hình, Kỵ, Hao");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Sao nhập Mệnh TC261 - Vũ Khúc tại Dần Thân: Vũ Khúc đồng cung Thiên Tướng tại Mệnh ở Dần/Thân (đắc địa)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && isSaoToaThuTaiCung("Mệnh", "Thiên Mã")) {
+        keyArr.push("Sao nhập Mệnh TC264 - Vũ Khúc tại Dần Thân: Vũ Khúc đồng cung Thiên Tướng, Lộc Tồn, Thiên Mã tại Mệnh ở Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 1)) {
+        keyArr.push("Sao nhập Mệnh TC265 - Vũ Khúc tại Dần Thân: Vũ Khúc đồng cung Thiên Tướng tại Mệnh ở Dần/Thân, gặp từ 2 sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC266 - Vũ Khúc tại Mão Dậu: Vũ Khúc đồng cung Thất Sát tại Mệnh ở Mão/Dậu (bình)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh")) {
+        keyArr.push("Sao nhập Mệnh TC267 - Vũ Khúc tại Mão Dậu: Vũ Khúc đồng cung Thất Sát và Hỏa Tinh tại Mệnh ở Mão/Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Mệnh TC268 - Vũ Khúc tại Mão Dậu: Vũ Khúc đồng cung Thất Sát tại Mệnh ở Mão/Dậu, gặp Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) || isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false))) {
+        keyArr.push("Sao nhập Mệnh TC269 - Vũ Khúc tại Mão Dậu: Vũ Khúc đồng cung Thất Sát tại Mệnh ở Mão/Dậu, hội Lộc Tồn hoặc Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Dậu")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0) && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Mệnh TC270 - Vũ Khúc tại Mão Dậu: Vũ Khúc đồng cung Thất Sát tại Mệnh ở Dậu, gặp sát tinh và Hóa Kỵ đồng cung");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thất Sát")) {
+        keyArr.push("Sao nhập Mệnh TC271 - Vũ Khúc: Vũ Khúc đồng cung Thất Sát tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh")) {
+        keyArr.push("Sao nhập Mệnh TC272 - Vũ Khúc: Vũ Khúc đồng cung Thất Sát và Hỏa Tinh tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Mệnh", "Kình Dương") && (isSaoToaThuTaiCung("Mệnh", "Địa Không") || isSaoToaThuTaiCung("Mệnh", "Địa Kiếp"))) {
+        keyArr.push("Sao nhập Mệnh TC273 - Vũ Khúc: Vũ Khúc đồng cung Thất Sát, Kình Dương và Không hoặc Kiếp tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La"))) {
+        keyArr.push("Sao nhập Mệnh TC274 - Vũ Khúc: Vũ Khúc đồng cung Kình hoặc Đà tại Mệnh ở Thìn/Tuất");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isSaoHoiChieuRong("Mệnh", "Văn Xương", false) || isSaoHoiChieuRong("Mệnh", "Văn Khúc", false))) {
+        keyArr.push("Sao nhập Mệnh TC275 - Vũ Khúc: Vũ Khúc tại Mệnh, gặp Xương hoặc Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isSaoToaThuTaiCung("Mệnh", "Văn Xương") || isSaoToaThuTaiCung("Mệnh", "Văn Khúc")) && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi") || isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Dậu") || isCungTaiChi("Mệnh", "Mão"))) {
+        keyArr.push("Sao nhập Mệnh TC276 - Vũ Khúc: Vũ Khúc nhập miếu đồng cung Xương hoặc Khúc tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Tỵ")) && (isSaoToaThuTaiCung("Mệnh", "Văn Xương") || isSaoToaThuTaiCung("Mệnh", "Văn Khúc"))) {
+        keyArr.push("Sao nhập Mệnh TC277 - Vũ Khúc: Vũ Khúc hãm địa đồng cung Xương hoặc Khúc tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Tả Phù") && isSaoToaThuTaiCung("Mệnh", "Hữu Bật")) {
+        keyArr.push("Sao nhập Mệnh TC279 - Vũ Khúc: Vũ Khúc đồng cung Tả Phù và Hữu Bật tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi") || isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Dậu") || isCungTaiChi("Mệnh", "Mão")) && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Mệnh TC280 - Vũ Khúc: Vũ Khúc nhập miếu tại Mệnh, gặp Khôi và Việt");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC281 - Vũ Khúc: Vũ Khúc đồng cung Lộc Tồn tại Mệnh, không có Không, Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && isSaoToaThuTaiCung("Mệnh", "Thiên Mã")) {
+        keyArr.push("Sao nhập Mệnh TC282 - Vũ Khúc: Vũ Khúc, Lộc Tồn, Thiên Mã cùng nhập Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && (lasoData.canNam === "K.")) {
+        keyArr.push("Sao nhập Mệnh TC283 - Vũ Khúc: Vũ Khúc hóa Lộc tại Mệnh (sinh năm Kỷ)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC284 - Vũ Khúc: Vũ Khúc tại Mệnh, gặp Kình, Đà, Hỏa hoặc Linh gia hội hay xung phá");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Kình Dương")) {
+        keyArr.push("Sao nhập Mệnh TC285 - Vũ Khúc: Vũ Khúc đồng cung Kình Dương tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Đà La")) {
+        keyArr.push("Sao nhập Mệnh TC286 - Vũ Khúc: Vũ Khúc đồng cung Đà La tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") || isSaoToaThuTaiCung("Mệnh", "Linh Tinh")) && isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && isSaoHoiChieuRong("Mệnh", "Đà La", false)) {
+        keyArr.push("Sao nhập Mệnh TC287 - Vũ Khúc: Vũ Khúc đồng cung Hỏa hoặc Linh tại Mệnh, tam phương gia hội Kình và Đà");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Mệnh TC288 - Vũ Khúc: Vũ Khúc hóa Kỵ tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (lasoData.canNam === "N.")) {
+        keyArr.push("Sao nhập Mệnh TC289 - Vũ Khúc: Vũ Khúc hóa Kỵ tại Mệnh (sinh năm Nhâm)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && isSaoToaThuTaiCung("Mệnh", "Thiên Hình")) {
+        keyArr.push("Sao nhập Mệnh TC290 - Vũ Khúc: Vũ Khúc hóa Kỵ đồng cung Thiên Hình tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && isSaoHoiChieuRong("Mệnh", "Thiên Mã", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Mệnh TC291 - Vũ Khúc: Vũ Khúc tại Mệnh, gặp Lộc Tồn, Thiên Mã, Hóa Lộc, Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungCoTuan("Mệnh") || isCungCoTriet("Mệnh"))) {
+        keyArr.push("Sao nhập Mệnh TC292 - Vũ Khúc: Vũ Khúc tại Mệnh gặp Tuần hoặc Triệt (Không Vong)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isSaoToaThuTaiCung("Điền Trạch", "Hóa Lộc") || isSaoToaThuTaiCung("Điền Trạch", "Lộc Tồn"))) {
+        keyArr.push("Sao nhập Mệnh TC293 - Vũ Khúc: Vũ Khúc tại Mệnh, Hóa Lộc hoặc Lộc Tồn ở Điền Trạch");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC294 - Vũ Khúc: Nữ mệnh có Vũ Khúc tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi") || isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Dậu") || isCungTaiChi("Mệnh", "Mão")) && (tc22DemHoi(["Thiên Phủ", "Tả Phù", "Hữu Bật", "Thiên Khôi", "Thiên Việt", "Lộc Tồn", "Thiên Mã", "Tam Thai", "Bát Tọa"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC295 - Vũ Khúc: Nữ mệnh có Vũ Khúc nhập miếu tại Mệnh, hội từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi") || isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Dậu") || isCungTaiChi("Mệnh", "Mão")) && isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && isSaoHoiChieuRong("Mệnh", "Thiên Việt", false) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC296 - Vũ Khúc: Nữ mệnh có Vũ Khúc nhập miếu tại Mệnh, có Khôi và Việt, không có sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Tỵ")) && (tc22DemHoi(["Hóa Kỵ", "Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC297 - Vũ Khúc: Nữ mệnh có Vũ Khúc lạc hãm tại Mệnh, gặp Hóa Kỵ hoặc sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (isSaoToaThuTaiCung("Mệnh", "Văn Xương") || isSaoToaThuTaiCung("Mệnh", "Văn Khúc") || isSaoToaThuTaiCung("Mệnh", "Thiên Riêu") || isSaoToaThuTaiCung("Mệnh", "Đào Hoa") || isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ"))) {
+        keyArr.push("Sao nhập Mệnh TC298 - Vũ Khúc: Nữ mệnh có Vũ Khúc tại Mệnh ở Thìn/Tuất, gặp Xương, Khúc, Riêu, Hàm Trì hoặc Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng")) {
+        keyArr.push("Sao nhập Mệnh TC299 - Thiên Đồng: Thiên Đồng tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 0) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC300 - Thiên Đồng: Thiên Đồng tại Mệnh, gặp cát tinh, không có sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (isCungTaiChi("Mệnh", "Ngọ")) && (lasoData.canNam === "B." || lasoData.canNam === "M.")) {
+        keyArr.push("Sao nhập Mệnh TC301 - Thiên Đồng: Thiên Đồng tại Mệnh ở Ngọ, sinh năm Bính hoặc Mậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Sao nhập Mệnh TC302 - Thiên Đồng: Thiên Đồng tại Mệnh ở tứ mã tứ sinh (Dần/Thân/Tỵ/Hợi)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (isCungTaiChi("Mệnh", "Tuất")) && (tc22DemHoi(["Hóa Kỵ"], [6]) > 0) && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Mệnh TC303 - Thiên Đồng: Thiên Đồng tại Mệnh ở Tuất, đối cung có Hóa Kỵ, gặp Lộc Tồn và Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (isCungTaiChi("Mệnh", "Hợi")) && (lasoData.canNam === "C.") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp", "Thiên Hình"], [0, 4, 6, 8]) > 1)) {
+        keyArr.push("Sao nhập Mệnh TC304 - Thiên Đồng: Thiên Đồng hóa Kỵ tại Mệnh ở Hợi (sinh năm Canh), gặp từ 2 sát tinh hoặc Thiên Hình");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Phu Thê", "Thiên Lương")) {
+        keyArr.push("Sao nhập Mệnh TC305 - Thiên Đồng: Thiên Đồng tại Mệnh, Thiên Lương ở Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Ngọ")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC306 - Thiên Đồng: Thiên Đồng đồng cung Thái Âm tại Mệnh ở Ngọ, gặp tứ sát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && (isCungTaiChi("Mệnh", "Tý")) && isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && isSaoHoiChieuRong("Mệnh", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Mệnh TC307 - Thiên Đồng: Thiên Đồng đồng cung Thái Âm và Lộc Tồn tại Mệnh ở Tý, gặp Tả Phù và Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Mệnh TC308 - Thiên Đồng: Thiên Đồng tại Mệnh ở Mão/Dậu, Thái Âm đối cung, gặp Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (tc22DemHoi(["Cự Môn"], [6]) > 0) && (lasoData.canNam === "B." || lasoData.canNam === "T.")) {
+        keyArr.push("Sao nhập Mệnh TC309 - Thiên Đồng: Thiên Đồng tại Mệnh ở Thìn/Tuất, Cự Môn đối cung, sinh năm Bính (Đồng hóa Lộc) hoặc Tân (Cự hóa Lộc)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (tc22DemHoi(["Cự Môn"], [6]) > 0) && (lasoData.canNam === "C." || lasoData.canNam === "Đ.")) {
+        keyArr.push("Sao nhập Mệnh TC310 - Thiên Đồng: Thiên Đồng tại Mệnh ở Thìn/Tuất, Cự Môn đối cung, sinh năm Canh (Đồng hóa Kỵ) hoặc Đinh (Cự hóa Kỵ)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") || isSaoToaThuTaiCung("Mệnh", "Linh Tinh"))) {
+        keyArr.push("Sao nhập Mệnh TC311 - Thiên Đồng: Thiên Đồng đồng cung Cự Môn và Hỏa hoặc Linh tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Cự Môn") && !isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && !isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && !isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && !isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && !isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Mệnh TC312 - Thiên Đồng: Thiên Đồng đồng cung Cự Môn tại Mệnh, không có cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Sao nhập Mệnh TC313 - Thiên Đồng: Thiên Đồng đồng cung Cự Môn tại Mệnh ở Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La"))) {
+        keyArr.push("Sao nhập Mệnh TC314 - Thiên Đồng: Thiên Đồng đồng cung Cự Môn và Kình hoặc Đà tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 1)) {
+        keyArr.push("Sao nhập Mệnh TC315 - Thiên Đồng: Thiên Đồng đồng cung Cự Môn tại Mệnh ở Sửu/Mùi, tam phương gặp từ 2 sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương")) {
+        keyArr.push("Sao nhập Mệnh TC316 - Thiên Đồng: Thiên Đồng đồng cung Thiên Lương tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC317 - Thiên Đồng: Thiên Đồng đồng cung Thiên Lương tại Mệnh, sát tinh thủ chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoHoiChieuRong("Mệnh", "Thiên Mã", false)) {
+        keyArr.push("Sao nhập Mệnh TC318 - Thiên Đồng: Thiên Đồng đồng cung Thiên Lương tại Mệnh, gặp Thiên Mã");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (lasoData.canNam === "G." || lasoData.canNam === "Ấ." || lasoData.canNam === "Đ.")) {
+        keyArr.push("Sao nhập Mệnh TC319 - Thiên Đồng: Thiên Đồng đồng cung Thiên Lương tại Mệnh ở Dần/Thân, sinh năm Giáp, Ất hoặc Đinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && tc22TamHop(["Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"]) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC320 - Thiên Đồng: Thiên Đồng đồng cung Thiên Lương tại Mệnh ở Dần/Thân, tam phương đủ Cơ, Nguyệt, Đồng, Lương, hội từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp", "Thiên Hình", "Đại Hao", "Tiểu Hao"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC321 - Thiên Đồng: Thiên Đồng tại Mệnh, gặp từ 3 sao trong bộ sát tinh, Hình, Hao, Không, Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Kình Dương")) {
+        keyArr.push("Sao nhập Mệnh TC322 - Thiên Đồng: Thiên Đồng đồng cung Kình Dương tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh")) {
+        keyArr.push("Sao nhập Mệnh TC323 - Thiên Đồng: Thiên Đồng đồng cung Hỏa Tinh tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false)) {
+        keyArr.push("Sao nhập Mệnh TC324 - Thiên Đồng: Thiên Đồng đồng cung Lộc Tồn tại Mệnh, Hỏa Tinh hội chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Hóa Lộc")) {
+        keyArr.push("Sao nhập Mệnh TC325 - Thiên Đồng: Thiên Đồng hóa Lộc tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam")) {
+        keyArr.push("Sao nhập Mệnh TC326 - Thiên Đồng: Nam mệnh có Thiên Đồng hóa Kỵ tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC327 - Thiên Đồng: Nữ mệnh có Thiên Đồng tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && (isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) || isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC328 - Thiên Đồng: Nữ mệnh có Thiên Đồng nhập miếu tại Mệnh, gặp Lộc Tồn hoặc Hóa Lộc, hội từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC329 - Thiên Đồng: Nữ mệnh có Thiên Đồng tại Mệnh, sát tinh xung chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC330 - Thiên Đồng: Nữ mệnh có Thiên Đồng đồng cung Thái Âm tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Tý"))) {
+        keyArr.push("Sao nhập Mệnh TC331 - Thiên Đồng tại Tý: Thiên Đồng đồng cung Thái Âm tại Mệnh ở Tý (Đồng vượng, Âm miếu)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && (isCungTaiChi("Mệnh", "Tý")) && (isSaoHoiChieuRong("Mệnh", "Tả Phù", false) || isSaoHoiChieuRong("Mệnh", "Hữu Bật", false))) {
+        keyArr.push("Sao nhập Mệnh TC332 - Thiên Đồng tại Tý: Thiên Đồng đồng cung Thái Âm và Lộc Tồn tại Mệnh ở Tý, gặp Tả hoặc Hữu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && isSaoToaThuTaiCung("Mệnh", "Kình Dương") && (isCungTaiChi("Mệnh", "Tý"))) {
+        keyArr.push("Sao nhập Mệnh TC333 - Thiên Đồng tại Tý: Thiên Đồng đồng cung Thái Âm và Kình Dương tại Mệnh ở Tý");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Sao nhập Mệnh TC334 - Thiên Đồng tại Ngọ: Thiên Đồng đồng cung Thái Âm tại Mệnh ở Ngọ (đều lạc hãm)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Ngọ")) && (isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") || isSaoToaThuTaiCung("Mệnh", "Linh Tinh"))) {
+        keyArr.push("Sao nhập Mệnh TC335 - Thiên Đồng tại Ngọ: Thiên Đồng đồng cung Thái Âm và Hỏa hoặc Linh tại Mệnh ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && isSaoToaThuTaiCung("Mệnh", "Kình Dương") && (isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Sao nhập Mệnh TC336 - Thiên Đồng tại Ngọ: Thiên Đồng đồng cung Thái Âm và Kình Dương tại Mệnh ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Sao nhập Mệnh TC337 - Thiên Đồng tại Sửu Mùi: Thiên Đồng đồng cung Cự Môn tại Mệnh ở Sửu/Mùi (đều lạc hãm)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC338 - Thiên Đồng tại Mùi: Thiên Đồng đồng cung Cự Môn tại Mệnh ở Mùi, hội từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC339 - Thiên Đồng tại Mùi: Thiên Đồng đồng cung Cự Môn tại Mệnh ở Mùi, gặp sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Sao nhập Mệnh TC340 - Thiên Đồng tại Dần Thân: Thiên Đồng đồng cung Thiên Lương tại Mệnh ở Dần/Thân (Dần bình, Thân vượng)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La"))) {
+        keyArr.push("Sao nhập Mệnh TC341 - Thiên Đồng tại Dần Thân: Thiên Đồng đồng cung Thiên Lương tại Mệnh ở Dần/Thân, gặp Kình hoặc Đà");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh")) {
+        keyArr.push("Sao nhập Mệnh TC342 - Thiên Đồng tại Dần Thân: Thiên Đồng đồng cung Thiên Lương và Hỏa Tinh tại Mệnh ở Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Thiên Mã") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Sao nhập Mệnh TC343 - Thiên Đồng tại Dần Thân: Thiên Đồng đồng cung Thiên Lương và Thiên Mã tại Mệnh ở Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (lasoData.canNam === "G." || lasoData.canNam === "Ấ." || lasoData.canNam === "Đ." || lasoData.canNam === "K." || lasoData.canNam === "C.")) {
+        keyArr.push("Sao nhập Mệnh TC344 - Thiên Đồng tại Dần Thân: Thiên Đồng đồng cung Thiên Lương tại Mệnh ở Dần/Thân, sinh năm Giáp, Ất, Đinh, Kỷ hoặc Canh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (isSaoHoiChieuRong("Mệnh", "Tả Phù", false) || isSaoHoiChieuRong("Mệnh", "Hữu Bật", false)) && (isSaoHoiChieuRong("Mệnh", "Văn Xương", false) || isSaoHoiChieuRong("Mệnh", "Văn Khúc", false))) {
+        keyArr.push("Sao nhập Mệnh TC345 - Thiên Đồng tại Dần Thân: Thiên Đồng đồng cung Thiên Lương tại Mệnh ở Dần/Thân, gặp Phù, Bật, Xương hoặc Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (tc22DemHoi(["Thái Âm"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC346 - Thiên Đồng tại Mão Dậu: Thiên Đồng độc tọa tại Mệnh ở Mão/Dậu (bình), Thái Âm ở đối cung");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Kình Dương") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC347 - Thiên Đồng tại Mão Dậu: Thiên Đồng đồng cung Kình Dương tại Mệnh ở Mão/Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") || isSaoToaThuTaiCung("Mệnh", "Linh Tinh"))) {
+        keyArr.push("Sao nhập Mệnh TC348 - Thiên Đồng tại Mão Dậu: Thiên Đồng đồng cung Hỏa hoặc Linh tại Mệnh ở Mão/Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (tc22DemHoi(["Cự Môn"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC349 - Thiên Đồng tại Thìn Tuất: Thiên Đồng độc tọa tại Mệnh ở Thìn/Tuất, Cự Môn ở đối cung (đều lạc hãm)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (isSaoHoiChieuRong("Mệnh", "Tả Phù", false) || isSaoHoiChieuRong("Mệnh", "Hữu Bật", false)) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false)) {
+        keyArr.push("Sao nhập Mệnh TC350 - Thiên Đồng tại Thìn Tuất: Thiên Đồng tại Mệnh ở Thìn/Tuất, gặp Phù, Bật và Xương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La"))) {
+        keyArr.push("Sao nhập Mệnh TC351 - Thiên Đồng tại Thìn Tuất: Thiên Đồng đồng cung Kình hoặc Đà tại Mệnh ở Thìn/Tuất");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Sao nhập Mệnh TC352 - Thiên Đồng tại Tỵ Hợi: Thiên Đồng độc tọa tại Mệnh ở Tỵ/Hợi (nhập miếu)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh")) {
+        keyArr.push("Sao nhập Mệnh TC353 - Liêm Trinh: Liêm Trinh tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Dậu") || isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Tỵ")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC354 - Liêm Trinh: Liêm Trinh lạc hãm tại Mệnh, gặp tứ sát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Mệnh TC355 - Liêm Trinh: Liêm Trinh hóa Kỵ tại Mệnh (sinh năm Bính)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoHoiChieuRong("Mệnh", "Tử Vi", false) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC356 - Liêm Trinh: Liêm Trinh tại Mệnh, Tử Vi hội chiếu, không có sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (lasoData.canNam === "B.")) {
+        keyArr.push("Sao nhập Mệnh TC357 - Liêm Trinh: Liêm Trinh tại Mệnh ở Tý/Ngọ/Mão/Dậu, sinh năm Bính");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC358 - Liêm Trinh thanh bạch: Liêm Trinh đồng cung Lộc Tồn tại Mệnh ở Dần/Thân, không có sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La") || isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") || isSaoToaThuTaiCung("Mệnh", "Linh Tinh") || isSaoToaThuTaiCung("Mệnh", "Địa Không") || isSaoToaThuTaiCung("Mệnh", "Địa Kiếp"))) {
+        keyArr.push("Sao nhập Mệnh TC360 - Liêm Trinh: Liêm Trinh tại Mệnh ở Tỵ/Hợi, đồng cung Kỵ tinh và sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Phu Thê", "Tham Lang")) {
+        keyArr.push("Sao nhập Mệnh TC361 - Liêm Trinh: Liêm Trinh đồng cung Thiên Tướng tại Mệnh, Tham Lang ở Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Tử Vi", false) && (isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) || (isSaoHoiChieuRong("Mệnh", "Cự Môn", false) && (isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) || isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false)))) && !isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Mệnh TC362 - Liêm Trinh: Liêm Trinh đồng cung Thiên Tướng tại Mệnh ở Tý/Ngọ, Tử Vi hội chiếu, gặp Lộc Tồn (hoặc Cự Môn hóa Lộc/Quyền), không có sát, Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Thiên Hình", false) && (tc22DemHoi(["Phá Quân"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC363 - Liêm Trinh: Liêm Trinh đồng cung Thiên Tướng và Hỏa Tinh tại Mệnh ở Tý/Ngọ, Thiên Hình hội chiếu, Phá Quân ở đối cung");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Mùi") || isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Mão")) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC365 - Liêm Trinh: Liêm Trinh tại Mệnh ở Mùi/Thân/Mão, hội từ 3 cát tinh, không có sát tinh, Không, Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && !isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Hình", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC366 - Liêm Trinh: Liêm Trinh đồng cung Thất Sát tại Mệnh ở Sửu/Mùi, không có Hóa Kỵ, không có sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Hóa Kỵ", "Thiên Hình", "Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 1)) {
+        keyArr.push("Sao nhập Mệnh TC367 - Liêm Trinh: Liêm Trinh đồng cung Thất Sát tại Mệnh ở Sửu/Mùi, gặp từ 2 sao trong bộ Sát, Hình, Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Sao nhập Mệnh TC368 - Liêm Trinh: Liêm Trinh hóa Kỵ đồng cung Thất Sát tại Mệnh ở Sửu/Mùi (sinh năm Bính)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Mùi")) && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
+        keyArr.push("Sao nhập Mệnh TC369 - Liêm Trinh: Liêm Trinh đồng cung Thất Sát tại Mệnh ở Mùi, gặp Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thất Sát")) {
+        keyArr.push("Sao nhập Mệnh TC370 - Liêm Trinh: Liêm Trinh đồng cung Thất Sát tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Phu Thê", "Thất Sát")) {
+        keyArr.push("Sao nhập Mệnh TC371 - Liêm Trinh: Liêm Trinh tại Mệnh, Thất Sát ở Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Phu Thê", "Thiên Tướng")) {
+        keyArr.push("Sao nhập Mệnh TC372 - Liêm Trinh: Liêm Trinh đồng cung Thất Sát tại Mệnh, Thiên Tướng ở Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Tham Lang")) {
+        keyArr.push("Sao nhập Mệnh TC374 - Liêm Trinh: Liêm Trinh đồng cung Tham Lang tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Phu Thê", "Thiên Phủ")) {
+        keyArr.push("Sao nhập Mệnh TC375 - Liêm Trinh: Liêm Trinh đồng cung Tham Lang tại Mệnh, Thiên Phủ ở Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (lasoData.canNam === "K." || lasoData.canNam === "T.")) {
+        keyArr.push("Sao nhập Mệnh TC376 - Liêm Trinh: Liêm Trinh đồng cung Tham Lang tại Mệnh, sinh năm Kỷ (Khúc hóa Kỵ) hoặc Tân (Xương hóa Kỵ)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Tuất")) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC377 - Liêm Trinh: Liêm Trinh đồng cung Thiên Phủ tại Mệnh ở Tuất, không có sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (isSaoToaThuTaiCung("Mệnh", "Văn Xương") || isSaoToaThuTaiCung("Mệnh", "Văn Khúc"))) {
+        keyArr.push("Sao nhập Mệnh TC378 - Liêm Trinh: Liêm Trinh đồng cung Thiên Phủ và Xương hoặc Khúc tại Mệnh ở Thìn/Tuất");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC379 - Liêm Trinh: Liêm Trinh đồng cung Phá Quân tại Mệnh ở Mão/Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC380 - Liêm Trinh: Liêm Trinh hóa Kỵ đồng cung Phá Quân tại Mệnh ở Mão/Dậu (sinh năm Bính)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoToaThuTaiCung("Mệnh", "Thiên Hình") && (isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC381 - Liêm Trinh: Liêm Trinh đồng cung Phá Quân và Thiên Hình tại Mệnh ở Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh")) {
+        keyArr.push("Sao nhập Mệnh TC382 - Liêm Trinh: Liêm Trinh đồng cung Phá Quân và Hỏa Tinh tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && !((isSaoToaThuTaiCung("Phu Thê", "Tử Vi") || isSaoToaThuTaiCung("Phu Thê", "Thiên Phủ") || isSaoToaThuTaiCung("Phu Thê", "Vũ Khúc") || isSaoToaThuTaiCung("Phu Thê", "Thiên Tướng") || isSaoToaThuTaiCung("Phu Thê", "Thất Sát") || isSaoToaThuTaiCung("Phu Thê", "Phá Quân") || isSaoToaThuTaiCung("Phu Thê", "Tham Lang") || isSaoToaThuTaiCung("Phu Thê", "Cự Môn") || isSaoToaThuTaiCung("Phu Thê", "Thái Dương") || isSaoToaThuTaiCung("Phu Thê", "Thiên Cơ") || isSaoToaThuTaiCung("Phu Thê", "Thái Âm") || isSaoToaThuTaiCung("Phu Thê", "Thiên Đồng") || isSaoToaThuTaiCung("Phu Thê", "Thiên Lương") || isSaoToaThuTaiCung("Phu Thê", "Liêm Trinh")))) {
+        keyArr.push("Sao nhập Mệnh TC383 - Liêm Trinh: Liêm Trinh đồng cung Phá Quân tại Mệnh, Phu Thê không có chính tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isSaoHoiChieuRong("Mệnh", "Văn Xương", false) || isSaoHoiChieuRong("Mệnh", "Văn Khúc", false))) {
+        keyArr.push("Sao nhập Mệnh TC384 - Liêm Trinh: Liêm Trinh tại Mệnh, gặp Xương hoặc Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Thiên Hình", "Đại Hao", "Hóa Kỵ", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 2) && !isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && !isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && !isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && !isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && !isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Mệnh TC385 - Liêm Trinh: Liêm Trinh tại Mệnh, gặp từ 3 sao trong bộ sát tinh, Hình, Hao, Kỵ, Không, Kiếp mà không có cát tinh hóa giải");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Kình Dương") && isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") && (lasoData.canNam === "B.")) {
+        keyArr.push("Sao nhập Mệnh TC386 - Liêm Trinh: Liêm Trinh hóa Kỵ (sinh năm Bính) đồng cung Kình Dương và Hỏa Tinh tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Kình Dương")) {
+        keyArr.push("Sao nhập Mệnh TC387 - Liêm Trinh: Liêm Trinh đồng cung Kình Dương tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 3)) {
+        keyArr.push("Sao nhập Mệnh TC388 - Liêm Trinh: Liêm Trinh đồng cung tứ sát tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isSaoToaThuTaiCung("Mệnh", "Địa Không") || isSaoToaThuTaiCung("Mệnh", "Địa Kiếp"))) {
+        keyArr.push("Sao nhập Mệnh TC389 - Liêm Trinh: Liêm Trinh đồng cung Không hoặc Kiếp tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && (lasoData.canNam === "G.")) {
+        keyArr.push("Sao nhập Mệnh TC390 - Liêm Trinh: Liêm Trinh hóa Lộc tại Mệnh (sinh năm Giáp)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (isCungTaiChi("Mệnh", "Thân")) && (isSaoToaThuTaiCung("Mệnh", "Tả Phù") || isSaoToaThuTaiCung("Mệnh", "Linh Tinh"))) {
+        keyArr.push("Sao nhập Mệnh TC391 - Liêm Trinh: Liêm Trinh hóa Kỵ tại Mệnh ở Thân, đồng cung Tả Phù hoặc Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Bạch Hổ")) {
+        keyArr.push("Sao nhập Mệnh TC392 - Liêm Trinh: Liêm Trinh đồng cung Bạch Hổ tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi") || isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) || isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false))) {
+        keyArr.push("Sao nhập Mệnh TC393 - Liêm Trinh: Nữ mệnh có Liêm Trinh nhập miếu tại Mệnh, gặp Lộc Tồn hoặc Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp", "Thiên Hình"], [0, 4, 6, 8]) > 1)) {
+        keyArr.push("Sao nhập Mệnh TC394 - Liêm Trinh: Nữ mệnh có Liêm Trinh tại Mệnh, hội từ 2 sát tinh, Không, Kiếp, Hình");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC395 - Liêm Trinh: Nữ mệnh có Liêm Trinh hóa Kỵ tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Sao nhập Mệnh TC396 - Liêm Trinh tại Tý Ngọ: Liêm Trinh đồng cung Thiên Tướng tại Mệnh ở Tý/Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && (isSaoHoiChieuRong("Mệnh", "Văn Xương", false) || isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) && (isSaoHoiChieuRong("Mệnh", "Tả Phù", false) || isSaoHoiChieuRong("Mệnh", "Hữu Bật", false))) {
+        keyArr.push("Sao nhập Mệnh TC397 - Liêm Trinh tại Tý Ngọ: Liêm Trinh đồng cung Thiên Tướng tại Mệnh ở Tý/Ngọ, gặp Xương hoặc Khúc cùng Tả hoặc Hữu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && isSaoToaThuTaiCung("Mệnh", "Kình Dương")) {
+        keyArr.push("Sao nhập Mệnh TC398 - Liêm Trinh tại Tý Ngọ: Liêm Trinh đồng cung Thiên Tướng và Kình Dương tại Mệnh ở Tý/Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && isSaoHoiChieuRong("Mệnh", "Phá Quân", false)) {
+        keyArr.push("Sao nhập Mệnh TC399 - Liêm Trinh tại Tý Ngọ: Liêm Trinh đồng cung Thiên Tướng tại Mệnh ở Tý/Ngọ, gặp Văn Khúc và Phá Quân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Sao nhập Mệnh TC400 - Liêm Trinh tại Sửu Mùi: Liêm Trinh đồng cung Thất Sát tại Mệnh ở Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh")) {
+        keyArr.push("Sao nhập Mệnh TC401 - Liêm Trinh tại Sửu Mùi: Liêm Trinh đồng cung Thất Sát và Hỏa Tinh tại Mệnh ở Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && isSaoToaThuTaiCung("Mệnh", "Kình Dương")) {
+        keyArr.push("Sao nhập Mệnh TC402 - Liêm Trinh tại Sửu Mùi: Liêm Trinh đồng cung Thất Sát và Kình Dương tại Mệnh ở Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (tc22DemHoi(["Tham Lang"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC403 - Liêm Trinh tại Dần Thân: Liêm Trinh độc tọa tại Mệnh ở Dần/Thân (nhập miếu), Tham Lang ở đối cung");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") || isSaoToaThuTaiCung("Mệnh", "Lộc Tồn")) && isSaoHoiChieuRong("Mệnh", "Vũ Khúc", false) && isSaoHoiChieuRong("Mệnh", "Thiên Phủ", false) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC404 - Liêm Trinh tại Dần Thân: Liêm Trinh tại Mệnh ở Dần/Thân, đồng cung Lộc, hội Vũ Khúc và Thiên Phủ, không có sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La") || isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") || isSaoToaThuTaiCung("Mệnh", "Linh Tinh"))) {
+        keyArr.push("Sao nhập Mệnh TC405 - Liêm Trinh tại Dần Thân: Liêm Trinh đồng cung sát tinh tại Mệnh ở Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC406 - Liêm Trinh tại Mão Dậu: Liêm Trinh đồng cung Phá Quân tại Mệnh ở Mão/Dậu, không có sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC407 - Liêm Trinh tại Mão Dậu: Liêm Trinh đồng cung Phá Quân tại Mệnh ở Mão/Dậu, gặp tứ sát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ")) {
+        keyArr.push("Sao nhập Mệnh TC408 - Thiên Phủ: Thiên Phủ tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && !isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && !isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && !isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && !isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && !isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Mệnh TC409 - Thiên Phủ: Thiên Phủ tại Mệnh, không có cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Phu Thê", "Phá Quân")) {
+        keyArr.push("Sao nhập Mệnh TC410 - Thiên Phủ: Thiên Phủ tại Mệnh, Phá Quân ở Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (tc22DemHoi(["Tả Phù", "Hữu Bật", "Thiên Tướng", "Vũ Khúc", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 3)) {
+        keyArr.push("Sao nhập Mệnh TC411 - Thiên Phủ: Thiên Phủ đồng cung Tử Vi tại Mệnh, hội từ 4 sao trong bộ Tả, Hữu, Tướng, Vũ, Xương, Khúc, Khôi, Việt");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Tử Vi", "Văn Xương", "Văn Khúc", "Tả Phù", "Hữu Bật", "Thiên Khôi", "Thiên Việt", "Lộc Tồn", "Thiên Mã", "Hóa Lộc", "Hóa Quyền", "Hóa Khoa"], [0, 4, 6, 8]) > 4) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC412 - Thiên Phủ: Thiên Phủ nhập miếu tại Mệnh, hội từ 5 cát tinh, không có sát tinh, Không, Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoHoiChieuRong("Mệnh", "Địa Không", false) && isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC413 - Thiên Phủ: Thiên Phủ tại Mệnh, hội Địa Không và Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoHoiChieuRong("Mệnh", "Thiên Riêu", false)) {
+        keyArr.push("Sao nhập Mệnh TC414 - Thiên Phủ: Thiên Phủ tại Mệnh, hội Thiên Riêu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Mệnh TC415 - Thiên Phủ: Thiên Phủ tại Mệnh ở Thìn/Tuất, gặp Tả Phù và Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Tuất")) && (lasoData.canNam === "G." || lasoData.canNam === "K.") && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false)) {
+        keyArr.push("Sao nhập Mệnh TC416 - Thiên Phủ triều viên: Liêm Trinh đồng cung Thiên Phủ tại Mệnh ở Tuất, sinh năm Giáp hoặc Kỷ, không có tứ sát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Mệnh TC417 - Thiên Phủ: Thiên Phủ tại Mệnh, gặp Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && !isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Mệnh TC418 - Thiên Phủ: Thiên Phủ tại Mệnh, không gặp Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 1)) {
+        keyArr.push("Sao nhập Mệnh TC419 - Thiên Phủ: Thiên Phủ tại Mệnh, gặp từ 2 sao trong tứ sát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungCoTuan("Mệnh") || isCungCoTriet("Mệnh"))) {
+        keyArr.push("Sao nhập Mệnh TC420 - Thiên Phủ: Thiên Phủ tại Mệnh gặp Tuần hoặc Triệt (Không Vong)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC421 - Thiên Phủ: Thiên Phủ tại Mệnh ở Tỵ/Hợi (đối chiếu Tử Vi, Thất Sát), hội từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && !isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && !isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && !isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && !isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && !isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Mệnh TC423 - Thiên Phủ: Thiên Phủ đồng cung Tử Vi tại Mệnh ở Dần/Thân, không có cát tinh trợ giúp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (tc22DemHoi(["Vũ Khúc"], [6]) > 0) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC424 - Thiên Phủ: Thiên Phủ tại Mệnh ở Mão/Dậu, Vũ Khúc và Thất Sát chiếu, hội từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Liêm Trinh"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC425 - Thiên Phủ: Thiên Phủ tại Mệnh ở Sửu/Mùi, Liêm Trinh và Thất Sát ở đối cung");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoHoiChieuRong("Mệnh", "Thiên Tướng", false) && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Mùi") || isCungTaiChi("Mệnh", "Dậu") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Sao nhập Mệnh TC426 - Thiên Phủ: Thiên Phủ tại Mệnh, Thiên Tướng chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (tc22DemHoi(["Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 3)) {
+        keyArr.push("Sao nhập Mệnh TC427 - Thiên Phủ: Thiên Phủ tại Mệnh, hội từ 4 sao lục cát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn")) {
+        keyArr.push("Sao nhập Mệnh TC428 - Thiên Phủ: Thiên Phủ đồng cung Lộc Tồn tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Văn Xương")) {
+        keyArr.push("Sao nhập Mệnh TC429 - Thiên Phủ: Thiên Phủ đồng cung Văn Xương tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La") || isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") || isSaoToaThuTaiCung("Mệnh", "Linh Tinh") || isSaoToaThuTaiCung("Mệnh", "Thiên Riêu"))) {
+        keyArr.push("Sao nhập Mệnh TC431 - Thiên Phủ: Thiên Phủ đồng cung một trong tứ sát hoặc Thiên Riêu tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Địa Không") && isSaoToaThuTaiCung("Mệnh", "Địa Kiếp")) {
+        keyArr.push("Sao nhập Mệnh TC432 - Thiên Phủ: Thiên Phủ đồng cung Địa Không và Địa Kiếp tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && !(isSaoHoiChieuRong("Mệnh", "Văn Xương", false))) {
+        keyArr.push("Sao nhập Mệnh TC433 - Thiên Phủ: Thiên Phủ tại Mệnh gặp Văn Khúc mà không gặp Văn Xương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (tc22DemHoi(["Địa Không", "Địa Kiếp", "Đại Hao", "Tiểu Hao", "Hóa Kỵ"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC434 - Thiên Phủ: Thiên Phủ tại Mệnh, gặp từ 3 sao trong bộ Không, Kiếp, Hao, Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC435 - Thiên Phủ: Nữ mệnh có Thiên Phủ tại Mệnh, hội từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (tc22DemHoi(["Địa Không", "Địa Kiếp", "Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Thiên Hình", "Hóa Kỵ"], [0, 4, 6, 8]) > 1)) {
+        keyArr.push("Sao nhập Mệnh TC436 - Thiên Phủ: Nữ mệnh có Thiên Phủ tại Mệnh, hội từ 2 sao trong bộ sát tinh, Không, Kiếp, Hình, Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC437 - Thiên Phủ: Nữ mệnh có Thiên Phủ tại Mệnh ở Tỵ/Hợi (đối Tử Vi, Thất Sát) hoặc Mão/Dậu (đối Vũ Khúc, Phá Quân)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && isSaoToaThuTaiCung("Phu Thê", "Liêm Trinh") && isSaoToaThuTaiCung("Phu Thê", "Phá Quân") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC438 - Thiên Phủ: Nữ mệnh có Thiên Phủ tại Mệnh, Liêm Trinh và Phá Quân đồng cung ở Phu Thê, gặp sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Sao nhập Mệnh TC439 - Thiên Phủ tại Tý Ngọ: Thiên Phủ đồng cung Vũ Khúc tại Mệnh ở Tý/Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && (tc22DemHoi(["Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 3)) {
+        keyArr.push("Sao nhập Mệnh TC440 - Thiên Phủ tại Tý Ngọ: Thiên Phủ đồng cung Vũ Khúc và Lộc Tồn tại Mệnh ở Tý/Ngọ, hội từ 4 sao lục cát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC441 - Thiên Phủ tại Tý Ngọ: Thiên Phủ đồng cung Vũ Khúc tại Mệnh ở Tý/Ngọ, có sát tinh đồng cung hoặc hội họp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC442 - Thiên Phủ tại Tý Ngọ: Nữ mệnh có Thiên Phủ đồng cung Vũ Khúc tại Mệnh ở Tý/Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && !isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && !isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && !isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && !isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Mệnh TC443 - Thiên Phủ tại Sửu Mùi: Thiên Phủ độc tọa tại Mệnh ở Sửu/Mùi (nhập miếu), không có lục cát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && tc22Giap("Thái Dương", "Thái Âm") && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC444 - Thiên Phủ tại Sửu Mùi: Thiên Phủ tại Mệnh ở Sửu/Mùi, Nhật Nguyệt kẹp Mệnh, gặp cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Tả Phù") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Sao nhập Mệnh TC445 - Thiên Phủ tại Sửu Mùi: Thiên Phủ đồng cung Tả Phù tại Mệnh ở Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 1)) {
+        keyArr.push("Sao nhập Mệnh TC448 - Thiên Phủ tại Sửu Mùi: Thiên Phủ tại Mệnh ở Sửu/Mùi, hội từ 2 sao trong tứ sát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Sao nhập Mệnh TC449 - Thiên Phủ tại Dần Thân: Thiên Phủ đồng cung Tử Vi tại Mệnh ở Dần/Thân (vượng)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && isSaoToaThuTaiCung("Mệnh", "Thiên Mã") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Sao nhập Mệnh TC450 - Thiên Phủ tại Dần Thân: Thiên Phủ đồng cung Tử Vi, Lộc Tồn, Thiên Mã tại Mệnh ở Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isSaoToaThuTaiCung("Mệnh", "Địa Không") || isSaoToaThuTaiCung("Mệnh", "Địa Kiếp")) && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Sao nhập Mệnh TC451 - Thiên Phủ tại Dần Thân: Thiên Phủ đồng cung Tử Vi và Không hoặc Kiếp tại Mệnh ở Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC452 - Thiên Phủ tại Dần Thân: Nữ mệnh có Thiên Phủ đồng cung Tử Vi tại Mệnh ở Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC453 - Thiên Phủ tại Mão Dậu: Thiên Phủ độc tọa tại Mệnh ở Mão (đắc địa)/Dậu (vượng)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Tả Phù") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC454 - Thiên Phủ tại Mão Dậu: Thiên Phủ đồng cung Tả Phù tại Mệnh ở Mão/Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 1)) {
+        keyArr.push("Sao nhập Mệnh TC456 - Thiên Phủ tại Mão Dậu: Thiên Phủ tại Mệnh ở Mão/Dậu, gặp từ 2 sao trong tứ sát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC457 - Thiên Phủ tại Thìn Tuất: Thiên Phủ đồng cung Liêm Trinh tại Mệnh ở Thìn/Tuất (nhập miếu), không bị sát tinh chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất"))) {
+        keyArr.push("Sao nhập Mệnh TC458 - Thiên Phủ tại Thìn Tuất: Thiên Phủ đồng cung Liêm Trinh và Hỏa Tinh tại Mệnh ở Thìn/Tuất");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất"))) {
+        keyArr.push("Sao nhập Mệnh TC459 - Thiên Phủ tại Thìn Tuất: Thiên Phủ đồng cung Liêm Trinh hóa Kỵ (sinh năm Bính) tại Mệnh ở Thìn/Tuất");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Sao nhập Mệnh TC460 - Thiên Phủ tại Tỵ Hợi: Thiên Phủ độc tọa tại Mệnh ở Tỵ/Hợi (đắc địa)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC463 - Thiên Phủ tại Tỵ Hợi: Thiên Phủ tại Mệnh ở Tỵ/Hợi, tam hợp hoặc đối cung gặp từ 3 sao trong tứ sát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Sao nhập Mệnh TC464 - Thiên Phủ tại Tỵ Hợi: Thiên Phủ đồng cung Hỏa Tinh tại Mệnh ở Tỵ/Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Phủ") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && (isCungCoTuan("Mệnh") || isCungCoTriet("Mệnh"))) {
+        keyArr.push("Sao nhập Mệnh TC465 - Thiên Phủ tại Tỵ Hợi: Thiên Phủ đồng cung Hóa Kỵ tại Mệnh ở Tỵ/Hợi, gặp Tuần hoặc Triệt");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm")) {
+        keyArr.push("Sao nhập Mệnh TC466 - Thái Âm: Thái Âm tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tỵ")) && isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh")) {
+        keyArr.push("Sao nhập Mệnh TC467 - Thái Âm: Thái Âm lạc hãm đồng cung Hỏa Tinh tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Sao nhập Mệnh TC469 - Thái Âm: Thái Âm tại Mệnh ở Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && !((isSaoToaThuTaiCung("Phu Thê", "Tử Vi") || isSaoToaThuTaiCung("Phu Thê", "Thiên Phủ") || isSaoToaThuTaiCung("Phu Thê", "Vũ Khúc") || isSaoToaThuTaiCung("Phu Thê", "Thiên Tướng") || isSaoToaThuTaiCung("Phu Thê", "Thất Sát") || isSaoToaThuTaiCung("Phu Thê", "Phá Quân") || isSaoToaThuTaiCung("Phu Thê", "Tham Lang") || isSaoToaThuTaiCung("Phu Thê", "Cự Môn") || isSaoToaThuTaiCung("Phu Thê", "Thái Dương") || isSaoToaThuTaiCung("Phu Thê", "Thiên Cơ") || isSaoToaThuTaiCung("Phu Thê", "Thái Âm") || isSaoToaThuTaiCung("Phu Thê", "Thiên Đồng") || isSaoToaThuTaiCung("Phu Thê", "Thiên Lương") || isSaoToaThuTaiCung("Phu Thê", "Liêm Trinh")))) {
+        keyArr.push("Sao nhập Mệnh TC470 - Thái Âm: Thái Âm tại Mệnh, cung Phu Thê không có chính tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Dậu") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Sửu")) && (isSaoToaThuTaiCung("Mệnh", "Văn Xương") || isSaoToaThuTaiCung("Mệnh", "Văn Khúc")) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC471 - Thái Âm: Thái Âm miếu vượng (Dậu/Tuất/Hợi/Tý/Sửu) đồng cung Xương hoặc Khúc tại Mệnh, không có sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (isCungTaiChi("Mệnh", "Dậu") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Sửu")) && (lasoData.canNam === "Ấ.")) {
+        keyArr.push("Sao nhập Mệnh TC472 - Thái Âm: Thái Âm hóa Kỵ (sinh năm Ất) tại Mệnh ở miếu vượng");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && isSaoToaThuTaiCung("Mệnh", "Hóa Khoa") && (lasoData.canNam === "C.")) {
+        keyArr.push("Sao nhập Mệnh TC473 - Thái Âm: Thái Âm hóa Khoa (sinh năm Canh) tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Tuất")) && (tc22DemHoi(["Thái Dương"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC474 - Nhật Nguyệt: Thái Âm tại Mệnh ở Tuất, Thái Dương ở Thìn đối chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Mệnh TC476 - Thái Âm: Thái Âm đồng cung Thiên Cơ tại Mệnh ở Dần/Thân, gặp Xương và Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false))) {
+        keyArr.push("Sao nhập Mệnh TC477 - Thái Âm: Thái Âm đồng cung Thái Dương tại Mệnh, gặp Kình hoặc Đà");
+    }
+    if (isSaoHoiChieuRong("Mệnh", "Thái Dương", false) && isSaoHoiChieuRong("Mệnh", "Thái Âm", false) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Mệnh TC478 - Thái Âm: Mệnh hội cả Thái Dương, Thái Âm, Văn Xương và Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Sao nhập Mệnh TC479 - Thái Âm: Thái Âm đồng cung Thiên Đồng tại Mệnh ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (isCungTaiChi("Mệnh", "Tý")) && (isSaoHoiChieuRong("Mệnh", "Văn Xương", false) || isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && (isSaoHoiChieuRong("Mệnh", "Tả Phù", false) || isSaoHoiChieuRong("Mệnh", "Hữu Bật", false))) {
+        keyArr.push("Sao nhập Mệnh TC481 - Thái Âm: Thái Âm đồng cung Thiên Đồng tại Mệnh ở Tý, gặp Xương hoặc Khúc, Hóa Lộc, Tả hoặc Hữu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tỵ")) && (isSaoHoiChieuRong("Mệnh", "Văn Xương", false) || isSaoHoiChieuRong("Mệnh", "Văn Khúc", false))) {
+        keyArr.push("Sao nhập Mệnh TC482 - Thái Âm: Thái Âm lạc hãm tại Mệnh, gặp Xương hoặc Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Dậu") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 3)) {
+        keyArr.push("Sao nhập Mệnh TC483 - Thái Âm: Thái Âm nhập miếu tại Mệnh, hội từ 4 sao lục cát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn")) {
+        keyArr.push("Sao nhập Mệnh TC484 - Thái Âm: Thái Âm đồng cung Lộc Tồn tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tỵ")) && !(isSaoHoiChieuRong("Mệnh", "Văn Xương", false))) {
+        keyArr.push("Sao nhập Mệnh TC485 - Thái Âm: Thái Âm lạc hãm đồng cung Văn Khúc, không gặp Văn Xương, tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false)) {
+        keyArr.push("Sao nhập Mệnh TC486 - Thái Âm: Thái Âm tại Mệnh, gặp Văn Xương và Văn Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 1) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false))) {
+        keyArr.push("Sao nhập Mệnh TC487 - Thái Âm: Thái Âm tại Mệnh, gặp từ 2 sao trong tứ sát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tỵ")) && (isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La") || isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") || isSaoToaThuTaiCung("Mệnh", "Linh Tinh"))) {
+        keyArr.push("Sao nhập Mệnh TC488 - Thái Âm: Thái Âm lạc hãm đồng cung sát tinh tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tỵ")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Thiên Hình", "Hóa Kỵ", "Địa Không", "Địa Kiếp", "Đào Hoa", "Thiên Riêu"], [0, 4, 6, 8]) > 3)) {
+        keyArr.push("Sao nhập Mệnh TC489 - Thái Âm: Thái Âm lạc hãm tại Mệnh, gặp từ 4 sao trong bộ sát, Hình, Kỵ, Không, Kiếp, Hàm Trì, Riêu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Mệnh TC490 - Thái Âm: Thái Âm lạc hãm tại Mệnh, gặp Hóa Lộc, Quyền, Khoa");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Mệnh TC491 - Thái Âm: Thái Âm tại Mệnh, gặp Hóa Lộc và Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && tc22Giap("Văn Xương", "Văn Khúc")) {
+        keyArr.push("Sao nhập Mệnh TC492 - Thái Âm: Thái Âm tại Mệnh, gặp Quyền, Khoa, Xương Khúc kẹp hai bên");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tỵ")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC493 - Thái Âm: Thái Âm lạc hãm tại Mệnh, gặp tứ sát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Mệnh TC494 - Thái Âm: Thái Âm hóa Kỵ tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isSaoToaThuTaiCung("Mệnh", "Phong Cáo") || isSaoToaThuTaiCung("Mệnh", "Thiên Tài"))) {
+        keyArr.push("Sao nhập Mệnh TC495 - Thái Âm: Thái Âm đồng cung Phong Cáo hoặc Thiên Tài tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isSaoHoiChieuRong("Mệnh", "Hồng Loan", false) || isSaoHoiChieuRong("Mệnh", "Thiên Hỷ", false) || isSaoHoiChieuRong("Mệnh", "Đào Hoa", false))) {
+        keyArr.push("Sao nhập Mệnh TC496 - Thái Âm: Thái Âm tại Mệnh, gặp Hồng Loan, Thiên Hỷ hoặc Hàm Trì");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ")) {
+        keyArr.push("Sao nhập Mệnh TC497 - Thái Âm: Nữ mệnh có Thái Âm tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Tý"))) {
+        keyArr.push("Sao nhập Mệnh TC498 - Thái Âm tại Tý: Thái Âm độc tọa hoặc đồng cung Thiên Đồng tại Mệnh ở Tý (nhập miếu)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang")) {
+        keyArr.push("Sao nhập Mệnh TC499 - Tham Lang: Tham Lang tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC500 - Tham Lang: Tham Lang tại Mệnh, hội từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && !isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && !isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && !isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && !isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && !isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Việt", false) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC501 - Tham Lang: Tham Lang tại Mệnh, không có cát tinh mà gặp hung tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi") || isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Sao nhập Mệnh TC502 - Tham Lang: Tham Lang nhập miếu tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC503 - Tham Lang: Tham Lang tại Mệnh, không có sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC505 - Tham Lang: Tham Lang tại Mệnh ở Tý/Ngọ/Mão/Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC506 - Tham Lang: Tham Lang tại Mệnh ở Thìn/Tuất/Sửu/Mùi, hội từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && !isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && !isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && !isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && !isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && !isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Mệnh TC507 - Tham Lang: Tham Lang tại Mệnh ở Thìn/Tuất/Sửu/Mùi, không có cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && (tc22DemHoi(["Tử Vi"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC508 - Tham Lang: Tham Lang tại Mệnh ở Tý/Ngọ, Tử Vi ở đối cung");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Mệnh", "Kình Dương") && (isCungTaiChi("Mệnh", "Ngọ")) && !isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Hình", false)) {
+        keyArr.push("Sao nhập Mệnh TC509 - Tham Lang: Tham Lang đồng cung Kình Dương tại Mệnh ở Ngọ (Mã đầu đới tiễn), không có Kỵ, Không, Kiếp, Hình");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Dần")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC511 - Tham Lang: Tham Lang tại Mệnh ở Dần, sát tinh hội chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Sao nhập Mệnh TC512 - Tham Lang: Tham Lang đồng cung Liêm Trinh tại Mệnh ở Tỵ/Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && (isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) || isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) && (isSaoHoiChieuRong("Mệnh", "Tả Phù", false) || isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) || isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) || isSaoHoiChieuRong("Mệnh", "Thiên Việt", false))) {
+        keyArr.push("Sao nhập Mệnh TC513 - Tham Lang: Tham Lang đồng cung Liêm Trinh tại Mệnh ở Tỵ/Hợi, gặp Lộc và Phù, Bật, Khôi hoặc Việt");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tỵ")) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC514 - Tham Lang: Tham Lang đồng cung Liêm Trinh tại Mệnh ở Tỵ, không có sát tinh, ác tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tỵ")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 1)) {
+        keyArr.push("Sao nhập Mệnh TC515 - Tham Lang: Tham Lang đồng cung Liêm Trinh tại Mệnh ở Tỵ, hội nhiều hung tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (tc22DemHoi(["Liêm Trinh"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC516 - Tham Lang: Tham Lang tại Mệnh ở Dần/Thân, Liêm Trinh ở đối cung");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Thân")) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC517 - Tham Lang: Tham Lang tại Mệnh ở Thân, không có sát tinh, ác tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Thân")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC518 - Tham Lang: Tham Lang tại Mệnh ở Thân, gặp sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (tc22DemHoi(["Vũ Khúc"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC519 - Tham Lang: Tham Lang tại Mệnh ở Thìn/Tuất, Vũ Khúc hội chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC520 - Tham Lang: Tham Lang tại Mệnh ở Tỵ/Hợi (lạc hãm), gặp sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Tuất")) && isSaoHoiChieuRong("Mệnh", "Thiên Không", false)) {
+        keyArr.push("Sao nhập Mệnh TC521 - Tham Lang: Tham Lang tại Mệnh ở Tuất, gặp Thiên Không");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && (isCungTaiChi("Mệnh", "Ngọ")) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC522 - Tham Lang: Tham Lang tại Mệnh ở Ngọ, tam phương tứ chính không có sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn")) {
+        keyArr.push("Sao nhập Mệnh TC523 - Cự Môn: Cự Môn tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && !isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && !isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && !isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) && !isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && !isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) && !isSaoHoiChieuRong("Mệnh", "Thiên Việt", false)) {
+        keyArr.push("Sao nhập Mệnh TC524 - Cự Môn: Cự Môn tại Mệnh, không có cát tinh hội chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && (lasoData.canNam === "Q.")) {
+        keyArr.push("Sao nhập Mệnh TC525 - Cự Môn: Cự Môn hóa Quyền (sinh năm Quý) tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Phu Thê", "Thái Âm")) {
+        keyArr.push("Sao nhập Mệnh TC526 - Cự Môn: Cự Môn tại Mệnh, Thái Âm ở Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && (tc22DemHoi(["Thiên Cơ"], [6]) > 0) && (isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) || isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) || isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false)) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Mệnh TC527 - Thạch trung ẩn ngọc: Cự Môn tại Mệnh ở Tý/Ngọ, Thiên Cơ ở đối cung, gặp Hóa Quyền, Hóa Lộc hoặc Lộc Tồn, không có Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Kình Dương") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Sao nhập Mệnh TC528 - Thạch trung ẩn ngọc: Cự Môn đồng cung Kình Dương tại Mệnh ở Tý/Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC529 - Cự Môn: Cự Môn tại Mệnh ở Thìn/Tuất/Sửu/Mùi, không có Hóa Lộc, Hóa Quyền mà gặp tứ sát");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Mệnh TC530 - Cự Môn: Cự Môn hóa Kỵ tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (lasoData.canNam === "T.")) {
+        keyArr.push("Sao nhập Mệnh TC531 - Cự Môn: Cự Môn tại Mệnh ở Thìn/Tuất, sinh năm Tân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Sao nhập Mệnh TC533 - Cự Nhật đồng cung: Cự Môn đồng cung Thái Dương tại Mệnh ở Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Dần")) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC534 - Cự Nhật đồng cung: Cự Môn đồng cung Thái Dương tại Mệnh ở Dần, không có tứ sát, Không, Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Tỵ")) && (tc22DemHoi(["Thái Dương"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC535 - Cự Môn: Cự Môn tại Mệnh ở Tỵ, Thái Dương ở Hợi (lạc hãm)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Mão")) && (lasoData.canNam === "Ấ." || lasoData.canNam === "B." || lasoData.canNam === "K." || lasoData.canNam === "T.") && (isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) || isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) || isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false))) {
+        keyArr.push("Sao nhập Mệnh TC536 - Cự Cơ đồng lâm: Cự Môn đồng cung Thiên Cơ tại Mệnh ở Mão, sinh năm Ất, Bính, Kỷ hoặc Tân, gặp Hóa Lộc, Hóa Quyền hoặc Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Mão")) && (lasoData.canNam === "G.")) {
+        keyArr.push("Sao nhập Mệnh TC537 - Cự Cơ đồng lâm: Cự Môn đồng cung Thiên Cơ tại Mệnh ở Mão, sinh năm Giáp");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC538 - Cự Cơ cư Dậu: Cự Môn đồng cung Thiên Cơ tại Mệnh ở Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Thìn")) && (isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) || isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false))) {
+        keyArr.push("Sao nhập Mệnh TC539 - Cự Môn: Cự Môn tại Mệnh ở Thìn, gặp Hóa Quyền (năm Quý) hoặc Hóa Lộc (năm Tân)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Văn Xương") && (isCungTaiChi("Mệnh", "Thìn")) && (lasoData.canNam === "T.")) {
+        keyArr.push("Sao nhập Mệnh TC540 - Cự Môn: Cự Môn đồng cung Văn Xương tại Mệnh ở Thìn, sinh năm Tân (Cự hóa Lộc, Xương hóa Kỵ)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Hợi")) && (tc22DemHoi(["Thái Dương"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC541 - Cự Môn: Cự Môn tại Mệnh ở Hợi, Thái Dương ở Tỵ (nhập miếu)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thiên Đồng")) {
+        keyArr.push("Sao nhập Mệnh TC542 - Cự Môn: Cự Môn đồng cung Thiên Đồng tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La"))) {
+        keyArr.push("Sao nhập Mệnh TC543 - Cự Môn: Cự Môn đồng cung Thiên Đồng và Kình hoặc Đà tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (tc22DemHoi(["Thiên Đồng"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC544 - Cự Môn: Cự Môn tại Mệnh, Thiên Đồng ở đối cung");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (isCungTaiChi("Mệnh", "Tuất")) && (isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) || isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false))) {
+        keyArr.push("Sao nhập Mệnh TC545 - Cự Môn: Cự Môn tại Mệnh ở Tuất, gặp Hóa Quyền (năm Quý) hoặc Hóa Lộc (năm Tân)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && (tc22DemHoi(["Thái Dương"], [6]) > 0) && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu") || isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Sao nhập Mệnh TC546 - Cự Môn: Cự Môn tại Mệnh ở thế vượng, đối chiếu Thái Dương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Cự Môn") && isSaoToaThuTaiCung("Mệnh", "Văn Xương")) {
+        keyArr.push("Sao nhập Mệnh TC547 - Cự Môn: Cự Môn đồng cung Văn Xương tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng")) {
+        keyArr.push("Sao nhập Mệnh TC548 - Thiên Tướng: Thiên Tướng tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Phu Thê", "Tham Lang")) {
+        keyArr.push("Sao nhập Mệnh TC549 - Thiên Tướng: Thiên Tướng tại Mệnh, Tham Lang ở Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi") || isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Tả Phù", false) && isSaoHoiChieuRong("Mệnh", "Hữu Bật", false)) {
+        keyArr.push("Sao nhập Mệnh TC550 - Thiên Tướng: Thiên Tướng miếu vượng tại Mệnh, gặp Tả Phù và Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (tc22Giap("Vũ Khúc", "Thiên Lương") || tc22Giap("Thiên Lương", "Hóa Lộc"))) {
+        keyArr.push("Sao nhập Mệnh TC552 - Tài ấm giáp ấn: Thiên Tướng tại Mệnh, Vũ Khúc với Thiên Lương hoặc Thiên Lương với Hóa Lộc kẹp hai bên");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isSaoHoiChieuRong("Mệnh", "Vũ Khúc", false) || isSaoHoiChieuRong("Mệnh", "Liêm Trinh", false) || isSaoHoiChieuRong("Mệnh", "Tham Lang", false)) && (isSaoHoiChieuRong("Mệnh", "Thiên Tài", false) || isSaoHoiChieuRong("Mệnh", "Phượng Các", false))) {
+        keyArr.push("Sao nhập Mệnh TC553 - Thiên Tướng: Thiên Tướng tại Mệnh, hội Vũ Khúc, Liêm Trinh hoặc Tham Lang cùng Thiên Tài hoặc Phượng Các");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isSaoHoiChieuRong("Mệnh", "Vũ Khúc", false) || isSaoHoiChieuRong("Mệnh", "Phá Quân", false) || isSaoHoiChieuRong("Mệnh", "Văn Xương", false) || isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) || isSaoHoiChieuRong("Mệnh", "Tả Phù", false) || isSaoHoiChieuRong("Mệnh", "Hữu Bật", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Thiên Mã", false) || isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) && isSaoHoiChieuRong("Mệnh", "Phá Quân", false) && isSaoHoiChieuRong("Mệnh", "Vũ Khúc", false)) {
+        keyArr.push("Sao nhập Mệnh TC554 - Thiên Tướng: Thiên Tướng tại Mệnh, Vũ Khúc và Phá Quân cùng hội chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoHoiChieuRong("Mệnh", "Liêm Trinh", false) && isSaoHoiChieuRong("Mệnh", "Kình Dương", false)) {
+        keyArr.push("Sao nhập Mệnh TC555 - Thiên Tướng: Thiên Tướng tại Mệnh, đồng cung hoặc hội chiếu Liêm Trinh và Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isSaoToaThuTaiCung("Mệnh", "Hỏa Tinh") || isSaoToaThuTaiCung("Mệnh", "Linh Tinh"))) {
+        keyArr.push("Sao nhập Mệnh TC556 - Thiên Tướng: Thiên Tướng đồng cung Hỏa hoặc Linh tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoHoiChieuRong("Mệnh", "Phá Quân", false) && (isSaoHoiChieuRong("Mệnh", "Thất Sát", false) || isSaoHoiChieuRong("Mệnh", "Vũ Khúc", false)) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false))) {
+        keyArr.push("Sao nhập Mệnh TC558 - Thiên Tướng: Thiên Tướng tại Mệnh, hội Phá Quân, Vũ Khúc hoặc Thất Sát, Kình hoặc Đà");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false))) {
+        keyArr.push("Sao nhập Mệnh TC559 - Thiên Tướng: Thiên Tướng tại Mệnh, gặp Kình hoặc Đà xung phá");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (tc22DemHoi(["Tả Phù", "Hữu Bật", "Thiên Khôi", "Thiên Việt", "Tam Thai", "Bát Tọa", "Thiên Quý", "Ân Quang", "Thiên Đức", "Giải Thần", "Thiên Vu"], [0, 4, 6, 8]) > 3) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && isSaoHoiChieuRong("Mệnh", "Thiên Mã", false)) {
+        keyArr.push("Sao nhập Mệnh TC560 - Thiên Tướng: Thiên Tướng tại Mệnh, hội từ 4 cát tinh phò tá cùng Hóa Lộc, Lộc Tồn, Thiên Mã");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isSaoHoiChieuRong("Mệnh", "Văn Xương", false) || isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) || isSaoHoiChieuRong("Mệnh", "Long Trì", false) || isSaoHoiChieuRong("Mệnh", "Phượng Các", false) || isSaoHoiChieuRong("Mệnh", "Thiên Tài", false)) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC561 - Thiên Tướng: Thiên Tướng tại Mệnh, gặp Xương, Khúc, Long, Phượng hoặc Thiên Tài, không có sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Mệnh", "Đà La")) {
+        keyArr.push("Sao nhập Mệnh TC562 - Thiên Tướng: Thiên Tướng đồng cung Đà La tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (tc22DemHoi(["Hỏa Tinh", "Linh Tinh", "Thiên Hình", "Thiên Nguyệt", "Âm Sát", "Địa Không", "Địa Kiếp", "Đại Hao"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC563 - Thiên Tướng: Thiên Tướng tại Mệnh, hội từ 3 sao trong bộ Hỏa, Linh, Hình, Nguyệt, Âm Sát, Không, Kiếp, Hao");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false)) {
+        keyArr.push("Sao nhập Mệnh TC564 - Thiên Tướng: Thiên Tướng đồng cung Lộc Tồn tại Mệnh, gặp Hóa Lộc, Hóa Quyền, Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC565 - Thiên Tướng: Thiên Tướng đồng cung Lộc Tồn tại Mệnh, hội từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && (tc22DemHoi(["Phá Quân"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC566 - Thiên Tướng tại Tý Ngọ: Thiên Tướng đồng cung Liêm Trinh tại Mệnh ở Tý/Ngọ, Phá Quân ở đối cung");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (tc22DemHoi(["Liêm Trinh"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC567 - Thiên Tướng tại Mão Dậu: Thiên Tướng độc tọa tại Mệnh ở Mão/Dậu, Liêm Trinh và Phá Quân ở đối cung");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC568 - Thiên Tướng tại Mão Dậu: Thiên Tướng độc tọa tại Mệnh ở Mão/Dậu, gặp sát tinh và Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Sao nhập Mệnh TC569 - Thiên Tướng tại Sửu Mùi: Thiên Tướng độc tọa tại Mệnh ở Sửu/Mùi, Tử Vi và Phá Quân ở đối cung");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân"))) {
+        keyArr.push("Sao nhập Mệnh TC570 - Thiên Tướng tại Dần Thân: Thiên Tướng đồng cung Vũ Khúc tại Mệnh ở Dần/Thân");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (tc22DemHoi(["Phá Quân"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC571 - Thiên Tướng tại Thìn Tuất: Thiên Tướng đồng cung Tử Vi tại Mệnh ở Thìn/Tuất, Phá Quân ở đối cung");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && (tc22DemHoi(["Vũ Khúc"], [6]) > 0) && (tc22DemHoi(["Phá Quân"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC572 - Thiên Tướng tại Tỵ Hợi: Thiên Tướng độc tọa tại Mệnh ở Tỵ/Hợi, Vũ Khúc và Phá Quân đối chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Tướng") && (lasoData.amduong === "Dương Nữ" || lasoData.amduong === "Âm Nữ") && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) && isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Mệnh TC573 - Thiên Tướng: Nữ mệnh có Thiên Tướng tại Mệnh, gặp Hóa Lộc, Quyền, Khoa và Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương")) {
+        keyArr.push("Sao nhập Mệnh TC574 - Thiên Lương: Thiên Lương tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi") || isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC575 - Thiên Lương: Thiên Lương nhập miếu tại Mệnh, không gặp sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn")) {
+        keyArr.push("Sao nhập Mệnh TC576 - Thiên Lương: Thiên Lương đồng cung Lộc Tồn tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất"))) {
+        keyArr.push("Sao nhập Mệnh TC577 - Thiên Lương: Thiên Lương nhập miếu đồng cung Thiên Cơ tại Mệnh ở Thìn/Tuất");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Tý"))) {
+        keyArr.push("Sao nhập Mệnh TC578 - Thiên Lương: Thiên Lương tại Mệnh ở Tý");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Văn Khúc") && (isCungTaiChi("Mệnh", "Ngọ")) && (tc22DemHoi(["Thiên Khôi", "Thiên Việt", "Tam Thai", "Bát Tọa", "Tả Phù", "Hữu Bật", "Thiên Tài"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC579 - Thiên Lương: Thiên Lương đồng cung Văn Khúc tại Mệnh ở Ngọ, hội từ 3 cát tinh (Khôi, Việt, Tam Đài, Bát Tọa, Tả, Hữu, Thiên Tài)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC580 - Thiên Lương: Thiên Lương tại Mệnh ở Ngọ/Mùi, hội từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC581 - Thiên Lương: Thiên Lương tại Mệnh ở Ngọ/Mùi, gặp sát diệu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Thiên Đồng")) {
+        keyArr.push("Sao nhập Mệnh TC582 - Thiên Lương: Thiên Lương đồng cung Thiên Đồng tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) || isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false))) {
+        keyArr.push("Sao nhập Mệnh TC583 - Thiên Lương: Thiên Lương đồng cung Thiên Đồng tại Mệnh ở Dần/Thân, gặp Lộc Tồn hoặc Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && !isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && !isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Mệnh TC584 - Thiên Lương: Thiên Lương đồng cung Thiên Đồng tại Mệnh ở Dần/Thân, không có Lộc Tồn, Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Ngọ") || isCungTaiChi("Mệnh", "Tuất")) && tc22TamHop(["Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"]) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC585 - Cơ Nguyệt Đồng Lương: Thiên Lương tại Mệnh ở Dần/Ngọ/Tuất, tam hợp đủ Cơ, Nguyệt, Đồng, Lương, không có sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất"))) {
+        keyArr.push("Sao nhập Mệnh TC586 - Thiên Lương: Thiên Lương đồng cung Thiên Cơ tại Mệnh ở Thìn/Tuất");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC587 - Thiên Lương: Thiên Lương đồng cung Thái Dương tại Mệnh ở Mão/Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Thái Dương") && isSaoToaThuTaiCung("Mệnh", "Văn Xương") && isSaoToaThuTaiCung("Mệnh", "Lộc Tồn") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC588 - Thiên Lương: Thiên Lương đồng cung Thái Dương, Văn Xương và Lộc Tồn tại Mệnh ở Mão/Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && isSaoToaThuTaiCung("Mệnh", "Thái Dương") && (isCungTaiChi("Mệnh", "Mão")) && (tc22DemHoi(["Văn Xương", "Văn Khúc", "Thiên Tài", "Phượng Các"], [0, 4, 6, 8]) > 1)) {
+        keyArr.push("Sao nhập Mệnh TC589 - Thiên Lương: Thiên Lương đồng cung Thái Dương tại Mệnh ở Mão, hội từ 2 sao Xương, Khúc, Thiên Tài, Phượng Các");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Thân")) && (isSaoHoiChieuRong("Mệnh", "Thiên Mã", false) || isSaoHoiChieuRong("Mệnh", "Đào Hoa", false) || isSaoHoiChieuRong("Mệnh", "Thiên Riêu", false) || isSaoHoiChieuRong("Mệnh", "Hồng Loan", false) || isSaoHoiChieuRong("Mệnh", "Thiên Hỷ", false)) && !isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false)) {
+        keyArr.push("Sao nhập Mệnh TC590 - Thiên Lương: Thiên Lương lạc hãm tại Mệnh ở Tỵ/Hợi/Thân, gặp Mã hoặc sao đào hoa, không có Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0) && isSaoHoiChieuRong("Mệnh", "Thái Âm", false)) {
+        keyArr.push("Sao nhập Mệnh TC591 - Thiên Lương: Thiên Lương lạc hãm tại Mệnh ở Tỵ/Hợi, gặp sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Tỵ"))) {
+        keyArr.push("Sao nhập Mệnh TC592 - Thiên Lương: Thiên Lương lạc hãm tại Mệnh ở Tỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Dậu") || isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Thiên Mã", false)) {
+        keyArr.push("Sao nhập Mệnh TC593 - Thiên Lương: Thiên Lương lạc hãm tại Mệnh, gặp Thiên Mã");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Dậu") || isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Tỵ")) && isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && isSaoHoiChieuRong("Mệnh", "Đà La", false)) {
+        keyArr.push("Sao nhập Mệnh TC594 - Thiên Lương: Thiên Lương lạc hãm tại Mệnh, gặp Kình và Đà");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát")) {
+        keyArr.push("Sao nhập Mệnh TC595 - Thất Sát: Thất Sát tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoHoiChieuRong("Mệnh", "Địa Không", false) && isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) && isSaoHoiChieuRong("Mệnh", "Đại Hao", false)) {
+        keyArr.push("Sao nhập Mệnh TC596 - Thất Sát: Thất Sát tại Mệnh, hội Không, Kiếp và Đại Hao");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân") || isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi")) && (tc22DemHoi(["Thiên Phủ"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC597 - Thất Sát: Thất Sát tại Mệnh ở Dần/Thân/Tỵ/Hợi, Thiên Phủ ở đối cung");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Tử Tức", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Mệnh TC598 - Thất Sát: Thất Sát tại Mệnh, Hóa Kỵ ở Tử Tức");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Điền Trạch", "Hóa Kỵ")) {
+        keyArr.push("Sao nhập Mệnh TC599 - Thất Sát: Thất Sát tại Mệnh, Hóa Kỵ ở Điền Trạch");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Thân")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC600 - Thất Sát: Thất Sát lạc hãm tại Mệnh ở Thân, gặp sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isSaoHoiChieuRong("Mệnh", "Tử Vi", false) || isSaoHoiChieuRong("Mệnh", "Thiên Tướng", false) || isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false))) {
+        keyArr.push("Sao nhập Mệnh TC601 - Thất Sát: Thất Sát tại Mệnh, gặp Tử Vi, Thiên Tướng hoặc Lộc Tồn");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Mệnh", "Tử Vi")) {
+        keyArr.push("Sao nhập Mệnh TC602 - Thất Sát: Thất Sát đồng cung Tử Vi tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (tc22DemHoi(["Tử Vi"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC603 - Thất Sát: Thất Sát tại Mệnh, Tử Vi ở đối cung (không đồng cung)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (tc22DemHoi(["Tử Vi", "Thiên Phủ", "Lộc Tồn", "Hóa Lộc", "Hóa Khoa", "Tả Phù", "Hữu Bật", "Thiên Khôi", "Thiên Việt", "Văn Xương", "Văn Khúc"], [0, 4, 6, 8]) > 4)) {
+        keyArr.push("Sao nhập Mệnh TC604 - Thất Sát: Thất Sát tại Mệnh, hội từ 5 sao trong bộ Tử Vi, Thiên Phủ, Lộc Tồn, Hóa Lộc, Hóa Khoa, Tả, Hữu, Khôi, Việt, Xương, Khúc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Mệnh", "Vũ Khúc")) {
+        keyArr.push("Sao nhập Mệnh TC605 - Thất Sát: Thất Sát đồng cung Vũ Khúc tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && (tc22DemHoi(["Vũ Khúc"], [6]) > 0) && (tc22DemHoi(["Thiên Phủ"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC606 - Thất Sát tại Tý Ngọ: Thất Sát tại Mệnh ở Tý/Ngọ, Vũ Khúc và Thiên Phủ ở đối cung");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Sao nhập Mệnh TC607 - Thất Sát tại Sửu Mùi: Thất Sát đồng cung Liêm Trinh tại Mệnh ở Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Mùi"))) {
+        keyArr.push("Sao nhập Mệnh TC608 - Thất Sát tại Sửu Mùi: Thất Sát đồng cung Liêm Trinh tại Mệnh ở Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Sửu"))) {
+        keyArr.push("Sao nhập Mệnh TC609 - Thất Sát tại Sửu Mùi: Thất Sát đồng cung Liêm Trinh tại Mệnh ở Sửu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Ngọ"))) {
+        keyArr.push("Sao nhập Mệnh TC610 - Thất Sát tại Ngọ: Thất Sát tại Mệnh ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (lasoData.canNam === "B.")) {
+        keyArr.push("Sao nhập Mệnh TC611 - Thất Sát tại Sửu Mùi: Thất Sát đồng cung Liêm Trinh hóa Kỵ (sinh năm Bính) tại Mệnh ở Sửu/Mùi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && !(isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ")) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC612 - Thất Sát: Thất Sát đồng cung Liêm Trinh tại Mệnh, Liêm Trinh không hóa Kỵ, không có sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Mùi")) && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
+        keyArr.push("Sao nhập Mệnh TC613 - Thất Sát: Thất Sát đồng cung Liêm Trinh tại Mệnh ở Mùi, gặp Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Tỵ") || isCungTaiChi("Mệnh", "Hợi"))) {
+        keyArr.push("Sao nhập Mệnh TC614 - Thất Sát: Thất Sát tại Mệnh ở Tỵ/Hợi");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (tc22DemHoi(["Tử Vi"], [6]) > 0) && (tc22DemHoi(["Thiên Phủ"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC615 - Thất Sát tại Dần Thân: Thất Sát tại Mệnh ở Dần/Thân, Tử Vi và Thiên Phủ ở đối cung");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (tc22DemHoi(["Liêm Trinh"], [6]) > 0) && (tc22DemHoi(["Thiên Phủ"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC616 - Thất Sát tại Thìn Tuất: Thất Sát tại Mệnh ở Thìn/Tuất, Liêm Trinh và Thiên Phủ ở đối cung");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thất Sát") && isSaoToaThuTaiCung("Phu Thê", "Thiên Tướng")) {
+        keyArr.push("Sao nhập Mệnh TC617 - Thất Sát: Thất Sát tại Mệnh, Thiên Tướng ở Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân")) {
+        keyArr.push("Sao nhập Mệnh TC618 - Phá Quân: Phá Quân tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && !((isSaoToaThuTaiCung("Phu Thê", "Tử Vi") || isSaoToaThuTaiCung("Phu Thê", "Thiên Phủ") || isSaoToaThuTaiCung("Phu Thê", "Vũ Khúc") || isSaoToaThuTaiCung("Phu Thê", "Thiên Tướng") || isSaoToaThuTaiCung("Phu Thê", "Thất Sát") || isSaoToaThuTaiCung("Phu Thê", "Phá Quân") || isSaoToaThuTaiCung("Phu Thê", "Tham Lang") || isSaoToaThuTaiCung("Phu Thê", "Cự Môn") || isSaoToaThuTaiCung("Phu Thê", "Thái Dương") || isSaoToaThuTaiCung("Phu Thê", "Thiên Cơ") || isSaoToaThuTaiCung("Phu Thê", "Thái Âm") || isSaoToaThuTaiCung("Phu Thê", "Thiên Đồng") || isSaoToaThuTaiCung("Phu Thê", "Thiên Lương") || isSaoToaThuTaiCung("Phu Thê", "Liêm Trinh")))) {
+        keyArr.push("Sao nhập Mệnh TC619 - Phá Quân: Phá Quân tại Mệnh, cung Phu Thê không có chính tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") && (lasoData.canNam === "Q.")) {
+        keyArr.push("Sao nhập Mệnh TC620 - Phá Quân: Phá Quân hóa Lộc (sinh năm Quý) tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (tc22DemHoi(["Tử Vi"], [6]) > 0) && (tc22DemHoi(["Thiên Tướng"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC621 - Phá Quân: Phá Quân độc tọa tại Mệnh ở Thìn/Tuất, Tử Vi và Thiên Tướng xung chiếu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất")) && (isSaoToaThuTaiCung("Mệnh", "Kình Dương") || isSaoToaThuTaiCung("Mệnh", "Đà La"))) {
+        keyArr.push("Sao nhập Mệnh TC622 - Phá Quân: Phá Quân tại Mệnh ở Thìn/Tuất, đồng cung Kình hoặc Đà");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Ngọ")) && (isSaoToaThuTaiCung("Mệnh", "Hóa Lộc") || isSaoToaThuTaiCung("Mệnh", "Hóa Quyền")) && !isSaoHoiChieuRong("Mệnh", "Kình Dương", false) && !isSaoHoiChieuRong("Mệnh", "Đà La", false) && !isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) && !isSaoHoiChieuRong("Mệnh", "Địa Không", false) && !isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false)) {
+        keyArr.push("Sao nhập Mệnh TC623 - Anh tinh nhập miếu: Phá Quân tại Mệnh ở Tý/Ngọ, đồng cung Hóa Lộc (năm Quý) hoặc Hóa Quyền (năm Giáp), không có sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isSaoToaThuTaiCung("Mệnh", "Văn Xương") || isSaoToaThuTaiCung("Mệnh", "Văn Khúc")) && (isCungTaiChi("Mệnh", "Hợi") || isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Sửu"))) {
+        keyArr.push("Sao nhập Mệnh TC625 - Phá Quân: Phá Quân đồng cung Xương hoặc Khúc tại Mệnh ở Hợi/Tý/Sửu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (tc22DemHoi(["Vũ Khúc"], [6]) > 0) && (tc22DemHoi(["Thiên Tướng"], [6]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC626 - Phá Quân: Phá Quân độc tọa tại Mệnh ở Dần/Thân, Vũ Khúc và Thiên Tướng ở đối cung");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && isSaoToaThuTaiCung("Phu Thê", "Tử Vi")) {
+        keyArr.push("Sao nhập Mệnh TC627 - Phá Quân: Phá Quân tại Mệnh ở Dần/Thân, Tử Vi ở Phu Thê");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (tc22DemHoi(["Kình Dương", "Đà La", "Hỏa Tinh", "Linh Tinh", "Địa Không", "Địa Kiếp"], [0, 4, 6, 8]) > 0)) {
+        keyArr.push("Sao nhập Mệnh TC628 - Phá Quân: Phá Quân tại Mệnh ở Thìn/Tuất/Sửu/Mùi, gặp sát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && (isCungTaiChi("Mệnh", "Thìn") || isCungTaiChi("Mệnh", "Tuất") || isCungTaiChi("Mệnh", "Sửu") || isCungTaiChi("Mệnh", "Mùi")) && (lasoData.canNam === "B." || lasoData.canNam === "M.")) {
+        keyArr.push("Sao nhập Mệnh TC629 - Phá Quân: Phá Quân tại Mệnh ở Thìn/Tuất/Sửu/Mùi, sinh năm Bính hoặc Mậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoToaThuTaiCung("Mệnh", "Tử Vi") && (tc22DemHoi(["Thiên Tướng"], [6]) > 0) && (tc22DemHoi(["Lộc Tồn", "Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt"], [0, 4, 6, 8]) > 2)) {
+        keyArr.push("Sao nhập Mệnh TC630 - Phá Quân: Phá Quân đồng cung Tử Vi tại Mệnh, Thiên Tướng ở đối cung, hội từ 3 cát tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoToaThuTaiCung("Mệnh", "Tử Vi") && isSaoHoiChieuRong("Mệnh", "Tham Lang", false) && isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false)) {
+        keyArr.push("Sao nhập Mệnh TC631 - Phá Quân: Phá Quân đồng cung Tử Vi tại Mệnh, gặp Tham Lang và Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoToaThuTaiCung("Mệnh", "Vũ Khúc")) {
+        keyArr.push("Sao nhập Mệnh TC632 - Phá Quân: Phá Quân đồng cung Vũ Khúc tại Mệnh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoToaThuTaiCung("Mệnh", "Vũ Khúc") && (isCungTaiChi("Mệnh", "Tỵ")) && (lasoData.canNam === "K.")) {
+        keyArr.push("Sao nhập Mệnh TC633 - Phá Quân: Phá Quân đồng cung Vũ Khúc hóa Lộc (sinh năm Kỷ) tại Mệnh ở Tỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu"))) {
+        keyArr.push("Sao nhập Mệnh TC634 - Phá Quân: Phá Quân đồng cung Liêm Trinh tại Mệnh ở Mão/Dậu (Phá Quân lạc hãm)");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && isSaoToaThuTaiCung("Mệnh", "Hóa Kỵ") && (isCungTaiChi("Mệnh", "Mão") || isCungTaiChi("Mệnh", "Dậu")) && (lasoData.canNam === "B.")) {
+        keyArr.push("Sao nhập Mệnh TC635 - Phá Quân: Phá Quân đồng cung Liêm Trinh hóa Kỵ (sinh năm Bính) tại Mệnh ở Mão/Dậu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Phá Quân") && isSaoHoiChieuRong("Mệnh", "Tham Lang", false) && isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false) && isSaoHoiChieuRong("Mệnh", "Thiên Mã", false)) {
+        keyArr.push("Sao nhập Mệnh TC636 - Phá Quân: Phá Quân tại Mệnh, Tham Lang tam phương hội chiếu, gặp Lộc Tồn và Thiên Mã");
     }
 }
 // CACH22-END
