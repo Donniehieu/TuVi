@@ -4219,20 +4219,6 @@ function TatAchKhongThanKiep(idxCungMenh, idxCungThan, dsChinh, dsPhu, keyArr) {
     }
     return false;
 }
-// TK18-BEGIN
-function LuanTamKhong18_tatach(keyArr) {
-    let lasoData = {};
-    try {
-        lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
-    } catch (e) { lasoData = {}; }
-    if (lasoData.hanhMenh === "Hỏa" && (isCungTaiChi("Tật Ách", "Ngọ")) && isSaoHoiChieuRong("Tật Ách", "Tang Môn", false) && isSaoHoiChieuRong("Tật Ách", "Bạch Hổ", false)) {
-        keyArr.push("Ví dụ lá số 14 - Tật Ách - Người mệnh Hỏa, cung Tật Ách ở Ngọ gặp Tang Môn và Bạch Hổ: cuối đời nhiều khổ sở, bệnh tậ");
-    }
-    if (isSaoToaThuTaiCung("Tật Ách", "Phá Quân") && (isCungTaiChi("Tật Ách", "Tý"))) {
-        keyArr.push("Ví dụ lá số 17 - Tật Ách - Phá Quân ở Tý tại cung Tật Ách: tung hoành ngang dọc, bất chấp nan nguy, can trường vượt k");
-    }
-}
-// TK18-END
 // PHU17-BEGIN
 function phu17DemSao(tenCung, ds, tinhSang) {
     let d = {};
@@ -4297,3 +4283,17 @@ function LuanPhuGiaiLan17_tatach(keyArr) {
     }
 }
 // PHU17-END
+// TK18-BEGIN
+function LuanTamKhong18_tatach(keyArr) {
+    let lasoData = {};
+    try {
+        lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
+    } catch (e) { lasoData = {}; }
+    if (lasoData.hanhMenh === "Hỏa" && (isCungTaiChi("Tật Ách", "Ngọ")) && isSaoHoiChieuRong("Tật Ách", "Tang Môn", false) && isSaoHoiChieuRong("Tật Ách", "Bạch Hổ", false)) {
+        keyArr.push("Ví dụ lá số 14 - Tật Ách - Người mệnh Hỏa, cung Tật Ách ở Ngọ gặp Tang Môn và Bạch Hổ");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Phá Quân") && (isCungTaiChi("Tật Ách", "Tý"))) {
+        keyArr.push("Ví dụ lá số 17 - Tật Ách - Phá Quân ở Tý tại cung Tật Ách");
+    }
+}
+// TK18-END

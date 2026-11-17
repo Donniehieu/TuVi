@@ -144,12 +144,35 @@
         return Array.from(new Set(keys.filter(Boolean)));
     }
     function thoat(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+
+    /* Tên khóa hiển thị: bỏ số thứ tự nội bộ của các khóa do công cụ sinh ("Sách vận hạn 12 - Đại hạn - ", "Tam Không 03 - Mệnh - ", "Ví dụ lá số 15 - Phu Thê - ") */
+    function tenKhoaHienThi(key) {
+        return String(key).replace(/^(Sách vận hạn \d+ - (Đại hạn|Tiểu hạn) - |Tam Không \d+ - [^-]+ - |Ví dụ lá số \d+ - [^-]+ - )/, '');
+    }
+    window.tenKhoaHienThi = tenKhoaHienThi;
+
+    /* Hiển thị luận theo cung và các phần tổng quan/lời khuyên: dùng tenKhoaHienThi cho tiêu đề khóa */
+    window.traCuuVaHienThiChoCung = function (item, comboData, keyArr) {
+        var results = traCuuNhieuBoSao(keyArr, comboData);
+        var divId = 'cung-' + item.tenCung.replace(/\s/g, '').toLowerCase();
+        var excelDiv = document.querySelector('#' + divId + ' .bo-sao-excel');
+        if (!excelDiv) return;
+        var found = results.filter(function (r) { return r.found && r.values.length > 0; });
+        if (found.length > 0) {
+            excelDiv.innerHTML = found.map(function (r) {
+                return '<div class="bo-sao-group"><b>' + thoat(tenKhoaHienThi(r.key)) + ':</b>' +
+                    r.values.map(function (v) { return '<div>• ' + thoat(v) + '</div>'; }).join('') + '</div>';
+            }).join('');
+        } else {
+            excelDiv.innerHTML = '<em>Không có thông tin tra cứu từ Excel</em>';
+        }
+    };
     function khoiHtml(tieuDe, ketQua) {
         var tim = ketQua.filter(function (r) { return r.found && r.values.length; });
         var html = '<div class="cung-item vanhan-khoi"><b>' + thoat(tieuDe) + '</b>';
         if (!tim.length) html += '<div><em>Không có dữ liệu cho phần này.</em></div>';
         tim.forEach(function (r) {
-            html += '<div class="bo-sao-group"><b>' + thoat(r.key.replace(/^Sách vận hạn \d+ - (Đại hạn|Tiểu hạn) - /, '')) + ':</b>' +
+            html += '<div class="bo-sao-group"><b>' + thoat(tenKhoaHienThi(r.key)) + ':</b>' +
                 r.values.map(function (v) { return '<div>• ' + thoat(v) + '</div>'; }).join('') + '</div>';
         });
         return html + '</div>';
