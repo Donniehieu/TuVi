@@ -29,6 +29,8 @@ let canchi ="";
 // hàm thực hiện khi bấm nút
 document.getElementById('form_tuvi').addEventListener('submit', function (e) {
     e.preventDefault();
+    // Lá số mới: xóa dữ liệu và ảnh của lá số cũ trước khi an sao (không dùng lại bất cứ gì của lá số trước)
+    if (typeof xoaLasoCu === 'function') xoaLasoCu();
 
     const hoten = document.getElementById('hoten').value.trim();
     const ngay = parseInt(document.getElementById('ngay').value);
@@ -203,7 +205,7 @@ document.getElementById('form_tuvi').addEventListener('submit', function (e) {
     // An Tuần
     anTuan(canNam, chiNam);
     // An sao lưu  theo Năm xem
-    anSaoLuuTheoNamXem(chiNamXemhan, canNamXemHan);
+    anSaoLuuTheoNamXem(chiNamXemhan, canNamXemHan, amduong);
     // An sao lưu Lộc Tồn
     anLuuLocTon(canchiNamXemHan.split(' ')[0]);
     // An sao Lưu Kình -Đà
@@ -344,6 +346,7 @@ document.getElementById('form_tuvi').addEventListener('submit', function (e) {
     document.getElementById('laso-row').classList.remove('d-none');
 
     setTimeout(function () {
+        if (typeof apDungGiaoDienLaSo === 'function') apDungGiaoDienLaSo();
         drawTamHopByMenhIdx(IDCungMenh);
         chupVaShowBanLaSo();
     }, 20);

@@ -1,15 +1,14 @@
-﻿function anSaoLuuTheoNamXem(chiNamXem, canNamXem) {
-    let lasoData = {};
-    try {
-        lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
-    } catch (e) { lasoData = {}; }
+﻿function anSaoLuuTheoNamXem(chiNamXem, canNamXem, amduongHienTai) {
+    // Âm dương của lá số ĐANG an (truyền vào). Trước đây đọc 'laso_data' trong localStorage: đó là lá số CŨ (hoặc rỗng ở lần đầu)
+    // nên L. Hỷ Thần bị an theo lá số trước, hoặc không an.
+    let lasoData = { amduong: amduongHienTai };
 
    
     // Xóa nhãn lưu cũ
     document.querySelectorAll('.laso-cell').forEach(cell => {
         cell.querySelectorAll(`
                                                                                     .sao-luu-thai-tue, .sao-luu-bach-ho, .sao-luu-tang-mon,
-                                                                                    .sao-luu-thien-hu, .sao-luu-thien-khoc, .sao-luu-thien-ma
+                                                                                    .sao-luu-thien-hu, .sao-luu-thien-khoc, .sao-luu-thien-ma, .sao-luu-hy-than
                                                                                 `).forEach(e => e.remove());
     });
 

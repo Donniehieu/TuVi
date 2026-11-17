@@ -773,9 +773,9 @@ function datNhanTuanTriet(chiA, chiB, text, w, cls, mau) {
     const cell = document.querySelector('.cell' + cellNum);
     if (!cell) return;
     cell.insertAdjacentHTML('beforeend',
-        '<div class="' + cls + '" style="position:absolute;' + css + 'width:' + w + 'px;height:20px;background:#fffbe7;border:2px solid ' + mau +
-        ';border-radius:5px;color:' + mau + ';font-weight:bold;font-size:0.75em;z-index:100;display:flex;align-items:center;justify-content:center;' +
-        'text-align:center;letter-spacing:1px;box-shadow:1px 1px 5px #0001;opacity:0.96;">' + text + '</div>');
+        '<div class="' + cls + '" style="position:absolute;' + css + 'width:' + w + 'px;height:20px;background:#efe9d8;border:0;border-radius:5px;color:#1a1710' +
+        ';font-weight:bold;font-size:0.75em;z-index:100;display:flex;align-items:center;justify-content:center;' +
+        'text-align:center;letter-spacing:1px;">' + text + '</div>');
 }
 
 function veNhanTuanTriet(trietChi, tuanChi) {

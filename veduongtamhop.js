@@ -181,37 +181,41 @@ function getTamHopPoints(menhIdx) {
     return { start, ends };
 }
 
-function drawTamHopLines(svg, start, ends) {
-    // Xoá các line cũ
-    svg.querySelectorAll('.tam-hop-line').forEach(e => e.remove());
-    ends.forEach(end => {
-        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line.setAttribute('x1', start.x);
-        line.setAttribute('y1', start.y);
-        line.setAttribute('x2', end.x);
-        line.setAttribute('y2', end.y);
-        line.setAttribute('stroke', 'black');
-        line.setAttribute('stroke-width', '2');
-        line.setAttribute('opacity', '0.25');
-        line.classList.add('tam-hop-line');
-        svg.appendChild(line);
-    });
+// Điểm neo của cung (giống TuViApp.CellAnchor): cung hàng đầu/cuối neo ở cạnh hướng vào vùng giữa (cung góc neo tại góc chạm vùng giữa),
+// cung hai bên neo ở trung điểm cạnh hướng vào vùng giữa. Tọa độ theo bàn 900 x 1170.
+const CELL_POS_TAM_HOP = {
+    1: [0, 0], 2: [0, 1], 3: [0, 2], 4: [0, 3],
+    5: [1, 0], 8: [1, 3],
+    9: [2, 0], 12: [2, 3],
+    13: [3, 0], 14: [3, 1], 15: [3, 2], 16: [3, 3]
+};
+function diemNeoCung(idxCung, W, H) {
+    const cw = W / 4, ch = H / 4;
+    const p = CELL_POS_TAM_HOP[CUNG_CELLS[idxCung].cell];
+    const r = p[0], col = p[1];
+    let x, y;
+    if (r === 0 || r === 3) {
+        y = r === 0 ? ch : 3 * ch;
+        x = (col === 0) ? cw : (col === 3) ? 3 * cw : col * cw + cw / 2;
+    } else {
+        x = col === 0 ? cw : 3 * cw;
+        y = r * ch + ch / 2;
+    }
+    return { x: x, y: y };
 }
 
-// Hàm chính
+// Ba cạnh tam hợp (Mệnh, hai cung tam chiếu) vẽ nét liền màu vàng; Mệnh nối cung đối (xung chiếu) bằng nét đứt; bốn điểm có chấm thoi.
 function drawTamHopByMenhIdx(menhIdx) {
-    // Lấy lưới bàn lá số
     const grid = document.getElementById('lasoGrid');
     if (!grid) {
         alert('Không tìm thấy bàn lá số (id="lasoGrid")!');
         return;
     }
-    // ĐẢM BẢO grid có position: relative
     grid.style.position = 'relative';
-
     const rect = grid.getBoundingClientRect();
+    const scale = rect.width ? 900 / rect.width : 1; // bàn có thể đang thu/phóng bằng CSS transform
+    const W = rect.width * scale, H = rect.height * scale;
 
-    // Tạo SVG nếu chưa có, gắn trực tiếp vào #lasoGrid
     let svg = document.getElementById('tamHopSvg');
     if (!svg) {
         svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -222,21 +226,33 @@ function drawTamHopByMenhIdx(menhIdx) {
         svg.style.width = '100%';
         svg.style.height = '100%';
         svg.style.zIndex = 20;
+        svg.style.pointerEvents = 'none';
         grid.appendChild(svg);
     }
-    // Cập nhật lại size SVG
-    svg.setAttribute('width', rect.width);
-    svg.setAttribute('height', rect.height);
-    svg.style.left = 0;
-    svg.style.top = 0;
+    svg.setAttribute('width', W);
+    svg.setAttribute('height', H);
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    svg.querySelectorAll('.tam-hop-line, .tam-hop-dot').forEach(function (e) { e.remove(); });
 
-    // Lấy các điểm cần vẽ
-    const { start, ends } = getTamHopPoints(menhIdx);
-    // Offset các điểm về relative với SVG
-    const offset = { x: rect.left, y: rect.top };
-    const _start = { x: start.x - offset.x, y: start.y - offset.y };
-    const _ends = ends.map(e => ({ x: e.x - offset.x, y: e.y - offset.y }));
-
-    // Vẽ
-    drawTamHopLines(svg, _start, _ends);
+    const m = diemNeoCung(menhIdx, W, H);
+    const t1 = diemNeoCung((menhIdx + 4) % 12, W, H);
+    const t2 = diemNeoCung((menhIdx + 8) % 12, W, H);
+    const xung = diemNeoCung((menhIdx + 6) % 12, W, H);
+    function nen(a, b, cls) {
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', a.x); line.setAttribute('y1', a.y);
+        line.setAttribute('x2', b.x); line.setAttribute('y2', b.y);
+        line.setAttribute('class', 'tam-hop-line' + (cls ? ' ' + cls : ''));
+        line.setAttribute('stroke', '#d9b25f'); line.setAttribute('stroke-width', '2.4'); line.setAttribute('opacity', '0.85');
+        if (cls) line.setAttribute('stroke-dasharray', '9 7');
+        svg.appendChild(line);
+    }
+    nen(m, t1); nen(m, t2); nen(t1, t2); nen(m, xung, 'tam-hop-xung');
+    [m, t1, t2, xung].forEach(function (p) {
+        const d = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        d.setAttribute('x', p.x - 4.5); d.setAttribute('y', p.y - 4.5); d.setAttribute('width', 9); d.setAttribute('height', 9);
+        d.setAttribute('transform', 'rotate(45 ' + p.x + ' ' + p.y + ')');
+        d.setAttribute('fill', '#d9b25f'); d.setAttribute('class', 'tam-hop-dot');
+        svg.appendChild(d);
+    });
 }

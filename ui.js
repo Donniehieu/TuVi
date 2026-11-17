@@ -198,6 +198,16 @@
     }
 
     /* ---------- Đọc dữ liệu 12 cung từ bàn lá số ---------- */
+    // Màu chấm sao trong thẻ cung (nền sáng): bảng màu ngũ hành đậm, khác bảng màu của bàn lá số (nền tối)
+    var MAU_THE = { 'hanh-kim': '#8a8a8a', 'hanh-moc': '#1f8a3a', 'hanh-thuy': '#1d7fbf', 'hanh-hoa': '#d94a2b', 'hanh-tho': '#c98a1a' };
+    function mauChoThe(node) {
+      for (var n = node; n && n.classList; n = n.parentElement) {
+        for (var k in MAU_THE) if (n.classList.contains(k)) return MAU_THE[k];
+        if (n.classList.contains('laso-cell')) break;
+      }
+      return window.getComputedStyle(node).color;
+    }
+
     function readCell(cell) {
       var info = { chinh: [], hoa: [], tot: [], xau: [], luu: [], khac: [], triet: false, tuan: false };
       var seen = {};
@@ -205,7 +215,7 @@
         text = clean(text);
         if (!text || seen[text]) return;
         seen[text] = true;
-        list.push({ text: text, color: window.getComputedStyle(node).color });
+        list.push({ text: text, color: mauChoThe(node) });
       }
 
       // Chính tinh: các phần tử lá nằm trong .chinh-tinh
