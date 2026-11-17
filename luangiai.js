@@ -725,6 +725,7 @@ function LuanGiaiCacCungVaHienThi() {
 
             if (pt) {
                 keyArr.push(pt + " tọa thủ tại " + item.tenCung);
+                if ((pt === "Hỏa Tinh" || pt === "Linh Tinh") && item.tenCung === "Quan Lộc" && !["Dần", "Mão", "Thìn", "Tỵ", "Ngọ"].includes(item.chi)) keyArr.push(pt + " hãm địa tọa thủ tại Quan Lộc");
                 if (pt === "Cô Thần") {
                     cungCoThan = item.tenCung;
                 }
