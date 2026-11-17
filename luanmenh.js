@@ -5796,5 +5796,23 @@ function LuanPhuGiaiLan17_menh(keyArr) {
     if (isSaoToaThuTaiCung("Mệnh", "Đào Hoa") && (lasoData.amduong === "Dương Nam" || lasoData.amduong === "Âm Nam")) {
         keyArr.push("Phú Giải số 7 (HỒNG LOAN) - Mệnh: Đào Hoa tọa thủ (kèm điều kiện cung đối)");
     }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Hợi")) && isSaoHoiChieuRong("Mệnh", "Văn Xương", false) && isSaoHoiChieuRong("Mệnh", "Văn Khúc", false) && isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false)) {
+        keyArr.push("Phú Giải số 27 (THAM LANG)a - Mệnh: Tham Lang + Liêm Trinh tọa thủ ở Tý/Hợi, gặp Văn Xương + Văn Khúc + Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Tham Lang") && isSaoToaThuTaiCung("Mệnh", "Liêm Trinh") && (isCungTaiChi("Mệnh", "Tý") || isCungTaiChi("Mệnh", "Hợi")) && (isSaoHoiChieuRong("Mệnh", "Kình Dương", false) || isSaoHoiChieuRong("Mệnh", "Đà La", false) || isSaoHoiChieuRong("Mệnh", "Địa Không", false) || isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) || isSaoHoiChieuRong("Mệnh", "Hỏa Tinh", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false))) {
+        keyArr.push("Phú Giải số 27 (THAM LANG)b - Mệnh: Tham Lang + Liêm Trinh tọa thủ ở Tý/Hợi, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Thân")) && (isSaoHoiChieuRong("Mệnh", "Liêm Trinh", false) || isSaoHoiChieuRong("Mệnh", "Bạch Hổ", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) || isSaoHoiChieuRong("Mệnh", "Thiên Riêu", false))) {
+        keyArr.push("Phú Giải số 30 (THIÊN – CƠ)a - Mệnh: Thiên Cơ + Thái Âm tọa thủ ở Thân, gặp Liêm Trinh hoặc Bạch Hổ hoặc Linh Tinh hoặc Thiên Riêu");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Thân")) && isSaoHoiChieuRong("Mệnh", "Địa Kiếp", false) && isSaoHoiChieuRong("Mệnh", "Thiên Hình", false)) {
+        keyArr.push("Phú Giải số 30 (THIÊN – CƠ)b - Mệnh: Thiên Cơ + Thái Âm tọa thủ ở Thân, gặp Địa Kiếp + Thiên Hình");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Cơ") && isSaoToaThuTaiCung("Mệnh", "Thái Âm") && (isCungTaiChi("Mệnh", "Thân")) && isSaoHoiChieuRong("Mệnh", "Hóa Khoa", false) && isSaoHoiChieuRong("Mệnh", "Phượng Các", false)) {
+        keyArr.push("Phú Giải số 30 (THIÊN – CƠ)c - Mệnh: Thiên Cơ + Thái Âm tọa thủ ở Thân, gặp Hóa Khoa + Phượng Các");
+    }
+    if (isSaoToaThuTaiCung("Mệnh", "Thiên Đồng") && isSaoToaThuTaiCung("Mệnh", "Thiên Lương") && (isCungTaiChi("Mệnh", "Dần") || isCungTaiChi("Mệnh", "Thân")) && (isSaoHoiChieuRong("Mệnh", "Thiên Khôi", false) || isSaoHoiChieuRong("Mệnh", "Hóa Quyền", false) || isSaoHoiChieuRong("Mệnh", "Linh Tinh", false) || isSaoHoiChieuRong("Mệnh", "Hóa Kỵ", false) || isSaoHoiChieuRong("Mệnh", "Hóa Lộc", false) || isSaoHoiChieuRong("Mệnh", "Lộc Tồn", false))) {
+        keyArr.push("Phú Giải số 19 (THIÊN ĐỒNG) - Mệnh: Thiên Đồng + Thiên Lương tọa thủ ở Dần/Thân, gặp Thiên Khôi hoặc Hóa Quyền hoặc Linh Tinh hoặc Hóa Kỵ hoặc Hóa Lộc hoặc Lộc Tồn");
+    }
 }
 // PHU17-END

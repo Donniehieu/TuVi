@@ -3763,5 +3763,17 @@ function LuanPhuGiaiLan17_phucduc(keyArr) {
     if (isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && (isCungTaiChi("Phúc Đức", "Sửu") || isCungTaiChi("Phúc Đức", "Mùi")) && isTrangSinhTaiCung("Phúc Đức", "Mộ")) {
         keyArr.push("Phú Giải số 45 (THAM LANG)a - Phúc Đức: Tham Lang + Vũ Khúc tọa thủ ở Sửu/Mùi, gặp vòng Tràng Sinh: Mộ");
     }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && (isSaoHoiChieuRong("Phúc Đức", "Tả Phù", false) || isSaoHoiChieuRong("Phúc Đức", "Hữu Bật", false) || isSaoHoiChieuRong("Phúc Đức", "Phượng Các", false) || isSaoHoiChieuRong("Phúc Đức", "Long Trì", false))) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)a - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Tả Phù hoặc Hữu Bật hoặc Phượng Các hoặc Long Trì");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isTrangSinhTaiCung("Phúc Đức", "Mộ")) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)b - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp vòng Tràng Sinh: Mộ");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && (isSaoHoiChieuRong("Phúc Đức", "Tả Phù", false) || isSaoHoiChieuRong("Phúc Đức", "Hữu Bật", false) || isSaoHoiChieuRong("Phúc Đức", "Phượng Các", false) || isSaoHoiChieuRong("Phúc Đức", "Long Trì", false)) && (isSaoHoiChieuRong("Phúc Đức", "Hóa Khoa", false) || isSaoHoiChieuRong("Phúc Đức", "Hóa Quyền", false) || isSaoHoiChieuRong("Phúc Đức", "Hóa Lộc", false) || isSaoHoiChieuRong("Phúc Đức", "Bạch Hổ", false) || isSaoHoiChieuRong("Phúc Đức", "Thiên Riêu", false))) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Tả Phù hoặc Hữu Bật hoặc Phượng Các hoặc Long Trì + Hóa Khoa hoặc Hóa Quyền hoặc Hóa Lộc hoặc Bạch Hổ hoặc Thiên Riêu");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isTrangSinhTaiCung("Phúc Đức", "Mộ") && (isSaoHoiChieuRong("Phúc Đức", "Hóa Khoa", false) || isSaoHoiChieuRong("Phúc Đức", "Hóa Quyền", false) || isSaoHoiChieuRong("Phúc Đức", "Hóa Lộc", false) || isSaoHoiChieuRong("Phúc Đức", "Bạch Hổ", false) || isSaoHoiChieuRong("Phúc Đức", "Thiên Riêu", false))) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)d - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp vòng Tràng Sinh: Mộ + Hóa Khoa hoặc Hóa Quyền hoặc Hóa Lộc hoặc Bạch Hổ hoặc Thiên Riêu");
+    }
 }
 // PHU17-END
