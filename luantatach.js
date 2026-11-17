@@ -4219,6 +4219,20 @@ function TatAchKhongThanKiep(idxCungMenh, idxCungThan, dsChinh, dsPhu, keyArr) {
     }
     return false;
 }
+// TK18-BEGIN
+function LuanTamKhong18_tatach(keyArr) {
+    let lasoData = {};
+    try {
+        lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
+    } catch (e) { lasoData = {}; }
+    if (lasoData.hanhMenh === "Hỏa" && (isCungTaiChi("Tật Ách", "Ngọ")) && isSaoHoiChieuRong("Tật Ách", "Tang Môn", false) && isSaoHoiChieuRong("Tật Ách", "Bạch Hổ", false)) {
+        keyArr.push("Ví dụ lá số 14 - Tật Ách - Người mệnh Hỏa, cung Tật Ách ở Ngọ gặp Tang Môn và Bạch Hổ");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Phá Quân") && (isCungTaiChi("Tật Ách", "Tý"))) {
+        keyArr.push("Ví dụ lá số 17 - Tật Ách - Phá Quân ở Tý tại cung Tật Ách");
+    }
+}
+// TK18-END
 // PHU17-BEGIN
 function phu17DemSao(tenCung, ds, tinhSang) {
     let d = {};
@@ -4269,31 +4283,32 @@ function LuanPhuGiaiLan17_tatach(keyArr) {
     if (isSaoToaThuTaiCung("Tật Ách", "Hóa Kỵ")) {
         keyArr.push("Phú Giải số 46 (HÓA KỴ) - Tật Ách: Hóa Kỵ tọa thủ");
     }
-    if (isSaoToaThuTaiCung("Tật Ách", "Kình Dương") && (isSaoHoiChieuRong("Tật Ách", "Thái Dương", false) || isSaoHoiChieuRong("Tật Ách", "Thái Âm", false))) {
-        keyArr.push("Phú Giải số 26 (ĐÀ LA) - Tật Ách: Kình Dương tọa thủ, gặp Thái Dương hoặc Thái Âm");
+    if (isSaoToaThuTaiCung("Tật Ách", "Kình Dương") && isSaoHoiChieuRong("Tật Ách", "Thái Dương", false)) {
+        keyArr.push("Phú Giải số 26 (ĐÀ LA) - Tật Ách: Kình Dương tọa thủ, gặp Thái Dương");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Kình Dương") && isSaoHoiChieuRong("Tật Ách", "Thái Âm", false)) {
+        keyArr.push("Phú Giải số 26 (ĐÀ LA) - Tật Ách: Kình Dương tọa thủ, gặp Thái Âm");
     }
     if (isSaoHoiChieuRong("Tật Ách", "Kình Dương", false) && isSaoHoiChieuRong("Tật Ách", "Đà La", false)) {
         keyArr.push("Phú Giải số 28 (ĐÀ LA) - Tật Ách, gặp Kình Dương + Đà La");
     }
-    if (isSaoToaThuTaiCung("Tật Ách", "Linh Tinh") && (isSaoHoiChieuRong("Tật Ách", "Kình Dương", false) || isSaoHoiChieuRong("Tật Ách", "Đà La", false))) {
-        keyArr.push("Phú Giải số 13 (LINH TINH) - Tật Ách: Linh Tinh tọa thủ, gặp Kình Dương hoặc Đà La");
+    if (isSaoToaThuTaiCung("Tật Ách", "Linh Tinh") && isSaoHoiChieuRong("Tật Ách", "Kình Dương", false)) {
+        keyArr.push("Phú Giải số 13 (LINH TINH) - Tật Ách: Linh Tinh tọa thủ, gặp Kình Dương");
     }
-    if ((isSaoToaThuTaiCung("Tật Ách", "Phá Quân") || isSaoToaThuTaiCung("Tật Ách", "Thất Sát")) && (isSaoHoiChieuRong("Tật Ách", "Đại Hao", false) || isSaoHoiChieuRong("Tật Ách", "Tiểu Hao", false)) && isTrangSinhTaiCung("Tật Ách", "Mộc Dục") && isSaoHoiChieuRong("Tật Ách", "Hóa Kỵ", false)) {
-        keyArr.push("Phú Giải số 30 (PHÁ – QUÂN) - Tật Ách: Phá Quân hoặc Thất Sát tọa thủ, gặp Đại Hao hoặc Tiểu Hao + vòng Tràng Sinh: Mộc Dục + Hóa Kỵ");
+    if (isSaoToaThuTaiCung("Tật Ách", "Linh Tinh") && isSaoHoiChieuRong("Tật Ách", "Đà La", false)) {
+        keyArr.push("Phú Giải số 13 (LINH TINH) - Tật Ách: Linh Tinh tọa thủ, gặp Đà La");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Phá Quân") && isSaoHoiChieuRong("Tật Ách", "Đại Hao", false) && isTrangSinhTaiCung("Tật Ách", "Mộc Dục") && isSaoHoiChieuRong("Tật Ách", "Hóa Kỵ", false)) {
+        keyArr.push("Phú Giải số 30 (PHÁ – QUÂN) - Tật Ách: Phá Quân tọa thủ, gặp Đại Hao + vòng Tràng Sinh: Mộc Dục + Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Phá Quân") && isSaoHoiChieuRong("Tật Ách", "Tiểu Hao", false) && isTrangSinhTaiCung("Tật Ách", "Mộc Dục") && isSaoHoiChieuRong("Tật Ách", "Hóa Kỵ", false)) {
+        keyArr.push("Phú Giải số 30 (PHÁ – QUÂN) - Tật Ách: Phá Quân tọa thủ, gặp Tiểu Hao + vòng Tràng Sinh: Mộc Dục + Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Thất Sát") && isSaoHoiChieuRong("Tật Ách", "Đại Hao", false) && isTrangSinhTaiCung("Tật Ách", "Mộc Dục") && isSaoHoiChieuRong("Tật Ách", "Hóa Kỵ", false)) {
+        keyArr.push("Phú Giải số 30 (PHÁ – QUÂN) - Tật Ách: Thất Sát tọa thủ, gặp Đại Hao + vòng Tràng Sinh: Mộc Dục + Hóa Kỵ");
+    }
+    if (isSaoToaThuTaiCung("Tật Ách", "Thất Sát") && isSaoHoiChieuRong("Tật Ách", "Tiểu Hao", false) && isTrangSinhTaiCung("Tật Ách", "Mộc Dục") && isSaoHoiChieuRong("Tật Ách", "Hóa Kỵ", false)) {
+        keyArr.push("Phú Giải số 30 (PHÁ – QUÂN) - Tật Ách: Thất Sát tọa thủ, gặp Tiểu Hao + vòng Tràng Sinh: Mộc Dục + Hóa Kỵ");
     }
 }
 // PHU17-END
-// TK18-BEGIN
-function LuanTamKhong18_tatach(keyArr) {
-    let lasoData = {};
-    try {
-        lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
-    } catch (e) { lasoData = {}; }
-    if (lasoData.hanhMenh === "Hỏa" && (isCungTaiChi("Tật Ách", "Ngọ")) && isSaoHoiChieuRong("Tật Ách", "Tang Môn", false) && isSaoHoiChieuRong("Tật Ách", "Bạch Hổ", false)) {
-        keyArr.push("Ví dụ lá số 14 - Tật Ách - Người mệnh Hỏa, cung Tật Ách ở Ngọ gặp Tang Môn và Bạch Hổ");
-    }
-    if (isSaoToaThuTaiCung("Tật Ách", "Phá Quân") && (isCungTaiChi("Tật Ách", "Tý"))) {
-        keyArr.push("Ví dụ lá số 17 - Tật Ách - Phá Quân ở Tý tại cung Tật Ách");
-    }
-}
-// TK18-END

@@ -3442,8 +3442,23 @@ function LuanPhuGiaiLan17_thiendi(keyArr) {
     if (isSaoToaThuTaiCung("Thiên Di", "Vũ Khúc")) {
         keyArr.push("Phú Giải số 26 (VŨ KHÚC) - Thiên Di: Vũ Khúc tọa thủ");
     }
-    if (isSaoToaThuTaiCung("Thiên Di", "Liêm Trinh") && isSaoToaThuTaiCung("Thiên Di", "Phá Quân") && (isSaoHoiChieuRong("Thiên Di", "Kình Dương", false) || isSaoHoiChieuRong("Thiên Di", "Đà La", false) || isSaoHoiChieuRong("Thiên Di", "Hỏa Tinh", false) || isSaoHoiChieuRong("Thiên Di", "Linh Tinh", false) || isSaoHoiChieuRong("Thiên Di", "Địa Không", false) || isSaoHoiChieuRong("Thiên Di", "Địa Kiếp", false))) {
-        keyArr.push("Phú Giải số 26 (LIÊM TRINH) - Thiên Di: Liêm Trinh + Phá Quân tọa thủ, gặp Kình Dương hoặc Đà La hoặc Hỏa Tinh hoặc Linh Tinh hoặc Địa Không hoặc Địa Kiếp");
+    if (isSaoToaThuTaiCung("Thiên Di", "Liêm Trinh") && isSaoToaThuTaiCung("Thiên Di", "Phá Quân") && isSaoHoiChieuRong("Thiên Di", "Kình Dương", false)) {
+        keyArr.push("Phú Giải số 26 (LIÊM TRINH) - Thiên Di: Liêm Trinh + Phá Quân tọa thủ, gặp Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Liêm Trinh") && isSaoToaThuTaiCung("Thiên Di", "Phá Quân") && isSaoHoiChieuRong("Thiên Di", "Đà La", false)) {
+        keyArr.push("Phú Giải số 26 (LIÊM TRINH) - Thiên Di: Liêm Trinh + Phá Quân tọa thủ, gặp Đà La");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Liêm Trinh") && isSaoToaThuTaiCung("Thiên Di", "Phá Quân") && isSaoHoiChieuRong("Thiên Di", "Hỏa Tinh", false)) {
+        keyArr.push("Phú Giải số 26 (LIÊM TRINH) - Thiên Di: Liêm Trinh + Phá Quân tọa thủ, gặp Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Liêm Trinh") && isSaoToaThuTaiCung("Thiên Di", "Phá Quân") && isSaoHoiChieuRong("Thiên Di", "Linh Tinh", false)) {
+        keyArr.push("Phú Giải số 26 (LIÊM TRINH) - Thiên Di: Liêm Trinh + Phá Quân tọa thủ, gặp Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Liêm Trinh") && isSaoToaThuTaiCung("Thiên Di", "Phá Quân") && isSaoHoiChieuRong("Thiên Di", "Địa Không", false)) {
+        keyArr.push("Phú Giải số 26 (LIÊM TRINH) - Thiên Di: Liêm Trinh + Phá Quân tọa thủ, gặp Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Liêm Trinh") && isSaoToaThuTaiCung("Thiên Di", "Phá Quân") && isSaoHoiChieuRong("Thiên Di", "Địa Kiếp", false)) {
+        keyArr.push("Phú Giải số 26 (LIÊM TRINH) - Thiên Di: Liêm Trinh + Phá Quân tọa thủ, gặp Địa Kiếp");
     }
     if (isSaoToaThuTaiCung("Thiên Di", "Thiên Cơ") && isSaoToaThuTaiCung("Thiên Di", "Thiên Mã")) {
         keyArr.push("Phú Giải số 8 (THIÊN – CƠ) - Thiên Di: Thiên Cơ + Thiên Mã tọa thủ");
@@ -3451,14 +3466,20 @@ function LuanPhuGiaiLan17_thiendi(keyArr) {
     if (isSaoToaThuTaiCung("Thiên Di", "Kình Dương") && (isCungTaiChi("Thiên Di", "Dậu"))) {
         keyArr.push("Phú Giải số 27 (ĐÀ LA) - Thiên Di: Kình Dương tọa thủ ở Dậu");
     }
-    if (isSaoToaThuTaiCung("Thiên Di", "Thiên Mã") && (isSaoToaThuTaiCung("Thiên Di", "Hóa Lộc") || isSaoToaThuTaiCung("Thiên Di", "Lộc Tồn"))) {
-        keyArr.push("Phú Giải số 14 (THIÊN MÃ) - Thiên Di: Thiên Mã + Hóa Lộc hoặc Lộc Tồn tọa thủ");
+    if (isSaoToaThuTaiCung("Thiên Di", "Thiên Mã") && isSaoToaThuTaiCung("Thiên Di", "Hóa Lộc")) {
+        keyArr.push("Phú Giải số 14 (THIÊN MÃ) - Thiên Di: Thiên Mã + Hóa Lộc tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Thiên Mã") && isSaoToaThuTaiCung("Thiên Di", "Lộc Tồn")) {
+        keyArr.push("Phú Giải số 14 (THIÊN MÃ) - Thiên Di: Thiên Mã + Lộc Tồn tọa thủ");
     }
     if (isSaoToaThuTaiCung("Thiên Di", "Thiên Lương") && (phu17DemCatTinh("Thiên Di") > 0) && !isSaoHoiChieuRong("Thiên Di", "Thiên Hình", false) && !isSaoHoiChieuRong("Thiên Di", "Hóa Kỵ", false)) {
-        keyArr.push("Phú Giải số 10 (THIÊN LƯƠNG) - Thiên Di: Thiên Lương tọa thủ, gặp cát tinh, không gặp Thiên Hình hoặc Hóa Kỵ");
+        keyArr.push("Phú Giải số 10 (THIÊN LƯƠNG) - Thiên Di: Thiên Lương tọa thủ, gặp cát tinh, không gặp bất kỳ sao nào trong (Thiên Hình, Hóa Kỵ)");
     }
-    if (isSaoToaThuTaiCung("Thiên Di", "Thiên Lương") && (phu17DemCatTinh("Thiên Di") > 0) && (isSaoHoiChieuRong("Thiên Di", "Thiên Hình", false) || isSaoHoiChieuRong("Thiên Di", "Hóa Kỵ", false))) {
-        keyArr.push("Phú Giải số 10 (THIÊN LƯƠNG)v - Thiên Di: Thiên Lương tọa thủ, gặp cát tinh + Thiên Hình hoặc Hóa Kỵ");
+    if (isSaoToaThuTaiCung("Thiên Di", "Thiên Lương") && (phu17DemCatTinh("Thiên Di") > 0) && isSaoHoiChieuRong("Thiên Di", "Thiên Hình", false)) {
+        keyArr.push("Phú Giải số 10 (THIÊN LƯƠNG)v - Thiên Di: Thiên Lương tọa thủ, gặp cát tinh + Thiên Hình");
+    }
+    if (isSaoToaThuTaiCung("Thiên Di", "Thiên Lương") && (phu17DemCatTinh("Thiên Di") > 0) && isSaoHoiChieuRong("Thiên Di", "Hóa Kỵ", false)) {
+        keyArr.push("Phú Giải số 10 (THIÊN LƯƠNG)v - Thiên Di: Thiên Lương tọa thủ, gặp cát tinh + Hóa Kỵ");
     }
 }
 // PHU17-END

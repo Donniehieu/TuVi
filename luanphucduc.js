@@ -3626,97 +3626,6 @@ function PhucDucKhongThanKiep(idxCungMenh, idxCungThan, dsChinh, dsPhu, keyArr) 
     }
     return false;
 }
-// PHU17-BEGIN
-function phu17DemSao(tenCung, ds, tinhSang) {
-    let d = {};
-    try {
-        d = JSON.parse(localStorage.getItem('laso_data')) || {};
-    } catch (e) { d = {}; }
-    const ob = d.lasoOb || [];
-    let i = 99;
-    for (let k = 0; k < ob.length; k++) { if (ob[k].tenCung === tenCung) { i = k; } }
-    if (i > 11) return 0;
-    const idxs = [i, (i + 4) % 12, (i + 6) % 12, (i + 8) % 12];
-    const tenSang = ["Tử Vi", "Liêm Trinh", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Thất Sát", "Phá Quân", "Tham Lang", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"];
-    const dacSang = [["Thìn", "Tuất", "Sửu", "Mùi", "Tỵ", "Ngọ", "Dần", "Thân"], ["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Dần", "Thân"], ["Dần", "Thân", "Tý", "Ngọ", "Thìn", "Tuất", "Tỵ", "Hợi", "Mùi"], ["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Dần", "Thân", "Dậu", "Mão"], ["Dần", "Thân", "Tý", "Ngọ", "Thìn", "Tuất", "Sửu", "Mùi", "Tỵ", "Hợi"], ["Dần", "Thân", "Tý", "Ngọ", "Tỵ", "Hợi", "Sửu", "Mùi"], ["Tý", "Ngọ", "Sửu", "Mùi", "Thìn", "Tuất"], ["Thìn", "Tuất", "Sửu", "Mùi", "Dần", "Thân"], ["Mão", "Dậu", "Tý", "Ngọ", "Dần", "Thân", "Hợi"], ["Tỵ", "Ngọ", "Dần", "Mão", "Thìn", "Sửu", "Mùi"], ["Thìn", "Tuất", "Mão", "Dậu", "Tỵ", "Thân", "Tý", "Ngọ", "Sửu", "Mùi"], ["Dậu", "Tuất", "Hợi", "Thân", "Tý", "Sửu", "Mùi"], ["Dần", "Thân", "Tý", "Mão", "Tỵ", "Hợi"], ["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Mão", "Dần", "Thân"]];
-    let dem = 0;
-    for (let a = 0; a < idxs.length; a++) {
-        const c = ob[idxs[a]];
-        let saoC = [];
-        if (c && Array.isArray(c.sao)) { saoC = c.sao; }
-        for (let b = 0; b < saoC.length; b++) {
-            const ten = saoC[b].ten;
-            let dung = false;
-            for (let m = 0; m < ds.length; m++) { if (ds[m] === ten) { dung = true; } }
-            if (!dung && tinhSang) {
-                for (let m = 0; m < tenSang.length; m++) {
-                    if (tenSang[m] === ten) {
-                        for (let n = 0; n < dacSang[m].length; n++) { if (dacSang[m][n] === c.chi) { dung = true; } }
-                    }
-                }
-            }
-            if (dung) dem++;
-        }
-    }
-    return dem;
-}
-function phu17DemCatTinh(tenCung) { return phu17DemSao(tenCung, ["Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Lộc Tồn", "Quốc Ấn", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt", "Long Trì", "Phượng Các", "Thanh Long", "Thiên Quan", "Thiên Phúc", "Ân Quang", "Thiên Quý", "Tam Thai", "Bát Tọa", "Thiên Giải", "Địa Giải"], true); }
-function phu17DemSatTinh(tenCung) { return phu17DemSao(tenCung, ["Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"], false); }
-function LuanPhuGiaiLan17_phucduc(keyArr) {
-    let lasoData = {};
-    try {
-        lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
-    } catch (e) { lasoData = {}; }
-    if (isSaoToaThuTaiCung("Phúc Đức", "Địa Không") && isSaoToaThuTaiCung("Phúc Đức", "Địa Kiếp")) {
-        keyArr.push("Phú Giải số 16 (ĐỊA KIẾP) - Phúc Đức: Địa Không + Địa Kiếp tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Phúc Đức", "Địa Kiếp")) {
-        keyArr.push("Phú Giải số 34 (ĐỊA KIẾP) - Phúc Đức: Địa Kiếp tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Phúc Đức", "Địa Không") && isSaoToaThuTaiCung("Phúc Đức", "Địa Kiếp")) {
-        keyArr.push("Phú Giải số 35 (ĐỊA KIẾP) - Phúc Đức: Địa Không + Địa Kiếp tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Phúc Đức", "Địa Kiếp") && (isSaoToaThuTaiCung("Phúc Đức", "Đại Hao") || isSaoToaThuTaiCung("Phúc Đức", "Tiểu Hao"))) {
-        keyArr.push("Phú Giải số 9 (TIỂU HAO) - Phúc Đức: Địa Kiếp + Đại Hao hoặc Tiểu Hao tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Phúc Đức", "Tam Thai") && isSaoToaThuTaiCung("Phúc Đức", "Bát Tọa") && isSaoToaThuTaiCung("Phúc Đức", "Phong Cáo")) {
-        keyArr.push("Phú Giải số 2 (BÁT TỌA) - Phúc Đức: Tam Thai + Bát Tọa + Phong Cáo tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Phúc Đức", "Thanh Long")) {
-        keyArr.push("Phú Giải số 6 (THIÊN QUÝ) - Phúc Đức: Thanh Long tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Phúc Đức", "Thiên Lương") && isTrangSinhTaiCung("Phúc Đức", "Tràng Sinh")) {
-        keyArr.push("Phú Giải số 21 (THIÊN LƯƠNG) - Phúc Đức: Thiên Lương + vòng Tràng Sinh: Tràng Sinh tọa thủ");
-    }
-    if (isSaoToaThuTaiCung("Phúc Đức", "Tử Vi") && isSaoToaThuTaiCung("Phúc Đức", "Kình Dương") && isSaoToaThuTaiCung("Phúc Đức", "Phượng Các") && (isCungTaiChi("Phúc Đức", "Ngọ")) && (isSaoHoiChieuRong("Phúc Đức", "Tang Môn", false) || isSaoHoiChieuRong("Phúc Đức", "Thiên Hình", false) || isSaoHoiChieuRong("Phúc Đức", "Thiên Mã", false) || isSaoHoiChieuRong("Phúc Đức", "Thiên Khốc", false) || isSaoHoiChieuRong("Phúc Đức", "Hóa Lộc", false) || isSaoHoiChieuRong("Phúc Đức", "Hóa Quyền", false))) {
-        keyArr.push("Phú Giải số 87 (TỬ VI)a - Phúc Đức: Tử Vi + Kình Dương + Phượng Các tọa thủ ở Ngọ, gặp Tang Môn hoặc Thiên Hình hoặc Thiên Mã hoặc Thiên Khốc hoặc Hóa Lộc hoặc Hóa Quyền");
-    }
-    if (isSaoToaThuTaiCung("Phúc Đức", "Tử Vi") && isSaoToaThuTaiCung("Phúc Đức", "Kình Dương") && isSaoToaThuTaiCung("Phúc Đức", "Phượng Các") && (isCungTaiChi("Phúc Đức", "Ngọ")) && isSaoHoiChieuRong("Phúc Đức", "Hữu Bật", false) && isSaoHoiChieuRong("Phúc Đức", "Hóa Khoa", false)) {
-        keyArr.push("Phú Giải số 87 (TỬ VI)b - Phúc Đức: Tử Vi + Kình Dương + Phượng Các tọa thủ ở Ngọ, gặp Hữu Bật + Hóa Khoa");
-    }
-    if (isSaoToaThuTaiCung("Phúc Đức", "Thiên Tướng") && isSaoToaThuTaiCung("Phúc Đức", "Tướng Quân") && (isCungTaiChi("Phúc Đức", "Dậu")) && (isSaoHoiChieuRong("Phúc Đức", "Thiên Hình", false) || isSaoHoiChieuRong("Phúc Đức", "Hóa Quyền", false) || isSaoHoiChieuRong("Phúc Đức", "Bạch Hổ", false) || isSaoHoiChieuRong("Phúc Đức", "Thiên Khốc", false) || isSaoHoiChieuRong("Phúc Đức", "Thiên Mã", false))) {
-        keyArr.push("Phú Giải số 14 (THIÊN – TƯỚNG)a - Phúc Đức: Thiên Tướng + Tướng Quân tọa thủ ở Dậu, gặp Thiên Hình hoặc Hóa Quyền hoặc Bạch Hổ hoặc Thiên Khốc hoặc Thiên Mã");
-    }
-    if (isSaoToaThuTaiCung("Phúc Đức", "Thiên Tướng") && isSaoToaThuTaiCung("Phúc Đức", "Tướng Quân") && (isCungTaiChi("Phúc Đức", "Dậu")) && isSaoHoiChieuRong("Phúc Đức", "Linh Tinh", false) && isSaoHoiChieuRong("Phúc Đức", "Văn Khúc", false) && isSaoHoiChieuRong("Phúc Đức", "Thiên Việt", false)) {
-        keyArr.push("Phú Giải số 14 (THIÊN – TƯỚNG)b - Phúc Đức: Thiên Tướng + Tướng Quân tọa thủ ở Dậu, gặp Linh Tinh + Văn Khúc + Thiên Việt");
-    }
-    if (isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && (isCungTaiChi("Phúc Đức", "Sửu") || isCungTaiChi("Phúc Đức", "Mùi")) && isTrangSinhTaiCung("Phúc Đức", "Mộ")) {
-        keyArr.push("Phú Giải số 45 (THAM LANG)a - Phúc Đức: Tham Lang + Vũ Khúc tọa thủ ở Sửu/Mùi, gặp vòng Tràng Sinh: Mộ");
-    }
-    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && (isSaoHoiChieuRong("Phúc Đức", "Tả Phù", false) || isSaoHoiChieuRong("Phúc Đức", "Hữu Bật", false) || isSaoHoiChieuRong("Phúc Đức", "Phượng Các", false) || isSaoHoiChieuRong("Phúc Đức", "Long Trì", false))) {
-        keyArr.push("Phú Giải số 30 (VŨ KHÚC)a - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Tả Phù hoặc Hữu Bật hoặc Phượng Các hoặc Long Trì");
-    }
-    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isTrangSinhTaiCung("Phúc Đức", "Mộ")) {
-        keyArr.push("Phú Giải số 30 (VŨ KHÚC)b - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp vòng Tràng Sinh: Mộ");
-    }
-    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && (isSaoHoiChieuRong("Phúc Đức", "Tả Phù", false) || isSaoHoiChieuRong("Phúc Đức", "Hữu Bật", false) || isSaoHoiChieuRong("Phúc Đức", "Phượng Các", false) || isSaoHoiChieuRong("Phúc Đức", "Long Trì", false)) && (isSaoHoiChieuRong("Phúc Đức", "Hóa Khoa", false) || isSaoHoiChieuRong("Phúc Đức", "Hóa Quyền", false) || isSaoHoiChieuRong("Phúc Đức", "Hóa Lộc", false) || isSaoHoiChieuRong("Phúc Đức", "Bạch Hổ", false) || isSaoHoiChieuRong("Phúc Đức", "Thiên Riêu", false))) {
-        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Tả Phù hoặc Hữu Bật hoặc Phượng Các hoặc Long Trì + Hóa Khoa hoặc Hóa Quyền hoặc Hóa Lộc hoặc Bạch Hổ hoặc Thiên Riêu");
-    }
-    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isTrangSinhTaiCung("Phúc Đức", "Mộ") && (isSaoHoiChieuRong("Phúc Đức", "Hóa Khoa", false) || isSaoHoiChieuRong("Phúc Đức", "Hóa Quyền", false) || isSaoHoiChieuRong("Phúc Đức", "Hóa Lộc", false) || isSaoHoiChieuRong("Phúc Đức", "Bạch Hổ", false) || isSaoHoiChieuRong("Phúc Đức", "Thiên Riêu", false))) {
-        keyArr.push("Phú Giải số 30 (VŨ KHÚC)d - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp vòng Tràng Sinh: Mộ + Hóa Khoa hoặc Hóa Quyền hoặc Hóa Lộc hoặc Bạch Hổ hoặc Thiên Riêu");
-    }
-}
-// PHU17-END
 // TK18-BEGIN
 function phu17DemKhong(tenCung, loai) {
     // loai: 0 = cung và ba cung hội; 1 = chỉ cung chính; 2 = chỉ ba cung hội; 3 = như 0 nhưng bỏ Tuần/Triệt của cung chính (đã tháo cởi khi hạn đến)
@@ -3777,3 +3686,205 @@ function LuanTamKhong18_phucduc(keyArr) {
     }
 }
 // TK18-END
+// PHU17-BEGIN
+function phu17DemSao(tenCung, ds, tinhSang) {
+    let d = {};
+    try {
+        d = JSON.parse(localStorage.getItem('laso_data')) || {};
+    } catch (e) { d = {}; }
+    const ob = d.lasoOb || [];
+    let i = 99;
+    for (let k = 0; k < ob.length; k++) { if (ob[k].tenCung === tenCung) { i = k; } }
+    if (i > 11) return 0;
+    const idxs = [i, (i + 4) % 12, (i + 6) % 12, (i + 8) % 12];
+    const tenSang = ["Tử Vi", "Liêm Trinh", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng", "Thất Sát", "Phá Quân", "Tham Lang", "Cự Môn", "Thái Dương", "Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"];
+    const dacSang = [["Thìn", "Tuất", "Sửu", "Mùi", "Tỵ", "Ngọ", "Dần", "Thân"], ["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Dần", "Thân"], ["Dần", "Thân", "Tý", "Ngọ", "Thìn", "Tuất", "Tỵ", "Hợi", "Mùi"], ["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Dần", "Thân", "Dậu", "Mão"], ["Dần", "Thân", "Tý", "Ngọ", "Thìn", "Tuất", "Sửu", "Mùi", "Tỵ", "Hợi"], ["Dần", "Thân", "Tý", "Ngọ", "Tỵ", "Hợi", "Sửu", "Mùi"], ["Tý", "Ngọ", "Sửu", "Mùi", "Thìn", "Tuất"], ["Thìn", "Tuất", "Sửu", "Mùi", "Dần", "Thân"], ["Mão", "Dậu", "Tý", "Ngọ", "Dần", "Thân", "Hợi"], ["Tỵ", "Ngọ", "Dần", "Mão", "Thìn", "Sửu", "Mùi"], ["Thìn", "Tuất", "Mão", "Dậu", "Tỵ", "Thân", "Tý", "Ngọ", "Sửu", "Mùi"], ["Dậu", "Tuất", "Hợi", "Thân", "Tý", "Sửu", "Mùi"], ["Dần", "Thân", "Tý", "Mão", "Tỵ", "Hợi"], ["Thìn", "Tuất", "Sửu", "Mùi", "Tý", "Ngọ", "Mão", "Dần", "Thân"]];
+    let dem = 0;
+    for (let a = 0; a < idxs.length; a++) {
+        const c = ob[idxs[a]];
+        let saoC = [];
+        if (c && Array.isArray(c.sao)) { saoC = c.sao; }
+        for (let b = 0; b < saoC.length; b++) {
+            const ten = saoC[b].ten;
+            let dung = false;
+            for (let m = 0; m < ds.length; m++) { if (ds[m] === ten) { dung = true; } }
+            if (!dung && tinhSang) {
+                for (let m = 0; m < tenSang.length; m++) {
+                    if (tenSang[m] === ten) {
+                        for (let n = 0; n < dacSang[m].length; n++) { if (dacSang[m][n] === c.chi) { dung = true; } }
+                    }
+                }
+            }
+            if (dung) dem++;
+        }
+    }
+    return dem;
+}
+function phu17DemCatTinh(tenCung) { return phu17DemSao(tenCung, ["Hóa Khoa", "Hóa Quyền", "Hóa Lộc", "Lộc Tồn", "Quốc Ấn", "Tả Phù", "Hữu Bật", "Văn Xương", "Văn Khúc", "Thiên Khôi", "Thiên Việt", "Long Trì", "Phượng Các", "Thanh Long", "Thiên Quan", "Thiên Phúc", "Ân Quang", "Thiên Quý", "Tam Thai", "Bát Tọa", "Thiên Giải", "Địa Giải"], true); }
+function phu17DemSatTinh(tenCung) { return phu17DemSao(tenCung, ["Kình Dương", "Đà La", "Địa Không", "Địa Kiếp", "Hỏa Tinh", "Linh Tinh"], false); }
+function LuanPhuGiaiLan17_phucduc(keyArr) {
+    let lasoData = {};
+    try {
+        lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
+    } catch (e) { lasoData = {}; }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Địa Không") && isSaoToaThuTaiCung("Phúc Đức", "Địa Kiếp")) {
+        keyArr.push("Phú Giải số 16 (ĐỊA KIẾP) - Phúc Đức: Địa Không + Địa Kiếp tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Địa Kiếp")) {
+        keyArr.push("Phú Giải số 34 (ĐỊA KIẾP) - Phúc Đức: Địa Kiếp tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Địa Không") && isSaoToaThuTaiCung("Phúc Đức", "Địa Kiếp")) {
+        keyArr.push("Phú Giải số 35 (ĐỊA KIẾP) - Phúc Đức: Địa Không + Địa Kiếp tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Địa Kiếp") && isSaoToaThuTaiCung("Phúc Đức", "Đại Hao")) {
+        keyArr.push("Phú Giải số 9 (TIỂU HAO) - Phúc Đức: Địa Kiếp + Đại Hao tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Địa Kiếp") && isSaoToaThuTaiCung("Phúc Đức", "Tiểu Hao")) {
+        keyArr.push("Phú Giải số 9 (TIỂU HAO) - Phúc Đức: Địa Kiếp + Tiểu Hao tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Tam Thai") && isSaoToaThuTaiCung("Phúc Đức", "Bát Tọa") && isSaoToaThuTaiCung("Phúc Đức", "Phong Cáo")) {
+        keyArr.push("Phú Giải số 2 (BÁT TỌA) - Phúc Đức: Tam Thai + Bát Tọa + Phong Cáo tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Thanh Long")) {
+        keyArr.push("Phú Giải số 6 (THIÊN QUÝ) - Phúc Đức: Thanh Long tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Thiên Lương") && isTrangSinhTaiCung("Phúc Đức", "Tràng Sinh")) {
+        keyArr.push("Phú Giải số 21 (THIÊN LƯƠNG) - Phúc Đức: Thiên Lương + vòng Tràng Sinh: Tràng Sinh tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Tử Vi") && isSaoToaThuTaiCung("Phúc Đức", "Kình Dương") && isSaoToaThuTaiCung("Phúc Đức", "Phượng Các") && (isCungTaiChi("Phúc Đức", "Ngọ")) && isSaoHoiChieuRong("Phúc Đức", "Tang Môn", false)) {
+        keyArr.push("Phú Giải số 87 (TỬ VI)a - Phúc Đức: Tử Vi + Kình Dương + Phượng Các tọa thủ ở Ngọ, gặp Tang Môn");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Tử Vi") && isSaoToaThuTaiCung("Phúc Đức", "Kình Dương") && isSaoToaThuTaiCung("Phúc Đức", "Phượng Các") && (isCungTaiChi("Phúc Đức", "Ngọ")) && isSaoHoiChieuRong("Phúc Đức", "Thiên Hình", false)) {
+        keyArr.push("Phú Giải số 87 (TỬ VI)a - Phúc Đức: Tử Vi + Kình Dương + Phượng Các tọa thủ ở Ngọ, gặp Thiên Hình");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Tử Vi") && isSaoToaThuTaiCung("Phúc Đức", "Kình Dương") && isSaoToaThuTaiCung("Phúc Đức", "Phượng Các") && (isCungTaiChi("Phúc Đức", "Ngọ")) && isSaoHoiChieuRong("Phúc Đức", "Thiên Mã", false)) {
+        keyArr.push("Phú Giải số 87 (TỬ VI)a - Phúc Đức: Tử Vi + Kình Dương + Phượng Các tọa thủ ở Ngọ, gặp Thiên Mã");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Tử Vi") && isSaoToaThuTaiCung("Phúc Đức", "Kình Dương") && isSaoToaThuTaiCung("Phúc Đức", "Phượng Các") && (isCungTaiChi("Phúc Đức", "Ngọ")) && isSaoHoiChieuRong("Phúc Đức", "Thiên Khốc", false)) {
+        keyArr.push("Phú Giải số 87 (TỬ VI)a - Phúc Đức: Tử Vi + Kình Dương + Phượng Các tọa thủ ở Ngọ, gặp Thiên Khốc");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Tử Vi") && isSaoToaThuTaiCung("Phúc Đức", "Kình Dương") && isSaoToaThuTaiCung("Phúc Đức", "Phượng Các") && (isCungTaiChi("Phúc Đức", "Ngọ")) && isSaoHoiChieuRong("Phúc Đức", "Hóa Lộc", false)) {
+        keyArr.push("Phú Giải số 87 (TỬ VI)a - Phúc Đức: Tử Vi + Kình Dương + Phượng Các tọa thủ ở Ngọ, gặp Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Tử Vi") && isSaoToaThuTaiCung("Phúc Đức", "Kình Dương") && isSaoToaThuTaiCung("Phúc Đức", "Phượng Các") && (isCungTaiChi("Phúc Đức", "Ngọ")) && isSaoHoiChieuRong("Phúc Đức", "Hóa Quyền", false)) {
+        keyArr.push("Phú Giải số 87 (TỬ VI)a - Phúc Đức: Tử Vi + Kình Dương + Phượng Các tọa thủ ở Ngọ, gặp Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Tử Vi") && isSaoToaThuTaiCung("Phúc Đức", "Kình Dương") && isSaoToaThuTaiCung("Phúc Đức", "Phượng Các") && (isCungTaiChi("Phúc Đức", "Ngọ")) && isSaoHoiChieuRong("Phúc Đức", "Hữu Bật", false) && isSaoHoiChieuRong("Phúc Đức", "Hóa Khoa", false)) {
+        keyArr.push("Phú Giải số 87 (TỬ VI)b - Phúc Đức: Tử Vi + Kình Dương + Phượng Các tọa thủ ở Ngọ, gặp Hữu Bật + Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Thiên Tướng") && isSaoToaThuTaiCung("Phúc Đức", "Tướng Quân") && (isCungTaiChi("Phúc Đức", "Dậu")) && isSaoHoiChieuRong("Phúc Đức", "Thiên Hình", false)) {
+        keyArr.push("Phú Giải số 14 (THIÊN – TƯỚNG)a - Phúc Đức: Thiên Tướng + Tướng Quân tọa thủ ở Dậu, gặp Thiên Hình");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Thiên Tướng") && isSaoToaThuTaiCung("Phúc Đức", "Tướng Quân") && (isCungTaiChi("Phúc Đức", "Dậu")) && isSaoHoiChieuRong("Phúc Đức", "Hóa Quyền", false)) {
+        keyArr.push("Phú Giải số 14 (THIÊN – TƯỚNG)a - Phúc Đức: Thiên Tướng + Tướng Quân tọa thủ ở Dậu, gặp Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Thiên Tướng") && isSaoToaThuTaiCung("Phúc Đức", "Tướng Quân") && (isCungTaiChi("Phúc Đức", "Dậu")) && isSaoHoiChieuRong("Phúc Đức", "Bạch Hổ", false)) {
+        keyArr.push("Phú Giải số 14 (THIÊN – TƯỚNG)a - Phúc Đức: Thiên Tướng + Tướng Quân tọa thủ ở Dậu, gặp Bạch Hổ");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Thiên Tướng") && isSaoToaThuTaiCung("Phúc Đức", "Tướng Quân") && (isCungTaiChi("Phúc Đức", "Dậu")) && isSaoHoiChieuRong("Phúc Đức", "Thiên Khốc", false)) {
+        keyArr.push("Phú Giải số 14 (THIÊN – TƯỚNG)a - Phúc Đức: Thiên Tướng + Tướng Quân tọa thủ ở Dậu, gặp Thiên Khốc");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Thiên Tướng") && isSaoToaThuTaiCung("Phúc Đức", "Tướng Quân") && (isCungTaiChi("Phúc Đức", "Dậu")) && isSaoHoiChieuRong("Phúc Đức", "Thiên Mã", false)) {
+        keyArr.push("Phú Giải số 14 (THIÊN – TƯỚNG)a - Phúc Đức: Thiên Tướng + Tướng Quân tọa thủ ở Dậu, gặp Thiên Mã");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Thiên Tướng") && isSaoToaThuTaiCung("Phúc Đức", "Tướng Quân") && (isCungTaiChi("Phúc Đức", "Dậu")) && isSaoHoiChieuRong("Phúc Đức", "Linh Tinh", false) && isSaoHoiChieuRong("Phúc Đức", "Văn Khúc", false) && isSaoHoiChieuRong("Phúc Đức", "Thiên Việt", false)) {
+        keyArr.push("Phú Giải số 14 (THIÊN – TƯỚNG)b - Phúc Đức: Thiên Tướng + Tướng Quân tọa thủ ở Dậu, gặp Linh Tinh + Văn Khúc + Thiên Việt");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && (isCungTaiChi("Phúc Đức", "Sửu")) && isTrangSinhTaiCung("Phúc Đức", "Mộ")) {
+        keyArr.push("Phú Giải số 45 (THAM LANG)a - Phúc Đức: Tham Lang + Vũ Khúc tọa thủ ở Sửu, gặp vòng Tràng Sinh: Mộ");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && (isCungTaiChi("Phúc Đức", "Mùi")) && isTrangSinhTaiCung("Phúc Đức", "Mộ")) {
+        keyArr.push("Phú Giải số 45 (THAM LANG)a - Phúc Đức: Tham Lang + Vũ Khúc tọa thủ ở Mùi, gặp vòng Tràng Sinh: Mộ");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Tả Phù", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)a - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Tả Phù");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Hữu Bật", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)a - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Hữu Bật");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Phượng Các", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)a - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Phượng Các");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Long Trì", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)a - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Long Trì");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isTrangSinhTaiCung("Phúc Đức", "Mộ")) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)b - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp vòng Tràng Sinh: Mộ");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Tả Phù", false) && isSaoHoiChieuRong("Phúc Đức", "Hóa Khoa", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Tả Phù + Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Tả Phù", false) && isSaoHoiChieuRong("Phúc Đức", "Hóa Quyền", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Tả Phù + Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Tả Phù", false) && isSaoHoiChieuRong("Phúc Đức", "Hóa Lộc", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Tả Phù + Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Tả Phù", false) && isSaoHoiChieuRong("Phúc Đức", "Bạch Hổ", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Tả Phù + Bạch Hổ");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Tả Phù", false) && isSaoHoiChieuRong("Phúc Đức", "Thiên Riêu", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Tả Phù + Thiên Riêu");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Hữu Bật", false) && isSaoHoiChieuRong("Phúc Đức", "Hóa Khoa", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Hữu Bật + Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Hữu Bật", false) && isSaoHoiChieuRong("Phúc Đức", "Hóa Quyền", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Hữu Bật + Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Hữu Bật", false) && isSaoHoiChieuRong("Phúc Đức", "Hóa Lộc", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Hữu Bật + Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Hữu Bật", false) && isSaoHoiChieuRong("Phúc Đức", "Bạch Hổ", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Hữu Bật + Bạch Hổ");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Hữu Bật", false) && isSaoHoiChieuRong("Phúc Đức", "Thiên Riêu", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Hữu Bật + Thiên Riêu");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Phượng Các", false) && isSaoHoiChieuRong("Phúc Đức", "Hóa Khoa", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Phượng Các + Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Phượng Các", false) && isSaoHoiChieuRong("Phúc Đức", "Hóa Quyền", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Phượng Các + Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Phượng Các", false) && isSaoHoiChieuRong("Phúc Đức", "Hóa Lộc", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Phượng Các + Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Phượng Các", false) && isSaoHoiChieuRong("Phúc Đức", "Bạch Hổ", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Phượng Các + Bạch Hổ");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Phượng Các", false) && isSaoHoiChieuRong("Phúc Đức", "Thiên Riêu", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Phượng Các + Thiên Riêu");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Long Trì", false) && isSaoHoiChieuRong("Phúc Đức", "Hóa Khoa", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Long Trì + Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Long Trì", false) && isSaoHoiChieuRong("Phúc Đức", "Hóa Quyền", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Long Trì + Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Long Trì", false) && isSaoHoiChieuRong("Phúc Đức", "Hóa Lộc", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Long Trì + Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Long Trì", false) && isSaoHoiChieuRong("Phúc Đức", "Bạch Hổ", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Long Trì + Bạch Hổ");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isSaoHoiChieuRong("Phúc Đức", "Long Trì", false) && isSaoHoiChieuRong("Phúc Đức", "Thiên Riêu", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)c - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp Long Trì + Thiên Riêu");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isTrangSinhTaiCung("Phúc Đức", "Mộ") && isSaoHoiChieuRong("Phúc Đức", "Hóa Khoa", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)d - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp vòng Tràng Sinh: Mộ + Hóa Khoa");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isTrangSinhTaiCung("Phúc Đức", "Mộ") && isSaoHoiChieuRong("Phúc Đức", "Hóa Quyền", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)d - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp vòng Tràng Sinh: Mộ + Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isTrangSinhTaiCung("Phúc Đức", "Mộ") && isSaoHoiChieuRong("Phúc Đức", "Hóa Lộc", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)d - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp vòng Tràng Sinh: Mộ + Hóa Lộc");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isTrangSinhTaiCung("Phúc Đức", "Mộ") && isSaoHoiChieuRong("Phúc Đức", "Bạch Hổ", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)d - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp vòng Tràng Sinh: Mộ + Bạch Hổ");
+    }
+    if (isSaoToaThuTaiCung("Phúc Đức", "Vũ Khúc") && isSaoToaThuTaiCung("Phúc Đức", "Tham Lang") && (isCungTaiChi("Phúc Đức", "Sửu")) && isTrangSinhTaiCung("Phúc Đức", "Mộ") && isSaoHoiChieuRong("Phúc Đức", "Thiên Riêu", false)) {
+        keyArr.push("Phú Giải số 30 (VŨ KHÚC)d - Phúc Đức: Vũ Khúc + Tham Lang tọa thủ ở Sửu, gặp vòng Tràng Sinh: Mộ + Thiên Riêu");
+    }
+}
+// PHU17-END

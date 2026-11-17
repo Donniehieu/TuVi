@@ -4164,29 +4164,83 @@ function LuanPhuGiaiLan17_quanloc(keyArr) {
     if (isSaoToaThuTaiCung("Quan Lộc", "Thái Dương") && isSaoToaThuTaiCung("Quan Lộc", "Văn Xương")) {
         keyArr.push("Phú Giải số 52 (THÁI DƯƠNG) - Quan Lộc: Thái Dương + Văn Xương tọa thủ");
     }
-    if (isSaoToaThuTaiCung("Quan Lộc", "Thái Dương") && (isCungTaiChi("Quan Lộc", "Mão") || isCungTaiChi("Quan Lộc", "Thìn") || isCungTaiChi("Quan Lộc", "Tỵ") || isCungTaiChi("Quan Lộc", "Ngọ"))) {
-        keyArr.push("Phú Giải số 61 (THÁI DƯƠNG)a - Quan Lộc: Thái Dương tọa thủ ở Mão/Thìn/Tỵ/Ngọ");
+    if (isSaoToaThuTaiCung("Quan Lộc", "Thái Dương") && (isCungTaiChi("Quan Lộc", "Mão"))) {
+        keyArr.push("Phú Giải số 61 (THÁI DƯƠNG)a - Quan Lộc: Thái Dương tọa thủ ở Mão");
     }
-    if (isSaoToaThuTaiCung("Quan Lộc", "Thái Âm") && (isCungTaiChi("Quan Lộc", "Dậu") || isCungTaiChi("Quan Lộc", "Tuất") || isCungTaiChi("Quan Lộc", "Hợi") || isCungTaiChi("Quan Lộc", "Tý"))) {
-        keyArr.push("Phú Giải số 61 (THÁI DƯƠNG)b - Quan Lộc: Thái Âm tọa thủ ở Dậu/Tuất/Hợi/Tý");
+    if (isSaoToaThuTaiCung("Quan Lộc", "Thái Dương") && (isCungTaiChi("Quan Lộc", "Thìn"))) {
+        keyArr.push("Phú Giải số 61 (THÁI DƯƠNG)a - Quan Lộc: Thái Dương tọa thủ ở Thìn");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Thái Dương") && (isCungTaiChi("Quan Lộc", "Tỵ"))) {
+        keyArr.push("Phú Giải số 61 (THÁI DƯƠNG)a - Quan Lộc: Thái Dương tọa thủ ở Tỵ");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Thái Dương") && (isCungTaiChi("Quan Lộc", "Ngọ"))) {
+        keyArr.push("Phú Giải số 61 (THÁI DƯƠNG)a - Quan Lộc: Thái Dương tọa thủ ở Ngọ");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Thái Âm") && (isCungTaiChi("Quan Lộc", "Dậu"))) {
+        keyArr.push("Phú Giải số 61 (THÁI DƯƠNG)b - Quan Lộc: Thái Âm tọa thủ ở Dậu");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Thái Âm") && (isCungTaiChi("Quan Lộc", "Tuất"))) {
+        keyArr.push("Phú Giải số 61 (THÁI DƯƠNG)b - Quan Lộc: Thái Âm tọa thủ ở Tuất");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Thái Âm") && (isCungTaiChi("Quan Lộc", "Hợi"))) {
+        keyArr.push("Phú Giải số 61 (THÁI DƯƠNG)b - Quan Lộc: Thái Âm tọa thủ ở Hợi");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Thái Âm") && (isCungTaiChi("Quan Lộc", "Tý"))) {
+        keyArr.push("Phú Giải số 61 (THÁI DƯƠNG)b - Quan Lộc: Thái Âm tọa thủ ở Tý");
     }
     if (isSaoHoiChieuRong("Quan Lộc", "Hóa Quyền", false) && isSaoHoiChieuRong("Quan Lộc", "Hóa Lộc", false)) {
         keyArr.push("Phú Giải số 26 (HÓA KỴ) - Quan Lộc, gặp Hóa Quyền + Hóa Lộc");
     }
-    if (isSaoToaThuTaiCung("Quan Lộc", "Hóa Lộc") && (isCungTaiChi("Quan Lộc", "Tý") || isCungTaiChi("Quan Lộc", "Ngọ") || isCungTaiChi("Quan Lộc", "Thân") || isCungTaiChi("Quan Lộc", "Dậu")) && (isSaoHoiChieuRong("Quan Lộc", "Địa Không", false) || isSaoHoiChieuRong("Quan Lộc", "Địa Kiếp", false))) {
-        keyArr.push("Phú Giải số 34 (HÓA KỴ) - Quan Lộc: Hóa Lộc tọa thủ ở Tý/Ngọ/Thân/Dậu, gặp Địa Không hoặc Địa Kiếp");
+    if (isSaoToaThuTaiCung("Quan Lộc", "Hóa Lộc") && (isCungTaiChi("Quan Lộc", "Tý")) && isSaoHoiChieuRong("Quan Lộc", "Địa Không", false)) {
+        keyArr.push("Phú Giải số 34 (HÓA KỴ) - Quan Lộc: Hóa Lộc tọa thủ ở Tý, gặp Địa Không");
     }
-    if (isSaoToaThuTaiCung("Quan Lộc", "Địa Không") && isSaoToaThuTaiCung("Quan Lộc", "Địa Kiếp") && (isCungTaiChi("Quan Lộc", "Tỵ") || isCungTaiChi("Quan Lộc", "Hợi"))) {
-        keyArr.push("Phú Giải số 30 (ĐỊA KIẾP) - Quan Lộc: Địa Không + Địa Kiếp tọa thủ ở Tỵ/Hợi");
+    if (isSaoToaThuTaiCung("Quan Lộc", "Hóa Lộc") && (isCungTaiChi("Quan Lộc", "Tý")) && isSaoHoiChieuRong("Quan Lộc", "Địa Kiếp", false)) {
+        keyArr.push("Phú Giải số 34 (HÓA KỴ) - Quan Lộc: Hóa Lộc tọa thủ ở Tý, gặp Địa Kiếp");
     }
-    if ((isSaoToaThuTaiCung("Quan Lộc", "Đại Hao") || isSaoToaThuTaiCung("Quan Lộc", "Tiểu Hao")) && (isSaoHoiChieuRong("Quan Lộc", "Cự Môn", false) || isSaoHoiChieuRong("Quan Lộc", "Vũ Khúc", false)) && isSaoHoiChieuRong("Quan Lộc", "Hóa Quyền", false)) {
-        keyArr.push("Phú Giải số 5 (TIỂU HAO) - Quan Lộc: Đại Hao hoặc Tiểu Hao tọa thủ, gặp Cự Môn hoặc Vũ Khúc + Hóa Quyền");
+    if (isSaoToaThuTaiCung("Quan Lộc", "Hóa Lộc") && (isCungTaiChi("Quan Lộc", "Ngọ")) && isSaoHoiChieuRong("Quan Lộc", "Địa Không", false)) {
+        keyArr.push("Phú Giải số 34 (HÓA KỴ) - Quan Lộc: Hóa Lộc tọa thủ ở Ngọ, gặp Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Hóa Lộc") && (isCungTaiChi("Quan Lộc", "Ngọ")) && isSaoHoiChieuRong("Quan Lộc", "Địa Kiếp", false)) {
+        keyArr.push("Phú Giải số 34 (HÓA KỴ) - Quan Lộc: Hóa Lộc tọa thủ ở Ngọ, gặp Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Hóa Lộc") && (isCungTaiChi("Quan Lộc", "Thân")) && isSaoHoiChieuRong("Quan Lộc", "Địa Không", false)) {
+        keyArr.push("Phú Giải số 34 (HÓA KỴ) - Quan Lộc: Hóa Lộc tọa thủ ở Thân, gặp Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Hóa Lộc") && (isCungTaiChi("Quan Lộc", "Thân")) && isSaoHoiChieuRong("Quan Lộc", "Địa Kiếp", false)) {
+        keyArr.push("Phú Giải số 34 (HÓA KỴ) - Quan Lộc: Hóa Lộc tọa thủ ở Thân, gặp Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Hóa Lộc") && (isCungTaiChi("Quan Lộc", "Dậu")) && isSaoHoiChieuRong("Quan Lộc", "Địa Không", false)) {
+        keyArr.push("Phú Giải số 34 (HÓA KỴ) - Quan Lộc: Hóa Lộc tọa thủ ở Dậu, gặp Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Hóa Lộc") && (isCungTaiChi("Quan Lộc", "Dậu")) && isSaoHoiChieuRong("Quan Lộc", "Địa Kiếp", false)) {
+        keyArr.push("Phú Giải số 34 (HÓA KỴ) - Quan Lộc: Hóa Lộc tọa thủ ở Dậu, gặp Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Địa Không") && isSaoToaThuTaiCung("Quan Lộc", "Địa Kiếp") && (isCungTaiChi("Quan Lộc", "Tỵ"))) {
+        keyArr.push("Phú Giải số 30 (ĐỊA KIẾP) - Quan Lộc: Địa Không + Địa Kiếp tọa thủ ở Tỵ");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Địa Không") && isSaoToaThuTaiCung("Quan Lộc", "Địa Kiếp") && (isCungTaiChi("Quan Lộc", "Hợi"))) {
+        keyArr.push("Phú Giải số 30 (ĐỊA KIẾP) - Quan Lộc: Địa Không + Địa Kiếp tọa thủ ở Hợi");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Đại Hao") && isSaoHoiChieuRong("Quan Lộc", "Cự Môn", false) && isSaoHoiChieuRong("Quan Lộc", "Hóa Quyền", false)) {
+        keyArr.push("Phú Giải số 5 (TIỂU HAO) - Quan Lộc: Đại Hao tọa thủ, gặp Cự Môn + Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Đại Hao") && isSaoHoiChieuRong("Quan Lộc", "Vũ Khúc", false) && isSaoHoiChieuRong("Quan Lộc", "Hóa Quyền", false)) {
+        keyArr.push("Phú Giải số 5 (TIỂU HAO) - Quan Lộc: Đại Hao tọa thủ, gặp Vũ Khúc + Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Tiểu Hao") && isSaoHoiChieuRong("Quan Lộc", "Cự Môn", false) && isSaoHoiChieuRong("Quan Lộc", "Hóa Quyền", false)) {
+        keyArr.push("Phú Giải số 5 (TIỂU HAO) - Quan Lộc: Tiểu Hao tọa thủ, gặp Cự Môn + Hóa Quyền");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Tiểu Hao") && isSaoHoiChieuRong("Quan Lộc", "Vũ Khúc", false) && isSaoHoiChieuRong("Quan Lộc", "Hóa Quyền", false)) {
+        keyArr.push("Phú Giải số 5 (TIỂU HAO) - Quan Lộc: Tiểu Hao tọa thủ, gặp Vũ Khúc + Hóa Quyền");
     }
     if (((isSaoToaThuTaiCung("Quan Lộc", "Thiên Khôi") && isSaoHoiChieuRong("Quan Lộc", "Thiên Việt", false)) || (isSaoToaThuTaiCung("Quan Lộc", "Thiên Việt") && isSaoHoiChieuRong("Quan Lộc", "Thiên Khôi", false)))) {
         keyArr.push("Phú Giải số 20 (THIÊN VIỆT) - Quan Lộc: Thiên Khôi, Thiên Việt (tọa hoặc chiếu)");
     }
-    if ((isSaoToaThuTaiCung("Quan Lộc", "Tả Phù") || isSaoToaThuTaiCung("Quan Lộc", "Hữu Bật")) && isSaoToaThuTaiCung("Quan Lộc", "Thiên Phúc")) {
-        keyArr.push("Phú Giải số 9 (HỮU BẬT) - Quan Lộc: Tả Phù hoặc Hữu Bật + Thiên Phúc tọa thủ");
+    if (isSaoToaThuTaiCung("Quan Lộc", "Tả Phù") && isSaoToaThuTaiCung("Quan Lộc", "Thiên Phúc")) {
+        keyArr.push("Phú Giải số 9 (HỮU BẬT) - Quan Lộc: Tả Phù + Thiên Phúc tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Quan Lộc", "Hữu Bật") && isSaoToaThuTaiCung("Quan Lộc", "Thiên Phúc")) {
+        keyArr.push("Phú Giải số 9 (HỮU BẬT) - Quan Lộc: Hữu Bật + Thiên Phúc tọa thủ");
     }
     if (isSaoToaThuTaiCung("Quan Lộc", "Tả Phù") && isSaoToaThuTaiCung("Quan Lộc", "Hữu Bật")) {
         keyArr.push("Phú Giải số 30 (HỮU BẬT) - Quan Lộc: Tả Phù + Hữu Bật tọa thủ");

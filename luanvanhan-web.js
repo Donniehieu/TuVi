@@ -166,6 +166,7 @@
         var excelDiv = document.querySelector('#' + divId + ' .bo-sao-excel');
         if (!excelDiv) return;
         var found = results.filter(function (r) { return r.found && r.values.length > 0; });
+        if (typeof GopKhoaCu !== 'undefined') found = GopKhoaCu.gop(found);   // gộp các khóa đã tách của cùng một quy tắc
         if (found.length > 0) {
             excelDiv.innerHTML = found.map(function (r) {
                 return '<div class="bo-sao-group"><b>' + thoat(tenKhoaHienThi(r.key)) + ':</b>' +
@@ -177,6 +178,7 @@
     };
     function khoiHtml(tieuDe, ketQua, tenCung) {
         var tim = ketQua.filter(function (r) { return r.found && r.values.length; });
+        if (typeof GopKhoaCu !== 'undefined') tim = GopKhoaCu.gop(tim);
         var html = '<div class="cung-item vanhan-khoi"><b>' + thoat(tieuDe) + '</b>';
         if (!tim.length) html += '<div><em>Không có dữ liệu cho phần này.</em></div>';
         tim.forEach(function (r) {

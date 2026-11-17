@@ -3580,17 +3580,56 @@ function LuanPhuGiaiLan17_dientrach(keyArr) {
     if (isSaoToaThuTaiCung("Điền Trạch", "Vũ Khúc") && isSaoToaThuTaiCung("Điền Trạch", "Tham Lang")) {
         keyArr.push("Phú Giải số 8 (VŨ KHÚC) - Điền Trạch: Vũ Khúc + Tham Lang tọa thủ");
     }
-    if (isSaoToaThuTaiCung("Điền Trạch", "Vũ Khúc") && isSaoToaThuTaiCung("Điền Trạch", "Phá Quân") && (isCungTaiChi("Điền Trạch", "Tỵ") || isCungTaiChi("Điền Trạch", "Hợi"))) {
-        keyArr.push("Phú Giải số 15 (VŨ KHÚC) - Điền Trạch: Vũ Khúc + Phá Quân tọa thủ ở Tỵ/Hợi");
+    if (isSaoToaThuTaiCung("Điền Trạch", "Vũ Khúc") && isSaoToaThuTaiCung("Điền Trạch", "Phá Quân") && (isCungTaiChi("Điền Trạch", "Tỵ"))) {
+        keyArr.push("Phú Giải số 15 (VŨ KHÚC) - Điền Trạch: Vũ Khúc + Phá Quân tọa thủ ở Tỵ");
     }
-    if (isSaoToaThuTaiCung("Điền Trạch", "Thiên Cơ") && isSaoToaThuTaiCung("Điền Trạch", "Thiên Lương") && (isSaoHoiChieuRong("Điền Trạch", "Hóa Lộc", false) || isSaoHoiChieuRong("Điền Trạch", "Lộc Tồn", false)) && isSaoHoiChieuRong("Điền Trạch", "Thiên Mã", false)) {
-        keyArr.push("Phú Giải số 14 (THIÊN – CƠ) - Điền Trạch: Thiên Cơ + Thiên Lương tọa thủ, gặp Hóa Lộc hoặc Lộc Tồn + Thiên Mã");
+    if (isSaoToaThuTaiCung("Điền Trạch", "Vũ Khúc") && isSaoToaThuTaiCung("Điền Trạch", "Phá Quân") && (isCungTaiChi("Điền Trạch", "Hợi"))) {
+        keyArr.push("Phú Giải số 15 (VŨ KHÚC) - Điền Trạch: Vũ Khúc + Phá Quân tọa thủ ở Hợi");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Thiên Cơ") && isSaoToaThuTaiCung("Điền Trạch", "Thiên Lương") && isSaoHoiChieuRong("Điền Trạch", "Hóa Lộc", false) && isSaoHoiChieuRong("Điền Trạch", "Thiên Mã", false)) {
+        keyArr.push("Phú Giải số 14 (THIÊN – CƠ) - Điền Trạch: Thiên Cơ + Thiên Lương tọa thủ, gặp Hóa Lộc + Thiên Mã");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Thiên Cơ") && isSaoToaThuTaiCung("Điền Trạch", "Thiên Lương") && isSaoHoiChieuRong("Điền Trạch", "Lộc Tồn", false) && isSaoHoiChieuRong("Điền Trạch", "Thiên Mã", false)) {
+        keyArr.push("Phú Giải số 14 (THIÊN – CƠ) - Điền Trạch: Thiên Cơ + Thiên Lương tọa thủ, gặp Lộc Tồn + Thiên Mã");
     }
     if (isSaoToaThuTaiCung("Điền Trạch", "Cự Môn") && isSaoToaThuTaiCung("Điền Trạch", "Thiên Cơ")) {
         keyArr.push("Phú Giải số 46 (CỰ MÔN) - Điền Trạch: Cự Môn + Thiên Cơ tọa thủ");
     }
-    if ((isSaoToaThuTaiCung("Điền Trạch", "Thái Dương") || isSaoToaThuTaiCung("Điền Trạch", "Thái Âm")) && (isSaoHoiChieuRong("Điền Trạch", "Kình Dương", false) || isSaoHoiChieuRong("Điền Trạch", "Đà La", false) || isSaoHoiChieuRong("Điền Trạch", "Địa Không", false) || isSaoHoiChieuRong("Điền Trạch", "Địa Kiếp", false) || isSaoHoiChieuRong("Điền Trạch", "Hỏa Tinh", false) || isSaoHoiChieuRong("Điền Trạch", "Linh Tinh", false))) {
-        keyArr.push("Phú Giải số 66 (THÁI DƯƠNG) - Điền Trạch: Thái Dương hoặc Thái Âm tọa thủ, gặp Kình Dương hoặc Đà La hoặc Địa Không hoặc Địa Kiếp hoặc Hỏa Tinh hoặc Linh Tinh");
+    if (isSaoToaThuTaiCung("Điền Trạch", "Thái Dương") && isSaoHoiChieuRong("Điền Trạch", "Kình Dương", false)) {
+        keyArr.push("Phú Giải số 66 (THÁI DƯƠNG) - Điền Trạch: Thái Dương tọa thủ, gặp Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Thái Dương") && isSaoHoiChieuRong("Điền Trạch", "Đà La", false)) {
+        keyArr.push("Phú Giải số 66 (THÁI DƯƠNG) - Điền Trạch: Thái Dương tọa thủ, gặp Đà La");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Thái Dương") && isSaoHoiChieuRong("Điền Trạch", "Địa Không", false)) {
+        keyArr.push("Phú Giải số 66 (THÁI DƯƠNG) - Điền Trạch: Thái Dương tọa thủ, gặp Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Thái Dương") && isSaoHoiChieuRong("Điền Trạch", "Địa Kiếp", false)) {
+        keyArr.push("Phú Giải số 66 (THÁI DƯƠNG) - Điền Trạch: Thái Dương tọa thủ, gặp Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Thái Dương") && isSaoHoiChieuRong("Điền Trạch", "Hỏa Tinh", false)) {
+        keyArr.push("Phú Giải số 66 (THÁI DƯƠNG) - Điền Trạch: Thái Dương tọa thủ, gặp Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Thái Dương") && isSaoHoiChieuRong("Điền Trạch", "Linh Tinh", false)) {
+        keyArr.push("Phú Giải số 66 (THÁI DƯƠNG) - Điền Trạch: Thái Dương tọa thủ, gặp Linh Tinh");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Thái Âm") && isSaoHoiChieuRong("Điền Trạch", "Kình Dương", false)) {
+        keyArr.push("Phú Giải số 66 (THÁI DƯƠNG) - Điền Trạch: Thái Âm tọa thủ, gặp Kình Dương");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Thái Âm") && isSaoHoiChieuRong("Điền Trạch", "Đà La", false)) {
+        keyArr.push("Phú Giải số 66 (THÁI DƯƠNG) - Điền Trạch: Thái Âm tọa thủ, gặp Đà La");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Thái Âm") && isSaoHoiChieuRong("Điền Trạch", "Địa Không", false)) {
+        keyArr.push("Phú Giải số 66 (THÁI DƯƠNG) - Điền Trạch: Thái Âm tọa thủ, gặp Địa Không");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Thái Âm") && isSaoHoiChieuRong("Điền Trạch", "Địa Kiếp", false)) {
+        keyArr.push("Phú Giải số 66 (THÁI DƯƠNG) - Điền Trạch: Thái Âm tọa thủ, gặp Địa Kiếp");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Thái Âm") && isSaoHoiChieuRong("Điền Trạch", "Hỏa Tinh", false)) {
+        keyArr.push("Phú Giải số 66 (THÁI DƯƠNG) - Điền Trạch: Thái Âm tọa thủ, gặp Hỏa Tinh");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Thái Âm") && isSaoHoiChieuRong("Điền Trạch", "Linh Tinh", false)) {
+        keyArr.push("Phú Giải số 66 (THÁI DƯƠNG) - Điền Trạch: Thái Âm tọa thủ, gặp Linh Tinh");
     }
     if (isSaoToaThuTaiCung("Điền Trạch", "Hóa Kỵ")) {
         keyArr.push("Phú Giải số 38 (HÓA KỴ) - Điền Trạch: Hóa Kỵ tọa thủ");
@@ -3601,8 +3640,11 @@ function LuanPhuGiaiLan17_dientrach(keyArr) {
     if (isSaoToaThuTaiCung("Điền Trạch", "Thiên Mã")) {
         keyArr.push("Phú Giải số 18 (THIÊN MÃ) - Điền Trạch: Thiên Mã tọa thủ");
     }
-    if ((isSaoToaThuTaiCung("Điền Trạch", "Cô Thần") || isSaoToaThuTaiCung("Điền Trạch", "Quả Tú"))) {
-        keyArr.push("Phú Giải số 1 (PHỤ LỤC) - Điền Trạch: Cô Thần hoặc Quả Tú tọa thủ");
+    if (isSaoToaThuTaiCung("Điền Trạch", "Cô Thần")) {
+        keyArr.push("Phú Giải số 1 (PHỤ LỤC) - Điền Trạch: Cô Thần tọa thủ");
+    }
+    if (isSaoToaThuTaiCung("Điền Trạch", "Quả Tú")) {
+        keyArr.push("Phú Giải số 1 (PHỤ LỤC) - Điền Trạch: Quả Tú tọa thủ");
     }
 }
 // PHU17-END

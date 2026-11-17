@@ -3578,8 +3578,17 @@ function LuanPhuGiaiLan17_tutuc(keyArr) {
     try {
         lasoData = JSON.parse(localStorage.getItem('laso_data')) || {};
     } catch (e) { lasoData = {}; }
-    if (isSaoToaThuTaiCung("Tử Tức", "Vũ Khúc") && (isCungTaiChi("Tử Tức", "Thìn") || isCungTaiChi("Tử Tức", "Tuất") || isCungTaiChi("Tử Tức", "Sửu") || isCungTaiChi("Tử Tức", "Mùi"))) {
-        keyArr.push("Phú Giải số 27 (VŨ KHÚC) - Tử Tức: Vũ Khúc tọa thủ ở Thìn/Tuất/Sửu/Mùi");
+    if (isSaoToaThuTaiCung("Tử Tức", "Vũ Khúc") && (isCungTaiChi("Tử Tức", "Thìn"))) {
+        keyArr.push("Phú Giải số 27 (VŨ KHÚC) - Tử Tức: Vũ Khúc tọa thủ ở Thìn");
+    }
+    if (isSaoToaThuTaiCung("Tử Tức", "Vũ Khúc") && (isCungTaiChi("Tử Tức", "Tuất"))) {
+        keyArr.push("Phú Giải số 27 (VŨ KHÚC) - Tử Tức: Vũ Khúc tọa thủ ở Tuất");
+    }
+    if (isSaoToaThuTaiCung("Tử Tức", "Vũ Khúc") && (isCungTaiChi("Tử Tức", "Sửu"))) {
+        keyArr.push("Phú Giải số 27 (VŨ KHÚC) - Tử Tức: Vũ Khúc tọa thủ ở Sửu");
+    }
+    if (isSaoToaThuTaiCung("Tử Tức", "Vũ Khúc") && (isCungTaiChi("Tử Tức", "Mùi"))) {
+        keyArr.push("Phú Giải số 27 (VŨ KHÚC) - Tử Tức: Vũ Khúc tọa thủ ở Mùi");
     }
     if (isSaoToaThuTaiCung("Tử Tức", "Thất Sát") && isSaoHoiChieuRong("Tử Tức", "Đà La", false) && isSaoHoiChieuRong("Tử Tức", "Địa Không", false) && isSaoHoiChieuRong("Tử Tức", "Địa Kiếp", false)) {
         keyArr.push("Phú Giải số 13 (THẤT – SÁT) - Tử Tức: Thất Sát tọa thủ, gặp Đà La + Địa Không + Địa Kiếp");
