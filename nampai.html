@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<!-- [Sửa lỗi] Trước đây thiếu thẻ viewport nên trên điện thoại trang bị hiển thị như màn hình máy tính -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#5b3cc4">
+<meta name="description" content="Tử Vi Nam Phái (theo sách Mệnh Lý Thiên Cơ): lập lá số theo dương lịch: tự đổi âm lịch, an sao, đại vận, tiểu vận và luận giải.">
+<title>Lập Lá Số Tử Vi Nam Phái</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="nampai-store.js"></script>
+<script src="amlich-convert.js"></script>
+</head>
+<body>
+
+<header class="app-bar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">☯</span>
+    <span class="brand-name">Tử Vi Nam Phái</span>
+  </div>
+  <span class="brand-sub"><a href="index.html" style="color:inherit">← Tử Vi thường</a> · Lập lá số · Luận giải Nam Phái</span>
+</header>
+
+<main class="app">
+
+  <!-- ========== MÀN HÌNH 1: NHẬP THÔNG TIN ========== -->
+  <section id="form-row" class="screen" aria-labelledby="form-title">
+    <div class="hero">
+      <h1 id="form-title">Tử Vi Nam Phái</h1>
+      <p>An sao và luận giải theo sách "Mệnh Lý Thiên Cơ" (Tử Vi Nam Phái). Nhập ngày giờ sinh dương lịch; ứng dụng tự đổi sang âm lịch.</p>
+    </div>
+
+    <div class="surface form-card">
+      <form id="form_tuvi" autocomplete="off">
+
+        <div class="field">
+          <label for="hoten" class="label">Họ và tên</label>
+          <input type="text" class="ui-input" id="hoten" placeholder="Nhập họ tên" maxlength="60" autocomplete="name" enterkeyhint="next">
+        </div>
+
+        <div class="field">
+          <span class="label" id="ngaysinh-label">Ngày sinh (dương lịch)</span>
+          <div class="date-row" role="group" aria-labelledby="ngaysinh-label">
+            <div class="date-col">
+              <input type="number" class="ui-input" id="ngay" min="1" max="31" required placeholder="Ngày" inputmode="numeric" aria-label="Ngày sinh" enterkeyhint="next">
+            </div>
+            <div class="date-col">
+              <input type="number" class="ui-input" id="thang" min="1" max="12" required placeholder="Tháng" inputmode="numeric" aria-label="Tháng sinh" enterkeyhint="next">
+            </div>
+            <div class="date-col">
+              <input type="number" class="ui-input" id="nam" min="1900" max="2100" required placeholder="Năm" inputmode="numeric" aria-label="Năm sinh" enterkeyhint="next">
+            </div>
+          </div>
+          <div id="amlich" class="notice d-none" role="status"></div>
+        </div>
+
+        <div class="field">
+          <label for="gio" class="label">Giờ sinh</label>
+          <select class="ui-input ui-select" id="gio">
+            <option value="Tý">Tý (23h-1h)</option>
+            <option value="Sửu">Sửu (1h-3h)</option>
+            <option value="Dần">Dần (3h-5h)</option>
+            <option value="Mão">Mão (5h-7h)</option>
+            <option value="Thìn">Thìn (7h-9h)</option>
+            <option value="Tỵ">Tỵ (9h-11h)</option>
+            <option value="Ngọ">Ngọ (11h-13h)</option>
+            <option value="Mùi">Mùi (13h-15h)</option>
+            <option value="Thân">Thân (15h-17h)</option>
+            <option value="Dậu">Dậu (17h-19h)</option>
+            <option value="Tuất">Tuất (19h-21h)</option>
+            <option value="Hợi">Hợi (21h-23h)</option>
+          </select>
+        </div>
+
+        <div class="field-grid">
+          <div class="field">
+            <span class="label" id="gt-label">Giới tính</span>
+            <div class="segmented" role="radiogroup" aria-labelledby="gt-label">
+              <button type="button" class="seg is-on" role="radio" aria-checked="true" data-value="Nam">Nam</button>
+              <button type="button" class="seg" role="radio" aria-checked="false" data-value="Nữ">Nữ</button>
+            </div>
+            <input type="hidden" id="gioitinh" value="Nam">
+          </div>
+          <div class="field">
+            <label for="namxemhan" class="label">Năm xem hạn</label>
+            <input type="number" class="ui-input" id="namxemhan" min="1900" max="2100" required inputmode="numeric" enterkeyhint="done">
+          </div>
+        </div>
+
+        <button type="submit" id="btn_xemtuvi" class="ui-btn ui-btn--primary ui-btn--block" disabled>Xem tử vi</button>
+        <p id="form-hint" class="hint" aria-live="polite"></p>
+      </form>
+      <div id="ketqua"></div>
+    </div>
+  </section>
+
+  <!-- ========== MÀN HÌNH 2: KẾT QUẢ ========== -->
+  <section id="laso-row" class="screen d-none" aria-labelledby="result-name">
+    <div class="result-head">
+      <div>
+        <h2 id="result-name" class="result-name">Lá số Tử Vi</h2>
+        <p id="result-meta" class="result-meta"></p>
+      </div>
+      <button type="button" id="btn-back-form" class="ui-btn ui-btn--ghost">← Sửa thông tin</button>
+    </div>
+
+    <nav class="tabs" role="tablist" aria-label="Chọn cách xem lá số">
+      <button type="button" class="tab is-on" role="tab" aria-selected="true" data-tab="board">Bàn lá số</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-tab="cards">Từng cung</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-tab="info">Thông tin</button>
+    </nav>
+
+    <!-- Tab 1: bàn lá số -->
+    <div id="pane-board" class="pane pane-board">
+      <div class="board-tools">
+        <div class="tool-group" role="group" aria-label="Phóng to thu nhỏ">
+          <button type="button" id="btn-zoom-out" class="ui-btn ui-btn--icon" aria-label="Thu nhỏ">−</button>
+          <span id="zoom-label" class="zoom-label" aria-live="polite">100%</span>
+          <button type="button" id="btn-zoom-in" class="ui-btn ui-btn--icon" aria-label="Phóng to">+</button>
+          <button type="button" id="btn-fit" class="ui-btn ui-btn--ghost ui-btn--sm">Vừa màn hình</button>
+        </div>
+        <div class="tool-group">
+          <button type="button" id="btn-full" class="ui-btn ui-btn--ghost ui-btn--sm" aria-pressed="false">Toàn màn hình</button>
+          <button type="button" id="btn-download" class="ui-btn ui-btn--ghost ui-btn--sm" disabled>Tải ảnh</button>
+        </div>
+      </div>
+
+      <div id="board-viewport">
+        <div id="board-sizer">
+          <div id="board-scaler">
+
+            <div class="laso-wrapper">
+              <svg id="lasoSvgOverlay" style="position:absolute; left:0; top:0; width:100%; height:100%; pointer-events:none; z-index:10;"></svg>
+              <div class="laso-grid" id="lasoGrid">
+
+                <!-- Hàng 1 -->
+                <div class="laso-cell cell1">Tỵ</div>
+                <div class="laso-cell cell2">Ngọ</div>
+                <div class="laso-cell cell3">Mùi</div>
+                <div class="laso-cell cell4">Thân</div>
+                <!-- Hàng 2 -->
+                <div class="laso-cell cell5">Thìn</div>
+                <div class="laso-cell center" id="cungGop">
+                  <!-- JS sẽ điền thông tin -->
+                </div>
+                <div class="laso-cell cell8">Dậu</div>
+                <!-- Hàng 3 -->
+                <div class="laso-cell cell9">Mão</div>
+                <div class="laso-cell cell12">Tuất</div>
+                <!-- Hàng 4 -->
+                <div class="laso-cell cell13">Dần</div>
+                <div class="laso-cell cell14">Sửu</div>
+                <div class="laso-cell cell15">Tý</div>
+                <div class="laso-cell cell16">Hợi</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <p class="hint hint-board">Trên điện thoại: bấm + để phóng to rồi kéo để xem từng vùng, hoặc xoay ngang màn hình / chọn "Toàn màn hình".</p>
+    </div>
+
+    <!-- Tab 2: từng cung dạng thẻ -->
+    <div id="pane-cards" class="pane d-none">
+      <p class="hint">Mỗi thẻ là một cung, bắt đầu từ cung Mệnh. Chấm màu bên cạnh tên sao là ngũ hành của sao đó.</p>
+      <div id="cards" class="cards"></div>
+    </div>
+
+    <!-- Tab 3: thông tin chung -->
+    <div id="pane-info" class="pane d-none">
+      <div class="surface info-card" id="info-card"></div>
+    </div>
+
+    <div class="action-bar">
+      <button type="button" id="btn-xem-luan-giai" class="ui-btn ui-btn--primary">📖 Xem luận giải</button>
+    </div>
+  </section>
+</main>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="kiemtragiosinh.js"></script>
+<script src="ansao.js"></script>
+
+<script src="veduongtamhop.js"></script>
+<script src="chuplaso.js"></script>
+<script src="nguhanhcucmenh.js"></script>
+<script src="ancanchocung.js"></script>
+<script src="tencung.js"></script>
+<script src="kiemtrathongtin.js"></script>
+<script src="ansaochinhtinh.js"></script>
+<script src="tinhdaitieuvan.js"></script>
+<script src="ansaophutinh.js"></script>
+<script src="nampai-ansao.js"></script>
+<script src="ansaoluu.js"></script>
+<script src="ansaodaivan.js"></script>
+<script src="lasotheme.js"></script>
+<script src="laplaso.js"></script>
+<script src="cungdata.js"></script>
+<script src="advice.js"></script>
+
+<script src="thongtinchung.js"></script>
+
+<script src="luangiai.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<!-- Lớp giao diện: phải nạp sau cùng -->
+<script src="nampai-ui.js"></script>
+</body>
+</html>
