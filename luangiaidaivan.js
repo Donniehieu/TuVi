@@ -136,21 +136,21 @@ function HienThiNhanXetDaiVan() {
     let nhanXetTamHop = '';
     if (tamHopGroups.some(g => isSameGroup(g.cacChi, menhTamHop))){ nhanXetTamHop = "Tuế Hổ Phù";
         nhanXetTamHopMenh = `<div style="color:#d0021b;font-weight:bold;margin-bottom:1em;">
-            <i class="fa fa-star"></i> Tam hợp Tuế Hổ Phù ở đại vận Mệnh Tài Quan: Bạn sinh ra gặp rất nhiều sóng gió cuộc đời nhưng đến khi vào đại vận mà bạn đủ chín chắn, trưởng thành thì bạn sẽ được hưởng trọn vẹn thành quả của sự cố gắng, cuộc sống gắn liền phần nhiều đến tín ngưỡng và tôn giáo.
+            <i class="fa fa-star"></i> Tam hợp Tuế Hổ Phù ở đại vận Mệnh Tài Quan: {XH} sinh ra gặp rất nhiều sóng gió cuộc đời nhưng đến khi vào đại vận mà {xh} đủ chín chắn, trưởng thành thì {xh} sẽ được hưởng trọn vẹn thành quả của sự cố gắng, cuộc sống gắn liền phần nhiều đến tín ngưỡng và tôn giáo.
         </div>`;
     } else if (amLongTrucGroups.some(g => isSameGroup(g.cacChi, menhTamHop))) {nhanXetTamHop = "Âm Long Trực";
         nhanXetTamHopMenh = `<div style="color:#009688;font-weight:bold;margin-bottom:1em;">
-            <i class="fa fa-star"></i> Tam hợp Âm Long Trực ở đại vận Mệnh Tài Quan: Bạn là người thông minh và biết cách ứng xử phù hợp với hoàn cảnh.
-            "Thuận thiên vô chiến tự nhiên thành" là châm ngôn lẽ sống của bạn.
+            <i class="fa fa-star"></i> Tam hợp Âm Long Trực ở đại vận Mệnh Tài Quan: {XH} là người thông minh và biết cách ứng xử phù hợp với hoàn cảnh.
+            "Thuận thiên vô chiến tự nhiên thành" là châm ngôn lẽ sống của {xh}.
         </div>`;
     } else if (duongTuPhucGroups.some(g => isSameGroup(g.cacChi, menhTamHop))) { nhanXetTamHop = "Dương Tử Phúc";
         nhanXetTamHopMenh = `<div style="color:#1976d2;font-weight:bold;margin-bottom:1em;">
-            <i class="fa fa-star"></i> Tam hợp Dương Tử Phúc ở đại vận Mệnh Tài Quan: Bạn là người thông minh, trực giác nhanh nhạy, luôn có động thái đi trước đón đầu, khẳng định bản thân và đề cao cái tôi của bản thân.
+            <i class="fa fa-star"></i> Tam hợp Dương Tử Phúc ở đại vận Mệnh Tài Quan: {XH} là người thông minh, trực giác nhanh nhạy, luôn có động thái đi trước đón đầu, khẳng định bản thân và đề cao cái tôi của bản thân.
 
         </div>`;
     } else if (tangTueDieuGroups.some(g => isSameGroup(g.cacChi, menhTamHop))) {nhanXetTamHop = "Tang Tuế Điếu";
         nhanXetTamHopMenh = `<div style="color:#a600b7;font-weight:bold;margin-bottom:1em;">
-            <i class="fa fa-star"></i> Tam hợp Tang-Tuế-Điếu ở đại vận Mệnh Tài Quan: Bạn là người năng động, cuộc đời có rất nhiều thay đổi lớn.
+            <i class="fa fa-star"></i> Tam hợp Tang-Tuế-Điếu ở đại vận Mệnh Tài Quan: {XH} là người năng động, cuộc đời có rất nhiều thay đổi lớn.
         </div>`;
     }
     luanGiaiLoiKhuyen.push(nhanXetTamHop);
@@ -175,8 +175,8 @@ function HienThiNhanXetDaiVan() {
             const tenCungGroup = getTenCungByChiArr(groupTTD.cacChi, arr).join('-');
             tamHopNote += `<div class="tang-tue-dieu-note" style="color: rgb(209, 0, 0); margin-bottom: 0.5em;">
                 <b style= "margin-left:1em;">Cung này thuộc vòng Tang-Tuế-Điếu tại: ${tenCungGroup}</b><br>
-                Đại vận này bạn rất dễ rơi vào trạng thái lao đao, cuộc sống có nhiều biến động thay đổi lớn, dễ xảy ra tai nạn, đổ vỡ để rèn luyện bản thân trở nên mạnh mẽ, và có nhiều kinh nghiệm.
-                Tích cực và năng động sẽ giúp bạn gặt hái được nhiều kinh nghiệm và thành công.
+                Đại vận này {xh} rất dễ rơi vào trạng thái lao đao, cuộc sống có nhiều biến động thay đổi lớn, dễ xảy ra tai nạn, đổ vỡ để rèn luyện bản thân trở nên mạnh mẽ, và có nhiều kinh nghiệm.
+                Tích cực và năng động sẽ giúp {xh} gặt hái được nhiều kinh nghiệm và thành công.
             </div>`;
         }
         let groupALT = amLongTrucGroups.find(g => g.cacChi.includes(item.chi));
@@ -192,7 +192,7 @@ function HienThiNhanXetDaiVan() {
             const tenCungGroup = getTenCungByChiArr(groupDTP.cacChi, arr).join('-');
             tamHopNote += `<div class="duong-tu-phuc-note" style="color: rgb(209, 0, 0); margin-bottom: 0.5em;">
                 <b style= "margin-left:1em;">Cung này thuộc tam hợp Dương Tử Phúc tại: ${tenCungGroup}</b><br>
-                Đại vận này bạn sẽ có nhiều cơ hội để phát triển bản thân, cũng có nhiều cám dỗ sẽ đến với bạn khiến bạn sa ngã và mất tất cả.
+                Đại vận này {xh} sẽ có nhiều cơ hội để phát triển bản thân, cũng có nhiều cám dỗ sẽ đến với {xh} khiến {xh} sa ngã và mất tất cả.
             </div>`;
         }
         html += `<div class="daivan-item${(group || groupTTD || groupALT || groupDTP) ? ' thuoc-tam-hop-tue-ho-phu' : ''} ${item.cungTen}" id="${item.cungTen}" >
@@ -201,5 +201,5 @@ function HienThiNhanXetDaiVan() {
         </div>`;
     });
 
-    document.getElementById('daivan-content').innerHTML = nhanXetTamHopMenh + html;
+    document.getElementById('daivan-content').innerHTML = (typeof renderXungHo === 'function') ? renderXungHo(nhanXetTamHopMenh + html) : (nhanXetTamHopMenh + html);
 }
