@@ -70,6 +70,7 @@ var LuuNienNP = (function () {
             case 'FEI': r = fei(x.d, x.ob, v, false); break;
             case 'FEIT': r = fei(x.d, x.ob, v, true); break;
             case 'GT': r = x.d.gioitinh === v; break;
+            case 'THUAN': r = ((x.d.amduong === 'Dương Nam' || x.d.amduong === 'Âm Nữ') === (v === '1')); break;
             case 'CANC': { var q2 = v.indexOf(':'), cn2 = v.slice(0, q2), cg2 = x.ob.filter(function (c) { return c.tenCung === cn2; })[0]; r = !!cg2 && canCung(x.d, cg2) >= 0 && v.slice(q2 + 1).split('/').indexOf(CAN10[canCung(x.d, cg2)]) >= 0; break; }
             case 'GIAP': {
                 var ab = v.split('+'), idx = x.ob.indexOf(x.c), truoc = ten(x.ob[(idx + 11) % 12]), sau = ten(x.ob[(idx + 1) % 12]);
