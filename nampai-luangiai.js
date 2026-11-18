@@ -282,6 +282,18 @@
                 veLuu();
             };
         }
+        // Thái Tuế nhập quẻ: đưa năm sinh của người khác vào lá số (chương 5, mục 3)
+        vh.insertAdjacentHTML('beforeend', '<div id="tt-box"></div>');
+        function veThaiTue(nam, qh) {
+            const kq = (nam && typeof LuuNienNP !== 'undefined') ? LuuNienNP.thaiTue(data, nam, qh) : [];
+            document.getElementById('tt-box').innerHTML = '<h3>Thái Tuế nhập quẻ (xem quan hệ với người khác theo năm sinh)</h3>' +
+                `<div class="np-key"><b>Người liên quan</b><span>Năm sinh (dương lịch): <input type="number" id="tt-nam" min="1900" max="2100" value="${nam || ''}" style="width:90px"> ` +
+                `quan hệ: <select id="tt-qh">${['Huynh Đệ', 'Phu Thê', 'Tử Tức', 'Phụ Mẫu', 'Nô Bộc', 'Quan Lộc', 'Tài Bạch', 'Thiên Di', 'Điền Trạch', 'Phúc Đức', 'Tật Ách'].map(c => `<option value="${c}"${c === qh ? ' selected' : ''}>${c}</option>`).join('')}</select> ` +
+                '<button type="button" id="btn-tt">Xem</button></span></div>' +
+                (nam ? (kq.map(muc).join('') || '<p class="np-empty">Không có điều kiện nào trong sách khớp.</p>') : '');
+            document.getElementById('btn-tt').onclick = function () { veThaiTue(parseInt(document.getElementById('tt-nam').value, 10) || 0, document.getElementById('tt-qh').value); };
+        }
+        veThaiTue(0, 'Huynh Đệ');
         veLuu();
         const luu = (typeof LuuNienNP !== 'undefined') ? LuuNienNP.chay(luuRules, data) : [];
         let html = '';

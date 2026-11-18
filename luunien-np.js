@@ -189,6 +189,40 @@ var LuuNienNP = (function () {
         canNgay = canGio = -1;
         return kq;
     }
-    return { chay: chay };
+    /* Thái Tuế nhập quẻ (Mệnh Lý Thiên Cơ, chương 5 mục 3, tr.985-987): đưa năm sinh của người khác vào lá số.
+     * nam: năm dương lịch sinh của đối phương; quanHe: tên cung thể hiện quan hệ (vd "Huynh Đệ", "Phu Thê"). Trả về [{tieu, luan}]. */
+    function thaiTue(d, nam, quanHe) {
+        var kq = [], ob = d.lasoOb || [];
+        nam = parseInt(nam, 10); if (!(nam > 0) || !ob.length) return kq;
+        var ci = ((nam - 4) % 10 + 10) % 10, yi = ((nam - 4) % 12 + 12) % 12, chiSinh = CHI12[yi], canchi = CAN_FULL[ci] + ' ' + chiSinh;
+        var menh = ob.filter(function (c) { return c.tenCung === 'Mệnh'; })[0], qh = ob.filter(function (c) { return c.tenCung === quanHe; })[0];
+        if (!menh) return kq;
+        function sach(x, base) { return ((x - base) % 12 + 12) % 12; }
+        var pm = idxChi(menh.chi), pq = qh ? idxChi(qh.chi) : -1, tenQH = qh ? 'cung ' + quanHe : '';
+        var NAME = ['Hóa Lộc', 'Hóa Quyền', 'Hóa Khoa', 'Hóa Kỵ'];
+        for (var i = 0; i < 4; i++) {
+            var sao = HOA4[ci][i], cung = ob.filter(function (c) { return ten(c)[sao]; })[0];
+            if (!cung) continue;
+            var pc = idxChi(cung.chi), dm = sach(pc, pm), dq = pq >= 0 ? sach(pc, pq) : -1;
+            var tieu = 'Thái Tuế nhập quẻ: người sinh năm ' + canchi + ' (' + NAME[i] + ' ' + sao + ') nhập cung ' + cung.tenCung + ' (' + cung.chi + ')';
+            var y = [];
+            if (i === 0 && (dm === 0 || dm === 4 || dm === 8)) y.push('Hóa Lộc vào cung Mệnh hoặc tam hợp cung Mệnh: người này giúp ích cho bạn mà không yêu cầu đền đáp, có lợi cho bạn');
+            if (i === 3 && dm === 0) y.push('Hóa Kỵ vào cung Mệnh: người này không có lợi với bạn, thậm chí còn cản trở bạn');
+            if (dq >= 0 && (dq === 0 || dq === 4 || dq === 6 || dq === 8)) {
+                if (i === 0) y.push('Hóa Lộc tác động hoặc hội chiếu ' + tenQH + ': hai bên có mối quan hệ tình cảm tốt đẹp');
+                if (i === 1) y.push('Hóa Quyền tác động hoặc hội chiếu ' + tenQH + ': hai bên có hiện tượng chi phối lẫn nhau');
+                if (i === 3) y.push('Hóa Kỵ tác động hoặc hội chiếu ' + tenQH + ': tình cảm giữa hai bên không tốt hoặc còn có điều bất lợi khác');
+            }
+            if (y.length) kq.push({ tieu: tieu, luan: y.join('; ') + ' (Mệnh Lý Thiên Cơ, tr.985-986).' });
+        }
+        var cs = ob.filter(function (c) { return c.chi === chiSinh; })[0];
+        if (cs) {
+            var dc = sach(idxChi(cs.chi), pm), same = (dc === 0 || dc === 4 || dc === 8 || dc === 6);
+            kq.push({ tieu: 'Thái Tuế nhập quẻ: chi năm sinh ' + chiSinh + ' nhập cung ' + cs.tenCung,
+                luan: 'Chi năm sinh của đối phương rơi vào cung ' + cs.tenCung + ' (' + cs.chi + ') trong lá số của bạn' + (same ? ': cung này nằm trong tam phương tứ chính của cung Mệnh nên đối phương có tính cách giống bạn' : ': dùng cung này để suy mối quan hệ và đặc điểm của đối phương') + ' (Mệnh Lý Thiên Cơ, tr.986).' });
+        }
+        return kq;
+    }
+    return { chay: chay, thaiTue: thaiTue };
 })();
 if (typeof window !== 'undefined') window.LuuNienNP = LuuNienNP;
