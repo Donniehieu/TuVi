@@ -212,6 +212,7 @@ document.getElementById('form_tuvi').addEventListener('submit', function (e) {
     anLuuKinhDuongDaLa(canchiNamXemHan.split(' ')[0]);
     // Gọi hàm an sao lưu tứ hóa
     anSaoLuuTuHoa(canchiNamXemHan.split(' ')[0], cuCungSao);
+    if (typeof window.locSaoSauAnSao === 'function') window.locSaoSauAnSao();   // Nam Phái: bỏ các sao sách không có
     // An đại vận sao
     let daiVanArr = [];
     for (let i = 0; i < 12; ++i) { daiVanArr.push(cucSo + i * 10); }

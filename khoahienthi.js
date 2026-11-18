@@ -197,6 +197,110 @@ var KhoaHienThi = (function () {
         return s.replace(RX_THUA, '');
     }
 
+    // ---------------- nhóm sao trong lời luận -> sao CỤ THỂ trong lá số (đồng nhất với KhoaHienThi.GiaiNhom của Unity) ----------------
+    var SAT6 = ['Kình Dương', 'Đà La', 'Hỏa Tinh', 'Linh Tinh', 'Địa Không', 'Địa Kiếp'], TUSAT = ['Kình Dương', 'Đà La', 'Hỏa Tinh', 'Linh Tinh'];
+    var LUCCAT = ['Văn Xương', 'Văn Khúc', 'Tả Phù', 'Hữu Bật', 'Thiên Khôi', 'Thiên Việt'], TAMHOA = ['Hóa Lộc', 'Hóa Quyền', 'Hóa Khoa'];
+    var CAT_CU = ['Hóa Khoa', 'Hóa Quyền', 'Hóa Lộc', 'Lộc Tồn', 'Quốc Ấn', 'Tả Phù', 'Hữu Bật', 'Văn Xương', 'Văn Khúc', 'Thiên Khôi', 'Thiên Việt', 'Long Trì', 'Phượng Các', 'Thanh Long', 'Thiên Quan', 'Thiên Phúc', 'Ân Quang', 'Thiên Quý', 'Tam Thai', 'Bát Tọa', 'Thiên Giải', 'Địa Giải'];
+    function nhomChung(np) {
+        var l = [
+            { re: 'tứ sát|tứ hung|tam sát', sao: TUSAT }, { re: 'lục sát|(?:gặp |thêm |có )?sát tinh|ác sát|(?:gặp|thêm|có) sát(?! tinh)', sao: SAT6 },
+            { re: 'Không,? Kiếp|Không Kiếp', sao: ['Địa Không', 'Địa Kiếp'] }, { re: 'Hỏa,? Linh|Hỏa Linh', sao: ['Hỏa Tinh', 'Linh Tinh'] },
+            { re: 'Kình,? Đà|Dương,? Đà', sao: ['Kình Dương', 'Đà La'] }, { re: 'song hao|Đại Hao,? Tiểu Hao', sao: ['Đại Hao', 'Tiểu Hao'] },
+            { re: 'tang hổ|Tang Môn,? Bạch Hổ', sao: ['Tang Môn', 'Bạch Hổ'] }];
+        if (!np) l.push({ re: 'khốc hư|Thiên Khốc,? Thiên Hư', sao: ['Thiên Khốc', 'Thiên Hư'] });
+        l.push({ re: 'lục bại|bại tinh', sao: ['Đại Hao', 'Tiểu Hao', 'Tang Môn', 'Bạch Hổ', 'Thiên Khốc', 'Thiên Hư'] });
+        l.push({ re: 'lục cát', sao: LUCCAT });
+        if (np) {
+            l.push({ re: 'thất cát', sao: LUCCAT.concat(['Lộc Tồn']) }); l.push({ re: 'tam cát hóa|tam hóa', sao: TAMHOA });
+            l.push({ re: '(?<![\\p{L}])cát tinh', sao: LUCCAT.concat(['Lộc Tồn'], TAMHOA) }); l.push({ re: 'văn tinh', sao: ['Văn Xương', 'Văn Khúc'] });
+            l.push({ re: 'phò tá', sao: ['Tả Phù', 'Hữu Bật'] });
+        } else l.push({ re: '(?<![\\p{L}])cát tinh|sao tốt|cát diệu|sao sáng', sao: CAT_CU, cat: true });
+        l.push({ re: 'không vong|Tuần,? Triệt|Tuần hoặc Triệt', tt: true });
+        return l;
+    }
+    function gopRx(nh) { return new RegExp(nh.map(function (n, i) { return '(?<n' + i + '>' + n.re + ')'; }).join('|'), 'giu'); }
+    var NH = { cu: nhomChung(false), np: nhomChung(true) };
+    var RX_NH = { cu: gopRx(NH.cu), np: gopRx(NH.np) };
+    var RX_PHUDINH = /(không|chưa|chẳng|miễn|tránh|hết|thiếu)\s*(?:(?:có|gặp|bị|thêm|còn)\s*)?(?:(?:các|nhiều)\s*)?$/i;
+    var RX_CUNGKHAC = new RegExp('cung\\s+(?:' + CUNG.map(esc).join('|') + '|đại hạn|tiểu hạn|đối|tam hợp)[^,;:.]{0,14}$', 'iu');
+    var RX_TRICH = /\s*\((?:[^()]*?(?:tr\.|trang)[^()]*)\)\s*\.?\s*$/;
+    var RX_MENHDE = /^(?:nếu|khi|còn|mà|miễn|gặp|thêm|có|không|dù|hễ|nhưng nếu)(?![\p{L}])/iu;
+    var RX_NGUON = /tr\.|mục|Đại Toàn|Phú Giải|Tân Biên|Hàm Số|Lý Thiên Cơ/;
+    function viTriNgan(off, ten) { return off === 0 ? 'đồng cung' : (off === 6 ? 'cung đối-' : 'cung tam hợp-') + ten; }
+    function timSao(d, tenCung, n, np, text) {
+        var ob = d.lasoOb || [], i0 = -1; ob.forEach(function (c, i) { if (c.tenCung === tenCung) i0 = i; });
+        if (i0 < 0) return null;
+        var kq = [], dong = [];
+        [0, 4, 6, 8].forEach(function (off) {
+            var c = ob[(i0 + off) % 12];
+            if (n.tt) {
+                var t = []; if (coTuan(c)) t.push('Tuần'); if (coTriet(c)) t.push('Triệt');
+                if (t.length) { if (off === 0) dong = dong.concat(t); else kq.push(t.join(' và ') + ' (' + viTriNgan(off, c.tenCung) + ')'); }
+                return;
+            }
+            (c.sao || []).forEach(function (s) {
+                var ten = s.ten; if (!natal(ten)) return;
+                var ok = n.sao.indexOf(ten) >= 0;
+                if (!ok && n.cat && !np && /chinh-tinh/.test(s.class || '')) ok = laSang(ma(ten, c.chi));
+                if (!ok || text.indexOf(ten) >= 0) return;   // sao đã nêu tên trong câu thì không liệt kê lại
+                if (off === 0) dong.push(ten); else kq.push(ten + ' (' + viTriNgan(off, c.tenCung) + ')');
+            });
+        });
+        if (dong.length) kq.unshift(dong.join(', ') + ' đồng cung');
+        return kq;
+    }
+    function timNhom(text, d, tenCung, np) {
+        var kq = [], rx = RX_NH[np ? 'np' : 'cu'], nh = NH[np ? 'np' : 'cu'], m;
+        rx.lastIndex = 0;
+        while ((m = rx.exec(text))) {
+            if (!m[0]) { rx.lastIndex++; continue; }
+            var gi = -1; for (var i = 0; i < nh.length; i++) if (m.groups['n' + i] !== undefined) { gi = i; break; }
+            if (gi < 0) continue;
+            var mt = { start: m.index, len: m[0].length, n: nh[gi], neg: false, skip: false };
+            var cs = m.index; while (cs > 0 && ',;:.'.indexOf(text[cs - 1]) < 0) cs--;
+            var before = text.slice(cs, m.index);
+            mt.neg = RX_PHUDINH.test(before);
+            mt.skip = RX_CUNGKHAC.test(before);
+            var lp = text.lastIndexOf('(', m.index);
+            if (lp >= 0) { var rp = text.indexOf(')', lp); if ((rp < 0 || rp > m.index) && RX_NGUON.test(text.substr(lp, 120))) mt.skip = true; }
+            mt.found = timSao(d, tenCung, mt.n, np, text);
+            if (!mt.found) mt.skip = true;
+            kq.push(mt);
+        }
+        return kq;
+    }
+    function giaiThich(m, goc) {
+        var ds = m.found.join(', ');
+        if (!m.neg) return m.found.length ? goc + ' (cụ thể: ' + ds + ')' : goc + ' (lá số này không có sao nào của nhóm này)';
+        return m.found.length ? goc + ' (nhưng lá số này có ' + ds + ')' : goc + ' (đúng với lá số: không có sao nào của nhóm)';
+    }
+    function giaiNhom(luan, d, tenCung) {
+        if (!luan || !tenCung) return luan;
+        var np = !!KhoaHienThi.np, trich = '', than = luan, mt0 = RX_TRICH.exec(luan);
+        if (mt0) { trich = mt0[0].trim().replace(/\.+$/, ''); than = luan.slice(0, mt0.index); }
+        var mds = than.split(/(?<=[;.])\s+/).filter(function (x) { return x.trim().length > 0; });
+        var tam = [], giu = 0, doi = false;
+        mds.forEach(function (md) {
+            var ms = timNhom(md, d, tenCung, np).filter(function (x) { return !x.skip; }), loai = false, kqmd = md;
+            if (ms.length) {
+                doi = true;
+                var bat = RX_MENHDE.test(md.replace(/^\s+/, ''));
+                loai = mds.length > 1 && bat && ms.some(function (x) { return (!x.neg && !x.found.length) || (x.neg && x.found.length); });
+                var out = '', pos = 0;
+                ms.sort(function (a, b) { return a.start - b.start; }).forEach(function (x) {
+                    if (x.start < pos) return;
+                    out += md.slice(pos, x.start) + giaiThich(x, md.substr(x.start, x.len)); pos = x.start + x.len;
+                });
+                kqmd = out + md.slice(pos);
+            }
+            tam.push({ t: kqmd, loai: loai }); if (!loai) giu++;
+        });
+        if (!doi) return luan;
+        var r = tam.filter(function (t) { return !t.loai || giu === 0; }).map(function (t) { return t.t; }).join(' ').trim();
+        if (trich) r = r.replace(/[. ]+$/, '') + ' ' + trich + '.';
+        return r;
+    }
+
     // ---------------- viết lại vế luận ----------------
     var RX_KNH = new RegExp('(' + STAR + ') không nên hãm ở cung này', 'gu');
     var RX_CANCU = new RegExp('cần căn cứ vào trạng thái vượng hoặc hãm của (' + STAR + ') để định cát hung', 'gu');
@@ -206,7 +310,7 @@ var KhoaHienThi = (function () {
     function chiSao(inf, s) { return inf.cung[s] ? inf.cung[s].chi : ''; }
     function vietLuan(luan, d, cung) {
         if (!luan) return luan;
-        var inf = lay(d), s = chinhTa(luan);
+        var inf = lay(d), s = giaiNhom(chinhTa(luan), d, cung);
         s = s.replace(RX_KNH, function (all, sao) {
             var chi = chiSao(inf, sao); if (!chi) return all; var m = ma(sao, chi);
             if (m === 'H') return sao + ' lại hãm địa tại ' + chi + ' nên phần tốt đẹp nói trên bị giảm sút';
@@ -276,6 +380,6 @@ var KhoaHienThi = (function () {
         if (!kq.length) kq.push('Cung ' + c.tenCung + ' có ' + tt + ' án ngữ nhưng không có sao nào đáng kể bị ảnh hưởng.');
         return kq;
     }
-    return { viet: viet, vietLuan: vietLuan, chinhTa: chinhTa, gachNgang: gachNgang, ma: ma, tenDay: TEN_DAY, laSang: laSang, lienQuan: lienQuan, nhanTT: nhanTT, cauTT: cauTT, phanLoai: phanLoai };
+    return { np: false, viet: viet, vietLuan: vietLuan, chinhTa: chinhTa, gachNgang: gachNgang, ma: ma, tenDay: TEN_DAY, laSang: laSang, lienQuan: lienQuan, nhanTT: nhanTT, cauTT: cauTT, phanLoai: phanLoai };
 })();
 if (typeof window !== 'undefined') window.KhoaHienThi = KhoaHienThi;

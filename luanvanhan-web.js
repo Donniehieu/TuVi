@@ -145,13 +145,7 @@
     }
     function thoat(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
     /* Thuật ngữ nhóm (cát tinh, sát tinh, lục bại, Không Kiếp, Hỏa Linh, Song Hao ...) được giải nghĩa bằng chính các sao có trong lá số (luanthuatngu.js) */
-    function ghiChuHtml(r, tenCung) {
-        try {
-            if (typeof GhiChuThuatNgu !== 'function' || !tenCung) return '';
-            var gn = GhiChuThuatNgu(r.key + ' ' + r.values.join(' '), tenCung);
-            return gn.length ? '<div><em>Theo lá số này: ' + thoat(KH() ? KH().gachNgang(gn.join('; ')) : gn.join('; ')) + '.</em></div>' : '';
-        } catch (e) { return ''; }
-    }
+    function ghiChuHtml() { return ''; }   // luận đã nêu cụ thể sao trong lá số (khoahienthi.js) nên không còn ghi chú "Theo lá số này"
 
     /* Tên khóa hiển thị: bỏ số thứ tự nội bộ của các khóa do công cụ sinh ("Sách vận hạn 12 - Đại hạn - ", "Tam Không 03 - Mệnh - ", "Ví dụ lá số 15 - Phu Thê - ") */
     function tenKhoaHienThi(key) {

@@ -103,4 +103,12 @@
             if (cell) cell.insertAdjacentHTML('beforeend', '<div class="sao-thien-quy sao-tot hanh-tho phu-tinh">Thiên Quý</div>');
         }
     };
+
+    // ---- Nam Phái chỉ dùng các sao có trong sách Mệnh Lý Thiên Cơ: bỏ các sao sách không có (giống TuViEngine.cs, NP_BO_SAO)
+    const NP_BO_SAO = ["Thiếu Dương", "Thiếu Âm", "Tử Phù", "Trực Phù", "Lưu Hà", "Quốc Ấn", "Đường Phù", "Thiên Giải", "Địa Giải", "Thiên Trù"];
+    window.locSaoSauAnSao = function () {
+        document.querySelectorAll('.laso-cell *').forEach(function (e) {
+            if (e.children.length === 0 && NP_BO_SAO.indexOf((e.textContent || '').trim()) >= 0) e.remove();
+        });
+    };
 })();

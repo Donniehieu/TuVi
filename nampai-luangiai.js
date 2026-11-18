@@ -210,8 +210,9 @@
         });
     }
     window.NamPhaiGom = gomMuc;
-    function render(keys, luan, metaAll, data, cungTT) {
-        const items = keys.length ? gomMuc(keys, luan, metaAll, data).map(m => ({ m: m, ten: KhoaHienThi.viet(m.tieu, data), luan: KhoaHienThi.vietLuan(m.luan, data, cungTT ? cungTT.tenCung : null) })) : [];
+    function render(keys, luan, metaAll, data, cungTT, cungTen) {
+        KhoaHienThi.np = true;
+        const items = keys.length ? gomMuc(keys, luan, metaAll, data).map(m => ({ m: m, ten: KhoaHienThi.viet(m.tieu, data), luan: KhoaHienThi.vietLuan(m.luan, data, cungTT ? cungTT.tenCung : cungTen) })) : [];
         let tt = '', list = items;
         if (cungTT && KhoaHienThi.nhanTT(cungTT)) {
             const cach = items.filter(i => i.m.cach).map(i => ({ ten: i.m.cach, luan: i.luan }));
@@ -221,7 +222,7 @@
         }
         if (!list.length && !tt) return '<p class="np-empty">Không có điều kiện nào trong sách khớp với lá số này.</p>';
         return tt + list.map(i => {
-            const gn = i.m.gn.length ? '<div class="np-gn">Theo lá số này: ' + i.m.gn.map(x => esc(KhoaHienThi.gachNgang(x))).join('; ') + '.</div>' : '';
+            const gn = '';
             return `<div class="np-key"><b>${esc(i.ten)}</b><span>${esc(i.luan)}</span>${gn}</div>`;
         }).join('');
     }
@@ -252,8 +253,8 @@
 
         const dai = chay('LuanVanHanNamPhai', 'dai'), tieu = chay('LuanVanHanNamPhai', 'tieu');
         document.getElementById('vanhan-content').innerHTML =
-            `<h3>Đại hạn hiện tại: cung ${esc(data.tenCungDaiVan || '')}</h3>${render(dai, luan, metaAll, data)}` +
-            `<h3>Tiểu hạn năm xem: cung ${esc(data.tenCungTieuHan || '')}</h3>${render(tieu, luan, metaAll, data)}`;
+            `<h3>Đại hạn hiện tại: cung ${esc(data.tenCungDaiVan || '')}</h3>${render(dai, luan, metaAll, data, null, data.tenCungDaiVan)}` +
+            `<h3>Tiểu hạn năm xem: cung ${esc(data.tenCungTieuHan || '')}</h3>${render(tieu, luan, metaAll, data, null, data.tenCungTieuHan)}`;
 
         let html = '';
         data.lasoOb.forEach(c => {
