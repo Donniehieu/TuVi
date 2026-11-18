@@ -233,7 +233,7 @@
     }
 
     window.NamPhaiLuanGiai = async function () {
-        let luan = {}, metaAll = {};
+        let luan = {}, metaAll = {}, luuRules = [];
         try {
             luan = await (await fetch('NamPhai_Luan.json')).json();
             try { metaAll = await (await fetch('NamPhai_Meta.json')).json(); } catch (e) { metaAll = {}; }
@@ -243,6 +243,7 @@
             el.classList.remove('d-none');
             return;
         }
+        try { luuRules = (await (await fetch('NamPhai_Luu.json')).json()).r || []; } catch (e) { luuRules = []; }
         const data = JSON.parse(localStorage.getItem('laso_data'));
         const anh = localStorage.getItem('anhBanLaSo');
         document.getElementById('svg-holder').innerHTML = anh
@@ -256,12 +257,18 @@
             `<h3>Đại hạn hiện tại: cung ${esc(data.tenCungDaiVan || '')}</h3>${render(dai, luan, metaAll, data, null, data.tenCungDaiVan)}` +
             `<h3>Tiểu hạn năm xem: cung ${esc(data.tenCungTieuHan || '')}</h3>${render(tieu, luan, metaAll, data, null, data.tenCungTieuHan)}`;
 
+        // sao lưu niên (12 tuế tinh, 12 tướng tinh) và quy tắc lưu niên / lưu nguyệt (chương 4)
+        const luu = (typeof LuuNienNP !== 'undefined') ? LuuNienNP.chay(luuRules, data) : [];
+        const muc = x => `<div class="np-key"><b>${esc(KhoaHienThi.viet(x.tieu, data))}</b><span>${esc(KhoaHienThi.vietLuan(x.luan, data, x.cung, true))}</span></div>`;
+        document.getElementById('vanhan-content').innerHTML +=
+            `<h3>Lưu niên ${esc(data.namXemHan || '')} (sao lưu niên và quy tắc lưu niên, lưu nguyệt)</h3>` +
+            (luu.filter(x => x.loai !== 'C').map(muc).join('') || '<p class="np-empty">Không có điều kiện nào trong sách khớp với lưu niên này.</p>');
         let html = '';
         data.lasoOb.forEach(c => {
             const sl = SLUG[c.tenCung];
             if (!sl) return;
             const keys = chay('LuanSaoCungTC_' + sl);
-            html += `<details class="np-cung"${keys.length ? ' open' : ''}><summary>${esc(c.tenCung)} (${esc(c.chi)}) · ${keys.length} điều</summary>${render(keys, luan, metaAll, data, c)}</details>`;
+            html += `<details class="np-cung"${keys.length ? ' open' : ''}><summary>${esc(c.tenCung)} (${esc(c.chi)}) · ${keys.length} điều</summary>${render(keys, luan, metaAll, data, c)}${luu.filter(x => x.loai === 'C' && x.cung === c.tenCung).map(muc).join('')}</details>`;
         });
         document.getElementById('cung-content').innerHTML = html;
     };

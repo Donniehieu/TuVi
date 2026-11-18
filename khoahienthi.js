@@ -227,6 +227,7 @@ var KhoaHienThi = (function () {
     var RX_MENHDE = /^(?:nếu|khi|còn|mà|miễn|gặp|thêm|có|không|dù|hễ|nhưng nếu)(?![\p{L}])/iu;
     var RX_NGUON = /tr\.|mục|Đại Toàn|Phú Giải|Tân Biên|Hàm Số|Lý Thiên Cơ/;
     function viTriNgan(off, ten) { return off === 0 ? 'đồng cung' : (off === 6 ? 'cung đối-' : 'cung tam hợp-') + ten; }
+    var tinhSaoLuu = false;
     function timSao(d, tenCung, n, np, text) {
         var ob = d.lasoOb || [], i0 = -1; ob.forEach(function (c, i) { if (c.tenCung === tenCung) i0 = i; });
         if (i0 < 0) return null;
@@ -239,8 +240,9 @@ var KhoaHienThi = (function () {
                 return;
             }
             (c.sao || []).forEach(function (s) {
-                var ten = s.ten; if (!natal(ten)) return;
-                var ok = n.sao.indexOf(ten) >= 0;
+                var ten = s.ten; if (!natal(ten) && !tinhSaoLuu) return;
+                var goc = ten.indexOf('L. ') === 0 ? ten.slice(3) : ten;
+                var ok = n.sao.indexOf(goc) >= 0;
                 if (!ok && n.cat && !np && /chinh-tinh/.test(s.class || '')) ok = laSang(ma(ten, c.chi));
                 if (!ok || text.indexOf(ten) >= 0) return;   // sao đã nêu tên trong câu thì không liệt kê lại
                 if (off === 0) dong.push(ten); else kq.push(ten + ' (' + viTriNgan(off, c.tenCung) + ')');
@@ -308,7 +310,8 @@ var KhoaHienThi = (function () {
     var RX_NHAPMIEU = new RegExp('(' + STAR + ')( (?:(?:phải|chỉ|cần|nên) )?nhập miếu)(?! \\(trong lá số)', 'gu');
     var RX_HOAVUONG = /Trong cung không nên có sao hỏa vượng \(hỏa khắc kim\), nếu không (khi đại tiểu hạn hoặc lưu niên trùng phùng thì bị tước bỏ chức vụ)/g;
     function chiSao(inf, s) { return inf.cung[s] ? inf.cung[s].chi : ''; }
-    function vietLuan(luan, d, cung) {
+    function vietLuan(luan, d, cung, coSaoLuu) {
+        tinhSaoLuu = !!coSaoLuu;
         if (!luan) return luan;
         var inf = lay(d), s = giaiNhom(chinhTa(luan), d, cung);
         s = s.replace(RX_KNH, function (all, sao) {
