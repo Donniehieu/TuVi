@@ -63,6 +63,16 @@ var LuuNienNP = (function () {
             case 'CNT': { var pr = v.split(/:(.+)/); r = dem(x.own, pr[1]) >= parseInt(pr[0], 10); break; }
             case 'HCNT': { var pr2 = v.split(/:(.+)/); r = dem(x.tam, pr2[1]) >= parseInt(pr2[0], 10); break; }
             case 'FEI': r = fei(x.d, x.ob, v); break;
+            case 'GIAP': {
+                var ab = v.split('+'), idx = x.ob.indexOf(x.c), truoc = ten(x.ob[(idx + 11) % 12]), sau = ten(x.ob[(idx + 1) % 12]);
+                function co(hs, g) { return g.split('/').some(function (a) { return nhom(a).some(function (n) { return hs[n]; }); }); }
+                r = (co(truoc, ab[0]) && co(sau, ab[1])) || (co(truoc, ab[1]) && co(sau, ab[0])); break;
+            }
+            case 'AT': {
+                var q = v.indexOf(':'), cn = v.slice(0, q), ii = -1;
+                x.ob.forEach(function (c, i) { if (c.tenCung === cn) ii = i; });
+                r = ii >= 0 && atom(v.slice(q + 1), ctx(x.d, x.ob, ii, x.ln, null)); break;
+            }
             default: r = false;
         }
         return neg ? !r : r;
