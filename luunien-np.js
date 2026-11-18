@@ -62,6 +62,7 @@ var LuuNienNP = (function () {
             return vung.some(function (cg) { var t = ten(cg); for (var k in sao) if (t[k]) return true; return false; });
         });
     }
+    var canNgay = -1, canGio = -1;   // can của ngày / giờ đang xét (lưu nhật, lưu thời)
     function atom(a, x) {
         a = a.trim(); var neg = false;
         if (a.indexOf('NOT ') === 0) { neg = true; a = a.slice(4).trim(); }
@@ -84,6 +85,12 @@ var LuuNienNP = (function () {
             case 'FEI': r = fei(x.d, x.ob, v, false, x.ln); break;
             case 'FEIT': r = fei(x.d, x.ob, v, true, x.ln); break;
             case 'GT': r = x.d.gioitinh === v; break;
+            case 'HOA': {
+                var pr = v.split(':'), ci = pr[0] === 'CAN.NH' ? canNgay : pr[0] === 'CAN.TH' ? canGio : canIdx(x.d, x.ob, pr[0], x.ln);
+                if (ci < 0) { r = false; break; }
+                var sh = HOA4[ci][pr[1] === 'Hóa Lộc' ? 0 : pr[1] === 'Hóa Quyền' ? 1 : pr[1] === 'Hóa Khoa' ? 2 : 3];
+                r = pr[2].split('/').indexOf(sh) >= 0 && !!x.own[sh]; break;
+            }
             case 'THUAN': r = ((x.d.amduong === 'Dương Nam' || x.d.amduong === 'Âm Nữ') === (v === '1')); break;
             case 'CANC': { var q2 = v.indexOf(':'), cn2 = v.slice(0, q2), cg2 = x.ob.filter(function (c) { return c.tenCung === cn2; })[0]; r = !!cg2 && canCung(x.d, cg2) >= 0 && v.slice(q2 + 1).split('/').indexOf(CAN10[canCung(x.d, cg2)]) >= 0; break; }
             case 'GIAP': {
@@ -141,11 +148,13 @@ var LuuNienNP = (function () {
                 var al = convertSolar2Lunar(nx.getDate(), nx.getMonth() + 1, nx.getFullYear(), 7);
                 if (parseInt(al[2], 10) !== parseInt(d.namXemHan, 10)) return;
                 var nhat = (((dq + (al[1] - 1) + (al[0] - 1)) % 12) + 12) % 12;
+                canNgay = ((jdFromDate(nx.getDate(), nx.getMonth() + 1, nx.getFullYear()) + 9) % 10 + 10) % 10; canGio = -1;
                 i = pos(nhat); c = ob[i];
                 var ngay = nx.getDate() + '/' + (nx.getMonth() + 1) + '/' + nx.getFullYear() + ' (âm lịch ' + al[0] + '/' + al[1] + ', cung ' + c.chi + ')';
                 if (dat(r.c, ctx(d, ob, i, ln, null))) kq.push({ loai: r.p, tieu: 'Lưu nhật ' + ngay + ': ' + gon(r.t), luan: r.l, cung: c.tenCung });
                 var gx = (typeof window !== 'undefined' && window.GIO_XEM) || CHI12[Math.floor((new Date().getHours() + 1) / 2) % 12], gi = CHI12.indexOf(gx);
                 if (gi >= 0) {
+                    canGio = ([0, 2, 4, 6, 8][canNgay % 5] + gi) % 10;
                     var i2 = pos(nhat + gi), c2 = ob[i2];
                     if (dat(r.c, ctx(d, ob, i2, ln, null))) kq.push({ loai: r.p, tieu: 'Lưu thời giờ ' + gx + ' ngày ' + nx.getDate() + '/' + (nx.getMonth() + 1) + ' (cung ' + c2.chi + '): ' + gon(r.t), luan: r.l, cung: c2.tenCung });
                 }
@@ -177,6 +186,7 @@ var LuuNienNP = (function () {
                 }
             }
         });
+        canNgay = canGio = -1;
         return kq;
     }
     return { chay: chay };
