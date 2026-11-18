@@ -69,6 +69,8 @@ var LuuNienNP = (function () {
             case 'HCNT': { var pr2 = v.split(/:(.+)/); r = dem(x.tam, pr2[1]) >= parseInt(pr2[0], 10); break; }
             case 'FEI': r = fei(x.d, x.ob, v, false); break;
             case 'FEIT': r = fei(x.d, x.ob, v, true); break;
+            case 'GT': r = x.d.gioitinh === v; break;
+            case 'CANC': { var q2 = v.indexOf(':'), cn2 = v.slice(0, q2), cg2 = x.ob.filter(function (c) { return c.tenCung === cn2; })[0]; r = !!cg2 && canCung(x.d, cg2) >= 0 && v.slice(q2 + 1).split('/').indexOf(CAN10[canCung(x.d, cg2)]) >= 0; break; }
             case 'GIAP': {
                 var ab = v.split('+'), idx = x.ob.indexOf(x.c), truoc = ten(x.ob[(idx + 11) % 12]), sau = ten(x.ob[(idx + 1) % 12]);
                 function co(hs, g) { return g.split('/').some(function (a) { return nhom(a).some(function (n) { return hs[n]; }); }); }
