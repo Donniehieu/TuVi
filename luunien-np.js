@@ -85,6 +85,10 @@ var LuuNienNP = (function () {
             case 'FEI': r = fei(x.d, x.ob, v, false, x.ln); break;
             case 'FEIT': r = fei(x.d, x.ob, v, true, x.ln); break;
             case 'GT': r = x.d.gioitinh === v; break;
+            case 'RC': {
+                var q = v.indexOf(':'), k = TEN_CUNG.indexOf(v.slice(0, q));
+                r = k >= 0 && atom(v.slice(q + 1), ctx(x.d, x.ob, (x.ob.indexOf(x.c) + k) % 12, x.ln, null)); break;
+            }
             case 'EQ': { var ab = v.split('='), c1 = resolveCung(x.d, x.ob, ab[0], x.ln), c2 = resolveCung(x.d, x.ob, ab[1], x.ln); r = !!c1 && !!c2 && c1 === c2; break; }
             case 'HOA': {
                 var pr = v.split(':'), ci = pr[0] === 'CAN.NH' ? canNgay : pr[0] === 'CAN.TH' ? canGio : canIdx(x.d, x.ob, pr[0], x.ln);
