@@ -35,13 +35,18 @@ var LuuNienNP = (function () {
         var cn = CAN10.indexOf(d.canNam); if (cn < 0) return -1;
         return ([2, 4, 6, 8, 0][cn % 5] + idxChi(c.chi)) % 10;
     }
-    function fei(d, ob, v) {
-        var a = v.split(':'), ft = a[0].split('>'), hoa = a[1];
-        var tu = ob.filter(function (c) { return c.tenCung === ft[0]; })[0], den = ob.filter(function (c) { return c.tenCung === ft[1]; })[0];
-        if (!tu || !den) return false;
+    function fei(d, ob, v, tamPhuong) {
+        var a = v.split(':'), ft = a[0].split('>');
+        var tu = ob.filter(function (c) { return c.tenCung === ft[0]; })[0];
+        if (!tu) return false;
         var ci = canCung(d, tu); if (ci < 0) return false;
-        var h = hoa === 'Hóa Lộc' ? 0 : hoa === 'Hóa Quyền' ? 1 : hoa === 'Hóa Khoa' ? 2 : 3;
-        return !!ten(den)[HOA4[ci][h]];
+        var sao = {}; a[1].split('/').forEach(function (hn) { sao[HOA4[ci][hn === 'Hóa Lộc' ? 0 : hn === 'Hóa Quyền' ? 1 : hn === 'Hóa Khoa' ? 2 : 3]] = 1; });
+        return ft[1].split('/').some(function (dn) {
+            var i = -1; ob.forEach(function (c, k) { if (c.tenCung === dn) i = k; });
+            if (i < 0) return false;
+            var vung = tamPhuong ? [0, 4, 6, 8].map(function (o) { return ob[(i + o) % 12]; }) : [ob[i]];
+            return vung.some(function (cg) { var t = ten(cg); for (var k in sao) if (t[k]) return true; return false; });
+        });
     }
     function atom(a, x) {
         a = a.trim(); var neg = false;
@@ -62,7 +67,8 @@ var LuuNienNP = (function () {
             case 'CTSANG': r = x.ct.length > 0 && x.ct.every(function (s) { return KhoaHienThi.laSang(KhoaHienThi.ma(s, x.c.chi)); }); break;
             case 'CNT': { var pr = v.split(/:(.+)/); r = dem(x.own, pr[1]) >= parseInt(pr[0], 10); break; }
             case 'HCNT': { var pr2 = v.split(/:(.+)/); r = dem(x.tam, pr2[1]) >= parseInt(pr2[0], 10); break; }
-            case 'FEI': r = fei(x.d, x.ob, v); break;
+            case 'FEI': r = fei(x.d, x.ob, v, false); break;
+            case 'FEIT': r = fei(x.d, x.ob, v, true); break;
             case 'GIAP': {
                 var ab = v.split('+'), idx = x.ob.indexOf(x.c), truoc = ten(x.ob[(idx + 11) % 12]), sau = ten(x.ob[(idx + 1) % 12]);
                 function co(hs, g) { return g.split('/').some(function (a) { return nhom(a).some(function (n) { return hs[n]; }); }); }
