@@ -31,20 +31,34 @@ var LuuNienNP = (function () {
         ['Thái Dương', 'Vũ Khúc', 'Thái Âm', 'Thiên Đồng'], ['Cự Môn', 'Thái Dương', 'Văn Khúc', 'Văn Xương'], ['Thiên Lương', 'Tử Vi', 'Tả Phù', 'Vũ Khúc'], ['Phá Quân', 'Cự Môn', 'Thái Âm', 'Tham Lang']];
     function dem(set, list) { var seen = {}, n = 0; list.split('/').forEach(function (a) { nhom(a).forEach(function (s) { if (!seen[s]) { seen[s] = 1; if (set[s]) n++; } }); }); return n; }
     /* can của cung (ngũ hổ độn): cung Dần lấy can theo can năm sinh, các cung sau tăng dần */
+    var CAN_FULL = ['Giáp', 'Ất', 'Bính', 'Đinh', 'Mậu', 'Kỷ', 'Canh', 'Tân', 'Nhâm', 'Quý'];
     function canCung(d, c) {
         var cn = CAN10.indexOf(d.canNam); if (cn < 0) return -1;
         return ([2, 4, 6, 8, 0][cn % 5] + idxChi(c.chi)) % 10;
     }
-    function fei(d, ob, v, tamPhuong) {
+    /* tên cung: bản mệnh ("Tài Bạch"), theo đại hạn ("ĐH.Tài Bạch"), lưu niên ("LN.Tài Bạch"), tiểu hạn ("TH.Tài Bạch") */
+    function resolveCung(d, ob, name, ln) {
+        var k, base = null;
+        function theoChi(pos) { return ob.filter(function (c) { return idxChi(c.chi) === ((pos % 12) + 12) % 12; })[0] || null; }
+        function posTen(ten) { var c = ob.filter(function (x) { return x.tenCung === ten; })[0]; return c ? idxChi(c.chi) : -1; }
+        if (name.indexOf('ĐH.') === 0) { k = TEN_CUNG.indexOf(name.slice(3)); base = posTen(d.tenCungDaiVan); return base >= 0 && k >= 0 ? theoChi(base + k) : null; }
+        if (name.indexOf('LN.') === 0) { k = TEN_CUNG.indexOf(name.slice(3)); return k >= 0 ? theoChi(ln + k) : null; }
+        if (name.indexOf('TH.') === 0) { k = TEN_CUNG.indexOf(name.slice(3)); base = posTen(d.tenCungTieuHan); return base >= 0 && k >= 0 ? theoChi(base + k) : null; }
+        return ob.filter(function (c) { return c.tenCung === name; })[0] || null;
+    }
+    function canIdx(d, ob, tu, ln) {
+        if (tu === 'CAN.NS') return CAN10.indexOf(d.canNam);
+        if (tu === 'CAN.LN') return d.namXemHan ? ((parseInt(d.namXemHan, 10) - 4) % 10 + 10) % 10 : -1;
+        var c = resolveCung(d, ob, tu, ln); return c ? canCung(d, c) : -1;
+    }
+    function fei(d, ob, v, tamPhuong, ln) {
         var a = v.split(':'), ft = a[0].split('>');
-        var tu = ob.filter(function (c) { return c.tenCung === ft[0]; })[0];
-        if (!tu) return false;
-        var ci = canCung(d, tu); if (ci < 0) return false;
+        var ci = canIdx(d, ob, ft[0], ln); if (ci < 0) return false;
         var sao = {}; a[1].split('/').forEach(function (hn) { sao[HOA4[ci][hn === 'Hóa Lộc' ? 0 : hn === 'Hóa Quyền' ? 1 : hn === 'Hóa Khoa' ? 2 : 3]] = 1; });
         return ft[1].split('/').some(function (dn) {
-            var i = -1; ob.forEach(function (c, k) { if (c.tenCung === dn) i = k; });
-            if (i < 0) return false;
-            var vung = tamPhuong ? [0, 4, 6, 8].map(function (o) { return ob[(i + o) % 12]; }) : [ob[i]];
+            var den = resolveCung(d, ob, dn, ln); if (!den) return false;
+            var i = ob.indexOf(den);
+            var vung = tamPhuong ? [0, 4, 6, 8].map(function (o) { return ob[(i + o) % 12]; }) : [den];
             return vung.some(function (cg) { var t = ten(cg); for (var k in sao) if (t[k]) return true; return false; });
         });
     }
@@ -67,8 +81,8 @@ var LuuNienNP = (function () {
             case 'CTSANG': r = x.ct.length > 0 && x.ct.every(function (s) { return KhoaHienThi.laSang(KhoaHienThi.ma(s, x.c.chi)); }); break;
             case 'CNT': { var pr = v.split(/:(.+)/); r = dem(x.own, pr[1]) >= parseInt(pr[0], 10); break; }
             case 'HCNT': { var pr2 = v.split(/:(.+)/); r = dem(x.tam, pr2[1]) >= parseInt(pr2[0], 10); break; }
-            case 'FEI': r = fei(x.d, x.ob, v, false); break;
-            case 'FEIT': r = fei(x.d, x.ob, v, true); break;
+            case 'FEI': r = fei(x.d, x.ob, v, false, x.ln); break;
+            case 'FEIT': r = fei(x.d, x.ob, v, true, x.ln); break;
             case 'GT': r = x.d.gioitinh === v; break;
             case 'THUAN': r = ((x.d.amduong === 'Dương Nam' || x.d.amduong === 'Âm Nữ') === (v === '1')); break;
             case 'CANC': { var q2 = v.indexOf(':'), cn2 = v.slice(0, q2), cg2 = x.ob.filter(function (c) { return c.tenCung === cn2; })[0]; r = !!cg2 && canCung(x.d, cg2) >= 0 && v.slice(q2 + 1).split('/').indexOf(CAN10[canCung(x.d, cg2)]) >= 0; break; }
@@ -79,7 +93,7 @@ var LuuNienNP = (function () {
             }
             case 'AT': {
                 var q = v.indexOf(':'), cns = v.slice(0, q).split('/'), con = v.slice(q + 1);
-                r = x.ob.some(function (c, i) { return cns.indexOf(c.tenCung) >= 0 && atom(con, ctx(x.d, x.ob, i, x.ln, null)); }); break;
+                r = cns.some(function (n) { var c = resolveCung(x.d, x.ob, n, x.ln); return !!c && atom(con, ctx(x.d, x.ob, x.ob.indexOf(c), x.ln, null)); }); break;
             }
             default: r = false;
         }
