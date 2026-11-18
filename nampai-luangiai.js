@@ -258,12 +258,32 @@
             `<h3>Tiểu hạn năm xem: cung ${esc(data.tenCungTieuHan || '')}</h3>${render(tieu, luan, metaAll, data, null, data.tenCungTieuHan)}`;
 
         // sao lưu niên (12 tuế tinh, 12 tướng tinh) và quy tắc lưu niên / lưu nguyệt (chương 4)
-        const luu = (typeof LuuNienNP !== 'undefined') ? LuuNienNP.chay(luuRules, data) : [];
         const muc = x => `<div class="np-key"><b>${esc(KhoaHienThi.viet(x.tieu, data))}</b><span>${esc(KhoaHienThi.vietLuan(x.luan, data, x.cung, true))}</span></div>`;
-        document.getElementById('vanhan-content').innerHTML +=
-            `<h3>Lưu niên ${esc(data.namXemHan || '')} (sao lưu niên, quy tắc lưu niên, lưu nguyệt và thi cử, sự nghiệp)</h3>` +
-            (luu.filter(x => x.loai !== 'C' && x.tieu.indexOf('Phi tinh:') !== 0).map(muc).join('') || '<p class="np-empty">Không có điều kiện nào trong sách khớp với lưu niên này.</p>') +
-            (luu.some(x => x.tieu.indexOf('Phi tinh:') === 0) ? '<h3>Tứ hóa phi tinh của lá số (chương 5, mục 2.7)</h3>' + luu.filter(x => x.tieu.indexOf('Phi tinh:') === 0).map(muc).join('') : '');
+        const CHI_G = ['Tý', 'Sửu', 'Dần', 'Mão', 'Thìn', 'Tỵ', 'Ngọ', 'Mùi', 'Thân', 'Dậu', 'Tuất', 'Hợi'];
+        const homNay = new Date();
+        const dateVal = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+        window.NGAY_XEM = homNay; window.GIO_XEM = CHI_G[Math.floor((homNay.getHours() + 1) / 2) % 12];
+        const vh = document.getElementById('vanhan-content');
+        vh.insertAdjacentHTML('beforeend', '<div id="luu-box"></div>');
+        function veLuu() {
+            const luu = (typeof LuuNienNP !== 'undefined') ? LuuNienNP.chay(luuRules, data) : [];
+            const ctl = `<div class="np-key"><b>Ngày và giờ xem lưu nhật, lưu thời</b><span>` +
+                `<input type="date" id="ngay-xem" value="${dateVal(window.NGAY_XEM)}"> ` +
+                `<select id="gio-xem">${CHI_G.map(g => `<option value="${g}"${g === window.GIO_XEM ? ' selected' : ''}>giờ ${g}</option>`).join('')}</select> ` +
+                `<button type="button" id="btn-xem-luu">Xem lưu nhật, lưu thời</button></span></div>`;
+            document.getElementById('luu-box').innerHTML = ctl +
+                `<h3>Lưu niên ${esc(data.namXemHan || '')} (sao lưu niên, quy tắc lưu niên, lưu nguyệt, lưu nhật, lưu thời và thi cử, sự nghiệp)</h3>` +
+                (luu.filter(x => x.loai !== 'C' && x.tieu.indexOf('Phi tinh:') !== 0).map(muc).join('') || '<p class="np-empty">Không có điều kiện nào trong sách khớp với lưu niên này.</p>') +
+                (luu.some(x => x.tieu.indexOf('Phi tinh:') === 0) ? '<h3>Tứ hóa phi tinh của lá số (chương 5, mục 2.7)</h3>' + luu.filter(x => x.tieu.indexOf('Phi tinh:') === 0).map(muc).join('') : '');
+            document.getElementById('btn-xem-luu').onclick = function () {
+                const v = document.getElementById('ngay-xem').value.split('-');
+                if (v.length === 3) window.NGAY_XEM = new Date(parseInt(v[0], 10), parseInt(v[1], 10) - 1, parseInt(v[2], 10));
+                window.GIO_XEM = document.getElementById('gio-xem').value;
+                veLuu();
+            };
+        }
+        veLuu();
+        const luu = (typeof LuuNienNP !== 'undefined') ? LuuNienNP.chay(luuRules, data) : [];
         let html = '';
         data.lasoOb.forEach(c => {
             const sl = SLUG[c.tenCung];

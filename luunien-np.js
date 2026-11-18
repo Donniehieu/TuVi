@@ -140,8 +140,15 @@ var LuuNienNP = (function () {
                 if (typeof convertSolar2Lunar !== 'function') return;
                 var al = convertSolar2Lunar(nx.getDate(), nx.getMonth() + 1, nx.getFullYear(), 7);
                 if (parseInt(al[2], 10) !== parseInt(d.namXemHan, 10)) return;
-                i = pos(dq + (al[1] - 1) + (al[0] - 1)); c = ob[i];
-                if (dat(r.c, ctx(d, ob, i, ln, null))) kq.push({ loai: r.p, tieu: 'Lưu nhật ' + nx.getDate() + '/' + (nx.getMonth() + 1) + '/' + nx.getFullYear() + ' (âm lịch ' + al[0] + '/' + al[1] + ', cung ' + c.chi + '): ' + gon(r.t), luan: r.l, cung: c.tenCung });
+                var nhat = (((dq + (al[1] - 1) + (al[0] - 1)) % 12) + 12) % 12;
+                i = pos(nhat); c = ob[i];
+                var ngay = nx.getDate() + '/' + (nx.getMonth() + 1) + '/' + nx.getFullYear() + ' (âm lịch ' + al[0] + '/' + al[1] + ', cung ' + c.chi + ')';
+                if (dat(r.c, ctx(d, ob, i, ln, null))) kq.push({ loai: r.p, tieu: 'Lưu nhật ' + ngay + ': ' + gon(r.t), luan: r.l, cung: c.tenCung });
+                var gx = (typeof window !== 'undefined' && window.GIO_XEM) || CHI12[Math.floor((new Date().getHours() + 1) / 2) % 12], gi = CHI12.indexOf(gx);
+                if (gi >= 0) {
+                    var i2 = pos(nhat + gi), c2 = ob[i2];
+                    if (dat(r.c, ctx(d, ob, i2, ln, null))) kq.push({ loai: r.p, tieu: 'Lưu thời giờ ' + gx + ' ngày ' + nx.getDate() + '/' + (nx.getMonth() + 1) + ' (cung ' + c2.chi + '): ' + gon(r.t), luan: r.l, cung: c2.tenCung });
+                }
             } else if (r.p === 'G') {
                 i = 0; c = ob[0];
                 if (dat(r.c, ctx(d, ob, i, ln, null))) kq.push({ loai: r.p, tieu: r.t, luan: r.l, cung: c.tenCung });
