@@ -75,9 +75,8 @@ var LuuNienNP = (function () {
                 r = (co(truoc, ab[0]) && co(sau, ab[1])) || (co(truoc, ab[1]) && co(sau, ab[0])); break;
             }
             case 'AT': {
-                var q = v.indexOf(':'), cn = v.slice(0, q), ii = -1;
-                x.ob.forEach(function (c, i) { if (c.tenCung === cn) ii = i; });
-                r = ii >= 0 && atom(v.slice(q + 1), ctx(x.d, x.ob, ii, x.ln, null)); break;
+                var q = v.indexOf(':'), cns = v.slice(0, q).split('/'), con = v.slice(q + 1);
+                r = x.ob.some(function (c, i) { return cns.indexOf(c.tenCung) >= 0 && atom(con, ctx(x.d, x.ob, i, x.ln, null)); }); break;
             }
             default: r = false;
         }
@@ -133,7 +132,7 @@ var LuuNienNP = (function () {
                     if (dat(r.c, ctx(d, ob, e[1], ln, null))) kq.push({ loai: r.p, tieu: r.t.replace('{lbl}', e[0] + ' (' + cc.chi + ')'), luan: r.l, cung: cc.tenCung });
                 });
             } else if (r.p === 'C') {
-                ob.forEach(function (cc, ii) { if (dat(r.c, ctx(d, ob, ii, ln, null))) kq.push({ loai: r.p, tieu: tieu(r, cc, ln, 0), luan: r.l, cung: cc.tenCung }); });
+                ob.forEach(function (cc, ii) { if (dat(r.c, ctx(d, ob, ii, ln, null))) kq.push({ loai: r.p, tieu: tieu(r, cc, ln, 0), luan: r.l.replace('{nc}', cc.tenCung), cung: cc.tenCung }); });
             } else {
                 if (r.p === 'N' || r.p === 'YN') {
                     i = pos(lnPos); c = ob[i];
