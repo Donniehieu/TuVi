@@ -62,7 +62,7 @@ var LuuNienNP = (function () {
             return vung.some(function (cg) { var t = ten(cg); for (var k in sao) if (t[k]) return true; return false; });
         });
     }
-    var canNgay = -1, canGio = -1;   // can của ngày / giờ đang xét (lưu nhật, lưu thời)
+    var canNgay = -1, canGio = -1, canThang = -1;   // can của ngày / giờ đang xét (lưu nhật, lưu thời)
     function atom(a, x) {
         a = a.trim(); var neg = false;
         if (a.indexOf('NOT ') === 0) { neg = true; a = a.slice(4).trim(); }
@@ -86,12 +86,21 @@ var LuuNienNP = (function () {
             case 'FEIT': r = fei(x.d, x.ob, v, true, x.ln); break;
             case 'GT': r = x.d.gioitinh === v; break;
             case 'RC': {
-                var q = v.indexOf(':'), k = TEN_CUNG.indexOf(v.slice(0, q));
-                r = k >= 0 && atom(v.slice(q + 1), ctx(x.d, x.ob, (x.ob.indexOf(x.c) + k) % 12, x.ln, null)); break;
+                var q = v.indexOf(':'), kc = TEN_CUNG.indexOf(v.slice(0, q));
+                r = kc >= 0 && atom(v.slice(q + 1), ctx(x.d, x.ob, (x.ob.indexOf(x.c) + kc) % 12, x.ln, null)); break;
             }
+            case 'TS': r = v.split('/').indexOf(trangSinh(x.d, idxChi(x.c.chi))) >= 0; break;
+            case 'BT': {
+                var pb = v.split(':'), need = parseInt(pb[1], 10), want = CAN_FULL.indexOf(pb[0]), dd = x.d;
+                if (!dd.ngaySinhDL) { r = false; break; }
+                var cnn = CAN10.indexOf(dd.canNam), cNg = ((jdFromDate(dd.ngaySinhDL, dd.thangSinhDL, dd.namSinhDL) + 9) % 10 + 10) % 10;
+                var bt = [cnn, ([2, 4, 6, 8, 0][cnn % 5] + dd.thangsinh - 1) % 10, cNg, ([0, 2, 4, 6, 8][cNg % 5] + CHI12.indexOf(dd.giosinh)) % 10];
+                r = bt.filter(function (b) { return b === want; }).length >= need; break;
+            }
+            case 'TRIET': r = (TRIET[x.d.canNam] || []).indexOf(x.c.chi) >= 0; break;
             case 'EQ': { var ab = v.split('='), c1 = resolveCung(x.d, x.ob, ab[0], x.ln), c2 = resolveCung(x.d, x.ob, ab[1], x.ln); r = !!c1 && !!c2 && c1 === c2; break; }
             case 'HOA': {
-                var pr = v.split(':'), ci = pr[0] === 'CAN.NH' ? canNgay : pr[0] === 'CAN.TH' ? canGio : canIdx(x.d, x.ob, pr[0], x.ln);
+                var pr = v.split(':'), ci = pr[0] === 'CAN.NH' ? canNgay : pr[0] === 'CAN.TH' ? canGio : pr[0] === 'CAN.NT' ? canThang : canIdx(x.d, x.ob, pr[0], x.ln);
                 if (ci < 0) { r = false; break; }
                 var sh = HOA4[ci][pr[1] === 'Hóa Lộc' ? 0 : pr[1] === 'Hóa Quyền' ? 1 : pr[1] === 'Hóa Khoa' ? 2 : 3];
                 r = pr[2].split('/').indexOf(sh) >= 0 && !!x.own[sh]; break;
@@ -111,6 +120,13 @@ var LuuNienNP = (function () {
         }
         return neg ? !r : r;
     }
+    /* vòng Tràng Sinh: từ cung Đế Vượng (d.idTenSaoDeVuong, Dần = 0) lùi 4 bước theo chiều vòng để ra cung Tràng Sinh */
+    var TRANG_SINH = ['Tràng Sinh', 'Mộc Dục', 'Quan Đới', 'Lâm Quan', 'Đế Vượng', 'Suy', 'Bệnh', 'Tử', 'Mộ', 'Tuyệt', 'Thai', 'Dưỡng'];
+    function trangSinh(d, pos) {
+        var dir = (d.amduong === 'Dương Nam' || d.amduong === 'Âm Nữ') ? 1 : -1;
+        return TRANG_SINH[((((pos - (d.idTenSaoDeVuong - 4 * dir)) * dir) % 12) + 12) % 12];
+    }
+    var TRIET = { 'G.': ['Thân', 'Dậu'], 'K.': ['Thân', 'Dậu'], 'Ấ.': ['Ngọ', 'Mùi'], 'C.': ['Ngọ', 'Mùi'], 'B.': ['Thìn', 'Tỵ'], 'T.': ['Thìn', 'Tỵ'], 'N.': ['Dần', 'Mão'], 'Đ.': ['Dần', 'Mão'], 'M.': ['Tý', 'Sửu'], 'Q.': ['Tý', 'Sửu'] };
     function dat(c, x) { return c.split(' & ').every(function (a) { return atom(a, x); }); }
     function ctx(d, ob, i, ln, ring) {
         var c = ob[i], tam = {};
@@ -186,12 +202,13 @@ var LuuNienNP = (function () {
                 if (r.p === 'Y' || r.p === 'YN') {
                     for (m = 1; m <= 12; m++) {
                         i = pos(dq + m - 1); c = ob[i];
+                        canThang = d.namXemHan ? ([2, 4, 6, 8, 0][(((parseInt(d.namXemHan, 10) - 4) % 10 + 10) % 10) % 5] + m - 1) % 10 : -1;
                         if (dat(r.c, ctx(d, ob, i, ln, null))) kq.push({ loai: r.p, tieu: r.p === 'Y' ? tieu(r, c, ln, m) : 'Lưu nguyệt ' + m + ' (' + c.chi + '): ' + gon(r.t), luan: r.l, cung: c.tenCung });
                     }
                 }
             }
         });
-        canNgay = canGio = -1;
+        canNgay = canGio = canThang = -1;
         return kq;
     }
     /* Thái Tuế nhập quẻ (Mệnh Lý Thiên Cơ, chương 5 mục 3, tr.985-987): đưa năm sinh của người khác vào lá số.

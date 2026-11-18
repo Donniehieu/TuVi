@@ -313,6 +313,7 @@ document.getElementById('form_tuvi').addEventListener('submit', function (e) {
         idTenSaoDeVuong,
         chiNamXemHan: chiNamXemhan,
         namXemHan: namxemhan,
+        ngaySinhDL: ngay, thangSinhDL: thang, namSinhDL: nam,   // ngày sinh dương lịch (để tính can ngày, can giờ trong bát tự)
         // có thể bổ sung các thông tin khác nếu muốn
     };
     // Lưu vào localStorage
