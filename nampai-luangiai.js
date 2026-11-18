@@ -261,7 +261,7 @@
         const luu = (typeof LuuNienNP !== 'undefined') ? LuuNienNP.chay(luuRules, data) : [];
         const muc = x => `<div class="np-key"><b>${esc(KhoaHienThi.viet(x.tieu, data))}</b><span>${esc(KhoaHienThi.vietLuan(x.luan, data, x.cung, true))}</span></div>`;
         document.getElementById('vanhan-content').innerHTML +=
-            `<h3>Lưu niên ${esc(data.namXemHan || '')} (sao lưu niên và quy tắc lưu niên, lưu nguyệt)</h3>` +
+            `<h3>Lưu niên ${esc(data.namXemHan || '')} (sao lưu niên, quy tắc lưu niên, lưu nguyệt và thi cử, sự nghiệp)</h3>` +
             (luu.filter(x => x.loai !== 'C').map(muc).join('') || '<p class="np-empty">Không có điều kiện nào trong sách khớp với lưu niên này.</p>');
         let html = '';
         data.lasoOb.forEach(c => {

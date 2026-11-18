@@ -25,6 +25,24 @@ var LuuNienNP = (function () {
         if (tatCa) return arg.split('+').every(function (term) { return term.split('/').some(function (a) { return nhom(a).some(function (n) { return set[n]; }); }); });
         return arg.split('/').some(function (a) { return nhom(a).some(function (n) { return set[n]; }); });
     }
+    var CAN10 = ['G.', 'Ấ.', 'B.', 'Đ.', 'M.', 'K.', 'C.', 'T.', 'N.', 'Q.'];
+    var HOA4 = [['Liêm Trinh', 'Phá Quân', 'Vũ Khúc', 'Thái Dương'], ['Thiên Cơ', 'Thiên Lương', 'Tử Vi', 'Thái Âm'], ['Thiên Đồng', 'Thiên Cơ', 'Văn Xương', 'Liêm Trinh'],
+        ['Thái Âm', 'Thiên Đồng', 'Thiên Cơ', 'Cự Môn'], ['Tham Lang', 'Thái Âm', 'Hữu Bật', 'Thiên Cơ'], ['Vũ Khúc', 'Tham Lang', 'Thiên Lương', 'Văn Khúc'],
+        ['Thái Dương', 'Vũ Khúc', 'Thái Âm', 'Thiên Đồng'], ['Cự Môn', 'Thái Dương', 'Văn Khúc', 'Văn Xương'], ['Thiên Lương', 'Tử Vi', 'Tả Phù', 'Vũ Khúc'], ['Phá Quân', 'Cự Môn', 'Thái Âm', 'Tham Lang']];
+    function dem(set, list) { var seen = {}, n = 0; list.split('/').forEach(function (a) { nhom(a).forEach(function (s) { if (!seen[s]) { seen[s] = 1; if (set[s]) n++; } }); }); return n; }
+    /* can của cung (ngũ hổ độn): cung Dần lấy can theo can năm sinh, các cung sau tăng dần */
+    function canCung(d, c) {
+        var cn = CAN10.indexOf(d.canNam); if (cn < 0) return -1;
+        return ([2, 4, 6, 8, 0][cn % 5] + idxChi(c.chi)) % 10;
+    }
+    function fei(d, ob, v) {
+        var a = v.split(':'), ft = a[0].split('>'), hoa = a[1];
+        var tu = ob.filter(function (c) { return c.tenCung === ft[0]; })[0], den = ob.filter(function (c) { return c.tenCung === ft[1]; })[0];
+        if (!tu || !den) return false;
+        var ci = canCung(d, tu); if (ci < 0) return false;
+        var h = hoa === 'Hóa Lộc' ? 0 : hoa === 'Hóa Quyền' ? 1 : hoa === 'Hóa Khoa' ? 2 : 3;
+        return !!ten(den)[HOA4[ci][h]];
+    }
     function atom(a, x) {
         a = a.trim(); var neg = false;
         if (a.indexOf('NOT ') === 0) { neg = true; a = a.slice(4).trim(); }
@@ -40,6 +58,11 @@ var LuuNienNP = (function () {
             case 'NC': r = v.split('/').some(function (n) { return n === 'Thân' ? x.d.cungCu === x.c.tenCung : n === x.c.tenCung; }); break;
             case 'CHI': r = v.split('/').indexOf(x.c.chi) >= 0; break;
             case 'R': r = x.ring === v; break;
+            case 'D': r = v.split('/').some(function (a) { return nhom(a).some(function (n) { return x.doi[n]; }); }); break;
+            case 'CTSANG': r = x.ct.length > 0 && x.ct.every(function (s) { return KhoaHienThi.laSang(KhoaHienThi.ma(s, x.c.chi)); }); break;
+            case 'CNT': { var pr = v.split(/:(.+)/); r = dem(x.own, pr[1]) >= parseInt(pr[0], 10); break; }
+            case 'HCNT': { var pr2 = v.split(/:(.+)/); r = dem(x.tam, pr2[1]) >= parseInt(pr2[0], 10); break; }
+            case 'FEI': r = fei(x.d, x.ob, v); break;
             default: r = false;
         }
         return neg ? !r : r;
@@ -48,7 +71,8 @@ var LuuNienNP = (function () {
     function ctx(d, ob, i, ln, ring) {
         var c = ob[i], tam = {};
         [0, 4, 6, 8].forEach(function (o) { var t = ten(ob[(i + o) % 12]); for (var k in t) tam[k] = 1; });
-        return { d: d, c: c, ln: ln, ring: ring, own: ten(c), tam: tam };
+        var ct = (c.sao || []).filter(function (s) { return /chinh-tinh/.test(s.class || '') && !(s.ten.indexOf('L. ') === 0); }).map(function (s) { return s.ten; });
+        return { d: d, ob: ob, c: c, ln: ln, ring: ring, own: ten(c), tam: tam, doi: ten(ob[(i + 6) % 12]), ct: ct };
     }
     function tieu(r, c, ln, m) {
         return r.t.replace('{chi}', c.chi).replace('{lc}', luuCung(c, ln)).replace('{nc}', c.tenCung).replace('{m}', m);
@@ -79,6 +103,19 @@ var LuuNienNP = (function () {
                 if (!sao || ring[sao] === undefined) return;
                 i = ring[sao]; c = ob[i];
                 if (dat(r.c, ctx(d, ob, i, ln, sao))) kq.push({ loai: r.p, tieu: tieu(r, c, ln, 0), luan: r.l, cung: c.tenCung });
+            } else if (r.p === 'G') {
+                i = 0; c = ob[0];
+                if (dat(r.c, ctx(d, ob, i, ln, null))) kq.push({ loai: r.p, tieu: r.t, luan: r.l, cung: c.tenCung });
+            } else if (r.p === 'M' || r.p === 'ML') {
+                var ds = [['cung Mệnh', 0]];
+                if (r.p === 'ML') {
+                    ds.push(['cung lưu niên ' + d.namXemHan, pos(lnPos)]);
+                    ob.forEach(function (cc, ii) { if (cc.tenCung === d.tenCungDaiVan) ds.push(['cung đại hạn', ii]); if (cc.tenCung === d.tenCungTieuHan) ds.push(['cung tiểu hạn', ii]); });
+                }
+                ds.forEach(function (e) {
+                    var cc = ob[e[1]];
+                    if (dat(r.c, ctx(d, ob, e[1], ln, null))) kq.push({ loai: r.p, tieu: r.t.replace('{lbl}', e[0] + ' (' + cc.chi + ')'), luan: r.l, cung: cc.tenCung });
+                });
             } else if (r.p === 'C') {
                 ob.forEach(function (cc, ii) { if (dat(r.c, ctx(d, ob, ii, ln, null))) kq.push({ loai: r.p, tieu: tieu(r, cc, ln, 0), luan: r.l, cung: cc.tenCung }); });
             } else {
