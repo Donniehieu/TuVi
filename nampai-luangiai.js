@@ -5,7 +5,7 @@
 (function () {
     'use strict';
     const SLUG = { "Huynh Đệ": "hd", "Phu Thê": "pt", "Tử Tức": "tn", "Tài Bạch": "tb", "Tật Ách": "ta", "Thiên Di": "td", "Nô Bộc": "nb", "Quan Lộc": "ql", "Điền Trạch": "dt", "Phúc Đức": "pd", "Phụ Mẫu": "pm" };
-    const OFFTEN = { 0: 'đồng cung', 4: 'cung tam hợp', 8: 'cung tam hợp', 6: 'cung đối' };
+    const OFFTEN = { 0: 'đồng cung', 4: 'cung tam hợp-', 8: 'cung tam hợp-', 6: 'cung đối-' };
 
     const SAT6 = ['Kình Dương', 'Đà La', 'Hỏa Tinh', 'Linh Tinh', 'Địa Không', 'Địa Kiếp'];
     const LUCCAT = ['Văn Xương', 'Văn Khúc', 'Tả Phù', 'Hữu Bật', 'Thiên Khôi', 'Thiên Việt'];
@@ -51,11 +51,12 @@
         });
         return kq;
     }
-    function moTa(v) { return v.o === 0 ? 'đồng cung' : (OFFTEN[v.o] + ' ' + v.cung); }
+    function moTa(v) { return v.o === 0 ? 'đồng cung' : (OFFTEN[v.o] + v.cung); }
     function lietKe(ob, anc, ds, offs) {
         const out = [];
-        ds.forEach(s => viTri(ob, anc, s, offs).forEach(v => out.push(s + ' (' + moTa(v) + ')')));
-        return out;
+        const dong = [];
+        ds.forEach(s => viTri(ob, anc, s, offs).forEach(v => { if (v.o === 0) dong.push(s); else out.push(s + ' (' + moTa(v) + ')'); }));
+        return dong.length ? [dong.join(', ') + ' đồng cung'].concat(out) : out;
     }
     function ttCung(ob, anc, offs) {
         const i = ob.findIndex(c => c.tenCung === anc);
@@ -64,7 +65,7 @@
             const c = ob[(i + o) % 12];
             let t = [];
             try { if (isCungCoTuan(c.tenCung)) t.push('Tuần'); if (isCungCoTriet(c.tenCung)) t.push('Triệt'); } catch (e) { }
-            if (t.length) out.push(t.join(' và ') + ' (' + (o === 0 ? 'đồng cung' : OFFTEN[o] + ' ' + c.tenCung) + ')');
+            if (t.length) out.push(t.join(' và ') + ' (' + (o === 0 ? 'đồng cung' : OFFTEN[o] + c.tenCung) + ')');
         });
         return out;
     }
@@ -75,7 +76,7 @@
         return m ? m[1] : null;
     }
     function ds(l) { return l.length === 1 ? l[0] : l.slice(0, -1).join(', ') + ' và ' + l[l.length - 1]; }
-    function viTriText(v) { return v.o === 0 ? 'đồng cung' : (v.o === 6 ? 'ở cung đối ' : 'ở cung tam hợp ') + (v.o === 0 ? '' : v.cung); }
+    function viTriText(v) { return v.o === 0 ? 'đồng cung' : (v.o === 6 ? 'ở cung đối-' : 'ở cung tam hợp-') + v.cung; }
     const CAN_FULL = { 'G.': 'Giáp', 'Ấ.': 'Ất', 'B.': 'Bính', 'Đ.': 'Đinh', 'M.': 'Mậu', 'K.': 'Kỷ', 'C.': 'Canh', 'T.': 'Tân', 'N.': 'Nhâm', 'Q.': 'Quý' };
     const OFF = { own: [0], doi: [6], tamhop: [4, 8], chieu: [4, 6, 8], hoi: [0, 4, 6, 8] };
     function coMat(ob, anc, val, offs) {   // mọi sao của vế "A/B;C" thực sự có mặt, kèm vị trí
@@ -89,20 +90,26 @@
         if (atoms.some(a => a[0] === 'or' || a[0] === 'and')) return null;
         const own = [];
         atoms.forEach(a => { if (a[0] === 'own') coMat(ob, anc, a[1], OFF.own).forEach(x => { if (own.indexOf(x.s) < 0) own.push(x.s); }); });
-        const parts = [own.length ? (own.length === 1 ? own[0] + ' tại ' + anc : ds(own) + ' đồng cung tại ' + anc) : 'cung ' + anc];
+        // sao ở cung đối / tam hợp / hội chiếu mà thực ra đồng cung thì gộp vào nhóm "A, B đồng cung"
+        atoms.forEach(a => {
+            if (a[0] === 'doi' || a[0] === 'tamhop' || a[0] === 'chieu' || a[0] === 'hoi') coMat(ob, anc, a[1], OFF[a[0]]).forEach(x => { if (x.v.o === 0 && own.indexOf(x.s) < 0) own.push(x.s); });
+            if (a[0] === 'hoin') a[1].split('/').forEach(s => viTri(ob, anc, s, OFF.hoi).forEach(v => { if (v.o === 0 && own.indexOf(s) < 0) own.push(s); }));
+        });
+        const parts = [own.length ? (own.length === 1 ? own[0] + ' tại ' + anc : own.join(', ') + ' đồng cung tại ' + anc) : 'cung ' + anc];
         const ci = ob.findIndex(c => c.tenCung === anc);
+        const gap = [], chiP = [];
         atoms.forEach(a => {
             const k = a[0];
             if (k === 'chi') {
                 const v = a[1];
-                parts.push(v.startsWith('DAC:') ? v.slice(4) + ' ở vị trí sáng (miếu, vượng, đắc địa)' : v.startsWith('DAM:') ? v.slice(4) + ' ở vị trí hãm' : 'ở ' + ob[ci].chi);
+                chiP.push(v.startsWith('DAC:') || v.startsWith('DAM:') ? doSangThucTe(ob, v.slice(4), v.startsWith('DAM:')) : 'ở ' + ob[ci].chi);
             } else if (k === 'doi' || k === 'tamhop' || k === 'chieu' || k === 'hoi') {
-                const f = coMat(ob, anc, a[1], OFF[k]).map(x => x.s + ' (' + viTriText(x.v) + ')');
-                if (f.length) parts.push('gặp ' + f.join(', '));
+                coMat(ob, anc, a[1], OFF[k]).filter(x => x.v.o !== 0).forEach(x => { const t = x.s + ' (' + viTriText(x.v) + ')'; if (gap.indexOf(t) < 0) gap.push(t); });
             } else if (k === 'hoin') {
                 const f = [];
-                a[1].split('/').forEach(s => viTri(ob, anc, s, OFF.hoi).forEach(v => f.push(s + ' (' + viTriText(v) + ')')));
-                parts.push('gặp ' + (f.length ? f.join(', ') : 'nhóm sao này'));
+                a[1].split('/').forEach(s => viTri(ob, anc, s, OFF.hoi).forEach(v => { if (v.o !== 0) f.push(s + ' (' + viTriText(v) + ')'); }));
+                if (f.length) f.forEach(t => { if (gap.indexOf(t) < 0) gap.push(t); });
+                else if (!a[1].split('/').some(x => own.indexOf(x) >= 0)) parts.push('gặp nhóm sao này');
             } else if (k === 'nohoi') {
                 const l = a[1].replace(/;/g, '/').split('/'); parts.push('không gặp ' + (nhomTen(l) || l.join(', ')));
             } else if (k === 'not') {
@@ -125,7 +132,10 @@
             else if (k === 'ring') parts.push('Tràng Sinh ở ' + a[1]);
             else if (k === 'th') parts.push('tam hợp có ' + a[1].replace(/;/g, ' và '));
         });
-        return parts.join(', ');
+        // thứ tự: cụm đầu, vị trí / độ sáng của sao, "gặp ..." (không có vị trí thì nối thẳng: "A, B đồng cung tại X gặp C (...)"), điều kiện còn lại
+        const kq = [parts[0]].concat(chiP);
+        if (gap.length) { const g = 'gặp ' + gap.join(', '); if (!chiP.length) kq[0] += ' ' + g; else kq.push(g); }
+        return kq.concat(parts.slice(1)).join(', ');
     }
     /* Vận hạn: quy tắc gốc gồm các nguyên tử tuổi/can/tháng/giờ/chi cung hạn/sao tọa thủ cung hạn */
     function thucTeHan(atoms, anc, loai, ob, data) {
@@ -148,6 +158,16 @@
         }
         if (stars.length) parts.unshift(ds(stars) + ' tọa thủ ' + H);
         return parts.join(', ');
+    }
+    function doSangThucTe(ob, saoList, toi) {
+        const seg = [];
+        saoList.split('/').forEach(n => {
+            const c = ob.find(x => (x.sao || []).some(s => s.ten === n));
+            const m = c ? KhoaHienThi.ma(n, c.chi) : '';
+            const t = toi ? 'hãm địa' : (KhoaHienThi.laSang(m) ? KhoaHienThi.tenDay[m] : 'ở vị trí sáng');
+            if (seg.length && seg[seg.length - 1].t === t) seg[seg.length - 1].n.push(n); else seg.push({ n: [n], t: t });
+        });
+        return seg.map(x => x.n.join(', ') + ' ' + x.t).join(', ');
     }
     function tenCach(key) {
         const m = /^Cách cục TC\d+ - (.+?): /.exec(key);
@@ -186,15 +206,23 @@
                 }
                 gn = ghiChuLuan(luan[k] || '', anc, ob);
             } catch (e) { if (window.console) console.warn(e); }
-            return { tieu: tieu, luan: luan[k] || '', gn: gn };
+            return { tieu: tieu, luan: luan[k] || '', gn: gn, cach: tenCach(k) };
         });
     }
     window.NamPhaiGom = gomMuc;
-    function render(keys, luan, metaAll, data) {
-        if (!keys.length) return '<p class="np-empty">Không có điều kiện nào trong sách khớp với lá số này.</p>';
-        return gomMuc(keys, luan, metaAll, data).map(m => {
-            const gn = m.gn.length ? '<div class="np-gn">Theo lá số này: ' + m.gn.map(esc).join('; ') + '.</div>' : '';
-            return `<div class="np-key"><b>${esc(m.tieu)}</b><span>${esc(m.luan)}</span>${gn}</div>`;
+    function render(keys, luan, metaAll, data, cungTT) {
+        const items = keys.length ? gomMuc(keys, luan, metaAll, data).map(m => ({ m: m, ten: KhoaHienThi.viet(m.tieu, data), luan: KhoaHienThi.vietLuan(m.luan, data, cungTT ? cungTT.tenCung : null) })) : [];
+        let tt = '', list = items;
+        if (cungTT && KhoaHienThi.nhanTT(cungTT)) {
+            const cach = items.filter(i => i.m.cach).map(i => ({ ten: i.m.cach, luan: i.luan }));
+            tt = `<div class="np-key"><b style="color:#8a4fd0">${esc(KhoaHienThi.nhanTT(cungTT))} án ngữ cung ${esc(cungTT.tenCung)}</b>` + KhoaHienThi.cauTT(cungTT, cach).map(x => `<span>• ${esc(x)}</span>`).join('') + '</div>';
+            const lq = i => KhoaHienThi.lienQuan(i.ten + ' ' + i.luan);
+            list = items.filter(lq).concat(items.filter(i => !lq(i)));
+        }
+        if (!list.length && !tt) return '<p class="np-empty">Không có điều kiện nào trong sách khớp với lá số này.</p>';
+        return tt + list.map(i => {
+            const gn = i.m.gn.length ? '<div class="np-gn">Theo lá số này: ' + i.m.gn.map(x => esc(KhoaHienThi.gachNgang(x))).join('; ') + '.</div>' : '';
+            return `<div class="np-key"><b>${esc(i.ten)}</b><span>${esc(i.luan)}</span>${gn}</div>`;
         }).join('');
     }
     function chay(fn, ...args) {
@@ -220,7 +248,7 @@
             ? `<img src="${anh}" alt="Ảnh bàn lá số" style="max-width:700px;width:100%;border-radius:12px;border:1.5px solid #bce3dd;">`
             : '<em>(Không có ảnh bàn lá số)</em>';
 
-        document.getElementById('menh-content').innerHTML = render(chay('LuanCachThienCo22'), luan, metaAll, data);
+        document.getElementById('menh-content').innerHTML = render(chay('LuanCachThienCo22'), luan, metaAll, data, data.lasoOb.find(c => c.tenCung === 'Mệnh'));
 
         const dai = chay('LuanVanHanNamPhai', 'dai'), tieu = chay('LuanVanHanNamPhai', 'tieu');
         document.getElementById('vanhan-content').innerHTML =
@@ -232,7 +260,7 @@
             const sl = SLUG[c.tenCung];
             if (!sl) return;
             const keys = chay('LuanSaoCungTC_' + sl);
-            html += `<details class="np-cung"${keys.length ? ' open' : ''}><summary>${esc(c.tenCung)} (${esc(c.chi)}) · ${keys.length} điều</summary>${render(keys, luan, metaAll, data)}</details>`;
+            html += `<details class="np-cung"${keys.length ? ' open' : ''}><summary>${esc(c.tenCung)} (${esc(c.chi)}) · ${keys.length} điều</summary>${render(keys, luan, metaAll, data, c)}</details>`;
         });
         document.getElementById('cung-content').innerHTML = html;
     };

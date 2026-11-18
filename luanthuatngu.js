@@ -17,23 +17,25 @@ var GhiChuThuatNgu = (function () {
         { re: /\bcát tinh|sao tốt|cát diệu|sao sáng/i, ten: "cát tinh (sao tốt gồm Quyền, Khoa, Lộc và chính tinh miếu vượng đắc địa)", sao: "CAT" },
         { re: /không vong|Tuần,? Triệt|Tuần hoặc Triệt/i, ten: "không vong (Tuần, Triệt)", sao: "TT" },
     ];
-    const TENOFF = { 0: "đồng cung", 4: "cung tam hợp", 8: "cung tam hợp", 6: "cung đối" };
+    const TENOFF = { 0: "đồng cung", 4: "cung tam hợp-", 8: "cung tam hợp-", 6: "cung đối-" };
     function ob() { let d = {}; try { d = JSON.parse(localStorage.getItem("laso_data")) || {}; } catch (e) { d = {}; } return d.lasoOb || []; }
     function laNatal(t) { return !(t.indexOf("L. ") === 0 || t.indexOf("(") === 0 || t.slice(-4) === "(ĐV)"); }
     function viTri(o, i, pred) {
         const out = [];
         [0, 4, 6, 8].forEach(off => {
             const c = o[(i + off) % 12];
-            (c.sao || []).forEach(s => { const t = s.ten; if (laNatal(t) && pred(t, c, s)) out.push(t + " (" + (off === 0 ? "đồng cung" : TENOFF[off] + " " + c.tenCung) + ")"); });
+            (c.sao || []).forEach(s => { const t = s.ten; if (laNatal(t) && pred(t, c, s)) out.push(t + " (" + (off === 0 ? "đồng cung" : TENOFF[off] + c.tenCung) + ")"); });
         });
-        return out;
+        const dong = out.filter(x => /\(đồng cung\)$/.test(x)).map(x => x.replace(/ \(đồng cung\)$/, ''));
+        if (!dong.length) return out;
+        return [dong.join(', ') + ' đồng cung'].concat(out.filter(x => !/\(đồng cung\)$/.test(x)));
     }
     function ttCung(o, i) {
         const out = [];
         [0, 4, 6, 8].forEach(off => {
             const c = o[(i + off) % 12]; const t = [];
             try { if (isCungCoTuan(c.tenCung)) t.push("Tuần"); if (isCungCoTriet(c.tenCung)) t.push("Triệt"); } catch (e) { }
-            if (t.length) out.push(t.join(" và ") + " (" + (off === 0 ? "đồng cung" : TENOFF[off] + " " + c.tenCung) + ")");
+            if (t.length) out.push(t.join(" và ") + " (" + (off === 0 ? "đồng cung" : TENOFF[off] + c.tenCung) + ")");
         });
         return out;
     }

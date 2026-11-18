@@ -217,7 +217,7 @@ body.board-full { overflow: hidden; }
 .cc-name { font-size: 1.1rem; font-weight: 700; }
 .cc-chi { font-size: .85rem; font-weight: 600; color: var(--muted); white-space: nowrap; }
 .cc-badge { padding: 2px 8px; border-radius: 999px; font-size: .7rem; font-weight: 700; color: #fff; background: var(--primary); }
-.cc-badge.warn { background: var(--danger); }
+.cc-badge.warn { background: rgba(255,255,255,.22); color: var(--danger); border: 1px solid rgba(255,255,255,.55); box-shadow: 0 1px 4px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.6); -webkit-backdrop-filter: blur(6px) saturate(140%); backdrop-filter: blur(6px) saturate(140%); opacity: .9; }
 .cc-meta { display: flex; flex-wrap: wrap; gap: 6px; }
 .pill { padding: 3px 10px; border-radius: 999px; font-size: .75rem; font-weight: 600; color: var(--primary); background: var(--primary-soft); }
 .cc-empty { margin: 0; font-style: italic; color: var(--muted); font-size: .9rem; }

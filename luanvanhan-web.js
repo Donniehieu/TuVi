@@ -149,7 +149,7 @@
         try {
             if (typeof GhiChuThuatNgu !== 'function' || !tenCung) return '';
             var gn = GhiChuThuatNgu(r.key + ' ' + r.values.join(' '), tenCung);
-            return gn.length ? '<div><em>Theo lá số này: ' + thoat(gn.join('; ')) + '.</em></div>' : '';
+            return gn.length ? '<div><em>Theo lá số này: ' + thoat(KH() ? KH().gachNgang(gn.join('; ')) : gn.join('; ')) + '.</em></div>' : '';
         } catch (e) { return ''; }
     }
 
@@ -160,17 +160,36 @@
     window.tenKhoaHienThi = tenKhoaHienThi;
 
     /* Hiển thị luận theo cung và các phần tổng quan/lời khuyên: dùng tenKhoaHienThi cho tiêu đề khóa */
+    function KH() { return (typeof KhoaHienThi !== 'undefined') ? KhoaHienThi : null; }
+    function vietKhoa(key, d) { var k = KH(); return k ? k.viet(tenKhoaHienThi(key), d) : tenKhoaHienThi(key); }
+    function vietLuan(v, d, cung) { var k = KH(); return k ? k.vietLuan(v, d, cung) : v; }
+    function ttBlock(d, tenCung, items) {
+        var k = KH(); if (!k) return '';
+        var c = (d.lasoOb || []).filter(function (x) { return x.tenCung === tenCung; })[0];
+        if (!c || !k.nhanTT(c)) return '';
+        var cach = items.filter(function (it) { return it.values.length && /^Cách/.test(it.values[0]); }).map(function (it) { return { ten: it.ten, luan: it.values.join(' ') }; });
+        return '<div class="bo-sao-group tt-block"><b style="color:#8a4fd0">' + thoat(k.nhanTT(c)) + ' án ngữ cung ' + thoat(tenCung) + '</b>' +
+            k.cauTT(c, cach).map(function (x) { return '<div>• ' + thoat(x) + '</div>'; }).join('') + '</div>';
+    }
+    /* Hiển thị luận theo cung: tên khóa và vế luận viết theo đúng lá số; cung có Triệt/Tuần thì luận Triệt/Tuần và các khóa liên quan được xếp trước */
     window.traCuuVaHienThiChoCung = function (item, comboData, keyArr) {
         var results = traCuuNhieuBoSao(keyArr, comboData);
         var divId = 'cung-' + item.tenCung.replace(/\s/g, '').toLowerCase();
         var excelDiv = document.querySelector('#' + divId + ' .bo-sao-excel');
         if (!excelDiv) return;
+        var d = docLaso();
         var found = results.filter(function (r) { return r.found && r.values.length > 0; });
         if (typeof GopKhoaCu !== 'undefined') found = GopKhoaCu.gop(found);   // gộp các khóa đã tách của cùng một quy tắc
-        if (found.length > 0) {
-            excelDiv.innerHTML = found.map(function (r) {
-                return '<div class="bo-sao-group"><b>' + thoat(tenKhoaHienThi(r.key)) + ':</b>' +
-                    r.values.map(function (v) { return '<div>• ' + thoat(v) + '</div>'; }).join('') + ghiChuHtml(r, item.tenCung) + '</div>';
+        var items = found.map(function (r) { return { r: r, ten: vietKhoa(r.key, d), values: r.values.map(function (v) { return vietLuan(v, d, item.tenCung); }) }; });
+        var tt = ttBlock(d, item.tenCung, items);
+        if (tt) {
+            var lq = function (it) { return KH().lienQuan(it.ten + ' ' + it.values.join(' ')); };
+            items = items.filter(lq).concat(items.filter(function (it) { return !lq(it); }));
+        }
+        if (items.length > 0 || tt) {
+            excelDiv.innerHTML = tt + items.map(function (it) {
+                return '<div class="bo-sao-group"><b>' + thoat(it.ten) + ':</b>' +
+                    it.values.map(function (v) { return '<div>• ' + thoat(v) + '</div>'; }).join('') + ghiChuHtml(it.r, item.tenCung) + '</div>';
             }).join('');
         } else {
             excelDiv.innerHTML = '<em>Không có thông tin tra cứu từ Excel</em>';
@@ -182,8 +201,9 @@
         var html = '<div class="cung-item vanhan-khoi"><b>' + thoat(tieuDe) + '</b>';
         if (!tim.length) html += '<div><em>Không có dữ liệu cho phần này.</em></div>';
         tim.forEach(function (r) {
-            html += '<div class="bo-sao-group"><b>' + thoat(tenKhoaHienThi(r.key)) + ':</b>' +
-                r.values.map(function (v) { return '<div>• ' + thoat(v) + '</div>'; }).join('') + ghiChuHtml(r, tenCung) + '</div>';
+            var dd = docLaso();
+            html += '<div class="bo-sao-group"><b>' + thoat(vietKhoa(r.key, dd)) + ':</b>' +
+                r.values.map(function (v) { return '<div>• ' + thoat(vietLuan(v, dd, tenCung)) + '</div>'; }).join('') + ghiChuHtml(r, tenCung) + '</div>';
         });
         return html + '</div>';
     }
