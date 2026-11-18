@@ -262,7 +262,8 @@
         const muc = x => `<div class="np-key"><b>${esc(KhoaHienThi.viet(x.tieu, data))}</b><span>${esc(KhoaHienThi.vietLuan(x.luan, data, x.cung, true))}</span></div>`;
         document.getElementById('vanhan-content').innerHTML +=
             `<h3>Lưu niên ${esc(data.namXemHan || '')} (sao lưu niên, quy tắc lưu niên, lưu nguyệt và thi cử, sự nghiệp)</h3>` +
-            (luu.filter(x => x.loai !== 'C').map(muc).join('') || '<p class="np-empty">Không có điều kiện nào trong sách khớp với lưu niên này.</p>');
+            (luu.filter(x => x.loai !== 'C' && x.tieu.indexOf('Phi tinh:') !== 0).map(muc).join('') || '<p class="np-empty">Không có điều kiện nào trong sách khớp với lưu niên này.</p>') +
+            (luu.some(x => x.tieu.indexOf('Phi tinh:') === 0) ? '<h3>Tứ hóa phi tinh của lá số (chương 5, mục 2.7)</h3>' + luu.filter(x => x.tieu.indexOf('Phi tinh:') === 0).map(muc).join('') : '');
         let html = '';
         data.lasoOb.forEach(c => {
             const sl = SLUG[c.tenCung];
