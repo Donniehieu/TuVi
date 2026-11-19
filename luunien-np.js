@@ -53,13 +53,15 @@ var LuuNienNP = (function () {
     }
     function fei(d, ob, v, tamPhuong, ln) {
         var a = v.split(':'), ft = a[0].split('>');
-        var ci = canIdx(d, ob, ft[0], ln); if (ci < 0) return false;
-        var sao = {}; a[1].split('/').forEach(function (hn) { sao[HOA4[ci][hn === 'Hóa Lộc' ? 0 : hn === 'Hóa Quyền' ? 1 : hn === 'Hóa Khoa' ? 2 : 3]] = 1; });
-        return ft[1].split('/').some(function (dn) {
-            var den = resolveCung(d, ob, dn, ln); if (!den) return false;
-            var i = ob.indexOf(den);
-            var vung = tamPhuong ? [0, 4, 6, 8].map(function (o) { return ob[(i + o) % 12]; }) : [den];
-            return vung.some(function (cg) { var t = ten(cg); for (var k in sao) if (t[k]) return true; return false; });
+        return ft[0].split('/').some(function (nguon) {   // nhiều cung nguồn ngăn bằng "/": đúng nếu một trong số đó thỏa
+            var ci = canIdx(d, ob, nguon, ln); if (ci < 0) return false;
+            var sao = {}; a[1].split('/').forEach(function (hn) { sao[HOA4[ci][hn === 'Hóa Lộc' ? 0 : hn === 'Hóa Quyền' ? 1 : hn === 'Hóa Khoa' ? 2 : 3]] = 1; });
+            return ft[1].split('/').some(function (dn) {
+                var den = resolveCung(d, ob, dn, ln); if (!den) return false;
+                var i = ob.indexOf(den);
+                var vung = tamPhuong ? [0, 4, 6, 8].map(function (o) { return ob[(i + o) % 12]; }) : [den];
+                return vung.some(function (cg) { var t = ten(cg); for (var k in sao) if (t[k]) return true; return false; });
+            });
         });
     }
     var canNgay = -1, canGio = -1, canThang = -1;   // can của ngày / giờ đang xét (lưu nhật, lưu thời)
