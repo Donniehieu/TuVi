@@ -218,7 +218,7 @@
         if (cungTT && KhoaHienThi.nhanTT(cungTT)) {
             ttOn = true;
             const cach = items.filter(i => i.m.cach).map(i => ({ ten: i.m.cach, luan: i.luan }));
-            tt = `<div class="np-key"><b style="color:#8a4fd0">${esc(KhoaHienThi.nhanTT(cungTT))} án ngữ cung ${esc(cungTT.tenCung)}</b>` + KhoaHienThi.cauTT(cungTT, cach).map(x => `<span>• ${esc(x)}</span>`).join('') + '</div>';
+            tt = `<div class="np-key"><b style="color:#8a4fd0">${esc(KhoaHienThi.nhanTT(cungTT))} án ngữ cung ${esc(cungTT.tenCung)}</b>` + [].concat(...KhoaHienThi.cauTT(cungTT, cach).map(x => typeof LuanSapXep !== 'undefined' ? LuanSapXep.tach(x) : [x])).map(x => `<span class="lsx-luan">• ${esc(x)}</span>`).join('') + '</div>';
             const lq = i => KhoaHienThi.lienQuan(i.ten + ' ' + i.luan);
             list = list.filter(lq).concat(list.filter(i => !lq(i)));
         }

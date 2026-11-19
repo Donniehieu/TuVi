@@ -61,8 +61,16 @@ var LuanSapXep = (function () {
             return { bac: k - 1, ten: TIERS[k][1], topics: topics, soDieu: b.length };
         }).filter(function (t) { return t.soDieu > 0; });
     }
+    /* Tách câu: mỗi dấu chấm kết câu xuống một dòng (không tách "tr.225", số thập phân, chữ viết tắt trong ngoặc) */
+    function tach(t) {
+        t = String(t == null ? '' : t).replace(/^\s*•\s*/, '');
+        return t.split(/(?<=[.!?…])(?:\s+|(?=[•A-ZÀ-Ỹ]))(?=[A-ZÀ-ỸĐ"“(•])/).map(function (x) { return x.replace(/^\s*•\s*/, '').trim(); }).filter(Boolean).reduce(function (r, x) {
+            if (r.length && /^\(.*tr\.?\s*\d.*\)[.]?$/.test(x)) r[r.length - 1] += ' ' + x; else r.push(x);   // chú thích nguồn dính với câu trước
+            return r;
+        }, []);
+    }
     function itemHtml(it) {
-        var luan = Array.isArray(it.luan) ? it.luan : [it.luan];
+        var luan = [].concat.apply([], (Array.isArray(it.luan) ? it.luan : [it.luan]).map(tach));
         return '<div class="lsx-it"><b class="lsx-khoa">' + esc(it.ten) + '</b>' + luan.filter(Boolean).map(function (v) { return '<span class="lsx-luan">' + esc(v) + '</span>'; }).join('') + (it.extra || '') + '</div>';
     }
     function grp(ten, n, cls, inner) {
@@ -165,6 +173,6 @@ var LuanSapXep = (function () {
         if (location.hash) mo(document.getElementById(location.hash.slice(1)));
     }
     if (typeof document !== 'undefined') { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', moDong); else moDong(); }
-    return { sapXep: sapXep, html: html, namTuoi: namTuoi, thongTinCung: thongTinCung, CHINH: CHINH, PHU: PHU };
+    return { sapXep: sapXep, html: html, tach: tach, namTuoi: namTuoi, thongTinCung: thongTinCung, CHINH: CHINH, PHU: PHU };
 })();
 if (typeof window !== 'undefined') window.LuanSapXep = LuanSapXep;

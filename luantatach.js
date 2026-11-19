@@ -3862,10 +3862,10 @@ function LuanCacCachCucKhacTatAch(keyArr) {
         
         keyArr.push("Hóa Quyền hội chiếu cung Tật Ách gặp các sao giải cứu Thiên Giải, Địa Giải, Giải Thần");
     }
-    // Hóa Quyền gặp các sao cúu giải Lực Sỹ Bác Sỹ,Hóa Khoa
+    // Hóa Quyền gặp các sao cứu giải Lực Sỹ Bác Sỹ,Hóa Khoa
     if (kiemTraCachCuc(phutinhtatach, ["Hóa Quyền"]) && kiemTraCachCuc(phutinhtatach, ["Lực Sĩ", "Bác Sĩ", "Hóa Khoa"])) {
         
-        keyArr.push("Hóa Quyền hội chiếu cung Tật Ách gặp các sao cúu giải Lực Sỹ, Bác Sỹ, Hóa Khoa");
+        keyArr.push("Hóa Quyền hội chiếu cung Tật Ách gặp các sao cứu giải Lực Sỹ, Bác Sỹ, Hóa Khoa");
     }
     // Hóa Quyền ,Khoa hội chiếu
     if (kiemTraCachCuc(phutinhtatach, ["Hóa Quyền", "Hóa Khoa"]) && kiemTraCachCuc(phutinhtatach, ["Thiên Giải", "Địa Giải", "Giải Thần"])) {
@@ -3875,7 +3875,7 @@ function LuanCacCachCucKhacTatAch(keyArr) {
     // Hóa Quyền, Hóa Khoa hội chiếu
     if (kiemTraCachCuc(phutinhtatach, ["Hóa Quyền", "Hóa Khoa"]) && kiemTraCachCuc(phutinhtatach, ["Lực Sĩ", "Bác Sĩ"])) {
         
-        keyArr.push("Hóa Quyền, Hóa Khoa hội chiếu cung Tật Ách gặp các sao cúu giải Lực Sỹ, Bác Sỹ");
+        keyArr.push("Hóa Quyền, Hóa Khoa hội chiếu cung Tật Ách gặp các sao cứu giải Lực Sỹ, Bác Sỹ");
     }
     // Hóa Khoa Quyền tọa thủ
     if (isHaiSaoDongCungTaiCung("Tật Ách", "Hóa Quyền", "Hóa Khoa") && kiemTraCachCuc("Hóa Khoa", ["Thiên Giải", "Địa Giải", "Giải Thần"])) {
@@ -3925,10 +3925,10 @@ function LuanCacCachCucKhacTatAch(keyArr) {
         
         keyArr.push("Tả Phù, Hữu Bật hội chiếu cung Tật Ách gặp các sao giải cứu Thiên Giải, Địa Giải, Giải Thần");
     }
-    // Tả Hữu và các sao cúu giải Lực Sỹ, Bác Sỹ, Hóa Khoa
+    // Tả Hữu và các sao cứu giải Lực Sỹ, Bác Sỹ, Hóa Khoa
     if (kiemTraCachCuc(phutinhtatach, ["Tả Phù", "Hữu Bật"]) && kiemTraCachCuc(phutinhtatach, ["Lực Sĩ", "Bác Sĩ", "Hóa Khoa"])) {
         
-        keyArr.push("Tả Phù, Hữu Bật hội chiếu cung Tật Ách gặp các sao cúu giải Lực Sỹ, Bác Sỹ, Hóa Khoa");
+        keyArr.push("Tả Phù, Hữu Bật hội chiếu cung Tật Ách gặp các sao cứu giải Lực Sỹ, Bác Sỹ, Hóa Khoa");
     }
     // Tả Phù và các từng các sao giải
     if (kiemTraCachCuc(phutinhtatach, ["Tả Phù"]) && kiemTraCachCuc(phutinhtatach, ["Thiên Giải"])) {

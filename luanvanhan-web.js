@@ -163,7 +163,7 @@
         if (!c || !k.nhanTT(c)) return '';
         var cach = items.filter(function (it) { return it.values.length && /^Cách/.test(it.values[0]); }).map(function (it) { return { ten: it.ten, luan: it.values.join(' ') }; });
         return '<div class="bo-sao-group tt-block"><b style="color:#8a4fd0">' + thoat(k.nhanTT(c)) + ' án ngữ cung ' + thoat(tenCung) + '</b>' +
-            k.cauTT(c, cach).map(function (x) { return '<div>• ' + thoat(x) + '</div>'; }).join('') + '</div>';
+            [].concat.apply([], k.cauTT(c, cach).map(function (x) { return (typeof LuanSapXep !== 'undefined' ? LuanSapXep.tach(x) : [x]); })).map(function (x) { return '<div>• ' + thoat(x) + '</div>'; }).join('') + '</div>';
     }
     /* Hiển thị luận theo cung: tên khóa và vế luận viết theo đúng lá số; cung có Triệt/Tuần thì luận Triệt/Tuần và các khóa liên quan được xếp trước */
     window.traCuuVaHienThiChoCung = function (item, comboData, keyArr) {
