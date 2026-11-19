@@ -104,6 +104,32 @@ var LuuNienNP = (function () {
             case 'CANS': r = v.split('/').indexOf(CAN10[canCung(x.d, x.c)]) >= 0; break;
             case 'CANF': { var q3 = v.indexOf(':'), cf = canIdx(x.d, x.ob, v.slice(0, q3), x.ln); r = cf >= 0 && v.slice(q3 + 1).split('/').indexOf(CAN10[cf]) >= 0; break; }
             case 'CANNH': r = canNgay >= 0 && v.split('/').indexOf(CAN10[canNgay]) >= 0; break;
+            case 'FEIX': {
+                var pr = v.split(':'), ft = pr[0].split('>'), ds = pr[2].split('/'); r = false;
+                ft[0].split('/').forEach(function (nguon) {
+                    var ci = canIdx(x.d, x.ob, nguon, x.ln); if (ci < 0) return;
+                    pr[1].split('/').forEach(function (hn) {
+                        var sh = HOA4[ci][hn === 'Hóa Lộc' ? 0 : hn === 'Hóa Quyền' ? 1 : hn === 'Hóa Khoa' ? 2 : 3];
+                        if (ds.indexOf(sh) < 0) return;
+                        ft[1].split('/').forEach(function (dn) {
+                            var den = resolveCung(x.d, x.ob, dn, x.ln); if (!den) return;
+                            var i = x.ob.indexOf(den);
+                            if ([0, 4, 6, 8].some(function (o) { return ten(x.ob[(i + o) % 12])[sh]; })) r = true;
+                        });
+                    });
+                });
+                break;
+            }
+            case 'CHAIN': {
+                var pc = v.split(':'); r = false;
+                if (x.own[pc[3]]) TEN_CUNG.some(function (cn) {
+                    if (!fei(x.d, x.ob, pc[0] + '>' + cn + ':' + pc[1], false, x.ln)) return false;
+                    var c2 = canIdx(x.d, x.ob, cn, x.ln); if (c2 < 0) return false;
+                    if (HOA4[c2][pc[2] === 'Hóa Lộc' ? 0 : pc[2] === 'Hóa Quyền' ? 1 : pc[2] === 'Hóa Khoa' ? 2 : 3] === pc[3]) { r = true; return true; }
+                    return false;
+                });
+                break;
+            }
             case 'EQ': { var ab = v.split('='), c1 = resolveCung(x.d, x.ob, ab[0], x.ln), c2 = resolveCung(x.d, x.ob, ab[1], x.ln); r = !!c1 && !!c2 && c1 === c2; break; }
             case 'HOA': {
                 var pr = v.split(':'), ci = pr[0] === 'CAN.NH' ? canNgay : pr[0] === 'CAN.TH' ? canGio : pr[0] === 'CAN.NT' ? canThang : canIdx(x.d, x.ob, pr[0], x.ln);
