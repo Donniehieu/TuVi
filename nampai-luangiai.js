@@ -210,19 +210,21 @@
         });
     }
     window.NamPhaiGom = gomMuc;
-    function render(keys, luan, metaAll, data, cungTT, cungTen) {
+    function render(keys, luan, metaAll, data, cungTT, cungTen, extra) {
         KhoaHienThi.np = true;
         const items = keys.length ? gomMuc(keys, luan, metaAll, data).map(m => ({ m: m, ten: KhoaHienThi.viet(m.tieu, data), luan: KhoaHienThi.vietLuan(m.luan, data, cungTT ? cungTT.tenCung : cungTen) })) : [];
         let tt = '', list = items;
+        (extra || []).forEach(x => list.push({ m: { cach: false }, ten: KhoaHienThi.viet(x.tieu, data), luan: KhoaHienThi.vietLuan(x.luan, data, x.cung, true) }));
         if (cungTT && KhoaHienThi.nhanTT(cungTT)) {
             const cach = items.filter(i => i.m.cach).map(i => ({ ten: i.m.cach, luan: i.luan }));
             tt = `<div class="np-key"><b style="color:#8a4fd0">${esc(KhoaHienThi.nhanTT(cungTT))} án ngữ cung ${esc(cungTT.tenCung)}</b>` + KhoaHienThi.cauTT(cungTT, cach).map(x => `<span>• ${esc(x)}</span>`).join('') + '</div>';
             const lq = i => KhoaHienThi.lienQuan(i.ten + ' ' + i.luan);
-            list = items.filter(lq).concat(items.filter(i => !lq(i)));
+            list = list.filter(lq).concat(list.filter(i => !lq(i)));
         }
+        if (list.length === 0 && (extra || []).length) list = items;
         if (!list.length && !tt) return '<p class="np-empty">Không có điều kiện nào trong sách khớp với lá số này.</p>';
         if (typeof LuanSapXep !== 'undefined')
-            return tt + LuanSapXep.html(list.map(i => ({ ten: i.ten, luan: i.luan, cach: !!(i.m && i.m.cach) })), LuanSapXep.thongTinCung(data, cungTT ? cungTT.tenCung : cungTen));
+            return tt + LuanSapXep.html(list.map(i => ({ ten: i.ten, luan: i.luan, cach: !!(i.m && i.m.cach) })), Object.assign({}, LuanSapXep.thongTinCung(data, cungTT ? cungTT.tenCung : cungTen), cungTT ? {} : { chiChuDiem: true }));
         return tt + list.map(i => {
             const gn = '';
             return `<div class="np-key"><b>${esc(i.ten)}</b><span>${esc(i.luan)}</span>${gn}</div>`;
@@ -261,6 +263,7 @@
 
         // sao lưu niên (12 tuế tinh, 12 tướng tinh) và quy tắc lưu niên / lưu nguyệt (chương 4)
         const muc = x => `<div class="np-key"><b>${esc(KhoaHienThi.viet(x.tieu, data))}</b><span>${esc(KhoaHienThi.vietLuan(x.luan, data, x.cung, true))}</span></div>`;
+        const sapMuc = ds => (ds.length && typeof LuanSapXep !== 'undefined') ? LuanSapXep.html(ds.map(x => ({ ten: KhoaHienThi.viet(x.tieu, data), luan: KhoaHienThi.vietLuan(x.luan, data, x.cung, true) })), { chiChuDiem: true }) : ds.map(muc).join('');
         const CHI_G = ['Tý', 'Sửu', 'Dần', 'Mão', 'Thìn', 'Tỵ', 'Ngọ', 'Mùi', 'Thân', 'Dậu', 'Tuất', 'Hợi'];
         const homNay = new Date();
         const dateVal = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
@@ -275,8 +278,8 @@
                 `<button type="button" id="btn-xem-luu">Xem lưu nhật, lưu thời</button></span></div>`;
             document.getElementById('luu-box').innerHTML = ctl +
                 `<h3>Lưu niên ${esc(data.namXemHan || '')} (sao lưu niên, quy tắc lưu niên, lưu nguyệt, lưu nhật, lưu thời và thi cử, sự nghiệp)</h3>` +
-                (luu.filter(x => x.loai !== 'C' && x.tieu.indexOf('Phi tinh:') !== 0).map(muc).join('') || '<p class="np-empty">Không có điều kiện nào trong sách khớp với lưu niên này.</p>') +
-                (luu.some(x => x.tieu.indexOf('Phi tinh:') === 0) ? '<h3>Tứ hóa phi tinh của lá số (chương 5, mục 2.7)</h3>' + luu.filter(x => x.tieu.indexOf('Phi tinh:') === 0).map(muc).join('') : '');
+                (sapMuc(luu.filter(x => x.loai !== 'C' && x.tieu.indexOf('Phi tinh:') !== 0)) || '<p class="np-empty">Không có điều kiện nào trong sách khớp với lưu niên này.</p>') +
+                (luu.some(x => x.tieu.indexOf('Phi tinh:') === 0) ? '<h3>Tứ hóa phi tinh của lá số (chương 5, mục 2.7)</h3>' + sapMuc(luu.filter(x => x.tieu.indexOf('Phi tinh:') === 0)) : '');
             document.getElementById('btn-xem-luu').onclick = function () {
                 const v = document.getElementById('ngay-xem').value.split('-');
                 if (v.length === 3) window.NGAY_XEM = new Date(parseInt(v[0], 10), parseInt(v[1], 10) - 1, parseInt(v[2], 10));
@@ -303,7 +306,7 @@
             const sl = SLUG[c.tenCung];
             if (!sl) return;
             const keys = chay('LuanSaoCungTC_' + sl);
-            html += `<details class="np-cung"><summary>${esc(c.tenCung)} (${esc(c.chi)}) · ${keys.length} điều</summary>${render(keys, luan, metaAll, data, c)}${luu.filter(x => x.loai === 'C' && x.cung === c.tenCung).map(muc).join('')}</details>`;
+            html += `<details class="np-cung"><summary>${esc(c.tenCung)} (${esc(c.chi)}) · ${keys.length + luu.filter(x => x.loai === 'C' && x.cung === c.tenCung).length} điều</summary>${render(keys, luan, metaAll, data, c, undefined, luu.filter(x => x.loai === 'C' && x.cung === c.tenCung))}</details>`;
         });
         document.getElementById('cung-content').innerHTML = html;
     };

@@ -68,6 +68,14 @@ var LuanSapXep = (function () {
         opts = opts || {};
         var buoc = sapXep(items, opts), out = '', n = 0;
         if (opts.voChinh && opts.doiCung) out += '<div class="lsx-note">Cung không có chính tinh: luận khóa chính tinh cung đối' + (opts.doiCung.ten ? ' (' + esc(opts.doiCung.ten) + (opts.doiCung.chinhTinh && opts.doiCung.chinhTinh.length ? ': ' + esc(opts.doiCung.chinhTinh.join(', ')) : '') + ')' : '') + ' trước.</div>';
+        if (opts.chiChuDiem) {   // các khối không theo sao (tổng quan, vận hạn, lưu niên): chỉ gom theo chủ điểm, giữ thứ tự xuất hiện
+            var g = {}; buoc.forEach(function (b) { b.topics.forEach(function (t) { (g[t.chuDiem] = g[t.chuDiem] || []).push.apply(g[t.chuDiem], t.items); }); });
+            ORDER.forEach(function (c) {
+                if (!g[c]) return;
+                out += '<div class="lsx-grp"><div class="lsx-gh">' + esc(c) + '<span>' + g[c].length + '</span></div>' + g[c].sort(function (a, b) { return a._i - b._i; }).map(itemHtml).join('') + '</div>';
+            });
+            return out;
+        }
         buoc.forEach(function (b) {
             n++;
             out += '<div class="lsx-st"><b>' + n + '</b>' + esc(b.ten) + '</div>';
@@ -87,6 +95,45 @@ var LuanSapXep = (function () {
         if (i < 0) return {};
         var ct = chinhTinhCua(ob[i]), d = ob[(i + 6) % 12];
         return { voChinh: ct.length === 0, chinhTinh: ct, doiCung: { ten: d ? d.tenCung : '', chinhTinh: chinhTinhCua(d) } };
+    }
+
+    /* Tự động áp dụng cho các khối luận do code cũ dựng sẵn (tổng quan, lời khuyên, vận hạn) trên trang phổ biến */
+    function mucTuNut(n) {
+        var b = n.querySelector(':scope > b'); if (!b) return null;
+        var luan = []; for (var i = 0; i < n.children.length; i++) { var c = n.children[i]; if (c.tagName === 'DIV') luan.push(c.textContent.replace(/^\s*•\s*/, '')); }
+        return { ten: b.textContent.replace(/:\s*$/, ''), luan: luan };
+    }
+    function xuLy(box) {
+        if (!box || box._lsxBusy) return;
+        var raw = [].slice.call(box.querySelectorAll(':scope > [data-bo-sao-key]'));
+        if (!raw.length) return;
+        var items = (box._lsx || []).concat(raw.map(mucTuNut).filter(Boolean)); box._lsx = items;
+        box._lsxBusy = true; box.innerHTML = html(items, { chiChuDiem: true }); box._lsxBusy = false;
+    }
+    function xuLyKhoi(k) {
+        var raw = [].slice.call(k.querySelectorAll(':scope > .bo-sao-group:not(.tt-block)'));
+        if (!raw.length) return;
+        var items = (k._lsx || []).concat(raw.map(mucTuNut).filter(Boolean)); k._lsx = items;
+        var tieu = k.querySelector(':scope > b'), tt = [].slice.call(k.querySelectorAll(':scope > .tt-block')).map(function (x) { return x.outerHTML; }).join('');
+        k.innerHTML = (tieu ? tieu.outerHTML : '') + tt + html(items, { chiChuDiem: true });
+    }
+    function tuDong() {
+        var cacBox = ['general-content', 'advice-content'];
+        var tre = null;
+        function chay() {
+            tre = null;
+            cacBox.forEach(function (id) { xuLy(document.getElementById(id)); });
+            var vh = document.getElementById('vanhan-content');
+            if (vh) [].slice.call(vh.querySelectorAll('.vanhan-khoi')).forEach(xuLyKhoi);
+        }
+        function hen() { if (!tre) tre = setTimeout(chay, 250); }
+        cacBox.concat(['vanhan-content']).forEach(function (id) {
+            var e = document.getElementById(id);
+            if (e && typeof MutationObserver !== 'undefined') new MutationObserver(hen).observe(e, { childList: true, subtree: true });
+        });
+    }
+    if (typeof document !== 'undefined' && !/nampai/i.test(location.pathname)) {
+        if (document.getElementById('general-content')) tuDong(); else document.addEventListener('DOMContentLoaded', tuDong);
     }
     return { sapXep: sapXep, html: html, thongTinCung: thongTinCung, CHINH: CHINH, PHU: PHU };
 })();
