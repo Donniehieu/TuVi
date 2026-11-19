@@ -44,7 +44,7 @@ var LuuNienNP = (function () {
         if (name.indexOf('ĐH.') === 0) { k = TEN_CUNG.indexOf(name.slice(3)); base = posTen(d.tenCungDaiVan); return base >= 0 && k >= 0 ? theoChi(base + k) : null; }
         if (name.indexOf('LN.') === 0) { k = TEN_CUNG.indexOf(name.slice(3)); return k >= 0 ? theoChi(ln + k) : null; }
         if (name.indexOf('TH.') === 0) { k = TEN_CUNG.indexOf(name.slice(3)); base = posTen(d.tenCungTieuHan); return base >= 0 && k >= 0 ? theoChi(base + k) : null; }
-        return ob.filter(function (c) { return c.tenCung === name; })[0] || null;
+        return ob.filter(function (c) { return c.tenCung === name || c.chi === name; })[0] || null;
     }
     function canIdx(d, ob, tu, ln) {
         if (tu === 'CAN.NS') return CAN10.indexOf(d.canNam);
@@ -98,6 +98,9 @@ var LuuNienNP = (function () {
                 r = bt.filter(function (b) { return b === want; }).length >= need; break;
             }
             case 'TRIET': r = (TRIET[x.d.canNam] || []).indexOf(x.c.chi) >= 0; break;
+            case 'FEIS': r = fei(x.d, x.ob, x.c.tenCung + '>' + v, false, x.ln); break;
+            case 'CANS': r = v.split('/').indexOf(CAN10[canCung(x.d, x.c)]) >= 0; break;
+            case 'CANF': { var q3 = v.indexOf(':'), cf = canIdx(x.d, x.ob, v.slice(0, q3), x.ln); r = cf >= 0 && v.slice(q3 + 1).split('/').indexOf(CAN10[cf]) >= 0; break; }
             case 'EQ': { var ab = v.split('='), c1 = resolveCung(x.d, x.ob, ab[0], x.ln), c2 = resolveCung(x.d, x.ob, ab[1], x.ln); r = !!c1 && !!c2 && c1 === c2; break; }
             case 'HOA': {
                 var pr = v.split(':'), ci = pr[0] === 'CAN.NH' ? canNgay : pr[0] === 'CAN.TH' ? canGio : pr[0] === 'CAN.NT' ? canThang : canIdx(x.d, x.ob, pr[0], x.ln);
