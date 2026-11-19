@@ -182,7 +182,7 @@
         }
         if ((items.length > 0 || tt) && typeof LuanSapXep !== 'undefined') {
             // chính tinh trước (cách cục rồi từng sao), phụ tinh sau, phụ tinh lẻ cuối cùng; các điều cùng chủ điểm xếp cạnh nhau
-            excelDiv.innerHTML = tt + LuanSapXep.html(items.map(function (it) { return { ten: it.ten, luan: it.values }; }), LuanSapXep.thongTinCung(d, item.tenCung));
+            excelDiv.innerHTML = tt + LuanSapXep.html(items.map(function (it) { return { ten: it.ten, luan: it.values, tt: !!tt && KH().lienQuan(it.ten + ' ' + it.values.join(' ')) }; }), LuanSapXep.thongTinCung(d, item.tenCung));
             var tieuDe = document.querySelector('#' + divId + ' .cung-title');
             if (tieuDe && !tieuDe.querySelector('small')) tieuDe.insertAdjacentHTML('beforeend', '<small>' + items.length + ' điều</small>');
         } else if (items.length > 0 || tt) {
@@ -194,10 +194,19 @@
             excelDiv.innerHTML = '<em>Không có thông tin tra cứu từ Excel</em>';
         }
     };
+    /* Các năm dương lịch kèm tuổi của đại hạn / tiểu hạn đang xét: "2021 (23 tuổi), 2022 (24 tuổi)..." */
+    function namVanHan(tieuDe) {
+        if (typeof LuanSapXep === 'undefined') return '';
+        var d = docLaso(), cuc = parseInt(d.cucSo, 10) || 0, tuoi = parseInt(d.tuoiAm, 10) || 1;
+        if (/Đại hạn hiện tại/.test(tieuDe)) { var khoi = tuoi >= cuc ? Math.min(Math.floor((tuoi - cuc) / 10), 11) : 0; return LuanSapXep.namTuoi(d, cuc + khoi * 10, cuc + khoi * 10 + 9); }
+        if (/Tiểu hạn năm xem/.test(tieuDe)) return LuanSapXep.namTuoi(d, tuoi, tuoi);
+        return '';
+    }
     function khoiHtml(tieuDe, ketQua, tenCung) {
         var tim = ketQua.filter(function (r) { return r.found && r.values.length; });
         if (typeof GopKhoaCu !== 'undefined') tim = GopKhoaCu.gop(tim);
         var html = '<div class="cung-item vanhan-khoi"><b>' + thoat(tieuDe) + '</b>';
+        var nam = namVanHan(tieuDe); if (nam) html += '<div class="lsx-nam">Năm dương lịch: ' + thoat(nam) + '</div>';
         if (!tim.length) html += '<div><em>Không có dữ liệu cho phần này.</em></div>';
         tim.forEach(function (r) {
             var dd = docLaso();

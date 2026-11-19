@@ -22,6 +22,7 @@ var LuanSapXep = (function () {
     ];
     var ORDER = ['Tính cách, con người', 'Tài lộc', 'Sự nghiệp, công danh', 'Tình duyên, hôn nhân', 'Gia đạo, con cái, người thân', 'Sức khỏe, tai nạn', 'Khác'];
     var TIERS = [
+        ['T', 'Liên quan đến Triệt, Tuần (luận trước cả cách cục chính tinh)'],
         ['0', 'Chính tinh cung đối (cung vô chính diệu)'],
         ['1', 'Cách cục chính tinh'],
         ['2', 'Luận từng chính tinh'],
@@ -48,8 +49,8 @@ var LuanSapXep = (function () {
     /* items: [{ten, luan: chuỗi hoặc mảng chuỗi, cach?: bool}] -> các bước đã xếp */
     function sapXep(items, opts) {
         opts = opts || {};
-        var buckets = [[], [], [], [], []];
-        items.forEach(function (it, i) { it._i = i; buckets[bac(it, opts.voChinh)].push(it); });
+        var buckets = [[], [], [], [], [], []];
+        items.forEach(function (it, i) { it._i = i; buckets[it.tt ? 0 : bac(it, opts.voChinh) + 1].push(it); });
         return buckets.map(function (b, k) {
             var g = {};
             b.forEach(function (it) {
@@ -57,22 +58,28 @@ var LuanSapXep = (function () {
                 var c = chuDiem(it.ten, lines); (g[c] = g[c] || []).push(it);
             });
             var topics = ORDER.filter(function (c) { return g[c]; }).map(function (c) { return { chuDiem: c, items: g[c].sort(function (a, b) { return a._i - b._i; }) }; });
-            return { bac: k, ten: TIERS[k][1], topics: topics, soDieu: b.length };
+            return { bac: k - 1, ten: TIERS[k][1], topics: topics, soDieu: b.length };
         }).filter(function (t) { return t.soDieu > 0; });
     }
     function itemHtml(it) {
         var luan = Array.isArray(it.luan) ? it.luan : [it.luan];
         return '<div class="lsx-it"><b class="lsx-khoa">' + esc(it.ten) + '</b>' + luan.filter(Boolean).map(function (v) { return '<span class="lsx-luan">' + esc(v) + '</span>'; }).join('') + (it.extra || '') + '</div>';
     }
+    function grp(ten, n, cls, inner) {
+        return '<details class="lsx-grp" open><summary class="lsx-gh' + cls + '"><i class="lsx-mui"></i>' + ten + '<span>' + n + '</span></summary>' + inner + '</details>';
+    }
     function html(items, opts) {
         opts = opts || {};
         var buoc = sapXep(items, opts), out = '', n = 0;
         if (opts.voChinh && opts.doiCung) out += '<div class="lsx-note">Cung không có chính tinh: luận khóa chính tinh cung đối' + (opts.doiCung.ten ? ' (' + esc(opts.doiCung.ten) + (opts.doiCung.chinhTinh && opts.doiCung.chinhTinh.length ? ': ' + esc(opts.doiCung.chinhTinh.join(', ')) : '') + ')' : '') + ' trước.</div>';
         if (opts.chiChuDiem) {   // các khối không theo sao (tổng quan, vận hạn, lưu niên): chỉ gom theo chủ điểm, giữ thứ tự xuất hiện
-            var g = {}; buoc.forEach(function (b) { b.topics.forEach(function (t) { (g[t.chuDiem] = g[t.chuDiem] || []).push.apply(g[t.chuDiem], t.items); }); });
+            var g = {}; buoc.forEach(function (b) {
+                if (b.bac === -1) { out += grp('Liên quan đến Triệt, Tuần', b.soDieu, ' t', [].concat.apply([], b.topics.map(function (t) { return t.items; })).sort(function (a, c) { return a._i - c._i; }).map(itemHtml).join('')); return; }
+                b.topics.forEach(function (t) { (g[t.chuDiem] = g[t.chuDiem] || []).push.apply(g[t.chuDiem], t.items); });
+            });
             ORDER.forEach(function (c) {
                 if (!g[c]) return;
-                out += '<div class="lsx-grp"><div class="lsx-gh">' + esc(c) + '<span>' + g[c].length + '</span></div>' + g[c].sort(function (a, b) { return a._i - b._i; }).map(itemHtml).join('') + '</div>';
+                out += grp(esc(c), g[c].length, '', g[c].sort(function (a, b) { return a._i - b._i; }).map(itemHtml).join(''));
             });
             return out;
         }
@@ -80,10 +87,17 @@ var LuanSapXep = (function () {
             n++;
             out += '<div class="lsx-st"><b>' + n + '</b>' + esc(b.ten) + '</div>';
             b.topics.forEach(function (t) {
-                out += '<div class="lsx-grp"><div class="lsx-gh' + (b.bac === 3 ? ' w' : b.bac === 4 ? ' l' : '') + '">' + esc(t.chuDiem) + '<span>' + t.items.length + '</span></div>' + t.items.map(itemHtml).join('') + '</div>';
+                out += grp(esc(t.chuDiem), t.items.length, b.bac === 3 ? ' w' : b.bac === 4 ? ' l' : b.bac === -1 ? ' t' : '', t.items.map(itemHtml).join(''));
             });
         });
         return out;
+    }
+    /* Danh sách năm dương lịch kèm tuổi: namTuoi(d, 23, 32) -> "2021 (23 tuổi), 2022 (24 tuổi), ..." (tuổi tính theo năm âm lịch, năm = năm xem - tuổi năm xem + tuổi) */
+    function namTuoi(d, a, b) {
+        var xem = parseInt(d && d.namXemHan, 10), tuoi = parseInt(d && d.tuoiAm, 10);
+        if (!xem || !tuoi) return '';
+        var r = []; for (var t = a; t <= b; t++) r.push((xem - tuoi + t) + ' (' + t + ' tuổi)');
+        return r.join(', ');
     }
     function chinhTinhCua(c) {
         return (c && c.sao || []).filter(function (s) { return /chinh-tinh/.test(s.class || '') && String(s.ten).indexOf('L. ') !== 0; }).map(function (s) { return String(s.ten).replace(/\s*\(.*\)\s*$/, ''); });
@@ -114,7 +128,7 @@ var LuanSapXep = (function () {
         var raw = [].slice.call(k.querySelectorAll(':scope > .bo-sao-group:not(.tt-block)'));
         if (!raw.length) return;
         var items = (k._lsx || []).concat(raw.map(mucTuNut).filter(Boolean)); k._lsx = items;
-        var tieu = k.querySelector(':scope > b'), tt = [].slice.call(k.querySelectorAll(':scope > .tt-block')).map(function (x) { return x.outerHTML; }).join('');
+        var tieu = k.querySelector(':scope > b'), tt = [].slice.call(k.querySelectorAll(':scope > .lsx-nam, :scope > .tt-block')).map(function (x) { return x.outerHTML; }).join('');
         k.innerHTML = (tieu ? tieu.outerHTML : '') + tt + html(items, { chiChuDiem: true });
     }
     function tuDong() {
@@ -135,6 +149,6 @@ var LuanSapXep = (function () {
     if (typeof document !== 'undefined' && !/nampai/i.test(location.pathname)) {
         if (document.getElementById('general-content')) tuDong(); else document.addEventListener('DOMContentLoaded', tuDong);
     }
-    return { sapXep: sapXep, html: html, thongTinCung: thongTinCung, CHINH: CHINH, PHU: PHU };
+    return { sapXep: sapXep, html: html, namTuoi: namTuoi, thongTinCung: thongTinCung, CHINH: CHINH, PHU: PHU };
 })();
 if (typeof window !== 'undefined') window.LuanSapXep = LuanSapXep;

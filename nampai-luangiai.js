@@ -213,9 +213,10 @@
     function render(keys, luan, metaAll, data, cungTT, cungTen, extra) {
         KhoaHienThi.np = true;
         const items = keys.length ? gomMuc(keys, luan, metaAll, data).map(m => ({ m: m, ten: KhoaHienThi.viet(m.tieu, data), luan: KhoaHienThi.vietLuan(m.luan, data, cungTT ? cungTT.tenCung : cungTen) })) : [];
-        let tt = '', list = items;
+        let tt = '', list = items, ttOn = false;
         (extra || []).forEach(x => list.push({ m: { cach: false }, ten: KhoaHienThi.viet(x.tieu, data), luan: KhoaHienThi.vietLuan(x.luan, data, x.cung, true) }));
         if (cungTT && KhoaHienThi.nhanTT(cungTT)) {
+            ttOn = true;
             const cach = items.filter(i => i.m.cach).map(i => ({ ten: i.m.cach, luan: i.luan }));
             tt = `<div class="np-key"><b style="color:#8a4fd0">${esc(KhoaHienThi.nhanTT(cungTT))} án ngữ cung ${esc(cungTT.tenCung)}</b>` + KhoaHienThi.cauTT(cungTT, cach).map(x => `<span>• ${esc(x)}</span>`).join('') + '</div>';
             const lq = i => KhoaHienThi.lienQuan(i.ten + ' ' + i.luan);
@@ -224,7 +225,7 @@
         if (list.length === 0 && (extra || []).length) list = items;
         if (!list.length && !tt) return '<p class="np-empty">Không có điều kiện nào trong sách khớp với lá số này.</p>';
         if (typeof LuanSapXep !== 'undefined')
-            return tt + LuanSapXep.html(list.map(i => ({ ten: i.ten, luan: i.luan, cach: !!(i.m && i.m.cach) })), Object.assign({}, LuanSapXep.thongTinCung(data, cungTT ? cungTT.tenCung : cungTen), cungTT ? {} : { chiChuDiem: true }));
+            return tt + LuanSapXep.html(list.map(i => ({ ten: i.ten, luan: i.luan, cach: !!(i.m && i.m.cach), tt: ttOn && KhoaHienThi.lienQuan(i.ten + ' ' + i.luan) })), Object.assign({}, LuanSapXep.thongTinCung(data, cungTT ? cungTT.tenCung : cungTen), cungTT ? {} : { chiChuDiem: true }));
         return tt + list.map(i => {
             const gn = '';
             return `<div class="np-key"><b>${esc(i.ten)}</b><span>${esc(i.luan)}</span>${gn}</div>`;
@@ -236,6 +237,13 @@
         return Array.from(new Set(keys));
     }
 
+    function dongNam(t) { return t ? `<p class="lsx-nam">Năm dương lịch: ${esc(t)}</p>` : ''; }
+    function namDai(d) {
+        if (typeof LuanSapXep === 'undefined') return '';
+        const cuc = parseInt(d.cucSo, 10) || 0, tuoi = parseInt(d.tuoiAm, 10) || 1, k = tuoi >= cuc ? Math.min(Math.floor((tuoi - cuc) / 10), 11) : 0;
+        return dongNam(LuanSapXep.namTuoi(d, cuc + k * 10, cuc + k * 10 + 9));
+    }
+    function namTieu(d) { return typeof LuanSapXep === 'undefined' ? '' : dongNam(LuanSapXep.namTuoi(d, parseInt(d.tuoiAm, 10) || 1, parseInt(d.tuoiAm, 10) || 1)); }
     window.NamPhaiLuanGiai = async function () {
         let luan = {}, metaAll = {}, luuRules = [];
         try {
@@ -258,8 +266,8 @@
 
         const dai = chay('LuanVanHanNamPhai', 'dai'), tieu = chay('LuanVanHanNamPhai', 'tieu');
         document.getElementById('vanhan-content').innerHTML =
-            `<h3>Đại hạn hiện tại: cung ${esc(data.tenCungDaiVan || '')}</h3>${render(dai, luan, metaAll, data, null, data.tenCungDaiVan)}` +
-            `<h3>Tiểu hạn năm xem: cung ${esc(data.tenCungTieuHan || '')}</h3>${render(tieu, luan, metaAll, data, null, data.tenCungTieuHan)}`;
+            `<h3>Đại hạn hiện tại: cung ${esc(data.tenCungDaiVan || '')}</h3>${namDai(data)}${render(dai, luan, metaAll, data, null, data.tenCungDaiVan)}` +
+            `<h3>Tiểu hạn năm xem: cung ${esc(data.tenCungTieuHan || '')}</h3>${namTieu(data)}${render(tieu, luan, metaAll, data, null, data.tenCungTieuHan)}`;
 
         // sao lưu niên (12 tuế tinh, 12 tướng tinh) và quy tắc lưu niên / lưu nguyệt (chương 4)
         const muc = x => `<div class="np-key"><b>${esc(KhoaHienThi.viet(x.tieu, data))}</b><span>${esc(KhoaHienThi.vietLuan(x.luan, data, x.cung, true))}</span></div>`;
@@ -277,7 +285,7 @@
                 `<select id="gio-xem">${CHI_G.map(g => `<option value="${g}"${g === window.GIO_XEM ? ' selected' : ''}>giờ ${g}</option>`).join('')}</select> ` +
                 `<button type="button" id="btn-xem-luu">Xem lưu nhật, lưu thời</button></span></div>`;
             document.getElementById('luu-box').innerHTML = ctl +
-                `<h3>Lưu niên ${esc(data.namXemHan || '')} (sao lưu niên, quy tắc lưu niên, lưu nguyệt, lưu nhật, lưu thời và thi cử, sự nghiệp)</h3>` +
+                `<h3>Lưu niên ${esc(data.namXemHan || '')}${data.tuoiAm ? ' (' + esc(data.tuoiAm) + ' tuổi)' : ''} (sao lưu niên, quy tắc lưu niên, lưu nguyệt, lưu nhật, lưu thời và thi cử, sự nghiệp)</h3>` +
                 (sapMuc(luu.filter(x => x.loai !== 'C' && x.tieu.indexOf('Phi tinh:') !== 0)) || '<p class="np-empty">Không có điều kiện nào trong sách khớp với lưu niên này.</p>') +
                 (luu.some(x => x.tieu.indexOf('Phi tinh:') === 0) ? '<h3>Tứ hóa phi tinh của lá số (chương 5, mục 2.7)</h3>' + sapMuc(luu.filter(x => x.tieu.indexOf('Phi tinh:') === 0)) : '');
             document.getElementById('btn-xem-luu').onclick = function () {

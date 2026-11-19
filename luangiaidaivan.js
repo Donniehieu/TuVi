@@ -196,7 +196,7 @@ function HienThiNhanXetDaiVan() {
             </div>`;
         }
         html += `<div class="daivan-item${(group || groupTTD || groupALT || groupDTP) ? ' thuoc-tam-hop-tue-ho-phu' : ''} ${item.cungTen}" id="${item.cungTen}" >
-            <b style="color:#d0021b;margin-left:1em;"><br>Đại Vận:</b> ${item.startAge} tuổi - ${item.endAge} tuổi tại cung ${item.cungTen} (${item.chi}) 
+            <b style="color:#d0021b;margin-left:1em;"><br>Đại Vận:</b> ${item.startAge} tuổi - ${item.endAge} tuổi tại cung ${item.cungTen} (${item.chi}) ${(typeof LuanSapXep !== 'undefined') ? '<br><span class="lsx-nam">Năm dương lịch: ' + LuanSapXep.namTuoi(lasoData, item.startAge, item.endAge) + '</span>' : ''}
             ${tamHopNote} 
         </div>`;
     });
