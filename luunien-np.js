@@ -101,6 +101,7 @@ var LuuNienNP = (function () {
             case 'FEIS': r = fei(x.d, x.ob, x.c.tenCung + '>' + v, false, x.ln); break;
             case 'CANS': r = v.split('/').indexOf(CAN10[canCung(x.d, x.c)]) >= 0; break;
             case 'CANF': { var q3 = v.indexOf(':'), cf = canIdx(x.d, x.ob, v.slice(0, q3), x.ln); r = cf >= 0 && v.slice(q3 + 1).split('/').indexOf(CAN10[cf]) >= 0; break; }
+            case 'CANNH': r = canNgay >= 0 && v.split('/').indexOf(CAN10[canNgay]) >= 0; break;
             case 'EQ': { var ab = v.split('='), c1 = resolveCung(x.d, x.ob, ab[0], x.ln), c2 = resolveCung(x.d, x.ob, ab[1], x.ln); r = !!c1 && !!c2 && c1 === c2; break; }
             case 'HOA': {
                 var pr = v.split(':'), ci = pr[0] === 'CAN.NH' ? canNgay : pr[0] === 'CAN.TH' ? canGio : pr[0] === 'CAN.NT' ? canThang : canIdx(x.d, x.ob, pr[0], x.ln);
