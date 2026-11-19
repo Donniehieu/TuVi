@@ -66,7 +66,7 @@ var LuanSapXep = (function () {
         return '<div class="lsx-it"><b class="lsx-khoa">' + esc(it.ten) + '</b>' + luan.filter(Boolean).map(function (v) { return '<span class="lsx-luan">' + esc(v) + '</span>'; }).join('') + (it.extra || '') + '</div>';
     }
     function grp(ten, n, cls, inner) {
-        return '<details class="lsx-grp" open><summary class="lsx-gh' + cls + '"><i class="lsx-mui"></i>' + ten + '<span>' + n + '</span></summary>' + inner + '</details>';
+        return '<details class="lsx-grp"><summary class="lsx-gh' + cls + '"><i class="lsx-mui"></i>' + ten + '<span>' + n + '</span></summary>' + inner + '</details>';
     }
     function html(items, opts) {
         opts = opts || {};
@@ -149,6 +149,22 @@ var LuanSapXep = (function () {
     if (typeof document !== 'undefined' && !/nampai/i.test(location.pathname)) {
         if (document.getElementById('general-content')) tuDong(); else document.addEventListener('DOMContentLoaded', tuDong);
     }
+
+    /* Mọi thẻ mặc định đóng: các mục lớn (.section) và khối vận hạn; bấm tiêu đề để mở. Bấm thanh chuyển nhanh sẽ mở đúng mục. */
+    function moDong() {
+        function mo(sec) { if (sec && sec.classList.contains('lsx-sec')) sec.classList.add('lsx-open'); }
+        [].slice.call(document.querySelectorAll('.section')).forEach(function (sec) { if (sec.querySelector(':scope > h2, :scope > h3')) sec.classList.add('lsx-sec'); });
+        document.addEventListener('click', function (e) {
+            var h = e.target.closest && e.target.closest('.lsx-sec > h2, .lsx-sec > h3');
+            if (h) { h.parentNode.classList.toggle('lsx-open'); return; }
+            var b = e.target.closest && e.target.closest('.vanhan-khoi > b');
+            if (b) { b.parentNode.classList.toggle('lsx-open'); return; }
+            var a = e.target.closest && e.target.closest('.jump a[href^="#"]');
+            if (a) mo(document.getElementById(a.getAttribute('href').slice(1)));
+        });
+        if (location.hash) mo(document.getElementById(location.hash.slice(1)));
+    }
+    if (typeof document !== 'undefined') { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', moDong); else moDong(); }
     return { sapXep: sapXep, html: html, namTuoi: namTuoi, thongTinCung: thongTinCung, CHINH: CHINH, PHU: PHU };
 })();
 if (typeof window !== 'undefined') window.LuanSapXep = LuanSapXep;

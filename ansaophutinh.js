@@ -773,8 +773,8 @@ function datNhanTuanTriet(chiA, chiB, text, w, cls, mau) {
     const cell = document.querySelector('.cell' + cellNum);
     if (!cell) return;
     cell.insertAdjacentHTML('beforeend',
-        '<div class="' + cls + '" style="position:absolute;' + css + 'width:' + w + 'px;height:20px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.35);border-radius:5px;color:#f0f3f6;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)' +
-        ';font-weight:bold;font-size:0.75em;z-index:100;display:flex;align-items:center;justify-content:center;' +
+        '<div class="' + cls + '" style="position:absolute;' + css + 'width:' + w + 'px;height:16px;background:#efe9d8;border:0;border-radius:4px;color:#1a1710' +
+        ';font-weight:bold;font-size:0.66em;z-index:100;display:flex;align-items:center;justify-content:center;' +
         'text-align:center;letter-spacing:1px;">' + text + '</div>');
 }
 
@@ -782,9 +782,9 @@ function veNhanTuanTriet(trietChi, tuanChi) {
     document.querySelectorAll('.triet-border, .tuan-border').forEach(e => e.remove());
     const trung = trietChi && tuanChi && trietChi.length === 2 && tuanChi.length === 2 &&
         trietChi.every(c => tuanChi.includes(c));
-    if (trung) { datNhanTuanTriet(trietChi[0], trietChi[1], 'TUẦN · TRIỆT', 104, 'tuan-border triet-border', '#5b2a86'); return; }
-    if (trietChi && trietChi.length === 2) datNhanTuanTriet(trietChi[0], trietChi[1], 'TRIỆT', 58, 'triet-border', '#d32f2f');
-    if (tuanChi && tuanChi.length === 2) datNhanTuanTriet(tuanChi[0], tuanChi[1], 'TUẦN', 58, 'tuan-border', '#2949d3');
+    if (trung) { datNhanTuanTriet(trietChi[0], trietChi[1], 'TUẦN · TRIỆT', 84, 'tuan-border triet-border', '#5b2a86'); return; }
+    if (trietChi && trietChi.length === 2) datNhanTuanTriet(trietChi[0], trietChi[1], 'TRIỆT', 46, 'triet-border', '#d32f2f');
+    if (tuanChi && tuanChi.length === 2) datNhanTuanTriet(tuanChi[0], tuanChi[1], 'TUẦN', 46, 'tuan-border', '#2949d3');
 }
 
 function anTriet(canNam) {
