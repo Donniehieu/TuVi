@@ -180,7 +180,12 @@
             var lq = function (it) { return KH().lienQuan(it.ten + ' ' + it.values.join(' ')); };
             items = items.filter(lq).concat(items.filter(function (it) { return !lq(it); }));
         }
-        if (items.length > 0 || tt) {
+        if ((items.length > 0 || tt) && typeof LuanSapXep !== 'undefined') {
+            // chính tinh trước (cách cục rồi từng sao), phụ tinh sau, phụ tinh lẻ cuối cùng; các điều cùng chủ điểm xếp cạnh nhau
+            excelDiv.innerHTML = tt + LuanSapXep.html(items.map(function (it) { return { ten: it.ten, luan: it.values }; }), LuanSapXep.thongTinCung(d, item.tenCung));
+            var tieuDe = document.querySelector('#' + divId + ' .cung-title');
+            if (tieuDe && !tieuDe.querySelector('small')) tieuDe.insertAdjacentHTML('beforeend', '<small>' + items.length + ' điều</small>');
+        } else if (items.length > 0 || tt) {
             excelDiv.innerHTML = tt + items.map(function (it) {
                 return '<div class="bo-sao-group"><b>' + thoat(it.ten) + ':</b>' +
                     it.values.map(function (v) { return '<div>• ' + thoat(v) + '</div>'; }).join('') + ghiChuHtml(it.r, item.tenCung) + '</div>';

@@ -221,6 +221,8 @@
             list = items.filter(lq).concat(items.filter(i => !lq(i)));
         }
         if (!list.length && !tt) return '<p class="np-empty">Không có điều kiện nào trong sách khớp với lá số này.</p>';
+        if (typeof LuanSapXep !== 'undefined')
+            return tt + LuanSapXep.html(list.map(i => ({ ten: i.ten, luan: i.luan, cach: !!(i.m && i.m.cach) })), LuanSapXep.thongTinCung(data, cungTT ? cungTT.tenCung : cungTen));
         return tt + list.map(i => {
             const gn = '';
             return `<div class="np-key"><b>${esc(i.ten)}</b><span>${esc(i.luan)}</span>${gn}</div>`;
@@ -301,7 +303,7 @@
             const sl = SLUG[c.tenCung];
             if (!sl) return;
             const keys = chay('LuanSaoCungTC_' + sl);
-            html += `<details class="np-cung"${keys.length ? ' open' : ''}><summary>${esc(c.tenCung)} (${esc(c.chi)}) · ${keys.length} điều</summary>${render(keys, luan, metaAll, data, c)}${luu.filter(x => x.loai === 'C' && x.cung === c.tenCung).map(muc).join('')}</details>`;
+            html += `<details class="np-cung"><summary>${esc(c.tenCung)} (${esc(c.chi)}) · ${keys.length} điều</summary>${render(keys, luan, metaAll, data, c)}${luu.filter(x => x.loai === 'C' && x.cung === c.tenCung).map(muc).join('')}</details>`;
         });
         document.getElementById('cung-content').innerHTML = html;
     };
